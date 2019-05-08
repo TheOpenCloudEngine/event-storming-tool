@@ -21,8 +21,9 @@
           'fill-cx': .1,
           'fill-cy': .1,
           'stroke-width': 1.4,
-          fill: '#FFFFFF',
-          'fill-opacity': 0,
+          'stroke': '#5FC08B',
+          fill: '#5FC08B',
+          'fill-opacity': 1,
           r: '1'
         }"
       >
@@ -30,13 +31,6 @@
 
       <sub-elements>
         <!--title-->
-        <text-element v-if="value.classReference"
-          :sub-width="'100%'"
-          :sub-height="titleH/2"
-          :sub-top="0"
-          :sub-left="0"
-          text="<<Bounded Context>>">
-        </text-element>
         <text-element
           :sub-width="'100%'"
           :sub-height="titleH"
@@ -45,14 +39,6 @@
           :sub-style="{'font-weight': 'bold'}"
           :text="value.classReference ? value.classReference : value.name">
         </text-element>
-
-        <edge-element
-          :vertices="[[0,titleH - (value.classReference ? 10:0)],['100%',titleH - (value.classReference ? 10:0)]]"
-          :label="''"
-          :sub-style="{'arrow-start': 'none', 'stroke-width' : '0.5', 'arrow-end': 'none'}"
-        >
-        </edge-element>
-
         <text-element v-if="value.fieldDescriptors" v-for="(item, index) in value.fieldDescriptors"
                       :sub-width="'90%'"
                       :sub-height="itemH"
@@ -134,26 +120,26 @@
 
   export default {
     mixins: [Element],
-    name: 'class-definition',
+    name: 'view-definition',
     props: {},
     computed: {
       defaultStyle() {
         return {}
       },
       type() {
-        return 'Class'
+        return 'View'
       },
       className() {
-        return 'org.uengine.uml.model.ClassDefinition'
+        return 'org.uengine.uml.model.View'
       },
       createNew(elementId, x, y, width, height) {
 
         return {
           _type: this.className(),
-          name: 'Class',
+          name: 'View',
           fieldDescriptors: [],
           elementView: {
-            '_type': 'org.uengine.modeling.ElementView',
+            '_type': 'org.uengine.modeling.View',
             'id': elementId,
             'x': x,
             'y': y,

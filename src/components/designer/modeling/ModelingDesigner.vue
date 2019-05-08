@@ -129,7 +129,7 @@
                 propertyEditing: false,
                 componentChangerData: null,
                 preventEvent: false,
-                relationVueComponentName: 'modeling-relation',
+                relationVueComponentNameTmp: 'modeling-relation',
                 elementsLoadDone: false
             }
         },
@@ -146,7 +146,9 @@
         created: function () {
         },
         mounted() {
-            if (!this.relationVueComponentName) this.relationVueComponentName = 'modeling-relation';
+                this.relationVueComponentNameTmp = 'modeling-relation';
+                this.$emit('update:relationVueComponentName', this.relationVueComponentNameTmp);
+
             // this.history = [JSON.parse(JSON.stringify(this.value))];
             this.$nextTick(function () {
                 console.log(this.$refs.opengraph)
@@ -179,7 +181,7 @@
                             this.history.splice(this.historyIndex, this.history.length - this.historyIndex);
                             this.undoed = false;
                         }
-                        this.history.push(JSON.parse(JSON.stringify(after.definition))); //heavy
+                        this.history.push(JSON.parse(JSON.stringify(after.classDefinitions))); //heavy
                         this.historyIndex = this.history.length - 1;
                     } else {
                         console.log('definition updated, but triggered by undo,redo action. will skip add history.');
