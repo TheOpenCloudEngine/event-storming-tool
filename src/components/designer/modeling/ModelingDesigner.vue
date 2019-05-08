@@ -29,12 +29,12 @@
                 </div>
 
                 <!--릴레이션-->
-                <v v-if="value[relationListBeanPath] && elementsLoadDone">
+                <div v-if="value[relationListBeanPath] && elementsLoadDone">
                     <component v-for="(relation, index) in value[relationListBeanPath][1]" v-if="relation != null"
                                :is="relationVueComponentName" v-model="value[relationListBeanPath][1][index]"
                                :definition="value">
                     </component>
-                </v>
+                </div>
 
             </opengraph>
 
@@ -49,7 +49,7 @@
                       :_component="item.component"
                       :_width="item.width"
                       :_height="item.height">
-          <img height="30px" width="30px" src="../../../../static/image/symbol/class.png">
+          <img height="30px" width="30px" src="../../../../public/static/image/symbol/class.png">
           <v-tooltip md-direction="right">{{item.label}}</v-tooltip>
         </span>
             </v-card>
@@ -73,26 +73,26 @@
             <!--</md-layout>-->
 
             <!--로케일-->
-            <md-layout v-if="value" style="max-width: 200px;">
-                <md-input-container>
-                    <label>Language</label>
-                    <md-select v-model="value._selectedLocale" @change="changeLocale">
-                        <md-option value="ko">Korean</md-option>
-                        <md-option value="en">English</md-option>
-                    </md-select>
-                </md-input-container>
-            </md-layout>
+            <!--<v-layout v-if="value" style="max-width: 200px;">-->
+                <!--<md-input-container>-->
+                    <!--<label>Language</label>-->
+                    <!--<md-select v-model="value._selectedLocale" @change="changeLocale">-->
+                        <!--<md-option value="ko">Korean</md-option>-->
+                        <!--<md-option value="en">English</md-option>-->
+                    <!--</md-select>-->
+                <!--</md-input-container>-->
+            <!--</v-layout>-->
 
             <!--프로세스 세이브-->
-            <md-layout v-if="!editMode" style="margin-left: 30px;">
-                <md-button v-if="!editMode" @click="save">
-                    <md-icon v-if="id && id.indexOf('@') > 1">history</md-icon>
-                    <md-icon v-else>save</md-icon>
+            <v-layout v-if="!editMode" style="margin-left: 30px;">
+                <v-btn v-if="!editMode" @click="save">
+                    <v-icon v-if="id && id.indexOf('@') > 1">history</v-icon>
+                    <v-icon v-else>save</v-icon>
                     save
-                </md-button>
+                </v-btn>
 
                 <slot name="toolbar-contents"></slot>
-            </md-layout>
+            </v-layout>
 
 
         </v-layout>
@@ -105,8 +105,7 @@
 
     export default {
         name: 'modeling-designer',
-        components: {
-        },
+        components: {},
         props: {
             backend: Object,
             id: String,
