@@ -150,6 +150,7 @@
             // this.history = [JSON.parse(JSON.stringify(this.value))];
             this.$nextTick(function () {
                 console.log(this.$refs.opengraph)
+                let startTime = new Date().getTime()
 
                 //$nextTick delays the callback function until Vue has updated the DOM
                 // (which usually happens as a result of us changing the data
