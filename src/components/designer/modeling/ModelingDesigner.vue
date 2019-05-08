@@ -43,13 +43,13 @@
               _width="30" _height="30" v-on:click="toggleGrip">
           <v-tooltip md-direction="right">Hands</v-tooltip>
         </span>
-                <span v-for="item in elementTypes"
-                      class="icons draggable"
-                      align="center"
-                      :_component="item.component"
-                      :_width="item.width"
-                      :_height="item.height">
-          <img height="30px" width="30px" src="../../../../public/static/image/symbol/class.png">
+        <span v-for="item in elementTypes"
+              class="icons draggable"
+              align="center"
+              :_component="item.component"
+              :_width="item.width"
+              :_height="item.height">
+          <img height="30px" width="30px" src="../../../../public/static/image/event/aggregate.png">
           <v-tooltip md-direction="right">{{item.label}}</v-tooltip>
         </span>
             </v-card>
@@ -74,13 +74,13 @@
 
             <!--로케일-->
             <!--<v-layout v-if="value" style="max-width: 200px;">-->
-                <!--<md-input-container>-->
-                    <!--<label>Language</label>-->
-                    <!--<md-select v-model="value._selectedLocale" @change="changeLocale">-->
-                        <!--<md-option value="ko">Korean</md-option>-->
-                        <!--<md-option value="en">English</md-option>-->
-                    <!--</md-select>-->
-                <!--</md-input-container>-->
+            <!--<md-input-container>-->
+            <!--<label>Language</label>-->
+            <!--<md-select v-model="value._selectedLocale" @change="changeLocale">-->
+            <!--<md-option value="ko">Korean</md-option>-->
+            <!--<md-option value="en">English</md-option>-->
+            <!--</md-select>-->
+            <!--</md-input-container>-->
             <!--</v-layout>-->
 
             <!--프로세스 세이브-->
@@ -146,8 +146,8 @@
         created: function () {
         },
         mounted() {
-                this.relationVueComponentNameTmp = 'modeling-relation';
-                this.$emit('update:relationVueComponentName', this.relationVueComponentNameTmp);
+            this.relationVueComponentNameTmp = 'modeling-relation';
+            this.$emit('update:relationVueComponentName', this.relationVueComponentNameTmp);
 
             // this.history = [JSON.parse(JSON.stringify(this.value))];
             this.$nextTick(function () {

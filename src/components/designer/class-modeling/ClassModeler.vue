@@ -87,52 +87,55 @@
                 elementTypes: [
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
-                        'component': 'class-definition',
-                        'label': 'Class',
-                        'width': '100',
-                        'height': '100'
-                    },
-                    {
-                        'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'domain-event-definition',
                         'label': 'Class',
                         'width': '100',
-                        'height': '100'
+                        'height': '100',
+                        'src': '../../../../public/static/image/event/event.png'
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'policy-definition',
                         'label': 'Class',
                         'width': '100',
-                        'height': '100'
+                        'height': '100',
+                        'src': '../../../../public/static/image/event/policy.png'
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'command-definition',
                         'label': 'Class',
                         'width': '100',
-                        'height': '100'
+                        'height': '100',
+                        'src': '../../../../../public/static/image/event/command.png'
+
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'aggregate-definition',
                         'label': 'Class',
                         'width': '100',
-                        'height': '100'
+                        'height': '100',
+                        'src': '../../../../public/static/image/event/aggregate.png'
+
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'external-definition',
                         'label': 'Class',
                         'width': '100',
-                        'height': '100'
+                        'height': '100',
+                        'src': '../../../../public/static/image/event/external.png'
+
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'view-definition',
                         'label': 'Class',
                         'width': '100',
-                        'height': '100'
+                        'height': '100',
+                        'src': '../../../../public/static/image/event/view.png'
+
                     },
 
                 ],
