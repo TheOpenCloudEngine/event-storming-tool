@@ -5,10 +5,7 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import VueJWT from 'vuejs-jwt'
-import VueMaterial from 'vue-material'
 import BpmnVue from './components/bpmn'
-
-
 
 import VModal from 'vue-js-modal'
 import EditYaml from './components/edityamlpage.vue'
@@ -17,7 +14,6 @@ import Opengraph from './components/opengraph'
 import ClassModeling from './components/designer/class-modeling'
 import Modeling from './components/designer/modeling'
 
-Vue.use(VueMaterial);
 Vue.use(BpmnVue);
 Vue.use(Opengraph);
 Vue.use(ClassModeling);

@@ -1,6 +1,6 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <div>
-        <md-layout row style="margin-bottom: 10px;">
+        <v-layout row style="margin-bottom: 10px;">
             <v-btn-toggle
                     style="box-shadow: 0px 0px 0px 0px rgba(0,0,0,0), 0px 0px 0px 0px rgba(0,0,0,0), 0px 0px 0px 0px rgba(0,0,0,0)"
                     v-model="toggle_exclusive">
@@ -26,7 +26,7 @@
                 <v-btn color="info" @click="codeModalShow(); status = 'add'">ADD</v-btn>
 
             </v-flex>
-        </md-layout>
+        </v-layout>
         <!-- Title -->
         <v-data-table
                 :rows-per-page-items="pageItems"
