@@ -6,7 +6,6 @@
             elementListBeanPath="classDefinitions"
             relationListBeanPath="relations"
             relationVueComponentName="class-relation"
-            @addElement="addElement"
             @loadModel="onLoadModel"
             @saved="onSaved"
             ref="designer"
@@ -88,53 +87,53 @@
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'domain-event-definition',
-                        'label': 'Class',
+                        'label': 'Event',
                         'width': '100',
                         'height': '100',
-                        'src': '../../../../public/static/image/event/event.png'
+                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/event.png'
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'policy-definition',
-                        'label': 'Class',
+                        'label': 'Policy',
                         'width': '100',
                         'height': '100',
-                        'src': '../../../../public/static/image/event/policy.png'
+                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/policy.png'
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'command-definition',
-                        'label': 'Class',
+                        'label': 'Command',
                         'width': '100',
                         'height': '100',
-                        'src': '../../../../../public/static/image/event/command.png'
+                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/command.png'
 
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'aggregate-definition',
-                        'label': 'Class',
+                        'label': 'Aggregate',
                         'width': '100',
                         'height': '100',
-                        'src': '../../../../public/static/image/event/aggregate.png'
+                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/aggregate.png'
 
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'external-definition',
-                        'label': 'Class',
+                        'label': 'External',
                         'width': '100',
                         'height': '100',
-                        'src': '../../../../public/static/image/event/external.png'
+                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/external.png'
 
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'view-definition',
-                        'label': 'Class',
+                        'label': 'View',
                         'width': '100',
                         'height': '100',
-                        'src': '../../../../public/static/image/event/view.png'
+                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/view.png'
 
                     },
 
@@ -153,9 +152,6 @@
         },
 
         methods: {
-            addElement: function (element) {
-
-            },
             onLoadModel: function (value) {
                 if (this.value.classDefinitions[1]) {
                     this.value.classDefinitions[1].forEach(function (classDefinition) {

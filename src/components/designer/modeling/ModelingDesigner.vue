@@ -11,7 +11,10 @@
                     :dragPageMovable="dragPageMovable"
                     :enableContextmenu="false"
                     :enableRootContextmenu="false"
-                    :slider="false"
+                    :enableHotkeyCtrlC="false"
+                    :enableHotkeyCtrlV="false"
+                    :enableHotkeyDelete="false"
+                    :slider="true"
                     :movable="!editMode"
                     :resizable="!editMode"
                     :selectable="!editMode"
@@ -19,6 +22,9 @@
                     v-if="value"
                     v-on:canvasReady="bindEvents"
                     v-on:connectShape="onConnectShape"
+                    v-on:removeShape="onRemoveShape"
+                    v-on:beforeDestroyElement="onBeforeDestroyElement"
+                    v-on:userAction="onUserAction"
             >
                 <!--엘리먼트-->
                 <div v-if="value[elementListBeanPath]">
@@ -39,19 +45,25 @@
             </opengraph>
 
             <v-card class="tools" style="top:100px;">
-        <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"
-              _width="30" _height="30" v-on:click="toggleGrip">
-          <v-tooltip md-direction="right">Hands</v-tooltip>
-        </span>
-        <span v-for="item in elementTypes"
-              class="icons draggable"
-              align="center"
-              :_component="item.component"
-              :_width="item.width"
-              :_height="item.height">
-          <img height="30px" width="30px" src="../../../../public/static/image/event/aggregate.png">
-          <v-tooltip md-direction="right">{{item.label}}</v-tooltip>
-        </span>
+        <!--<span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"-->
+              <!--_width="30" _height="30" v-on:click="toggleGrip">-->
+          <!--<v-tooltip md-direction="right">Hands</v-tooltip>-->
+        <!--</span>-->
+                <v-tooltip right
+                           v-for="item in elementTypes"
+                           >
+                    <template v-slot:activator="{ on }">
+                        <span class="icons draggable"
+                              align="center"
+                              :_component="item.component"
+                              :_width="item.width"
+                              :_height="item.height">
+                        <img height="30px" width="30px" :src="item.src" v-on="on">
+                            </span>
+                    </template>
+                    <span>{{item.label}}</span>
+
+                </v-tooltip>
             </v-card>
 
             <v-layout v-if="!editMode">
@@ -60,7 +72,6 @@
                     <v-input v-model="value.name" type="text"></v-input>
                 </v-container>
             </v-layout>
-
             <!--<md-layout v-if="versions">-->
             <!--<md-input-container>-->
             <!--<label>Revision</label>-->
@@ -102,7 +113,6 @@
 </template>
 
 <script>
-
     export default {
         name: 'modeling-designer',
         components: {},
@@ -146,6 +156,12 @@
         created: function () {
         },
         mounted() {
+            $(document).keydown((evt) => {
+                if (evt.keyCode == 46 || evt.keyCode == 8) {
+                    this.deleteActivity();
+                }
+            });
+
             this.relationVueComponentNameTmp = 'modeling-relation';
             this.$emit('update:relationVueComponentName', this.relationVueComponentNameTmp);
 
@@ -194,18 +210,58 @@
         },
 
         methods: {
-
+            deleteActivity: function () {
+                let data = this.value.classDefinitions[1];
+                let tmpArray = JSON.parse(JSON.stringify(data));
+                // console.log(tmpArray)
+                data.forEach(function (tmp, index) {
+                    // console.log(tmp)
+                    if(tmp.selected == true) {
+                        console.log(tmp)
+                        data[index] = null
+                    }
+                })
+                data.filter(n => n)
+                this.$emit('update:value', this.value)
+            },
             validateDefinition: function (value) {
                 return value;
             },
+
             /**
              * 도형이 삭제되었을 경우.
              **/
             onRemoveShape: function (component) {
                 console.log('remove component by user action', component.id);
+
                 this.removeComponentByOpenGraphComponentId(component.id);
             },
+            onBeforeDestroyElement: function (opengraphComponent, callback) {
+                var id = opengraphComponent.id;
 
+                //여기서 문제: 오픈그래프 객체를 제대로 삭제 안하면 이상해짐.
+                //아마도 더블클릭은 먹히지만, shape 이 먹히지 않는걸로 보아,
+                //drawshape 시에 id 를 재사용하여 그리는 방식에서 shape 가 동작을 잘 안하는 모양.
+                //해당 코드를 봐서, shape 의 각종 메소드를 완전히 오버라이딩 하는 법을 찾자.
+                //해결 => 오픈그래프 라이브러리 drawShape 에서, element node 에 shape 재등록을 실시함.
+
+                var activityOrRelation = this.getActAndRelByOpengraphId(id);
+                if (activityOrRelation) {
+                    console.log('onBeforeDestroyElement!!', id)
+                    callback(false);
+                }
+            },
+            onUserAction: function () {
+                if (this.preventEvent) {
+                    this.preventEvent = false;
+                    console.log('** onUserAction fired, but preventEvent!!');
+                } else {
+                    console.log('** onUserAction fired.');
+                    this.enableHistoryAdd = true;
+
+                    this.data.trigger = JSON.parse(JSON.stringify(this.data.trigger));
+                }
+            },
             addElement: function (componentInfo, newTracingTag, originalData) {
                 this.enableHistoryAdd = true;
                 var me = this;
@@ -245,8 +301,6 @@
 
                     this.value[this.elementListBeanPath][1].push(element);
                 }
-
-
                 this.$emit("addElement", element)
             },
 

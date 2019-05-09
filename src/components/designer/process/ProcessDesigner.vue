@@ -401,7 +401,6 @@
         }
 
         if (drawer == false) {
-
           console.log("Delete Activity")
           for (var i = 0; i < me.definition.childActivities[1].length; i++) {
             if (me.definition.childActivities[1][i] != null) {
