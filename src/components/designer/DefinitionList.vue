@@ -436,7 +436,7 @@
       openDialog: function (ref) {
         console.log(this.iam)
         this.$refs[ref].open();
-      },
+      },``
       closeDialog: function (ref) {
         this.$refs[ref].close();
       },

@@ -22,7 +22,8 @@
     methods: {
       generateShape: function () {
         var me = this;
-        return new OG.shape.RectangleShape(me.label);
+
+          return new OG.shape.RectangleShape(me.label);
       }
     }
   }

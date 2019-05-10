@@ -32,7 +32,7 @@
           shape.label = me.label;
           shape.SHAPE_ID = me.shapdId;
 
-          //싱글 지오메트리.
+            //싱글 지오메트리.
           if (keys.length < 2) {
             shape.createShape = function () {
               if (this.geom) {

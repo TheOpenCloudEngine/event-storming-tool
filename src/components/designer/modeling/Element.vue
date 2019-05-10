@@ -15,7 +15,6 @@
         data: function () {
             return {
                 _id: null,
-                drawer: false
             }
         },
         computed: {
@@ -63,7 +62,6 @@
                 if(this.value) {
                     this.value.selected = true
                 }
-
                 // this._selected = true;
             },
             deSelectedActivity: function () {
@@ -72,8 +70,9 @@
                     this.value.selected = false
                 }
             },
-            showProperty: function (event, component) {
-                this.drawer = true;
+            showProperty: function () {
+                console.log('Property' + this.value.drawer)
+                this.value.drawer = true;
             },
             uuid: function () {
                 function s4() {

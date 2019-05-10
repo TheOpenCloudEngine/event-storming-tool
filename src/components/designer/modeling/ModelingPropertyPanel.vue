@@ -102,7 +102,8 @@
                         if (this.bpmnVue) {
                             this.bpmnVue.propertyEditing = true;
                         }
-                        this.$emit('update:drawer', true);
+
+                        this.$emit('update:drawer', val);
 
                         // this.toggleRightSidenav();
                     } else {

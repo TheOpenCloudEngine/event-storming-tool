@@ -11725,7 +11725,7 @@ OG.shape.RectangleShape = function (label) {
 OG.shape.RectangleShape.prototype = new OG.shape.GeomShape();
 OG.shape.RectangleShape.superclass = OG.shape.GeomShape;
 OG.shape.RectangleShape.prototype.constructor = OG.shape.RectangleShape;
-OG.RectangleShape = OG.shape.RectangleShape;
+OG.RectangleShape = OG.shape.getElementByIdRectangleShape;
 
 /**
  * 드로잉할 Shape 을 생성하여 반환한다.

@@ -12,7 +12,6 @@
       :width.sync="value.elementView.width"
       :height="titleH + (value.fieldDescriptors ? value.fieldDescriptors.length * itemH : 0)"
       v-on:removeShape="onRemoveShape"
-      v-on:dblclick="showProperty"
       v-on:selectShape="selectedActivity"
       v-on:deSelectShape="deSelectedActivity"
     >

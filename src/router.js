@@ -1,10 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from './views/dashboardpage.vue'
-import VersionManager from './components/bpmn/VersionManager.vue'
 
 Vue.use(Router)
-Vue.component('version-manager', VersionManager);
 
 import ModelerRouter from './components/designer/ModelerRouter'
 import ProcessDesigner from './components/designer/process/ProcessDesigner'

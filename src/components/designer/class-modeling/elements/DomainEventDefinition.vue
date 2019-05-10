@@ -172,9 +172,7 @@
         watch: {
             referenceClassName: function () {
                 this.updateClassInfo();
-            }
-
-
+            },
         },
         mounted: function () {
 

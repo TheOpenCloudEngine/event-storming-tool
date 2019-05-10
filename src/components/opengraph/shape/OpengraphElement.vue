@@ -271,7 +271,7 @@
        */
       labelEditable: {
         default: function () {
-          return false;
+          return true;
         },
         type: Boolean
       },

@@ -6,15 +6,15 @@
                 resizable
                 connectable
                 deletable
+                labelEditable
                 :id.sync="value.elementView.id"
                 :x.sync="value.elementView.x"
                 :y.sync="value.elementView.y"
                 :width.sync="value.elementView.width"
-                :height="titleH + (value.fieldDescriptors ? value.fieldDescriptors.length * itemH : 0)"
-                v-on:removeShape="onRemoveShape"
-                v-on:dblclick="showProperty"
+                :height="value.elementView.height"
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
+                :label="value.name"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
             <geometry-rect
@@ -30,8 +30,7 @@
         }"
             >
             </geometry-rect>
-
-            <sub-elements>
+            <sub-elements labelEditable>
                 <!--title-->
                 <text-element
                         :sub-width="'100%'"
@@ -40,14 +39,6 @@
                         :sub-left="0"
                         :sub-style="{'font-weight': 'bold'}"
                         :text="value.classReference ? value.classReference : value.name">
-                </text-element>
-                <text-element v-if="value.fieldDescriptors" v-for="(item, index) in value.fieldDescriptors"
-                              :sub-width="'90%'"
-                              :sub-height="itemH"
-                              :sub-top="titleH + (index * itemH)"
-                              :sub-left="'5%'"
-                              :sub-style="{'text-anchor': 'start'}"
-                              :text="'+'+item.name + ': ' + item.className.substring(item.className.lastIndexOf('.')+1, item.className.length)">
                 </text-element>
             </sub-elements>
         </geometry-element>
@@ -59,7 +50,6 @@
                 style="height: 100%"
         >
             <template slot="properties-contents" style="height: 100%">
-
                 <v-switch v-model="reference">Reference from other model (Bounded Context)</v-switch>
 
                 <div v-if="!reference">
@@ -136,7 +126,7 @@
             },
             createNew(elementId, x, y, width, height) {
                 return {
-                    _type: this.className,
+                    _type: this.className(),
                     name: 'Aggregate',
                     fieldDescriptors: [],
                     elementView: {
@@ -144,19 +134,18 @@
                         'id': elementId,
                         'x': x,
                         'y': y,
-                        'width': width,
-                        'height': height,
+                        'width': 100,
+                        'height': 100,
                         'style': JSON.stringify({})
                     },
                     drawer: false,
                     selected: false
-
                 }
             }
         },
         data: function () {
             return {
-                itemH: 20,
+                itemH: 200,
                 titleH: (this.value.classReference ? 60 : 30),
                 reference: this.value.classReference != null,
                 referenceClassName: this.value.classReference
@@ -174,15 +163,16 @@
         watch: {
             referenceClassName: function () {
                 this.updateClassInfo();
+            },
+            drawer: function () {
+                console.log(this)
             }
-
 
         },
         mounted: function () {
 
         },
         methods: {
-
             addAttribute: function () {
                 this.value.fieldDescriptors.push({
                     name: 'attribute',
