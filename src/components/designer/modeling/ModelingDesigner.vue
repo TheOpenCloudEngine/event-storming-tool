@@ -16,37 +16,35 @@
                     :enableHotkeyCtrlV="false"
                     :enableHotkeyDelete="false"
                     :slider="true"
-                    :movable="!editMode"
-                    :resizable="!editMode"
-                    :selectable="!editMode"
-                    :connectable="!editMode"
+                    :movable="true"
+                    :resizable="true"
+                    :selectable="true"
+                    :connectable="true"
                     v-if="value"
                     v-on:canvasReady="bindEvents"
-                    v-on:connectShape="onConnectShape"
-                    v-on:removeShape="onRemoveShape"
             >
-                <!--엘리먼트-->
-                <div v-if="value[elementListBeanPath]">
-                    <component v-for="(element, index) in value[elementListBeanPath][1]" v-if="element != null"
-                               :is="getComponentByClassName(element._type)"
-                               v-model="value[elementListBeanPath][1][index]" :definition="value"
-                    ></component>
-                </div>
+                <!--&lt;!&ndash;엘리먼트&ndash;&gt;-->
+                <!--<div v-if="value[elementListBeanPath]">-->
+                    <!--<component v-for="(element, index) in value[elementListBeanPath][1]" v-if="element != null"-->
+                               <!--:is="getComponentByClassName(element._type)"-->
+                               <!--v-model="value[elementListBeanPath][1][index]" :definition="value"-->
+                    <!--&gt;</component>-->
+                <!--</div>-->
 
-                <!--릴레이션-->
-                <div v-if="value[relationListBeanPath] && elementsLoadDone">
-                    <component v-for="(relation, index) in value[relationListBeanPath][1]" v-if="relation != null"
-                               :is="relationVueComponentName" v-model="value[relationListBeanPath][1][index]"
-                               :definition="value">
-                    </component>
-                </div>
+                <!--&lt;!&ndash;릴레이션&ndash;&gt;-->
+                <!--<div v-if="value[relationListBeanPath] && elementsLoadDone">-->
+                    <!--<component v-for="(relation, index) in value[relationListBeanPath][1]" v-if="relation != null"-->
+                               <!--:is="relationVueComponentName" v-model="value[relationListBeanPath][1][index]"-->
+                               <!--:definition="value">-->
+                    <!--</component>-->
+                <!--</div>-->
             </opengraph>
 
             <v-card class="tools" style="top:100px;">
-                <!--<span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"-->
-                <!--_width="30" _height="30" v-on:click="toggleGrip">-->
-                <!--<v-tooltip md-direction="right">Hands</v-tooltip>-->
-                <!--</span>-->
+                <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"
+                _width="30" _height="30" v-on:click="toggleGrip">
+                <v-tooltip md-direction="right">Hands</v-tooltip>
+                </span>
                 <v-tooltip right
                            v-for="item in elementTypes"
                 >
@@ -63,13 +61,6 @@
 
                 </v-tooltip>
             </v-card>
-
-            <v-layout v-if="!editMode">
-                <v-container>
-                    <label>Definition Name</label>
-                    <v-input v-model="value.name" type="text"></v-input>
-                </v-container>
-            </v-layout>
         </v-layout>
         <modeler-image-generator ref="modeler-image-generator"></modeler-image-generator>
     </div>
@@ -80,11 +71,13 @@
         name: 'modeling-designer',
         components: {},
         props: {
-            value: Object
+            value: Object,
+            elementTypes: Array
         },
         data() {
             return {
-
+                dragPageMovable: false,
+                relationVueComponentName: 'modeling-relation'
             }
         },
         computed: {
@@ -121,7 +114,96 @@
         },
 
         methods: {
+            toggleGrip: function () {
+                this.dragPageMovable = !this.dragPageMovable;
 
+                if (this.dragPageMovable) {
+                    this.cursorStyle = 'cursor: url("/static/image/symbol/hands.png"), auto;';
+                    this.handsStyle = ' color: #ffc124;';
+                } else {
+                    this.cursorStyle = null;
+                    this.handsStyle = null;
+                }
+            },
+            bindEvents: function (opengraph) {
+                var me = this;
+                var el = me.$el;
+                var canvasEl = $(opengraph.container);
+                if (!canvasEl || !canvasEl.length) {
+                    return;
+                }
+                this.canvas = opengraph.canvas;
+                //아이콘 드래그 드랍 이벤트 등록
+                $(el).find('.draggable').draggable({
+                    start: function () {
+                        canvasEl.data('DRAG_SHAPE', {
+                            'component': $(this).attr('_component'),
+                            'width': $(this).attr('_width'),
+                            'height': $(this).attr('_height')
+                        });
+                    },
+                    helper: 'clone',
+                    appendTo: canvasEl
+                });
+
+                canvasEl.droppable({
+                    drop: function (event, ui) {
+                        var componentInfo = canvasEl.data('DRAG_SHAPE'), shape, element;
+                        if (componentInfo) {
+                            var dropX = event.pageX - canvasEl.offset().left + canvasEl[0].scrollLeft;
+                            var dropY = event.pageY - canvasEl.offset().top + canvasEl[0].scrollTop;
+
+                            dropX = dropX / opengraph.scale;
+                            dropY = dropY / opengraph.scale;
+
+                            componentInfo = {
+                                component: componentInfo.component,
+                                x: dropX,
+                                y: dropY,
+                                width: parseInt(componentInfo.width, 10),
+                                height: parseInt(componentInfo.height, 10),
+                                label: ''
+                            }
+                            me.addElement(componentInfo);
+                        }
+                        canvasEl.removeData('DRAG_SHAPE');
+                    }
+                });
+            },
+            addElement: function (componentInfo, newTracingTag, originalData) {
+                this.enableHistoryAdd = true;
+                var me = this;
+                var additionalData = {};
+
+                var vueComponent = me.getComponentByName(componentInfo.component);
+                console.log(componentInfo.component , this.relationVueComponentName)
+                var element;
+
+                if (componentInfo.component == this.relationVueComponentName) {
+                    element = vueComponent.computed.createNew(
+                        componentInfo.sourceElement,
+                        componentInfo.targetElement,
+                        componentInfo.vertices,
+                    );
+                } else {
+                    element = vueComponent.computed.createNew(
+                        this.uuid(),
+                        componentInfo.x,
+                        componentInfo.y,
+                        componentInfo.width,
+                        componentInfo.height
+                    );
+                }
+            },
+            getComponentByName: function (name) {
+                var componentByName;
+                $.each(window.Vue.classModelingComponents, function (i, component) {
+                    if (component.default.name == name) {
+                        componentByName = component.default;
+                    }
+                });
+                return componentByName;
+            },
         }
     }
 </script>
@@ -151,7 +233,7 @@
             top: 10%;
             left: 0px;
             overflow: hidden;
-            cursor: url('/static/image/symbol/hands.png'), auto;
+            cursor: url('../../../../public/static/image/symbol/hands.png'), auto;
         }
 
         .tools {

@@ -135,7 +135,6 @@
                 return 'org.uengine.uml.model.Command'
             },
             createNew(elementId, x, y, width, height) {
-
                 return {
                     _type: this.className(),
                     name: 'Command',

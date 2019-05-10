@@ -1,6 +1,5 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <modeling-designer
-            :id="id"
             :elementTypes="elementTypes"
             v-model="value"
             elementListBeanPath="classDefinitions"
@@ -9,8 +8,6 @@
             ref="designer"
             :value="value"
     >
-
-
     </modeling-designer>
 </template>
 
@@ -22,6 +19,7 @@
         },
         data() {
             return {
+
                 value: {},
                 elementTypes: [
                     {
