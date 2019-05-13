@@ -15,21 +15,23 @@
                     :enableHotkeyCtrlC="false"
                     :enableHotkeyCtrlV="false"
                     :enableHotkeyDelete="false"
-                    :slider="true"
+                    :slider="false"
                     :movable="true"
                     :resizable="true"
                     :selectable="true"
                     :connectable="true"
                     v-if="value"
                     v-on:canvasReady="bindEvents"
+                    v-on:connectShape="onConnectShape"
+
             >
-                <!--&lt;!&ndash;엘리먼트&ndash;&gt;-->
-                <!--<div v-if="value[elementListBeanPath]">-->
-                    <!--<component v-for="(element, index) in value[elementListBeanPath][1]" v-if="element != null"-->
-                               <!--:is="getComponentByClassName(element._type)"-->
-                               <!--v-model="value[elementListBeanPath][1][index]" :definition="value"-->
-                    <!--&gt;</component>-->
-                <!--</div>-->
+                <!--엘리먼트-->
+                <div v-if="value">
+                    <component v-for="(element, index) in value"
+                               :is="getComponentByClassName(element._type)"
+                               v-model="value[index]"
+                    ></component>
+                </div>
 
                 <!--&lt;!&ndash;릴레이션&ndash;&gt;-->
                 <!--<div v-if="value[relationListBeanPath] && elementsLoadDone">-->
@@ -71,13 +73,19 @@
         name: 'modeling-designer',
         components: {},
         props: {
-            value: Object,
             elementTypes: Array
         },
         data() {
             return {
+                canvas: null,
                 dragPageMovable: false,
-                relationVueComponentName: 'modeling-relation'
+                relationVueComponentName: 'modeling-relation',
+                value: [],
+                enableHistoryAdd: false,
+                undoing: false,
+                undoed: false,
+                history: [],
+                historyIndex: 0,
             }
         },
         computed: {
@@ -87,15 +95,8 @@
         created: function () {
         },
         mounted() {
-            $(document).keydown((evt) => {
-                if (evt.keyCode == 46 || evt.keyCode == 8) {
-                    this.deleteActivity();
-                }
-            });
-
             this.relationVueComponentNameTmp = 'modeling-relation';
             this.$emit('update:relationVueComponentName', this.relationVueComponentNameTmp);
-
             // this.history = [JSON.parse(JSON.stringify(this.value))];
             this.$nextTick(function () {
                 let startTime = new Date().getTime()
@@ -103,10 +104,18 @@
                 //$nextTick delays the callback function until Vue has updated the DOM
                 // (which usually happens as a result of us changing the data
                 //  so make any DOM changes here
+
                 this.canvas._CONFIG.FAST_LOADING = false;
                 this.canvas.updateSlider();
+
                 //timer end
                 this.$refs.opengraph.printTimer(startTime, new Date().getTime());
+
+                $(document).keydown((evt) => {
+                    if (evt.keyCode == 46 || evt.keyCode == 8) {
+                        this.deleteActivity();
+                    }
+                });
             });
         },
         watch: {
@@ -114,9 +123,36 @@
         },
 
         methods: {
+            deleteActivity: function () {
+                var me = this
+
+                let tmpArray = JSON.parse(JSON.stringify(me.value));
+                let drawer;
+                let selected = []
+                this.value.some(function (tmp) {
+                    if(tmp.drawer) {
+                        drawer = true
+                    }
+                })
+                if(!drawer) {
+                    tmpArray.forEach(function (valueTmp, index) {
+                        if(valueTmp.selected) {
+                            selected.push(valueTmp.elementView.id)
+                            tmpArray[index] = null
+                        }
+                    })
+
+                    me.value = tmpArray.filter(n => n)
+
+                    selected.forEach(function (deleteTmp) {
+                        me.$refs.opengraph.removeElement(deleteTmp)
+                    })
+                }
+
+            },
             toggleGrip: function () {
                 this.dragPageMovable = !this.dragPageMovable;
-
+                console.log("aa")
                 if (this.dragPageMovable) {
                     this.cursorStyle = 'cursor: url("/static/image/symbol/hands.png"), auto;';
                     this.handsStyle = ' color: #ffc124;';
@@ -170,6 +206,59 @@
                     }
                 });
             },
+            uuid: function () {
+                function s4() {
+                    return Math.floor((1 + Math.random()) * 0x10000)
+                        .toString(16)
+                        .substring(1);
+                }
+
+                return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                    s4() + '-' + s4() + s4() + s4();
+            },
+            onConnectShape: function (edge, from, to) {
+                var me = this;
+                //존재하는 릴레이션인 경우 (뷰 컴포넌트), 데이터 매핑에 의해 자동으로 from, to 가 변경되어있기 때문에 따로 로직은 필요없음.
+                //=> 바뀌어야 함.
+                //신규 릴레이션인 경우에는 릴레이션 생성
+                var edgeElement, originalData;
+                var isComponent = false;
+                if (edge.shape) {
+                    edgeElement = edge;
+                } else {
+                    isComponent = true;
+                    edgeElement = edge.element;
+                }
+
+                if (edgeElement && from && to) {
+                    var vertices = '[' + edgeElement.shape.geom.vertices.toString() + ']';
+                    var componentInfo = {
+                        component: this.relationVueComponentName,
+                        sourceElement: from.$parent.value,
+                        targetElement: to.$parent.value,
+                        vertices: vertices,
+                        isFilled: true,
+                        relationView: {
+                            style: JSON.stringify({}),
+                            value: vertices,
+                        }
+                    }
+
+                    from.$parent.value.elementView.id = from.id;
+                    to.$parent.value.elementView.id = to.id;
+
+                    if (isComponent) {
+                        me.canvas.removeShape(edgeElement, true);
+                        //this.removeComponentByOpenGraphComponentId(edgeElement.id);
+                        //기존 컴포넌트가 있는 경우 originalData 와 함께 생성
+                        this.addElement(componentInfo, null, JSON.parse(JSON.stringify(originalData)));
+                    } else {
+                        me.canvas.removeShape(edgeElement, true);
+                        //기존 컴포넌트가 없는 경우 신규 생성
+                        this.addElement(componentInfo);
+                    }
+                }
+            },
             addElement: function (componentInfo, newTracingTag, originalData) {
                 this.enableHistoryAdd = true;
                 var me = this;
@@ -194,16 +283,30 @@
                         componentInfo.height
                     );
                 }
+
+                console.log(this.value, element.elementView.id)
+                this.value.push(element)
             },
             getComponentByName: function (name) {
                 var componentByName;
                 $.each(window.Vue.classModelingComponents, function (i, component) {
                     if (component.default.name == name) {
+                        console.log(component.default.name)
                         componentByName = component.default;
                     }
                 });
                 return componentByName;
             },
+            getComponentByClassName: function (className) {
+                var componentByClassName;
+                $.each(window.Vue.classModelingComponents, function (i, component) {
+                    if (component.default.computed && component.default.computed.className && component.default.computed.className() == className) {
+                        console.log(component.default.className)
+                        componentByClassName = component.default;
+                    }
+                });
+                return componentByClassName;
+            }
         }
     }
 </script>

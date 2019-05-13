@@ -2,39 +2,46 @@
        * Todo: Property 작성 하는 부분 *
 -->
 <template>
-    <v-navigation-drawer right v-model="drawer"
-                         absolute
-                         temporary
-                         width="500"
-    >
-        <v-list style="height: 100%">
-            <v-list-tile style="height: 100%">
-                <v-list-tile-content>
-
-                </v-list-tile-content>
-            </v-list-tile>
-        </v-list>
-
-    </v-navigation-drawer>
+    <v-layout row justify-center>
+        <v-dialog v-model="navigationDrawer" max-width="600px">
+            <v-card>
+                <v-card-title>
+                    <span class="headline">{{titleName}} 내용 입력 </span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container fluid grid-list-md>
+                        <v-textarea
+                                name="input-7-1"
+                                outline
+                                :label="titleName"
+                                auto-grow
+                                v-model="input"
+                        ></v-textarea>
+                    </v-container>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" flat @click="navigationDrawer = false">확인</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+    </v-layout>
 </template>
 
 <script>
     export default {
         name: 'modeling-property-panel',
         props: {
-            drawer: {
-                default: function () {
-                    return false;
-                },
-                type: Boolean
-            },
-            value: Object
+            drawer: Boolean,
+            value: Object,
+            titleName: String,
+            inputText: String
         },
         computed: {},
         data: function () {
             var me = this;
             return {
-                navigationDrawer: this.drawer,
+                navigationDrawer: false,
                 _item: this.value,
                 preventWatch: false,
                 x: null,
@@ -44,6 +51,7 @@
                 style: [],
                 active: null,
                 tracingTag: null,
+                input: ''
             }
         },
         created: function () {
@@ -53,6 +61,9 @@
 
         },
         watch: {
+            input: function (newVal) {
+                this.$emit('update:inputText', newVal)
+            },
             drawer: function (val) {
                 this.navigationDrawer = val;
             },
@@ -152,14 +163,14 @@
 
         },
         methods: {
-            open(ref) {
-                this.navigationDrawer = true;
-                console.log('Opened: ' + ref);
-            },
-            close(ref) {
-                this.navigationDrawer = false;
-                console.log('Closed: ' + ref);
-            },
+            // open(ref) {
+            //     this.navigationDrawer = true;
+            //     console.log('Opened: ' + ref);
+            // },
+            // close(ref) {
+            //     this.navigationDrawer = false;
+            //     console.log('Closed: ' + ref);
+            // },
             // closeRightSidenav() {
             //     this.$refs.rightSidenav.close();
             // },

@@ -65,9 +65,12 @@
                 // this._selected = true;
             },
             deSelectedActivity: function () {
-                console.log('selected')
+                console.log('UnSelected')
                 if(this.value) {
                     this.value.selected = false
+                    if(this.value.drawer) {
+                        this.value.drawer = false
+                    }
                 }
             },
             showProperty: function () {

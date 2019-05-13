@@ -14,7 +14,8 @@
                 :height="value.elementView.height"
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
-                :label="value.name"
+                v-on:dblclick="showProperty"
+                :label="value.inputText"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
             <geometry-rect
@@ -45,63 +46,11 @@
 
 
         <modeling-property-panel
-                :drawer.sync="drawer"
+                :drawer.sync="value.drawer"
+                :titleName="value.name"
+                :inputText.sync="value.inputText"
                 v-model="value"
-                style="height: 100%"
         >
-            <template slot="properties-contents" style="height: 100%">
-                <v-switch v-model="reference">Reference from other model (Bounded Context)</v-switch>
-
-                <div v-if="!reference">
-                    <v-container>
-                        <v-text-field type="text"
-                                      label="클래스명"
-                                      v-model="value.name"></v-text-field>
-                    </v-container>
-
-                    <v-layout v-for="attribute in value.fieldDescriptors">
-                        <v-layout>
-                            <v-checkbox v-model="attribute.attributes.isKey">pk</v-checkbox>
-                            <v-container>
-                                <label>Attribute Name</label>
-                                <v-text-field type="text"
-                                              v-model="attribute.name"></v-text-field>
-                            </v-container>
-                        </v-layout>
-                        <v-layout>
-                            <v-container>
-                                <label>Type</label>
-                                <!--md-input type="text" v-model="attribute.className"></md-input-->
-                                <md-select type="text"
-                                           v-model="attribute.className">
-
-                                    <md-option value="java.lang.String">String</md-option>
-                                    <md-option value="java.lang.Long">Long</md-option>
-                                    <md-option value="java.lang.Double">Double</md-option>
-                                    <md-option value="java.util.Date">Date</md-option>
-                                    <md-option value="java.lang.Boolean">Boolean</md-option>
-
-                                </md-select>
-                                <md-icon v-on:click.native="removeAttribute(attribute)"
-                                         class="md-primary"
-                                         style="cursor: pointer"
-                                >delete
-                                </md-icon>
-                            </v-container>
-                        </v-layout>
-                    </v-layout>
-
-                    <v-btn @click="addAttribute">ADD ATTRIBUTE</v-btn>
-                </div>
-                <div v-else>
-                    <class-selector :modeling-classes-only="true" v-model="referenceClassName"></class-selector>
-                    <v-btn @click="updateClassInfo">Update class info</v-btn>
-                </div>
-
-            </template>
-
-            <template slot="additional-tabs">
-            </template>
         </modeling-property-panel>
 
     </div>
@@ -165,7 +114,6 @@
                 this.updateClassInfo();
             },
             drawer: function () {
-                console.log(this)
             }
 
         },
