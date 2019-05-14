@@ -1,6 +1,6 @@
 <template>
     <div>
-        <geometry-element
+        <image-element
                 selectable
                 movable
                 resizable
@@ -16,6 +16,7 @@
                 v-on:dblclick="showProperty"
                 v-on:addedToGroup="onAddedToGroup"
                 :label="value.inputText"
+                :image="'../../../../../../public/static/image/event/aggregate.png'"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
             <geometry-rect
@@ -44,7 +45,7 @@
                 </text-element>
 
             </sub-elements>
-        </geometry-element>
+        </image-element>
 
 
         <modeling-property-panel
@@ -60,8 +61,10 @@
 
 <script>
     import Element from '../../modeling/Element'
+    import ImageElement from "../../../opengraph/shape/ImageElement";
 
     export default {
+        components: {ImageElement},
         mixins: [Element],
         name: 'domain-event-definition',
         props: {},
