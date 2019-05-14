@@ -22,7 +22,9 @@
                 :drawer.sync="value.drawer"
                 :titleName="value.name"
                 :inputText.sync="value.inputText"
+                :aggregateList="aggregateList"
                 v-model="value"
+
         >
         </modeling-property-panel>
 
@@ -62,7 +64,8 @@
                     },
                     drawer: false,
                     selected: false,
-                    inputText: ''
+                    inputText: '',
+                    dataList: []
                 }
             }
         },
@@ -71,90 +74,35 @@
                 itemH: 20,
                 titleH: (this.value.classReference ? 60 : 30),
                 reference: this.value.classReference != null,
-                referenceClassName: this.value.classReference
+                referenceClassName: this.value.classReference,
+                aggregateList: []
             };
         },
         created: function () {
-            if (this.value.fieldDescriptors) {
-                this.value.fieldDescriptors.forEach(function (attribute) {
-                    if (!attribute.attributes)
-                        attribute.attributes = {};
-                });
-            }
 
         },
         watch: {
-            referenceClassName: function () {
-                this.updateClassInfo();
-            },
+            'value.drawer': function(newValue, oldValue){
+                var designer = this.getComponent('modeling-designer')
+
+                var me = this
+
+                if(newValue == true) {
+
+                        designer.value.forEach(function (aggregateTmp) {
+                            if(aggregateTmp.name == 'Aggregate') {
+                                me.aggregateList.push(aggregateTmp.inputText)
+                            }
+                        })
+                }
+            }
         },
         mounted: function () {
+
 
         },
         methods: {
 
-            addAttribute: function () {
-                this.value.fieldDescriptors.push({
-                    name: 'attribute',
-                    className: 'java.lang.String',
-                    attributes: {},
-                    _type: 'org.uengine.uml.model.Attribute'
-
-                });
-            },
-            removeAttribute: function (attribute) {
-                this.value.fieldDescriptors.splice(this.value.fieldDescriptors.indexOf(attribute), 1);
-            },
-            // className() {
-            //     return this.className()
-            // },
-            updateClassInfo: function () {
-                if (this.reference) {
-                    var definitionAndClassName = this.referenceClassName.split("#");
-                    var definitionName = definitionAndClassName[0];
-                    var classNameOnly = definitionAndClassName[1];
-
-                    var me = this;
-
-                    var result;
-                    var uri = (encodeURI(window.backend.$bind.ref + "/definition/raw/" + definitionName + ".ClassDiagram.json"))
-
-                    console.log("try to get class diagram: " + uri);
-
-                    var xhr = new XMLHttpRequest();
-                    var me = this;
-
-                    xhr.open('GET', uri, false);
-                    xhr.setRequestHeader("access_token", localStorage['access_token']);
-                    xhr.onload = function () {
-                        result = JSON.parse(xhr.responseText)
-
-                        var classDiagram = result.definition;
-
-                        for (var i in classDiagram.classDefinitions[1]) {
-
-                            var classDefinition = classDiagram.classDefinitions[1][i];
-                            if (classDefinition.name == classNameOnly) {
-
-
-                                classDefinition.elementView.x = me.value.elementView.x;
-                                classDefinition.elementView.y = me.value.elementView.y;
-
-                                classDefinition.classReference = me.referenceClassName;
-
-                                me.value = classDefinition;
-                                //me.$emit("input", me.value);
-
-                                break;
-                            }
-
-                        }
-                    };
-                    xhr.send();
-
-
-                }
-            }
         }
     }
 </script>

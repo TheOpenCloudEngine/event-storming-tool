@@ -1,10 +1,28 @@
 <!--
        * Todo: Property 작성 하는 부분 *
 -->
-<template>
+<template v-else>
     <v-layout row justify-center>
         <v-dialog v-model="navigationDrawer" max-width="600px">
-            <v-card>
+            <!-- Bounded Context Setting Start -->
+            <v-card v-if="value.name == 'Bounded Context'">
+                <v-card-title>
+                    <span class="headline">{{titleName}} 내용 입력 </span>
+                </v-card-title>
+                <v-card-text>
+                    <v-autocomplete
+                            v-model="input"
+                            :items="aggregateList"
+                            label="Aggregate"
+                            persistent-hint
+                            prepend-icon="mdi-city"
+                    >
+                    </v-autocomplete>
+                </v-card-text>
+            </v-card>
+            <!-- Bounded Context Setting End -->
+            <!-- Other Component Setting Start -->
+            <v-card v-else>
                 <v-card-title>
                     <span class="headline">{{titleName}} 내용 입력 </span>
                 </v-card-title>
@@ -23,6 +41,7 @@
                     <v-spacer></v-spacer>
                     <v-btn color="blue darken-1" flat @click="navigationDrawer = false">확인</v-btn>
                 </v-card-actions>
+                <!-- Other Component Setting Stop -->
             </v-card>
         </v-dialog>
     </v-layout>
@@ -35,7 +54,8 @@
             drawer: Boolean,
             value: Object,
             titleName: String,
-            inputText: String
+            inputText: String,
+            aggregateList: Array
         },
         computed: {},
         data: function () {
@@ -58,7 +78,7 @@
 
         },
         mounted: function () {
-
+            console.log(value)
         },
         watch: {
             input: function (newVal) {
@@ -76,8 +96,6 @@
             //프로퍼티 창이 오픈되었을 때 모델값을 새로 반영한다.
             navigationDrawer: {
                 handler: function (val, oldval) {
-
-                    console.log('val', val, this.value);
                     if (val == true) {
                         this._item = this.value;
 
@@ -87,44 +105,11 @@
                             this.width = this.value.elementView.width;
                             this.height = this.value.elementView.height;
                         }
-
-                        //맵 형식의 스타일을 어레이타입으로 변형한다.
-                        var view = this.value.elementView || this.value.relationView;
-                        var style = [];
-                        if (view.style) {
-                            var itemStyle = JSON.parse(view.style);
-                            if (!$.isEmptyObject(itemStyle)) {
-                                for (var key in itemStyle) {
-                                    style.push({
-                                        key: key,
-                                        value: itemStyle[key]
-                                    });
-                                }
-                            }
-                            this.style = style;
-                        }
-
-                        if (this.value.tracingTag) {
-                            this.tracingTag = this.value.tracingTag;
-                        }
-
-                        //bpmnVue 에 프로퍼티 에디팅중임을 알린다.
-                        //프로퍼티 에디팅 중 데피니션 변화는 히스토리에 기록된다.
-                        if (this.bpmnVue) {
-                            this.bpmnVue.propertyEditing = true;
-                        }
-
                         this.$emit('update:drawer', val);
-
-                        // this.toggleRightSidenav();
                     } else {
                         //프로퍼티 에디팅 해제.
-                        if (this.bpmnVue) {
-                            this.bpmnVue.propertyEditing = false;
-                        }
                         this.$emit('update:drawer', false);
 
-                        // this.closeRightSidenav();
                     }
                 }
             },
@@ -163,20 +148,7 @@
 
         },
         methods: {
-            // open(ref) {
-            //     this.navigationDrawer = true;
-            //     console.log('Opened: ' + ref);
-            // },
-            // close(ref) {
-            //     this.navigationDrawer = false;
-            //     console.log('Closed: ' + ref);
-            // },
-            // closeRightSidenav() {
-            //     this.$refs.rightSidenav.close();
-            // },
-            // toggleRightSidenav() {
-            //     this.$refs.rightSidenav.toggle();
-            // }
+
         }
     }
 </script>

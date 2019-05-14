@@ -86,6 +86,7 @@
                 undoed: false,
                 history: [],
                 historyIndex: 0,
+                aggregateList: []
             }
         },
         computed: {
@@ -143,16 +144,12 @@
                     })
 
                     me.value = tmpArray.filter(n => n)
-
-                    selected.forEach(function (deleteTmp) {
-                        me.$refs.opengraph.removeElement(deleteTmp)
-                    })
                 }
 
             },
             toggleGrip: function () {
                 this.dragPageMovable = !this.dragPageMovable;
-                console.log("aa")
+
                 if (this.dragPageMovable) {
                     this.cursorStyle = 'cursor: url("/static/image/symbol/hands.png"), auto;';
                     this.handsStyle = ' color: #ffc124;';
@@ -283,7 +280,6 @@
                         componentInfo.height
                     );
                 }
-
                 console.log(this.value, element.elementView.id)
                 this.value.push(element)
             },
@@ -301,7 +297,6 @@
                 var componentByClassName;
                 $.each(window.Vue.classModelingComponents, function (i, component) {
                     if (component.default.computed && component.default.computed.className && component.default.computed.className() == className) {
-                        console.log(component.default.className)
                         componentByClassName = component.default;
                     }
                 });

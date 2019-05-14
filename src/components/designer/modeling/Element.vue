@@ -87,7 +87,44 @@
                 return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
                     s4() + '-' + s4() + s4() + s4();
             },
+            onAddedToGroup: function (groupOpengraphComponent, opengraphComponent, eventOffset) {
+                console.log('onAddedToGroup!!');
+                var me = this;
 
+                console.log("groupOpengraphComponent: " , groupOpengraphComponent)
+
+
+                if(groupOpengraphComponent.tagName) {
+                    console.log('ROOT')
+                } else {
+                    var designer = this.getComponent('modeling-designer')
+                    designer.value.some(function (definitionTmp, definitionIndex) {
+                        var copyTmp = JSON.parse(JSON.stringify(definitionTmp))
+                        if(definitionTmp.elementView.id == opengraphComponent.element.id) {
+                            designer.value.some(function (boundedTmp, boundedIndex) {
+                                if(boundedTmp.elementView.id == groupOpengraphComponent.element.id) {
+                                    designer.value[boundedIndex].dataList.push(copyTmp.elementView.id)
+
+                                    designer.value = designer.value.filter(n => n)
+                                    return;
+                                }
+                            })
+                        }
+                    })
+                }
+
+            },
+            getComponent(componentName) {
+                let component = null
+                let parent = this.$parent
+                while (parent && !component) {
+                    if (parent.$options.name === componentName) {
+                        component = parent
+                    }
+                    parent = parent.$parent
+                }
+                return component
+            },
             onRemoveShape: function () {
                 console.log('remove')
                 var parent = this.$parent;

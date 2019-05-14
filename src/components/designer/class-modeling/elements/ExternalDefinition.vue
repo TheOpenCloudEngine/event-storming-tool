@@ -89,8 +89,8 @@
             'style': JSON.stringify({})
           },
             drawer: false,
-            selected: false
-
+            selected: false,
+            inputText: ''
         }
       }
     },

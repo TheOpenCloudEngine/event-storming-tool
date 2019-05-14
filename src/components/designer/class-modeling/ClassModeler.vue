@@ -77,7 +77,7 @@
                         'label': 'View',
                         'width': '100',
                         'height': '100',
-                        'src': '/public/static/image/bounded1.png'
+                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/bounded2.png'
 
                     },
                 ],
