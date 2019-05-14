@@ -1,6 +1,6 @@
 <template>
     <div>
-        <geometry-element
+        <image-element
                 selectable
                 movable
                 resizable
@@ -16,21 +16,9 @@
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:dblclick="showProperty"
                 :label="value.inputText"
+                :image="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/aggregate.png'"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
-            <geometry-rect
-                    :_style="{
-          'fill-r': 1,
-          'fill-cx': .1,
-          'fill-cy': .1,
-          'stroke-width': 1.4,
-          'stroke': '#F8D454',
-          fill: '#F8D454',
-          'fill-opacity': 1,
-          r: '1'
-        }"
-            >
-            </geometry-rect>
             <sub-elements labelEditable>
                 <!--title-->
                 <text-element
@@ -42,7 +30,7 @@
                         :text="value.classReference ? value.classReference : value.name">
                 </text-element>
             </sub-elements>
-        </geometry-element>
+        </image-element>
 
 
         <modeling-property-panel
