@@ -1,6 +1,6 @@
 <template>
     <div>
-        <image-element
+        <geometry-element
                 selectable
                 movable
                 resizable
@@ -16,9 +16,21 @@
                 v-on:dblclick="showProperty"
                 v-on:addedToGroup="onAddedToGroup"
                 :label="value.inputText"
-                :image="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/event.png'"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
+            <geometry-rect
+                    :_style="{
+          'fill-r': 1,
+          'fill-cx': .1,
+          'fill-cy': .1,
+          'stroke-width': 1.4,
+          'stroke': '#F1A746',
+          fill: '#F1A746',
+          'fill-opacity': 1,
+          r: '1'
+        }"
+            >
+            </geometry-rect>
 
             <sub-elements>
                 <!--title-->
@@ -32,7 +44,7 @@
                 </text-element>
 
             </sub-elements>
-        </image-element>
+        </geometry-element>
 
 
         <modeling-property-panel
@@ -48,10 +60,8 @@
 
 <script>
     import Element from '../../modeling/Element'
-    import ImageElement from "../../../opengraph/shape/ImageElement";
 
     export default {
-        components: {ImageElement},
         mixins: [Element],
         name: 'domain-event-definition',
         props: {},
