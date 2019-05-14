@@ -41,14 +41,6 @@
           :sub-style="{'font-weight': 'bold'}"
           :text="value.classReference ? value.classReference : value.name">
         </text-element>
-        <text-element v-if="value.fieldDescriptors" v-for="(item, index) in value.fieldDescriptors"
-                      :sub-width="'90%'"
-                      :sub-height="itemH"
-                      :sub-top="titleH + (index * itemH)"
-                      :sub-left="'5%'"
-                      :sub-style="{'text-anchor': 'start'}"
-                      :text="'+'+item.name + ': ' + item.className.substring(item.className.lastIndexOf('.')+1, item.className.length)">
-        </text-element>
       </sub-elements>
     </geometry-element>
 
