@@ -16,7 +16,7 @@
                 v-on:dblclick="showProperty"
                 v-on:addedToGroup="onAddedToGroup"
                 :label="value.inputText"
-                :image="'../../../../../../public/static/image/event/aggregate.png'"
+                :image="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/aggregateㅎ.png'"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
             <geometry-rect
