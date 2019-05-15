@@ -26,8 +26,12 @@
 
             >
                 <!--엘리먼트-->
-                <div v-if="value">
-                    <component v-for="(element, index) in value"
+                <div v-for="(element, index) in value">
+                    <component v-if="element._type == 'org.uengine.uml.model.relation'"
+                               :is="getComponentByClassName('org.uengine.uml.model.relation')"
+                               v-model="value[index]"
+                    ></component>
+                    <component v-else
                                :is="getComponentByClassName(element._type)"
                                v-model="value[index]"
                     ></component>
@@ -97,7 +101,6 @@
         },
         mounted() {
             this.relationVueComponentNameTmp = 'modeling-relation';
-            this.$emit('update:relationVueComponentName', this.relationVueComponentNameTmp);
             // this.history = [JSON.parse(JSON.stringify(this.value))];
             this.$nextTick(function () {
                 let startTime = new Date().getTime()
@@ -215,6 +218,7 @@
             },
             onConnectShape: function (edge, from, to) {
                 var me = this;
+
                 //존재하는 릴레이션인 경우 (뷰 컴포넌트), 데이터 매핑에 의해 자동으로 from, to 가 변경되어있기 때문에 따로 로직은 필요없음.
                 //=> 바뀌어야 함.
                 //신규 릴레이션인 경우에는 릴레이션 생성
@@ -230,9 +234,9 @@
                 if (edgeElement && from && to) {
                     var vertices = '[' + edgeElement.shape.geom.vertices.toString() + ']';
                     var componentInfo = {
-                        component: this.relationVueComponentName,
-                        sourceElement: from.$parent.value,
-                        targetElement: to.$parent.value,
+                        component: 'class-relation',
+                        sourceElement: from.$parent,
+                        targetElement: to.$parent,
                         vertices: vertices,
                         isFilled: true,
                         relationView: {
@@ -249,7 +253,8 @@
                         //this.removeComponentByOpenGraphComponentId(edgeElement.id);
                         //기존 컴포넌트가 있는 경우 originalData 와 함께 생성
                         this.addElement(componentInfo, null, JSON.parse(JSON.stringify(originalData)));
-                    } else {
+                    }
+                    else {
                         me.canvas.removeShape(edgeElement, true);
                         //기존 컴포넌트가 없는 경우 신규 생성
                         this.addElement(componentInfo);
@@ -262,13 +267,13 @@
                 var additionalData = {};
 
                 var vueComponent = me.getComponentByName(componentInfo.component);
-                console.log(componentInfo.component , this.relationVueComponentName)
+                // console.log(componentInfo.component , this.relationVueComponentName)
                 var element;
 
-                if (componentInfo.component == this.relationVueComponentName) {
+                if (componentInfo.component == 'class-relation') {
                     element = vueComponent.computed.createNew(
-                        componentInfo.sourceElement,
-                        componentInfo.targetElement,
+                        componentInfo.sourceElement.value,
+                        componentInfo.targetElement.value,
                         componentInfo.vertices,
                     );
                 } else {
@@ -280,21 +285,26 @@
                         componentInfo.height
                     );
                 }
-                console.log(this.value, element.elementView.id)
+                // console.log(this.value, element.elementView.id)
                 this.value.push(element)
+                this.$emit("addElement", element)
+
             },
             getComponentByName: function (name) {
                 var componentByName;
-                $.each(window.Vue.classModelingComponents, function (i, component) {
-                    if (component.default.name == name) {
-                        console.log(component.default.name)
-                        componentByName = component.default;
+                $.each(window.Vue._components, function (i, component) {
+                    if (component.name == name) {
+                        // console.log(component.default.name)
+                        componentByName = component;
                     }
                 });
                 return componentByName;
             },
             getComponentByClassName: function (className) {
                 var componentByClassName;
+                if(className == 'class-relation'){
+                    console.log('class-relation')
+                }
                 $.each(window.Vue.classModelingComponents, function (i, component) {
                     if (component.default.computed && component.default.computed.className && component.default.computed.className() == className) {
                         componentByClassName = component.default;

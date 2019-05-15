@@ -1136,10 +1136,15 @@
         /**
          * Shape 이 Connect 되었을 때의 이벤트 리스너
          *
-         * @param {Function} callbackFunc 콜백함수(event, edgeElement, fromElement, toElement)
+         * @param {Function} callbackFunc 콜백함수(eveconnectShapent, edgeElement, fromElement, toElement)
          */
         me.canvas.onConnectShape(function (event, edgeElement, fromElement, toElement) {
-          me.$emit('connectShape',
+            console.log("edgeElement" , edgeElement)
+            console.log("edgeElement" , fromElement)
+            console.log("edgeElement" , toElement)
+
+
+            me.$emit('connectShape',
             me.getElementById(edgeElement.id) || edgeElement,
             me.getElementById(fromElement.id) || fromElement,
             me.getElementById(toElement.id) || toElement);

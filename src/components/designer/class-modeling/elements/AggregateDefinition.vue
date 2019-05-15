@@ -15,8 +15,8 @@
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:dblclick="showProperty"
+                v-on:addedToGroup="onAddedToGroup"
                 :label="value.inputText"
-                :image="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/aggregate.png'"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
             <geometry-rect

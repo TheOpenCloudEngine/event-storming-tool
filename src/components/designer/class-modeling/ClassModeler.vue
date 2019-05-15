@@ -74,7 +74,7 @@
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'bounded-context-definition',
-                        'label': 'View',
+                        'label': 'Bounded Context',
                         'width': '100',
                         'height': '100',
                         'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/bounded2.png'

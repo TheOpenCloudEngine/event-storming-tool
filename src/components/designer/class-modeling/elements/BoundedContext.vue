@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vertical-lane-element
+        <group-element
                 selectable
                 movable
                 resizable
@@ -14,9 +14,19 @@
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:dblclick="showProperty"
-                :label="value.inputText"
                 :_style="{stroke:'black'}">
-        </vertical-lane-element>
+            <sub-elements>
+                <!--title-->
+                <text-element
+                        :sub-width="'100%'"
+                        :sub-height="titleH"
+                        :sub-top="0"
+                        :sub-left="0"
+                        :sub-style="{'font-weight': 'bold','font-size': '16'}"
+                        :text="value.inputText">
+                </text-element>
+            </sub-elements>
+        </group-element>
 
         <modeling-property-panel
                 :drawer.sync="value.drawer"
@@ -24,7 +34,6 @@
                 :inputText.sync="value.inputText"
                 :aggregateList="aggregateList"
                 v-model="value"
-
         >
         </modeling-property-panel>
 
@@ -33,8 +42,10 @@
 
 <script>
     import Element from '../../modeling/Element'
+    import GroupElement from "../../../opengraph/shape/GroupElement";
 
     export default {
+        components: {GroupElement},
         mixins: [Element],
         name: 'bounded-context-definition',
         props: {},
@@ -58,13 +69,13 @@
                         'id': elementId,
                         'x': x,
                         'y': y,
-                        'width': 100,
-                        'height': 100,
+                        'width': 300,
+                        'height': 300,
                         'style': JSON.stringify({})
                     },
                     drawer: false,
                     selected: false,
-                    inputText: '',
+                    inputText: 'Bounded Context',
                     dataList: []
                 }
             }
@@ -82,28 +93,32 @@
 
         },
         watch: {
-            'value.drawer': function(newValue, oldValue){
+            'value.drawer': function (newValue, oldValue) {
                 var designer = this.getComponent('modeling-designer')
 
                 var me = this
 
-                if(newValue == true) {
+                if (newValue == true) {
 
-                        designer.value.forEach(function (aggregateTmp) {
-                            if(aggregateTmp.name == 'Aggregate') {
-                                me.aggregateList.push(aggregateTmp.inputText)
-                            }
-                        })
+                    designer.value.forEach(function (aggregateTmp) {
+                        if (aggregateTmp.name == 'Aggregate') {
+                            me.aggregateList.push(aggregateTmp.inputText)
+                        }
+                    })
                 }
+            },
+            'value.inputText': function (newVal) {
+                this.value.elementView.x = this.value.elementView.x + 1
+                this.$nextTick(function () {
+                    this.value.elementView.x = this.value.elementView.x -1
+                })
             }
         },
         mounted: function () {
 
 
         },
-        methods: {
-
-        }
+        methods: {}
     }
 </script>
 

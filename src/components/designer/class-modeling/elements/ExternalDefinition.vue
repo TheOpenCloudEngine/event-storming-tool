@@ -15,6 +15,7 @@
       v-on:deSelectShape="deSelectedActivity"
       v-on:dblclick="showProperty"
       :label="value.inputText"
+      v-on:addedToGroup="onAddedToGroup"
     >
       <!--v-on:dblclick="$refs['dialog'].open()"-->
       <geometry-rect

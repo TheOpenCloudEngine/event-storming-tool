@@ -7,7 +7,7 @@
             <!-- Bounded Context Setting Start -->
             <v-card v-if="value.name == 'Bounded Context'">
                 <v-card-title>
-                    <span class="headline">{{titleName}} 내용 입력 </span>
+                    <span class="headline" v-if="titleName">{{titleName}} 내용 입력 </span>
                 </v-card-title>
                 <v-card-text>
                     <v-autocomplete

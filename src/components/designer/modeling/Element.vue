@@ -65,7 +65,7 @@
                 // this._selected = true;
             },
             deSelectedActivity: function () {
-                console.log('UnSelected')
+                // console.log('UnSelected')
                 if(this.value) {
                     this.value.selected = false
                     if(this.value.drawer) {
@@ -74,7 +74,7 @@
                 }
             },
             showProperty: function () {
-                console.log('Property' + this.value.drawer)
+                // console.log('Property' + this.value.drawer)
                 this.value.drawer = true;
             },
             uuid: function () {
@@ -88,16 +88,26 @@
                     s4() + '-' + s4() + s4() + s4();
             },
             onAddedToGroup: function (groupOpengraphComponent, opengraphComponent, eventOffset) {
-                console.log('onAddedToGroup!!');
+                // console.log('onAddedToGroup!!');
                 var me = this;
+                var designer = this.getComponent('modeling-designer')
 
-                console.log("groupOpengraphComponent: " , groupOpengraphComponent)
-
+                // console.log("groupOpengraphComponent: " , groupOpengraphComponent)
 
                 if(groupOpengraphComponent.tagName) {
-                    console.log('ROOT')
+                    designer.value.some(function (definitionTmp, definitionIndex) {
+                        if(definitionTmp.name == 'Bounded Context') {
+                            // console.log('ROOT')
+                            definitionTmp.dataList.some(function (deleteTmp, index) {
+                                if (deleteTmp == opengraphComponent.element.id) {
+                                    definitionTmp.dataList[index] = null
+                                    definitionTmp.dataList = definitionTmp.dataList.filter(n => n)
+                                    return;
+                                }
+                            })
+                        }
+                    })
                 } else {
-                    var designer = this.getComponent('modeling-designer')
                     designer.value.some(function (definitionTmp, definitionIndex) {
                         var copyTmp = JSON.parse(JSON.stringify(definitionTmp))
                         if(definitionTmp.elementView.id == opengraphComponent.element.id) {
@@ -126,7 +136,7 @@
                 return component
             },
             onRemoveShape: function () {
-                console.log('remove')
+                // console.log('remove')
                 var parent = this.$parent;
 
                 while (parent.$options._componentTag != "modeling-designer") {
