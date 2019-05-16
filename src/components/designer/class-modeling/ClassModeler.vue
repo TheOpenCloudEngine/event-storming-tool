@@ -1,4 +1,5 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
+
     <modeling-designer
             :elementTypes="elementTypes"
             elementListBeanPath="classDefinitions"
@@ -7,6 +8,8 @@
             ref="designer"
     >
     </modeling-designer>
+
+
 </template>
 
 <script>

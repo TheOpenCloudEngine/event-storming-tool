@@ -1,8 +1,6 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="canvas-panel">
         <v-layout>
-            <v-layout md-flex="20">
-            </v-layout>
 
             <opengraph
                     ref="opengraph"
@@ -23,15 +21,10 @@
                     v-if="value"
                     v-on:canvasReady="bindEvents"
                     v-on:connectShape="onConnectShape"
-
             >
                 <!--엘리먼트-->
                 <div v-for="(element, index) in value">
-                    <component v-if="element._type == 'org.uengine.uml.model.relation'"
-                               :is="getComponentByClassName('org.uengine.uml.model.relation')"
-                               v-model="value[index]"
-                    ></component>
-                    <component v-else
+                    <component
                                :is="getComponentByClassName(element._type)"
                                v-model="value[index]"
                     ></component>
@@ -45,7 +38,13 @@
                     <!--</component>-->
                 <!--</div>-->
             </opengraph>
-
+            <v-layout>
+                <text-reader
+                        :importType="'json'"
+                        @load="value = $event"
+                        style="z-index: 100"></text-reader>
+                <v-btn v-on:click.native="download">save</v-btn>
+            </v-layout>
             <v-card class="tools" style="top:100px;">
                 <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"
                 _width="30" _height="30" v-on:click="toggleGrip">
@@ -64,7 +63,6 @@
                             </span>
                     </template>
                     <span>{{item.label}}</span>
-
                 </v-tooltip>
             </v-card>
         </v-layout>
@@ -73,9 +71,16 @@
 </template>
 
 <script>
+    import TextReader from "@/components/yaml.vue";
+    var FileSaver = require('file-saver');
+    import {saveAs} from 'file-saver';
+
     export default {
         name: 'modeling-designer',
-        components: {},
+        components: {
+            TextReader,
+            saveAs
+        },
         props: {
             elementTypes: Array
         },
@@ -127,6 +132,18 @@
         },
 
         methods: {
+            download: function () {
+                console.log("aa")
+
+                var me = this;
+                var text = JSON.stringify(me.value);
+
+                var filename =  'test.json';
+
+
+                var file = new File([text], filename, {type: "text/json;charset=utf-8"});
+                FileSaver.saveAs(file);
+            },
             deleteActivity: function () {
                 var me = this
 
@@ -141,13 +158,35 @@
                 if(!drawer) {
                     tmpArray.forEach(function (valueTmp, index) {
                         if(valueTmp.selected) {
-                            selected.push(valueTmp.elementView.id)
-                            tmpArray[index] = null
+                            if(valueTmp.elementView) {
+                                selected.push(valueTmp.elementView.id)
+                                tmpArray[index] = null
+                            } else if (valueTmp.relationView) {
+                                selected.push(valueTmp.relationView.id)
+                                tmpArray[index] = null
+                            }
                         }
                     })
+                    console.log(selected)
+                    let tmpArray2 = tmpArray.filter(n => n)
 
-                    me.value = tmpArray.filter(n => n)
+                    selected.forEach(function (selectedTmp) {
+                        tmpArray2.forEach(function (relationTmp, index) {
+                            if( relationTmp != null ){
+                                if (relationTmp.relationView ) {
+                                    if(relationTmp.relationView.from == selectedTmp || relationTmp.relationView.to == selectedTmp) {
+                                        tmpArray2[index] = null
+                                    }
+                                }
+                            }
+                        })
+                    })
+
+                    me.value = tmpArray2.filter(n => n)
                 }
+
+            },
+            save: function () {
 
             },
             toggleGrip: function () {
@@ -157,7 +196,7 @@
                     this.cursorStyle = 'cursor: url("/static/image/symbol/hands.png"), auto;';
                     this.handsStyle = ' color: #ffc124;';
                 } else {
-                    this.cursorStyle = null;
+                   this.cursorStyle = null;
                     this.handsStyle = null;
                 }
             },
@@ -216,7 +255,7 @@
                 return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
                     s4() + '-' + s4() + s4() + s4();
             },
-            onConnectShape: function (edge, from, to) {
+                onConnectShape: function (edge, from, to) {
                 var me = this;
 
                 //존재하는 릴레이션인 경우 (뷰 컴포넌트), 데이터 매핑에 의해 자동으로 from, to 가 변경되어있기 때문에 따로 로직은 필요없음.
@@ -302,9 +341,7 @@
             },
             getComponentByClassName: function (className) {
                 var componentByClassName;
-                if(className == 'class-relation'){
-                    console.log('class-relation')
-                }
+
                 $.each(window.Vue.classModelingComponents, function (i, component) {
                     if (component.default.computed && component.default.computed.className && component.default.computed.className() == className) {
                         componentByClassName = component.default;

@@ -13,6 +13,7 @@
     export default {
         name: 'text-reader',
         props: {
+            importType: String,
             plainText: String,
             fileName: String
         },
@@ -38,15 +39,21 @@
         methods: {
             loadTextFromFile(ev) {
 
-                this.$emit('update:plainText', '')
+                if(this.importType == 'yaml') {
+                    this.$emit('update:plainText', '')
+                    const file = ev.target.files[0];
+                    const reader = new FileReader();
 
-                const file = ev.target.files[0];
-                const reader = new FileReader();
-
-                // this.fileName = file.name;
-                this.$emit('update:fileName', file.name)
-                reader.onload = e => this.$emit("load", e.target.result);
-                reader.readAsText(file);
+                    // this.fileName = file.name;
+                    this.$emit('update:fileName', file.name)
+                    reader.onload = e => this.$emit("load", e.target.result);
+                    reader.readAsText(file);
+                } else if (this.importType =='json') {
+                    const file = ev.target.files[0];
+                    const reader = new FileReader();
+                    reader.onload = e => this.$emit("load", JSON.parse(e.target.result));
+                    reader.readAsText(file);
+                }
             }
         }
     }

@@ -59,16 +59,16 @@
         },
         methods: {
             selectedActivity: function () {
-                if(this.value) {
+                if (this.value) {
                     this.value.selected = true
                 }
                 // this._selected = true;
             },
             deSelectedActivity: function () {
                 // console.log('UnSelected')
-                if(this.value) {
+                if (this.value) {
                     this.value.selected = false
-                    if(this.value.drawer) {
+                    if (this.value.drawer) {
                         this.value.drawer = false
                     }
                 }
@@ -94,9 +94,9 @@
 
                 // console.log("groupOpengraphComponent: " , groupOpengraphComponent)
 
-                if(groupOpengraphComponent.tagName) {
+                if (groupOpengraphComponent.tagName) {
                     designer.value.some(function (definitionTmp, definitionIndex) {
-                        if(definitionTmp.name == 'Bounded Context') {
+                        if (definitionTmp.name == 'Bounded Context') {
                             // console.log('ROOT')
                             definitionTmp.dataList.some(function (deleteTmp, index) {
                                 if (deleteTmp == opengraphComponent.element.id) {
@@ -110,15 +110,19 @@
                 } else {
                     designer.value.some(function (definitionTmp, definitionIndex) {
                         var copyTmp = JSON.parse(JSON.stringify(definitionTmp))
-                        if(definitionTmp.elementView.id == opengraphComponent.element.id) {
-                            designer.value.some(function (boundedTmp, boundedIndex) {
-                                if(boundedTmp.elementView.id == groupOpengraphComponent.element.id) {
-                                    designer.value[boundedIndex].dataList.push(copyTmp.elementView.id)
+                        if (definitionTmp.elementView) {
+                            if (definitionTmp.elementView.id == opengraphComponent.element.id) {
+                                designer.value.some(function (boundedTmp, boundedIndex) {
+                                    if (boundedTmp.elementView) {
+                                        if (boundedTmp.elementView.id == groupOpengraphComponent.element.id) {
+                                            designer.value[boundedIndex].dataList.push(copyTmp.elementView.id)
 
-                                    designer.value = designer.value.filter(n => n)
-                                    return;
-                                }
-                            })
+                                            designer.value = designer.value.filter(n => n)
+                                            return;
+                                        }
+                                    }
+                                })
+                            }
                         }
                     })
                 }

@@ -31,7 +31,6 @@
         }"
             >
             </geometry-rect>
-
             <sub-elements>
                 <!--title-->
                 <text-element

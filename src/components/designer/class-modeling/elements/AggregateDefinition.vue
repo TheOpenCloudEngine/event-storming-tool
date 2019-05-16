@@ -6,12 +6,11 @@
                 resizable
                 connectable
                 deletable
-                labelEditable
                 :id.sync="value.elementView.id"
                 :x.sync="value.elementView.x"
                 :y.sync="value.elementView.y"
                 :width.sync="value.elementView.width"
-                :height="value.elementView.height"
+                :height.sync="value.elementView.height"
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:dblclick="showProperty"
@@ -32,7 +31,7 @@
         }"
             >
             </geometry-rect>
-            <sub-elements labelEditable>
+            <sub-elements>
                 <!--title-->
                 <text-element
                         :sub-width="'100%'"

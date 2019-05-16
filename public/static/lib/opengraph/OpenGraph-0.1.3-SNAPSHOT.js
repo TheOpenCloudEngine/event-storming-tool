@@ -24370,7 +24370,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         if (isEdge) {
             _drawGroup();
             _drawBbox();
-            _drawTrash();
+            // _drawTrash();
         }
         if (!isEdge) {
             _drawGroup();
@@ -24400,7 +24400,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                     _drawLine();
                 }
             }
-            _drawTrash();
+            // _drawTrash();
         }
         _setControllerPosition();
 

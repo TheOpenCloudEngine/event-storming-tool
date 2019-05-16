@@ -1139,11 +1139,6 @@
          * @param {Function} callbackFunc 콜백함수(eveconnectShapent, edgeElement, fromElement, toElement)
          */
         me.canvas.onConnectShape(function (event, edgeElement, fromElement, toElement) {
-            console.log("edgeElement" , edgeElement)
-            console.log("edgeElement" , fromElement)
-            console.log("edgeElement" , toElement)
-
-
             me.$emit('connectShape',
             me.getElementById(edgeElement.id) || edgeElement,
             me.getElementById(fromElement.id) || fromElement,
