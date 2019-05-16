@@ -1,7 +1,6 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="canvas-panel">
         <v-layout>
-
             <opengraph
                     ref="opengraph"
                     focus-canvas-on-select
@@ -38,14 +37,16 @@
                     <!--</component>-->
                 <!--</div>-->
             </opengraph>
-            <v-layout>
+            <div style="z-index: 100; width: 100%;" align="right">
                 <text-reader
                         :importType="'json'"
                         @load="value = $event"
-                        style="z-index: 100"></text-reader>
-                <v-btn v-on:click.native="download">save</v-btn>
-            </v-layout>
-            <v-card class="tools" style="top:100px;">
+                        style="display: inline-block"
+                        ></text-reader>
+                <v-btn color="info" v-on:click.native="download">save</v-btn>
+            </div>
+
+            <v-card class="tools" style="top:100px; text-align: center;">
                 <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"
                 _width="30" _height="30" v-on:click="toggleGrip">
                 <v-tooltip md-direction="right">Hands</v-tooltip>
