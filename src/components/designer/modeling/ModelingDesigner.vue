@@ -12,7 +12,7 @@
                     :enableHotkeyCtrlC="false"
                     :enableHotkeyCtrlV="false"
                     :enableHotkeyDelete="false"
-                    :slider="false"
+                    :slider="true"
                     :movable="true"
                     :resizable="true"
                     :selectable="true"
@@ -24,31 +24,40 @@
                 <!--엘리먼트-->
                 <div v-for="(element, index) in value">
                     <component
-                               :is="getComponentByClassName(element._type)"
-                               v-model="value[index]"
+                            :is="getComponentByClassName(element._type)"
+                            v-model="value[index]"
                     ></component>
                 </div>
 
                 <!--&lt;!&ndash;릴레이션&ndash;&gt;-->
                 <!--<div v-if="value[relationListBeanPath] && elementsLoadDone">-->
-                    <!--<component v-for="(relation, index) in value[relationListBeanPath][1]" v-if="relation != null"-->
-                               <!--:is="relationVueComponentName" v-model="value[relationListBeanPath][1][index]"-->
-                               <!--:definition="value">-->
-                    <!--</component>-->
+                <!--<component v-for="(relation, index) in value[relationListBeanPath][1]" v-if="relation != null"-->
+                <!--:is="relationVueComponentName" v-model="value[relationListBeanPath][1][index]"-->
+                <!--:definition="value">-->
+                <!--</component>-->
                 <!--</div>-->
             </opengraph>
+
             <div style="z-index: 100; width: 100%;" align="right">
+                <v-flex xs12 sm6 style="display: inline-block">
+                    <v-text-field
+                            label="Project Name"
+                            v-model="projectName"
+                            single-line
+                    ></v-text-field>
+                </v-flex>
                 <text-reader
                         :importType="'json'"
                         @load="value = $event"
                         style="display: inline-block"
-                        ></text-reader>
+                        :fileName.sync="projectName"
+                ></text-reader>
                 <v-btn color="info" v-on:click.native="download">save</v-btn>
             </div>
 
             <v-card class="tools" style="top:100px; text-align: center;">
                 <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"
-                _width="30" _height="30" v-on:click="toggleGrip">
+                      _width="30" _height="30" v-on:click="toggleGrip">
                 <v-tooltip md-direction="right">Hands</v-tooltip>
                 </span>
                 <v-tooltip right
@@ -73,6 +82,7 @@
 
 <script>
     import TextReader from "@/components/yaml.vue";
+
     var FileSaver = require('file-saver');
     import {saveAs} from 'file-saver';
 
@@ -80,7 +90,7 @@
         name: 'modeling-designer',
         components: {
             TextReader,
-            saveAs
+            saveAs,
         },
         props: {
             elementTypes: Array
@@ -94,23 +104,28 @@
                 enableHistoryAdd: false,
                 undoing: false,
                 undoed: false,
-                history: [],
-                historyIndex: 0,
-                aggregateList: []
+                undoIndex: 0,
+                aggregateList: [],
+                tmpValue: [],
+                projectName: '',
+                noPushUndo: false,
+                redoArray: [],
+                undoArray: [[]],
             }
         },
-        computed: {
-
-
-        },
+        computed: {},
         created: function () {
         },
         mounted() {
-            this.relationVueComponentNameTmp = 'modeling-relation';
-            // this.history = [JSON.parse(JSON.stringify(this.value))];
+            var me = this
+            me.$ModelingBus.$on('MoveEvent', function () {
+                me.$nextTick(function () {
+                    me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
+                    me.redoArray = [];
+                })
+            })
             this.$nextTick(function () {
                 let startTime = new Date().getTime()
-
                 //$nextTick delays the callback function until Vue has updated the DOM
                 // (which usually happens as a result of us changing the data
                 //  so make any DOM changes here
@@ -122,8 +137,23 @@
                 this.$refs.opengraph.printTimer(startTime, new Date().getTime());
 
                 $(document).keydown((evt) => {
-                    if (evt.keyCode == 46 || evt.keyCode == 8) {
+                    if (evt.keyCode == 67 && (evt.metaKey || evt.ctrlKey)) {
+                        console.log("COPY");
+                        this.copy();
+                    } else if (evt.keyCode == 86 && (evt.ctrlKey || evt.metaKey)) {
+                        console.log("paste");
+                        this.paste();
+                    } else if (evt.keyCode == 46 || evt.keyCode == 8) {
+                        console.log("delete");
                         this.deleteActivity();
+                    } else if (evt.keyCode == 90 && (evt.metaKey || evt.ctrlKey)) {
+                        if (evt.shiftKey) {
+                            console.log("Control_SHIFIT_Z");
+                            me.redo()
+                        } else {
+                            console.log("Control_Z");
+                            me.undo();
+                        }
                     }
                 });
             });
@@ -133,14 +163,42 @@
         },
 
         methods: {
+            //복사
+            copy: function () {
+                var me = this
+                me.tempValue = []
+                me.value.forEach(function (tmp, idx) {
+                    if (tmp.selected == true) {
+                        me.tempValue.push(tmp)
+                    }
+                })
+            },
+            //붙여넣기
+            paste: function () {
+                var me = this
+                var temp = JSON.parse(JSON.stringify(me.tempValue))
+
+                if (me.tempValue != null) {
+                    temp.forEach(function (tmp, idx) {
+                        tmp.elementView.id = me.uuid();
+                        tmp.elementView.x = tmp.elementView.x + 10
+                        tmp.elementView.y = tmp.elementView.y + 10
+
+                        me.value.push(tmp);
+                        me.history.push(tmp);
+                    })
+                    //초기화
+                } else {
+                    console.log("다시 복사 필요");
+                }
+            },
             download: function () {
                 console.log("aa")
 
                 var me = this;
                 var text = JSON.stringify(me.value);
 
-                var filename =  'test.json';
-
+                var filename = this.projectName + '.json';
 
                 var file = new File([text], filename, {type: "text/json;charset=utf-8"});
                 FileSaver.saveAs(file);
@@ -152,18 +210,22 @@
                 let drawer;
                 let selected = []
                 this.value.some(function (tmp) {
-                    if(tmp.drawer) {
+                    if (tmp.drawer) {
                         drawer = true
                     }
                 })
-                if(!drawer) {
+                if (!drawer) {
                     tmpArray.forEach(function (valueTmp, index) {
-                        if(valueTmp.selected) {
-                            if(valueTmp.elementView) {
+                        if (valueTmp.selected) {
+                            if (valueTmp.elementView) {
                                 selected.push(valueTmp.elementView.id)
+                                me.undoArray.push(valueTmp);
+                                me.redoArray = [];
                                 tmpArray[index] = null
                             } else if (valueTmp.relationView) {
                                 selected.push(valueTmp.relationView.id)
+                                me.undoArray.push(valueTmp);
+                                me.redoArray = [];
                                 tmpArray[index] = null
                             }
                         }
@@ -173,9 +235,11 @@
 
                     selected.forEach(function (selectedTmp) {
                         tmpArray2.forEach(function (relationTmp, index) {
-                            if( relationTmp != null ){
-                                if (relationTmp.relationView ) {
-                                    if(relationTmp.relationView.from == selectedTmp || relationTmp.relationView.to == selectedTmp) {
+                            if (relationTmp != null) {
+                                if (relationTmp.relationView) {
+                                    if (relationTmp.relationView.from == selectedTmp || relationTmp.relationView.to == selectedTmp) {
+                                        me.undoArray.push(relationTmp);
+                                        me.redoArray = [];
                                         tmpArray2[index] = null
                                     }
                                 }
@@ -187,9 +251,6 @@
                 }
 
             },
-            save: function () {
-
-            },
             toggleGrip: function () {
                 this.dragPageMovable = !this.dragPageMovable;
 
@@ -197,7 +258,7 @@
                     this.cursorStyle = 'cursor: url("/static/image/symbol/hands.png"), auto;';
                     this.handsStyle = ' color: #ffc124;';
                 } else {
-                   this.cursorStyle = null;
+                    this.cursorStyle = null;
                     this.handsStyle = null;
                 }
             },
@@ -256,7 +317,7 @@
                 return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
                     s4() + '-' + s4() + s4() + s4();
             },
-                onConnectShape: function (edge, from, to) {
+            onConnectShape: function (edge, from, to) {
                 var me = this;
 
                 //존재하는 릴레이션인 경우 (뷰 컴포넌트), 데이터 매핑에 의해 자동으로 from, to 가 변경되어있기 때문에 따로 로직은 필요없음.
@@ -301,6 +362,31 @@
                     }
                 }
             },
+            redo: function () {
+                var me = this
+                if (me.redoArray.length > 0) {
+                    var tmpData = me.redoArray.pop();
+                    me.value = JSON.parse(JSON.stringify(tmpData));
+                    if (me.undoArray.length == 0 && me.value.length == 0) {
+                        me.undoArray.push([])
+                    }
+                    me.undoArray.push(JSON.parse(JSON.stringify(tmpData)));
+                } else {
+                    console.log(">>NO DATA");
+                }
+            },
+            undo: function () {
+                var me = this
+                if (me.undoArray.length > 0) {
+                    if (me.undoArray[me.undoArray.length - 1].length > 0) {
+                        me.redoArray.push(JSON.parse(JSON.stringify(me.value)));
+                    }
+                    var tmpData = me.undoArray.pop();
+                    me.value = JSON.parse(JSON.stringify(me.undoArray[me.undoArray.length - 1]));
+                } else {
+                    console.log(">>NO DATA");
+                }
+            },
             addElement: function (componentInfo, newTracingTag, originalData) {
                 this.enableHistoryAdd = true;
                 var me = this;
@@ -309,6 +395,7 @@
                 var vueComponent = me.getComponentByName(componentInfo.component);
                 // console.log(componentInfo.component , this.relationVueComponentName)
                 var element;
+
 
                 if (componentInfo.component == 'class-relation') {
                     element = vueComponent.computed.createNew(
@@ -326,8 +413,12 @@
                     );
                 }
                 // console.log(this.value, element.elementView.id)
-                this.value.push(element)
-                this.$emit("addElement", element)
+                if (me.value == null) {
+                    me.value = []
+                }
+                me.value.push(element);
+                me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
+                me.redoArray = [];
 
             },
             getComponentByName: function (name) {

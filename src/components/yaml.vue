@@ -47,6 +47,7 @@
                     reader.readAsText(file);
                 } else if (this.importType == 'json') {
                     const file = ev.target.files[0];
+                    this.$emit('update:fileName', file.name.replace('.json', ''))
                     const reader = new FileReader();
                     reader.onload = e => this.$emit("load", JSON.parse(e.target.result));
                     reader.readAsText(file);
