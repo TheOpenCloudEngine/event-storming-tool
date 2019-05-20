@@ -118,24 +118,17 @@
                 get: function () {
                     var me = this
                     console.log("aa")
-                    var temp;
-                    if(me.value.length > 0) {
-                        me.value.some(function (tmp, index) {
+                    var temp = false;
+                    var tmpArray = JSON.parse(JSON.stringify(me.value))
+                    if (tmpArray.length > 0) {
+                        tmpArray.some(function (tmp, index) {
                             if (tmp.drawer) {
-                                console.log(tmp.drawer)
                                 temp = true
-                                return;
-                            } else if (me.value.length - 1 == index) {
-                                console.log(tmp.drawer)
-                                temp = false
                                 return;
                             }
                         })
-                        console.log(temp)
-                        return temp;
                     }
-
-
+                    return temp;
                 }
             }
         },
@@ -145,6 +138,7 @@
             var me = this
             me.$ModelingBus.$on('MoveEvent', function () {
                 me.$nextTick(function () {
+                    console.log("aa")
                     me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                     me.redoArray = [];
                 })
@@ -167,24 +161,18 @@
                     } else if (evt.keyCode == 86 && (evt.ctrlKey || evt.metaKey)) {
                         this.paste();
                     } else if (evt.keyCode == 46 || evt.keyCode == 8) {
-                        console.log("Control_SHIFIT_Z");
-
                         this.deleteActivity();
                     } else if (evt.keyCode == 90 && (evt.metaKey || evt.ctrlKey)) {
                         if (evt.shiftKey) {
-                            console.log("Control_SHIFIT_Z");
                             me.redo()
                         } else {
-                            console.log("Control_Z");
                             me.undo();
                         }
                     }
                 });
             });
         },
-        watch: {
-
-        },
+        watch: {},
 
         methods: {
             //복사
@@ -388,7 +376,6 @@
             redo: function () {
                 var me = this
                 if (!this.drawer) {
-                    // console.log("redo")
                     if (me.redoArray.length > 0) {
                         var tmpData = me.redoArray.pop();
                         me.value = JSON.parse(JSON.stringify(tmpData));
@@ -403,19 +390,21 @@
             },
             undo: function () {
                 var me = this
-                if (!this.drawer) {
-                    // console.log("undo")
-
+                // if (!this.drawer) {
+                if (me.undoArray.length > 0) {
+                    if (me.undoArray[me.undoArray.length - 1].length > 0) {
+                        me.redoArray.push(JSON.parse(JSON.stringify(me.value)));
+                    }
+                    var tmpData = me.undoArray.pop();
                     if (me.undoArray.length > 0) {
-                        if (me.undoArray[me.undoArray.length - 1].length > 0) {
-                            me.redoArray.push(JSON.parse(JSON.stringify(me.value)));
-                        }
-                        var tmpData = me.undoArray.pop();
                         me.value = JSON.parse(JSON.stringify(me.undoArray[me.undoArray.length - 1]));
                     } else {
-                        // console.log(">>NO DATA");
+                        me.value = [[]]
                     }
+                } else {
+                    // console.log(">>NO DATA");
                 }
+                // }
             },
             addElement: function (componentInfo, newTracingTag, originalData) {
                 this.enableHistoryAdd = true;
