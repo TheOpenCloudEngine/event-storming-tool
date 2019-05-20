@@ -2,11 +2,6 @@
     <div class="text-reader" style="text-align:center; margin: 10px">
         <label class="v-btn v-btn theme--light success" for="ex_file">Upload</label>
         <input id="ex_file" type="file" @change="loadTextFromFile"/>
-        <!--<v-text-field v-else-if="item.ui_type=='number'"-->
-        <!--v-model="item.val" @focus="onUiFocus()"-->
-        <!--type="file"-->
-        <!--:label='item.ui_name'-->
-        <!--&gt;</v-text-field>-->
     </div>
 </template>
 
@@ -35,7 +30,6 @@
         watch: {},
         methods: {
             loadTextFromFile(ev) {
-
                 if (this.importType == 'yaml') {
                     this.$emit('update:plainText', '')
                     const file = ev.target.files[0];

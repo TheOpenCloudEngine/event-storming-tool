@@ -113,7 +113,32 @@
                 undoArray: [[]],
             }
         },
-        computed: {},
+        computed: {
+            drawer: {
+                get: function () {
+                    var me = this
+                    console.log("aa")
+                    var temp;
+                    if(me.value.length > 0) {
+                        me.value.some(function (tmp, index) {
+                            if (tmp.drawer) {
+                                console.log(tmp.drawer)
+                                temp = true
+                                return;
+                            } else if (me.value.length - 1 == index) {
+                                console.log(tmp.drawer)
+                                temp = false
+                                return;
+                            }
+                        })
+                        console.log(temp)
+                        return temp;
+                    }
+
+
+                }
+            }
+        },
         created: function () {
         },
         mounted() {
@@ -138,13 +163,12 @@
 
                 $(document).keydown((evt) => {
                     if (evt.keyCode == 67 && (evt.metaKey || evt.ctrlKey)) {
-                        console.log("COPY");
                         this.copy();
                     } else if (evt.keyCode == 86 && (evt.ctrlKey || evt.metaKey)) {
-                        console.log("paste");
                         this.paste();
                     } else if (evt.keyCode == 46 || evt.keyCode == 8) {
-                        console.log("delete");
+                        console.log("Control_SHIFIT_Z");
+
                         this.deleteActivity();
                     } else if (evt.keyCode == 90 && (evt.metaKey || evt.ctrlKey)) {
                         if (evt.shiftKey) {
@@ -166,30 +190,35 @@
             //복사
             copy: function () {
                 var me = this
-                me.tempValue = []
-                me.value.forEach(function (tmp, idx) {
-                    if (tmp.selected == true) {
-                        me.tempValue.push(tmp)
-                    }
-                })
+                if (!this.drawer) {
+                    console.log("copy")
+                    me.tempValue = []
+                    me.value.forEach(function (tmp, idx) {
+                        if (tmp.selected == true) {
+                            me.tempValue.push(tmp)
+                        }
+                    })
+                }
             },
             //붙여넣기
             paste: function () {
                 var me = this
-                var temp = JSON.parse(JSON.stringify(me.tempValue))
+                if (!this.drawer) {
+                    var temp = JSON.parse(JSON.stringify(me.tempValue))
 
-                if (me.tempValue != null) {
-                    temp.forEach(function (tmp, idx) {
-                        tmp.elementView.id = me.uuid();
-                        tmp.elementView.x = tmp.elementView.x + 10
-                        tmp.elementView.y = tmp.elementView.y + 10
+                    if (me.tempValue != null) {
+                        temp.forEach(function (tmp, idx) {
+                            tmp.elementView.id = me.uuid();
+                            tmp.elementView.x = tmp.elementView.x + 10
+                            tmp.elementView.y = tmp.elementView.y + 10
 
-                        me.value.push(tmp);
-                        me.history.push(tmp);
-                    })
-                    //초기화
-                } else {
-                    console.log("다시 복사 필요");
+                            me.value.push(tmp);
+                            me.history.push(tmp);
+                        })
+                        //초기화
+                    } else {
+                        console.log("다시 복사 필요");
+                    }
                 }
             },
             download: function () {
@@ -206,15 +235,9 @@
             deleteActivity: function () {
                 var me = this
 
-                let tmpArray = JSON.parse(JSON.stringify(me.value));
-                let drawer;
                 let selected = []
-                this.value.some(function (tmp) {
-                    if (tmp.drawer) {
-                        drawer = true
-                    }
-                })
-                if (!drawer) {
+                if (!this.drawer) {
+                    let tmpArray = JSON.parse(JSON.stringify(me.value));
                     tmpArray.forEach(function (valueTmp, index) {
                         if (valueTmp.selected) {
                             if (valueTmp.elementView) {
@@ -364,27 +387,34 @@
             },
             redo: function () {
                 var me = this
-                if (me.redoArray.length > 0) {
-                    var tmpData = me.redoArray.pop();
-                    me.value = JSON.parse(JSON.stringify(tmpData));
-                    if (me.undoArray.length == 0 && me.value.length == 0) {
-                        me.undoArray.push([])
+                if (!this.drawer) {
+                    // console.log("redo")
+                    if (me.redoArray.length > 0) {
+                        var tmpData = me.redoArray.pop();
+                        me.value = JSON.parse(JSON.stringify(tmpData));
+                        if (me.undoArray.length == 0 && me.value.length == 0) {
+                            me.undoArray.push([])
+                        }
+                        me.undoArray.push(JSON.parse(JSON.stringify(tmpData)));
+                    } else {
+                        // console.log(">>NO DATA");
                     }
-                    me.undoArray.push(JSON.parse(JSON.stringify(tmpData)));
-                } else {
-                    console.log(">>NO DATA");
                 }
             },
             undo: function () {
                 var me = this
-                if (me.undoArray.length > 0) {
-                    if (me.undoArray[me.undoArray.length - 1].length > 0) {
-                        me.redoArray.push(JSON.parse(JSON.stringify(me.value)));
+                if (!this.drawer) {
+                    // console.log("undo")
+
+                    if (me.undoArray.length > 0) {
+                        if (me.undoArray[me.undoArray.length - 1].length > 0) {
+                            me.redoArray.push(JSON.parse(JSON.stringify(me.value)));
+                        }
+                        var tmpData = me.undoArray.pop();
+                        me.value = JSON.parse(JSON.stringify(me.undoArray[me.undoArray.length - 1]));
+                    } else {
+                        // console.log(">>NO DATA");
                     }
-                    var tmpData = me.undoArray.pop();
-                    me.value = JSON.parse(JSON.stringify(me.undoArray[me.undoArray.length - 1]));
-                } else {
-                    console.log(">>NO DATA");
                 }
             },
             addElement: function (componentInfo, newTracingTag, originalData) {
