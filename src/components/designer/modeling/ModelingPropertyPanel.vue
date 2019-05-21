@@ -55,7 +55,7 @@
             value: Object,
             titleName: String,
             inputText: String,
-            aggregateList: Array
+            aggregateList: Array,
         },
         computed: {},
         data: function () {

@@ -12,7 +12,10 @@
                     :enableHotkeyCtrlC="false"
                     :enableHotkeyCtrlV="false"
                     :enableHotkeyDelete="false"
-                    :slider="true"
+                    :enableHotkeyCtrlZ="false"
+                    :enableHotkeyCtrlD="false"
+                    :enableHotkeyCtrlG="false"
+                    :slider="false"
                     :movable="true"
                     :resizable="true"
                     :selectable="true"
@@ -20,6 +23,8 @@
                     v-if="value"
                     v-on:canvasReady="bindEvents"
                     v-on:connectShape="onConnectShape"
+                    v-on:onRotateShap="onRotateShape"
+                    :imageBase="imageBase"
             >
                 <!--엘리먼트-->
                 <div v-for="(element, index) in value">
@@ -61,7 +66,8 @@
                 <v-tooltip md-direction="right">Hands</v-tooltip>
                 </span>
                 <v-tooltip right
-                           v-for="item in elementTypes"
+                           v-for="(item, key) in elementTypes"
+                           :key="key"
                 >
                     <template v-slot:activator="{ on }">
                         <span class="icons draggable"
@@ -110,14 +116,14 @@
                 projectName: '',
                 noPushUndo: false,
                 redoArray: [],
-                undoArray: [[]],
+                undoArray: [],
+                imageBase: 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/'
             }
         },
         computed: {
             drawer: {
                 get: function () {
                     var me = this
-                    console.log("aa")
                     var temp = false;
                     var tmpArray = JSON.parse(JSON.stringify(me.value))
                     if (tmpArray.length > 0) {
@@ -138,7 +144,6 @@
             var me = this
             me.$ModelingBus.$on('MoveEvent', function () {
                 me.$nextTick(function () {
-                    console.log("aa")
                     me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                     me.redoArray = [];
                 })
@@ -151,8 +156,8 @@
 
                 this.canvas._CONFIG.FAST_LOADING = false;
                 this.canvas.updateSlider();
-
                 //timer end
+                me.undoArray.push([])
                 this.$refs.opengraph.printTimer(startTime, new Date().getTime());
 
                 $(document).keydown((evt) => {
@@ -178,8 +183,7 @@
             //복사
             copy: function () {
                 var me = this
-                if (!this.drawer) {
-                    console.log("copy")
+                if(!me.drawer) {
                     me.tempValue = []
                     me.value.forEach(function (tmp, idx) {
                         if (tmp.selected == true) {
@@ -191,7 +195,7 @@
             //붙여넣기
             paste: function () {
                 var me = this
-                if (!this.drawer) {
+                if(!me.drawer) {
                     var temp = JSON.parse(JSON.stringify(me.tempValue))
 
                     if (me.tempValue != null) {
@@ -205,13 +209,10 @@
                         })
                         //초기화
                     } else {
-                        console.log("다시 복사 필요");
                     }
                 }
             },
             download: function () {
-                console.log("aa")
-
                 var me = this;
                 var text = JSON.stringify(me.value);
 
@@ -220,11 +221,13 @@
                 var file = new File([text], filename, {type: "text/json;charset=utf-8"});
                 FileSaver.saveAs(file);
             },
+            onRotateShape:function () {
+
+            },
             deleteActivity: function () {
                 var me = this
-
-                let selected = []
-                if (!this.drawer) {
+                if(!me.drawer) {
+                    let selected = []
                     let tmpArray = JSON.parse(JSON.stringify(me.value));
                     tmpArray.forEach(function (valueTmp, index) {
                         if (valueTmp.selected) {
@@ -241,7 +244,6 @@
                             }
                         }
                     })
-                    console.log(selected)
                     let tmpArray2 = tmpArray.filter(n => n)
 
                     selected.forEach(function (selectedTmp) {
@@ -257,10 +259,8 @@
                             }
                         })
                     })
-
                     me.value = tmpArray2.filter(n => n)
                 }
-
             },
             toggleGrip: function () {
                 this.dragPageMovable = !this.dragPageMovable;
@@ -375,7 +375,7 @@
             },
             redo: function () {
                 var me = this
-                if (!this.drawer) {
+                if(!me.drawer){
                     if (me.redoArray.length > 0) {
                         var tmpData = me.redoArray.pop();
                         me.value = JSON.parse(JSON.stringify(tmpData));
@@ -384,27 +384,23 @@
                         }
                         me.undoArray.push(JSON.parse(JSON.stringify(tmpData)));
                     } else {
-                        // console.log(">>NO DATA");
                     }
                 }
             },
             undo: function () {
-                var me = this
-                // if (!this.drawer) {
-                if (me.undoArray.length > 0) {
-                    if (me.undoArray[me.undoArray.length - 1].length > 0) {
-                        me.redoArray.push(JSON.parse(JSON.stringify(me.value)));
-                    }
-                    var tmpData = me.undoArray.pop();
-                    if (me.undoArray.length > 0) {
-                        me.value = JSON.parse(JSON.stringify(me.undoArray[me.undoArray.length - 1]));
+                var me = this;
+                if(!me.drawer) {
+                    var tmpArray = JSON.parse(JSON.stringify(me.value))
+                    if (me.undoArray.length > 1) {
+                        me.redoArray.push(me.undoArray[me.undoArray.length - 1])
+                        me.undoArray.pop()
+                        me.value = JSON.parse(JSON.stringify(me.undoArray[me.undoArray.length - 1]))
+                    } else if (me.undoArray.length == 1) {
+                        me.undoArray.pop();
+                        me.undoArray.push(JSON.parse(JSON.stringify(me.value)))
                     } else {
-                        me.value = [[]]
                     }
-                } else {
-                    // console.log(">>NO DATA");
                 }
-                // }
             },
             addElement: function (componentInfo, newTracingTag, originalData) {
                 this.enableHistoryAdd = true;
@@ -438,8 +434,8 @@
                 me.value.push(element);
                 me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                 me.redoArray = [];
-
             },
+
             getComponentByName: function (name) {
                 var componentByName;
                 $.each(window.Vue._components, function (i, component) {

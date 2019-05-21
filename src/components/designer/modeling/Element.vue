@@ -58,6 +58,10 @@
         mounted: function () {
         },
         methods: {
+            // onRotateShape: function (angle) {
+            //     var me = this
+            //     me.$emit('rotateShape', me, angle);
+            // },
             selectedActivity: function () {
                 if (this.value) {
                     this.value.selected = true
@@ -77,6 +81,7 @@
                 // console.log('Property' + this.value.drawer)
                 this.value.drawer = true;
             },
+
             uuid: function () {
                 function s4() {
                     return Math.floor((1 + Math.random()) * 0x10000)
@@ -128,6 +133,8 @@
                 }
 
             },
+            // onRotateShape() {
+            // },
             getComponent(componentName) {
                 let component = null
                 let parent = this.$parent

@@ -5,7 +5,6 @@
       movable
       resizable
       connectable
-      deletable
       :id.sync="value.elementView.id"
       :x.sync="value.elementView.x"
       :y.sync="value.elementView.y"
@@ -15,7 +14,6 @@
       v-on:selectShape="selectedActivity"
       v-on:deSelectShape="deSelectedActivity"
       :label="value.inputText"
-      v-on:addedToGroup="onAddedToGroup"
     >
       <!--v-on:dblclick="$refs['dialog'].open()"-->
       <geometry-rect

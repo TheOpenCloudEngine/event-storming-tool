@@ -6399,6 +6399,7 @@ OG.common.Constants = {
         RECT_CONNECT_MODE: "RECT_CONNECT_MODE",
         RECT_CONNECT_TO_DRAW: "RECT_CONNECT_TO_DRAW",
         TRASH: "_GUIDE_TRASH",
+        ROTATE: "_GUIDE_ROTATE",
         CONTROLLER: "_GUIDE_CONT",
         RECT: "_GUIDE_RECT",
         QUARTER_UPPER: "QUARTER_UPPER",
@@ -23799,7 +23800,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         _size = me._CONFIG.GUIDE_RECT_SIZE, _hSize = OG.Util.round(_size / 2),
         _ctrlSize = me._CONFIG.GUIDE_LINE_SIZE,
         _ctrlMargin = me._CONFIG.GUIDE_LINE_MARGIN,
-        _trash, isEdge, isEssensia, controllers = [], isLane,
+        _trash, _rotate, isEdge, isEssensia, controllers = [], isLane,
         _qUpper, _qLow, _qBisector, _qThirds;
 
     var bboxStyle = element.shape.GUIDE_BBOX ? element.shape.GUIDE_BBOX : me._CONFIG.DEFAULT_STYLE.GUIDE_BBOX;
@@ -24028,7 +24029,35 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         _trash = me._getREleById(rElement.id + OG.Constants.GUIDE_SUFFIX.TRASH);
         controllers.push(_trash);
     }
+    function _drawRotate() {
+        if (!_isDeletable) {
+            return;
+        }
+        _rotate = me._PAPER.image(me._CONFIG.IMAGE_BASE + 'rotate.svg', 0, 0, _ctrlSize, _ctrlSize);
+        _rotate.attr(me._CONFIG.DEFAULT_STYLE.GUIDE_LINE_AREA);
+        group.appendChild(_rotate);
+        me._add(_rotate, rElement.id + OG.Constants.GUIDE_SUFFIX.ROTATE);
+        guide.trash = _rotate.node;
 
+        $(_rotate.node).click(function () {
+            if (me.isLane(element)) {
+                me.removeLaneShape(element);
+                me.addHistory();
+            } else {
+                me.removeShape(element);
+                me.addHistory();
+            }
+        })
+        controllers.push(_rotate);
+    }
+
+    function _redrawRotate() {
+        if (!_isDeletable) {
+            return;
+        }
+        _rotate = me._getREleById(rElement.id + OG.Constants.GUIDE_SUFFIX.TRASH);
+        controllers.push(_rotate);
+    }
     function _drawLine() {
         if (!_isConnectable) {
             return;
@@ -24356,6 +24385,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                 }
             }
             _redrawTrash();
+            _redrawRotate();
         }
         if (isEdge) {
             _redrawBbox();
@@ -24370,7 +24400,8 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         if (isEdge) {
             _drawGroup();
             _drawBbox();
-            // _drawTrash();
+            _drawTrash();
+            _drawRotate();
         }
         if (!isEdge) {
             _drawGroup();
@@ -24400,7 +24431,8 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                     _drawLine();
                 }
             }
-            // _drawTrash();
+            _drawTrash();
+            _drawRotate();
         }
         _setControllerPosition();
 
@@ -35355,7 +35387,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
         /**
          * 이미지 베이스 패스
          */
-        IMAGE_BASE: 'resources/images/symbol/',
+        IMAGE_BASE: '../../images/symbol/',
 
         /**
          * 이미지 url 정보

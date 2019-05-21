@@ -63,7 +63,6 @@
                 return {
                     _type: this.className(),
                     name: 'Bounded Context',
-                    fieldDescriptors: [],
                     elementView: {
                         '_type': 'org.uengine.modeling.bounded',
                         'id': elementId,
@@ -99,11 +98,12 @@
                 var me = this
 
                 if (newValue == true) {
-
-                    designer.value.forEach(function (aggregateTmp) {
-                        if (aggregateTmp.name == 'Aggregate') {
-                            me.aggregateList.push(aggregateTmp.inputText)
-                        }
+                    me.value.dataList.forEach(function(aggregateId) {
+                        designer.value.forEach(function (tmp) {
+                            if(tmp.elementView.id == aggregateId) {
+                                me.aggregateList.push(tmp.inputText)
+                            }
+                        })
                     })
                 }
             },

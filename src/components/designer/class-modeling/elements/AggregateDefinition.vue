@@ -5,7 +5,6 @@
                 movable
                 resizable
                 connectable
-                deletable
                 :id.sync="value.elementView.id"
                 :x.sync="value.elementView.x"
                 :y.sync="value.elementView.y"
@@ -77,7 +76,7 @@
                 return {
                     _type: this.className(),
                     name: 'Aggregate',
-                    fieldDescriptors: [],
+                    innerAggregate: [],
                     elementView: {
                         '_type': 'org.uengine.modeling.Aggregate',
                         'id': elementId,

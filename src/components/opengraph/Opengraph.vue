@@ -250,7 +250,7 @@
              */
             selfCloneable: {
                 default: function () {
-                    return true;
+                    return false;
                 },
                 type: Boolean
             },
@@ -268,7 +268,7 @@
              */
             deletable: {
                 default: function () {
-                    return true;
+                    return false;
                 },
                 type: Boolean
             },
@@ -860,7 +860,6 @@
 
         methods: {
             setCanvasConfiguration: function (canvas) {
-
                 var me = this;
 
                 canvas._CONTAINER = $(this.$el).find('.canvas-wrapper')[0];
@@ -901,7 +900,7 @@
                 canvas._CONFIG.SELF_CONNECTABLE = this.selfConnectable;
                 canvas._CONFIG.CONNECT_CLONEABLE = this.selfCloneable;
                 canvas._CONFIG.CONNECT_STYLE_CHANGE = this.connectStyleChange;
-                canvas._CONFIG.DELETABLE = this.deletable;
+                // canvas._CONFIG.DELETABLE = this.deletable;
                 canvas._CONFIG.LABEL_EDITABLE = this.labelEditable;
                 canvas._CONFIG.GROUP_DROPABLE = this.groupDropable;
                 canvas._CONFIG.DRAG_GRIDABLE = this.dragGridable;

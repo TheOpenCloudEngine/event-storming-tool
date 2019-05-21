@@ -11,10 +11,10 @@
                 :y.sync="value.elementView.y"
                 :width.sync="value.elementView.width"
                 :height.sync="value.elementView.height"
+                :angle.sync="value.elementView.angle"
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:dblclick="showProperty"
-                v-on:addedToGroup="onAddedToGroup"
                 :label="value.inputText"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
@@ -73,7 +73,7 @@
             className() {
                 return 'org.uengine.uml.model.Domain'
             },
-            createNew(elementId, x, y, width, height) {
+            createNew(elementId, x, y, width, height, angle) {
                 return {
                     _type: this.className(),
                     name: 'Domain',
@@ -85,7 +85,8 @@
                         'y': y,
                         'width': 100,
                         'height': 100,
-                        'style': JSON.stringify({})
+                        'style': JSON.stringify({}),
+                        'angle': 0
                     },
                     drawer: false,
                     selected: false,
