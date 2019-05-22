@@ -24033,7 +24033,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         if (!_isDeletable) {
             return;
         }
-        _rotate = me._PAPER.image(me._CONFIG.IMAGE_BASE + 'rotate.svg', 0, 0, _ctrlSize, _ctrlSize);
+        _rotate = me._PAPER.image(me._CONFIG.IMAGE_BASE + 'rotate.png', 0, 0, _ctrlSize, _ctrlSize);
         _rotate.attr(me._CONFIG.DEFAULT_STYLE.GUIDE_LINE_AREA);
         group.appendChild(_rotate);
         me._add(_rotate, rElement.id + OG.Constants.GUIDE_SUFFIX.ROTATE);
@@ -24044,7 +24044,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                 me.removeLaneShape(element);
                 me.addHistory();
             } else {
-                me.removeShape(element);
+                me.rotate(element, -30);
                 me.addHistory();
             }
         })
@@ -24384,12 +24384,12 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                     _redrawLine();
                 }
             }
-            _redrawTrash();
+            // _redrawTrash();
             _redrawRotate();
         }
         if (isEdge) {
             _redrawBbox();
-            _redrawTrash();
+            // _redrawTrash();
         }
 
         _setControllerPosition();
@@ -24400,8 +24400,8 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         if (isEdge) {
             _drawGroup();
             _drawBbox();
-            _drawTrash();
-            _drawRotate();
+            // _drawTrash();
+            // _drawRotate();
         }
         if (!isEdge) {
             _drawGroup();
@@ -24431,7 +24431,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                     _drawLine();
                 }
             }
-            _drawTrash();
+            // _drawTrash();
             _drawRotate();
         }
         _setControllerPosition();
@@ -35387,7 +35387,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
         /**
          * 이미지 베이스 패스
          */
-        IMAGE_BASE: '../../images/symbol/',
+        IMAGE_BASE: 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/images/symbol/',
 
         /**
          * 이미지 url 정보

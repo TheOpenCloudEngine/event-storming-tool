@@ -1,6 +1,6 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="canvas-panel">
-        <v-layout>
+        <v-layout right>
             <opengraph
                     ref="opengraph"
                     focus-canvas-on-select
@@ -43,7 +43,6 @@
                 <!--</div>-->
             </opengraph>
 
-            <div style="z-index: 100; width: 100%;" align="right">
                 <v-flex xs12 sm6 style="display: inline-block">
                     <v-text-field
                             label="Project Name"
@@ -57,8 +56,7 @@
                         style="display: inline-block"
                         :fileName.sync="projectName"
                 ></text-reader>
-                <v-btn color="info" v-on:click.native="download">save</v-btn>
-            </div>
+                <v-btn color="info" v-on:click.native="download" style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save</v-btn>
 
             <v-card class="tools" style="top:100px; text-align: center;">
                 <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"
@@ -117,7 +115,7 @@
                 noPushUndo: false,
                 redoArray: [],
                 undoArray: [],
-                imageBase: 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/'
+                imageBase: 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/symbol/'
             }
         },
         computed: {
@@ -135,6 +133,11 @@
                         })
                     }
                     return temp;
+                }
+            },
+            id: {
+                get : function() {
+                    return this.projectName
                 }
             }
         },
@@ -177,13 +180,18 @@
                 });
             });
         },
-        watch: {},
+        watch: {
+            value: function () {
+                var me = this
+                me.$refs['modeler-image-generator'].save(me.id, me.canvas);
+            }
+        },
 
         methods: {
             //복사
             copy: function () {
                 var me = this
-                if(!me.drawer) {
+                if (!me.drawer) {
                     me.tempValue = []
                     me.value.forEach(function (tmp, idx) {
                         if (tmp.selected == true) {
@@ -195,7 +203,7 @@
             //붙여넣기
             paste: function () {
                 var me = this
-                if(!me.drawer) {
+                if (!me.drawer) {
                     var temp = JSON.parse(JSON.stringify(me.tempValue))
 
                     if (me.tempValue != null) {
@@ -221,12 +229,12 @@
                 var file = new File([text], filename, {type: "text/json;charset=utf-8"});
                 FileSaver.saveAs(file);
             },
-            onRotateShape:function () {
+            onRotateShape: function () {
 
             },
             deleteActivity: function () {
                 var me = this
-                if(!me.drawer) {
+                if (!me.drawer) {
                     let selected = []
                     let tmpArray = JSON.parse(JSON.stringify(me.value));
                     tmpArray.forEach(function (valueTmp, index) {
@@ -375,7 +383,7 @@
             },
             redo: function () {
                 var me = this
-                if(!me.drawer){
+                if (!me.drawer) {
                     if (me.redoArray.length > 0) {
                         var tmpData = me.redoArray.pop();
                         me.value = JSON.parse(JSON.stringify(tmpData));
@@ -389,7 +397,7 @@
             },
             undo: function () {
                 var me = this;
-                if(!me.drawer) {
+                if (!me.drawer) {
                     var tmpArray = JSON.parse(JSON.stringify(me.value))
                     if (me.undoArray.length > 1) {
                         me.redoArray.push(me.undoArray[me.undoArray.length - 1])

@@ -780,6 +780,7 @@
         shape.RESIZABLE = this.resizable;
         shape.RESIZEX = this.resizex;
         shape.RESIZEY = this.resizey;
+        shape.ANGLE = this.angle;
         shape.CONNECTABLE = this.connectable;
         shape.ENABLE_FROM = this.enableFrom;
         shape.ENABLE_TO = this.enableTo;
