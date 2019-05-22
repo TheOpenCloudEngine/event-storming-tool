@@ -532,6 +532,8 @@
           me.$emit('update:height', boundary.getHeight());
           me.$emit('update:x', boundary.getCentroid().x);
           me.$emit('update:y', boundary.getCentroid().y);
+        // me.$emit('update:y', boundary.getCentroid().y);
+
         }
 
         var style = JSON.parse(JSON.stringify(me.element.shape.geom.style.map));
@@ -869,6 +871,7 @@
           me.$emit('moveShape', me, offset);
         };
         shape.onRotateShape = function (angle) {
+            console.log("onRotateShape", angle)
           me.$emit('rotateShape', me, angle);
         };
         shape.onPasteShape = function (copied, pasted) {

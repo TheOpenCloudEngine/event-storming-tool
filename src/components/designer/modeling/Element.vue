@@ -58,10 +58,9 @@
         mounted: function () {
         },
         methods: {
-            // onRotateShape: function (angle) {
-            //     var me = this
-            //     me.$emit('rotateShape', me, angle);
-            // },
+            onRotateShape: function () {
+                console.log(this.value);
+            },
             selectedActivity: function () {
                 if (this.value) {
                     this.value.selected = true

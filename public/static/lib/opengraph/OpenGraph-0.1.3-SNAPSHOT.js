@@ -24029,9 +24029,9 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         _trash = me._getREleById(rElement.id + OG.Constants.GUIDE_SUFFIX.TRASH);
         controllers.push(_trash);
     }
-    function _drawRotate() {
+    function _drawRotate(angle) {
         if (!_isDeletable) {
-            return;
+            return;ROTATE
         }
         _rotate = me._PAPER.image(me._CONFIG.IMAGE_BASE + 'rotate.png', 0, 0, _ctrlSize, _ctrlSize);
         _rotate.attr(me._CONFIG.DEFAULT_STYLE.GUIDE_LINE_AREA);
@@ -24055,7 +24055,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         if (!_isDeletable) {
             return;
         }
-        _rotate = me._getREleById(rElement.id + OG.Constants.GUIDE_SUFFIX.TRASH);
+        _rotate = me._getREleById(rElement.id + OG.Constants.GUIDE_SUFFIX.ROTATE);
         controllers.push(_rotate);
     }
     function _drawLine() {
@@ -24432,6 +24432,8 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                 }
             }
             // _drawTrash();
+            console.log(element)
+
             _drawRotate();
         }
         _setControllerPosition();

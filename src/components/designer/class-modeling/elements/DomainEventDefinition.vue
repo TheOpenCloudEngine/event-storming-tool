@@ -15,6 +15,7 @@
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:dblclick="showProperty"
+                v-on:onRotateShape="onRotateShape"
                 :label="value.inputText"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
