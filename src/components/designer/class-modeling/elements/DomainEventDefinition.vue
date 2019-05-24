@@ -15,11 +15,18 @@
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:dblclick="showProperty"
+<<<<<<< HEAD
                 v-on:rotateShape="onRotateShape"
                 :label.syhc="value.inputText"
                 :_style="{
                 'label-angle':value.elementView.angle
                 }"
+=======
+                v-on:rotateShape="rotateShapeActivity"
+                :label.sync="value.inputText"
+
+
+>>>>>>> 81291700bc550e957f1455fcc641d7e78a30b3b8
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
             <geometry-rect
@@ -115,6 +122,23 @@
         },
         watch: {
 
+<<<<<<< HEAD
+=======
+          'value.drawer': function (newValue, oldValue) {
+              var designer = this.getComponent('modeling-designer')
+
+              var me = this
+              console.log(me.designer);
+
+              if (newValue == true) {
+                  designer.value.forEach(function(temp) {
+                    if(temp._type == "org.uengine.uml.model.Aggregate" )
+                    me.aggregateList.push(temp.inputText);
+                  })
+              }
+
+            }
+>>>>>>> 81291700bc550e957f1455fcc641d7e78a30b3b8
         },
         mounted: function () {
         },

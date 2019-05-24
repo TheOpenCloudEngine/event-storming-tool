@@ -42,6 +42,11 @@
         <v-card-title>
           <span class="headline" v-if="titleName">연결 리스트 </span>
         </v-card-title>
+
+        <v-card-text>
+          <v-autocomplete v-model="selectAggregate" :items="aggregateList" label="Aggregate" persistent-hint prepend-icon="mdi-city">
+          </v-autocomplete>
+        </v-card-text>
       </v-card>
 
       <v-card v-else>

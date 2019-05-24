@@ -24034,7 +24034,13 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
     }
     function _drawRotate(angle) {
         if (!_isDeletable) {
+<<<<<<< HEAD
             return;
+=======
+
+            return ROTATE;
+
+>>>>>>> 81291700bc550e957f1455fcc641d7e78a30b3b8
         }
         _rotate = me._PAPER.image(me._CONFIG.IMAGE_BASE + 'rotate.png', 0, 0, _ctrlSize, _ctrlSize);
         _rotate.attr(me._CONFIG.DEFAULT_STYLE.GUIDE_LINE_AREA);
@@ -24048,6 +24054,10 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                 me.removeLaneShape(element);
                 me.addHistory();
             } else {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 81291700bc550e957f1455fcc641d7e78a30b3b8
               //Rotate 클릭 구분
                 if(rElement.attrs.cursor == 'move'){
                   me.rotate(element, 330)
@@ -24443,6 +24453,11 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                     _drawLine();
                 }
             }
+<<<<<<< HEAD
+=======
+            // _drawTrash();
+
+>>>>>>> 81291700bc550e957f1455fcc641d7e78a30b3b8
             _drawRotate();
         }
         _setControllerPosition();

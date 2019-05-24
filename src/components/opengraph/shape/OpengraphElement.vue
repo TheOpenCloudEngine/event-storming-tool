@@ -781,7 +781,12 @@
         shape.MOVABLE = this.movable;
         shape.RESIZABLE = this.resizable;
         shape.RESIZEX = this.resizex;
+<<<<<<< HEAD
         shape.RESIZEY = this.resizey;
+=======
+        shape.RESIZEY = this.resizey
+
+>>>>>>> 81291700bc550e957f1455fcc641d7e78a30b3b8
         shape.CONNECTABLE = this.connectable;
         shape.ENABLE_FROM = this.enableFrom;
         shape.ENABLE_TO = this.enableTo;
@@ -871,7 +876,15 @@
         };
 
         shape.onRotateShape = function (angle) {
+<<<<<<< HEAD
           me.$emit('rotateShape',me,angle);
+=======
+
+          me.$emit('rotateShape',me,angle);
+
+          me.$emit('rotateShape', me, angle);
+
+>>>>>>> 81291700bc550e957f1455fcc641d7e78a30b3b8
         };
         shape.onPasteShape = function (copied, pasted) {
           me.$emit('pasteShape',
