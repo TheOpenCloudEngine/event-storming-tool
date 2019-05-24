@@ -64,8 +64,8 @@
                     console.log(me.type)
                     if(me.type == 'Domain' || me.type == 'Command' || me.type == 'View') {
                         designer.value.definition.forEach(function(tmp) {
-                            if(tmp.inputText == newVal) {
-                                tmp.innerAggregate[me.type.toLowerCase()].push(me.value.elementView.id)
+                            if(tmp.inputText.length > 0 && tmp.inputText == newVal) {
+                                tmp.innerAggregate[me.type.toLowerCase()].push({'id':me.value.elementView.id, 'inputText': me.value.inputText})
                             }
                         })
                     }
