@@ -1081,7 +1081,11 @@
                  * @param {Function} callbackFunc 콜백함수(event, shapeElement, angle)
                  */
                 me.canvas.onRotateShape(function (event, shapeElement, angle) {
+<<<<<<< HEAD
                     me.$emit('Rotate', me.getElementById(shapeElement.id) || shapeElement, angle);
+=======
+                    me.$emit('rotateShape', me.getElementById(shapeElement.id) || shapeElement, angle);
+>>>>>>> origin/master
                 });
 
                 /**
@@ -1099,6 +1103,7 @@
                  * @param {Function} callbackFunc 콜백함수(event, shapeElement, offset)
                  */
                 me.canvas.onResizeShape(function (event, shapeElement, offset) {
+                    console.log("resize")
                     me.$emit('resizeShape', me.getElementById(shapeElement.id) || shapeElement, offset);
                 });
 

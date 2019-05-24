@@ -32,14 +32,6 @@
                             v-model="value[index]"
                     ></component>
                 </div>
-
-                <!--&lt;!&ndash;릴레이션&ndash;&gt;-->
-                <!--<div v-if="value[relationListBeanPath] && elementsLoadDone">-->
-                <!--<component v-for="(relation, index) in value[relationListBeanPath][1]" v-if="relation != null"-->
-                <!--:is="relationVueComponentName" v-model="value[relationListBeanPath][1][index]"-->
-                <!--:definition="value">-->
-                <!--</component>-->
-                <!--</div>-->
             </opengraph>
 
                 <v-flex xs12 sm6 style="display: inline-block">
@@ -434,6 +426,9 @@
                 // console.log(this.value, element.elementView.id)
                 if (me.value == null) {
                     me.value = []
+                }
+                if(element._type) {
+
                 }
                 me.value.push(element);
                 me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
