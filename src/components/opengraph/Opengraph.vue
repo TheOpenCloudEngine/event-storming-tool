@@ -1082,11 +1082,6 @@
                  */
                 me.canvas.onRotateShape(function (event, shapeElement, angle) {
                     me.$emit('Rotate', me.getElementById(shapeElement.id) || shapeElement, angle);
-<<<<<<< HEAD
-=======
-                    me.$emit('rotateShape', me.getElementById(shapeElement.id) || shapeElement, angle);
-
->>>>>>> 81291700bc550e957f1455fcc641d7e78a30b3b8
                 });
 
                 /**

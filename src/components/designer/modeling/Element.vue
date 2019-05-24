@@ -136,15 +136,8 @@
         mounted: function () {
         },
         methods: {
-<<<<<<< HEAD
             onRotateShape: function (me, angle) {
                 this.value.elementView.angle = angle
-=======
-
-            rotateShapeActivity: function (me, angle) {
-              this.value.elementView.angle=angle;
-
->>>>>>> 81291700bc550e957f1455fcc641d7e78a30b3b8
             },
             selectedActivity: function () {
                 if (this.value) {
