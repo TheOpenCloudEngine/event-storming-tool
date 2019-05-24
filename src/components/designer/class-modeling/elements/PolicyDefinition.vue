@@ -5,6 +5,8 @@
       movable
       resizable
       connectable
+      deletable
+      :angle.sync="value.elementView.angle"
       :id.sync="value.elementView.id"
       :x.sync="value.elementView.x"
       :y.sync="value.elementView.y"
@@ -48,6 +50,7 @@
             :drawer.sync="value.drawer"
             :titleName="value.name"
             :inputText.sync="value.inputText"
+            :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/policy.png'"
             v-model="value"
     >
     </modeling-property-panel>
@@ -120,4 +123,3 @@
 <style scoped lang="scss" rel="stylesheet/scss">
 
 </style>
-

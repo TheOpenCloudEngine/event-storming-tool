@@ -5,6 +5,8 @@
                 movable
                 resizable
                 connectable
+                deletable
+                :angle.sync="value.elementView.angle"
                 :id.sync="value.elementView.id"
                 :x.sync="value.elementView.x"
                 :y.sync="value.elementView.y"
@@ -48,6 +50,8 @@
                 :drawer.sync="value.drawer"
                 :titleName="value.name"
                 :inputText.sync="value.inputText"
+                :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/command.png'"
+                :aggregateList="aggregateList"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -67,7 +71,7 @@
                 return {}
             },
             type() {
-                return 'Command'
+                return 'Event'
             },
             className() {
                 return 'org.uengine.uml.model.Command'
@@ -97,21 +101,34 @@
                 itemH: 20,
                 titleH: (this.value.classReference ? 60 : 30),
                 reference: this.value.classReference != null,
-                referenceClassName: this.value.classReference
+                referenceClassName: this.value.classReference,
+                aggregateList: []
             };
         },
         created: function () {
 
         },
         watch: {
+          'value.drawer': function (newValue, oldValue) {
+              var designer = this.getComponent('modeling-designer')
 
+              var me = this
+              console.log(me);
+              console.log(designer);
+
+              if (newValue == true) {
+                  designer.value.forEach(function(temp) {
+                    if(temp._type == "org.uengine.uml.model.Aggregate" )
+                    me.aggregateList.push(temp.inputText);
+                  })
+              }
+
+            }
         },
         mounted: function () {
 
         },
         methods: {
-            rotate:function() {
-            }
         }
     }
 </script>
@@ -120,4 +137,3 @@
 <style scoped lang="scss" rel="stylesheet/scss">
 
 </style>
-

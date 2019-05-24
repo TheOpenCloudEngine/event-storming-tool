@@ -23,7 +23,6 @@
                     v-if="value"
                     v-on:canvasReady="bindEvents"
                     v-on:connectShape="onConnectShape"
-                    v-on:onRotateShap="onRotateShape"
                     :imageBase="imageBase"
             >
                 <!--엘리먼트-->
@@ -228,9 +227,6 @@
 
                 var file = new File([text], filename, {type: "text/json;charset=utf-8"});
                 FileSaver.saveAs(file);
-            },
-            onRotateShape: function () {
-
             },
             deleteActivity: function () {
                 var me = this

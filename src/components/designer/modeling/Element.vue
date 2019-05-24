@@ -58,8 +58,8 @@
         mounted: function () {
         },
         methods: {
-            onRotateShape: function () {
-                console.log(this.value);
+            rotateShapeActivity: function (me, angle) {
+              this.value.elementView.angle=angle;
             },
             selectedActivity: function () {
                 if (this.value) {
@@ -132,8 +132,6 @@
                 }
 
             },
-            // onRotateShape() {
-            // },
             getComponent(componentName) {
                 let component = null
                 let parent = this.$parent

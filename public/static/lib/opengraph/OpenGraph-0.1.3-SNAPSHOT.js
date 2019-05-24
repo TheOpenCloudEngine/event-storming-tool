@@ -4618,6 +4618,7 @@ window.Raphael.svg && function (R) {
     };
 
     elproto.rotate = function (deg, cx, cy) {
+
         if (this.removed) {
             return this;
         }
@@ -7878,17 +7879,17 @@ OG.geometry.Coordinate.prototype = {
      * @return {OG.geometry.Coordinate} 회전된 좌표
      */
     rotate: function (angle, origin) {
-        if (origin.constructor === Array) {
-            origin = new OG.geometry.Coordinate(origin[0], origin[1]);
-        }
+      if (origin.constructor === Array) {
+                  origin = new OG.geometry.Coordinate(origin[0], origin[1]);
+              }
 
-        angle *= Math.PI / 180;
-        var radius = this.distance(origin),
-            theta = angle + Math.atan2(this.y - origin.y, this.x - origin.x);
-        this.x = OG.Util.round(origin.x + (radius * Math.cos(theta)));
-        this.y = OG.Util.round(origin.y + (radius * Math.sin(theta)));
+              angle *= Math.PI / 180;
+              var radius = this.distance(origin),
+                  theta = angle + Math.atan2(this.y - origin.y, this.x - origin.x);
+              this.x = OG.Util.round(origin.x + (radius * Math.cos(theta)));
+              this.y = OG.Util.round(origin.y + (radius * Math.sin(theta)));
 
-        return this;
+              return this;
     },
 
     /**
@@ -9043,6 +9044,7 @@ OG.geometry.Geometry.prototype = {
      * @param distance
      * @return {OG.geometry.Coordinate[]} 평행선 시작좌표, 끝좌표 Array
      */
+
     getParallelLine: function (from, to, distance) {
         var me = this;
         var direction = 'plus';
@@ -24031,7 +24033,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
     }
     function _drawRotate(angle) {
         if (!_isDeletable) {
-            return;ROTATE
+            return ROTATE;
         }
         _rotate = me._PAPER.image(me._CONFIG.IMAGE_BASE + 'rotate.png', 0, 0, _ctrlSize, _ctrlSize);
         _rotate.attr(me._CONFIG.DEFAULT_STYLE.GUIDE_LINE_AREA);
@@ -24039,13 +24041,22 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         me._add(_rotate, rElement.id + OG.Constants.GUIDE_SUFFIX.ROTATE);
         guide.trash = _rotate.node;
 
+
         $(_rotate.node).click(function () {
             if (me.isLane(element)) {
                 me.removeLaneShape(element);
                 me.addHistory();
             } else {
-                me.rotate(element, -30);
+              //Rotate 클릭 구분
+                if(rElement.attrs.cursor == 'move'){
+                  me.rotate(element, 330)
+                  rElement.attrs.cursor = 'default'
+                }else if(rElement.attrs.cursor == 'default'){
+                  me.rotate(element, 0)
+                  rElement.attrs.cursor = 'move'
+                }
                 me.addHistory();
+
             }
         })
         controllers.push(_rotate);
@@ -24432,7 +24443,6 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                 }
             }
             // _drawTrash();
-            console.log(element)
 
             _drawRotate();
         }
@@ -25524,20 +25534,24 @@ OG.renderer.RaphaelRenderer.prototype.rotate = function (element, angle) {
         geometry = rElement ? rElement.node.shape.geom : null,
         shape, envelope, center, width, height;
 
-    if (rElement && type && geometry) {
+    if (rElement && type && geometry)
+    {
         if (type === OG.Constants.SHAPE_TYPE.IMAGE ||
             type === OG.Constants.SHAPE_TYPE.TEXT ||
             type === OG.Constants.SHAPE_TYPE.HTML ||
-            type === OG.Constants.SHAPE_TYPE.SVG) {
+            type === OG.Constants.SHAPE_TYPE.SVG)
+        {
             shape = rElement.node.shape.clone();
             envelope = geometry.getBoundary();
             center = envelope.getCentroid();
             width = envelope.getWidth();
             height = envelope.getHeight();
-
             this.drawShape([center.x, center.y], shape, [width, height, angle], rElement.node.shapeStyle, rElement.node.id);
-        } else {
-            if (rElement.node.shape.angle) {
+        }
+        else
+        {
+            if (rElement.node.shape.angle)
+            {
                 geometry.rotate(-1 * rElement.node.shape.angle);
             }
             geometry.rotate(angle);
@@ -25545,19 +25559,19 @@ OG.renderer.RaphaelRenderer.prototype.rotate = function (element, angle) {
 
             this.redrawShape(rElement.node);
         }
-
+        console.log("HERE_1");
         // rotateShape event fire
         rElement.node.shape.onRotateShape(angle);
         $(this._PAPER.canvas).trigger('rotateShape', [rElement.node, angle]);
-
         return rElement.node;
-    } else if (rElement) {
-        rElement.rotate(angle);
 
+    } else if (rElement) {
+
+        console.log("HERE_2");
+        rElement.rotate(angle);
         // rotateShape event fire
         rElement.node.shape.onRotateShape(angle);
         $(this._PAPER.canvas).trigger('rotateShape', [rElement.node, angle]);
-
         return rElement.node;
     }
 

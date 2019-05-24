@@ -1005,6 +1005,7 @@
                  */
                 me.canvas.onAddHistory(function (event) {
                     me.$ModelingBus.$emit('MoveEvent');
+
                     for (var key in me.elements) {
                         me.elements[key].emitElement();
                     }
@@ -1080,8 +1081,7 @@
                  * @param {Function} callbackFunc 콜백함수(event, shapeElement, angle)
                  */
                 me.canvas.onRotateShape(function (event, shapeElement, angle) {
-                    console.log("angle")
-                    me.$emit('rotateShape', me.getElementById(shapeElement.id) || shapeElement, angle);
+                    me.$emit('Rotate', me.getElementById(shapeElement.id) || shapeElement, angle);
                 });
 
                 /**
