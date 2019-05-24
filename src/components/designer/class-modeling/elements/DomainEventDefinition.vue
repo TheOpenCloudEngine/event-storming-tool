@@ -15,8 +15,11 @@
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:dblclick="showProperty"
-                v-on:onRotateShape="onRotateShape"
-                :label="value.inputText"
+                v-on:rotateShape="onRotateShape"
+                :label.syhc="value.inputText"
+                :_style="{
+                'label-angle':value.elementView.angle
+                }"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
             <geometry-rect
@@ -60,6 +63,7 @@
 
 <script>
     import Element from '../../modeling/Element'
+
     export default {
         mixins: [Element],
         name: 'domain-event-definition',
@@ -107,12 +111,19 @@
 
         },
         watch: {
+            "value.elementView.angle": {
+                handler: function () {
+                    this.value.elementView.x = this.value.elementView.x +1
+                    this.$nextTick(function () {
+                        this.value.elementView.x = this.value.elementView.x -1
+
+                    })
+                }
+            }
         },
         mounted: function () {
         },
-        methods: {
-
-        }
+        methods: {}
     }
 </script>
 

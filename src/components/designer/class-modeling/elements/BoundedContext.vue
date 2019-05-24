@@ -94,9 +94,8 @@
         watch: {
             'value.drawer': function (newValue, oldValue) {
                 var designer = this.getComponent('modeling-designer')
-
                 var me = this
-
+                me.aggregateList = []
                 if (newValue == true) {
                     me.value.dataList.forEach(function(aggregateId) {
                         designer.value.forEach(function (tmp) {

@@ -58,8 +58,8 @@
         mounted: function () {
         },
         methods: {
-            onRotateShape: function () {
-                console.log(this.value);
+            onRotateShape: function (me, angle) {
+                this.value.elementView.angle = angle
             },
             selectedActivity: function () {
                 if (this.value) {
@@ -146,34 +146,6 @@
                 return component
             },
             onRemoveShape: function () {
-                // console.log('remove')
-                var parent = this.$parent;
-
-                while (parent.$options._componentTag != "modeling-designer") {
-
-                    parent = parent.$parent;
-                }
-
-                var elementIndex = -1;
-                try {
-                    elementIndex = parent.value[parent.relationListBeanPath][1].indexOf(this.value);
-                } catch (e) {
-                }
-
-                if (elementIndex > -1) {
-                    parent.value[parent.relationListBeanPath][1].splice(elementIndex, 1);
-                } else {
-                    try {
-                        elementIndex = parent.value[parent.elementListBeanPath][1].indexOf(this.value);
-                    } catch (e) {
-                    }
-
-                    if (elementIndex > -1) {
-                        parent.value[parent.elementListBeanPath][1].splice(elementIndex, 1);
-                    }
-
-                }
-
             }
         }
     }

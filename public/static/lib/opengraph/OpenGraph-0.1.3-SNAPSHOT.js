@@ -24031,7 +24031,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
     }
     function _drawRotate(angle) {
         if (!_isDeletable) {
-            return;ROTATE
+            return;
         }
         _rotate = me._PAPER.image(me._CONFIG.IMAGE_BASE + 'rotate.png', 0, 0, _ctrlSize, _ctrlSize);
         _rotate.attr(me._CONFIG.DEFAULT_STYLE.GUIDE_LINE_AREA);
@@ -24044,7 +24044,13 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                 me.removeLaneShape(element);
                 me.addHistory();
             } else {
-                me.rotate(element, -30);
+                if(rElement.attrs.cursor == 'move'){
+                    me.rotate(element, 330)
+                    rElement.attrs.cursor = 'default'
+                }else if(rElement.attrs.cursor == 'default'){
+                    me.rotate(element, 0)
+                    rElement.attrs.cursor = 'move'
+                }
                 me.addHistory();
             }
         })
@@ -24066,7 +24072,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         if (me._CONFIG.GUIDE_CONTROL_LINE_NUM == 2) {
             _linePath1 = me._PAPER.path(createLinePath(0, 0, 0, 8));
             _linePath2 = me._PAPER.path(createLinePath(0, 0, 8, 8));
-        } else {
+        } else {ㄱ
             _linePath1 = me._PAPER.path(createLinePath(0, 0, 0, 4));
         }
         _line.attr(me._CONFIG.DEFAULT_STYLE.GUIDE_LINE_AREA);
@@ -24432,7 +24438,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                 }
             }
             // _drawTrash();
-            console.log(element)
+            // console.log(element)
 
             _drawRotate();
         }
