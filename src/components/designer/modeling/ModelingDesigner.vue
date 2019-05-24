@@ -40,20 +40,22 @@
                 </div>
             </opengraph>
 
-                <v-flex xs12 sm6 style="display: inline-block">
-                    <v-text-field
-                            label="Project Name"
-                            v-model="projectName"
-                            single-line
-                    ></v-text-field>
-                </v-flex>
-                <text-reader
-                        :importType="'json'"
-                        @load="value = $event"
-                        style="display: inline-block"
-                        :fileName.sync="projectName"
-                ></text-reader>
-                <v-btn color="info" v-on:click.native="download" style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save</v-btn>
+            <v-flex xs12 sm6 style="display: inline-block">
+                <v-text-field
+                        label="Project Name"
+                        v-model="projectName"
+                        single-line
+                ></v-text-field>
+            </v-flex>
+            <text-reader
+                    :importType="'json'"
+                    @load="value = $event"
+                    style="display: inline-block"
+                    :fileName.sync="projectName"
+            ></text-reader>
+            <v-btn color="info" v-on:click.native="download"
+                   style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save
+            </v-btn>
 
             <v-card class="tools" style="top:100px; text-align: center;">
                 <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"
@@ -101,7 +103,7 @@
                 canvas: null,
                 dragPageMovable: false,
                 relationVueComponentName: 'modeling-relation',
-                value: {'definition':[], 'relation':[]},
+                value: {'definition': [], 'relation': []},
                 enableHistoryAdd: false,
                 undoing: false,
                 undoed: false,
@@ -133,7 +135,7 @@
                 }
             },
             id: {
-                get : function() {
+                get: function () {
                     return this.projectName
                 }
             }
@@ -157,7 +159,7 @@
                 this.canvas._CONFIG.FAST_LOADING = false;
                 this.canvas.updateSlider();
                 //timer end
-                me.undoArray.push([])
+                me.undoArray.push({'definition': [], 'relation': []})
                 this.$refs.opengraph.printTimer(startTime, new Date().getTime());
 
                 $(document).keydown((evt) => {
@@ -235,38 +237,34 @@
                 var me = this
                 if (!me.drawer) {
                     let selected = []
-                    let tmpArray = JSON.parse(JSON.stringify(me.value['definition']));
-                    tmpArray.forEach(function (valueTmp, index) {
-                        if (valueTmp.selected) {
-                            if (valueTmp.elementView) {
-                                selected.push(valueTmp.elementView.id)
-                                me.undoArray.push(valueTmp);
-                                me.redoArray = [];
-                                tmpArray[index] = null
-                            } else if (valueTmp.relationView) {
-                                selected.push(valueTmp.relationView.id)
-                                me.undoArray.push(valueTmp);
-                                me.redoArray = [];
-                                tmpArray[index] = null
-                            }
+                    let definitionArray = JSON.parse(JSON.stringify(me.value.definition));
+                    let relationArray = JSON.parse(JSON.stringify(me.value.relation));
+                    console.log(me.value)
+                    definitionArray.forEach(function (definitionTmp, index) {
+                        if (definitionTmp.selected) {
+                            selected.push(definitionTmp.elementView.id)
+                            definitionArray[index] = null
                         }
                     })
-                    let tmpArray2 = tmpArray.filter(n => n)
-
+                    definitionArray = definitionArray.filter(n => n)
                     selected.forEach(function (selectedTmp) {
-                        tmpArray2.forEach(function (relationTmp, index) {
-                            if (relationTmp != null) {
-                                if (relationTmp.relationView) {
-                                    if (relationTmp.relationView.from == selectedTmp || relationTmp.relationView.to == selectedTmp) {
-                                        me.undoArray.push(relationTmp);
-                                        me.redoArray = [];
-                                        tmpArray2[index] = null
-                                    }
-                                }
+                        relationArray.forEach(function (relation, index) {
+                            if (relation.to == selectedTmp || relation.from == selectedTmp) {
+                                relationArray[index] = null
                             }
                         })
                     })
-                    me.value['definition'] = tmpArray2.filter(n => n)
+
+                    relationArray = relationArray.filter(n => n)
+                    relationArray.forEach(function (relationTmp, index) {
+                        if (relationTmp.selected) {
+                            relationArray[index] = null
+                        }
+                    })
+                    relationArray = relationArray.filter(n => n)
+
+                    me.value.definition = definitionArray
+                    me.value.relation = relationArray
                 }
             },
             toggleGrip: function () {
@@ -387,7 +385,7 @@
                         var tmpData = me.redoArray.pop();
                         me.value = JSON.parse(JSON.stringify(tmpData));
                         if (me.undoArray.length == 0 && me.value.length == 0) {
-                            me.undoArray.push([])
+                            me.undoArray.push({'definition': [], 'relation': []})
                         }
                         me.undoArray.push(JSON.parse(JSON.stringify(tmpData)));
                     } else {
@@ -397,13 +395,13 @@
             undo: function () {
                 var me = this;
                 if (!me.drawer) {
-                    var tmpArray = JSON.parse(JSON.stringify(me.value))
                     if (me.undoArray.length > 1) {
                         me.redoArray.push(me.undoArray[me.undoArray.length - 1])
                         me.undoArray.pop()
                         me.value = JSON.parse(JSON.stringify(me.undoArray[me.undoArray.length - 1]))
                     } else if (me.undoArray.length == 1) {
                         me.undoArray.pop();
+                        console.log("undo length 0")
                         me.undoArray.push(JSON.parse(JSON.stringify(me.value)))
                     } else {
                     }
@@ -438,7 +436,7 @@
                 if (me.value == null) {
                     me.value = {'definition': [], 'relation': []}
                 }
-                if(element._type == 'org.uengine.uml.model.relation') {
+                if (element._type == 'org.uengine.uml.model.relation') {
                     me.value['relation'].push(element);
                 } else {
                     me.value['definition'].push(element);
