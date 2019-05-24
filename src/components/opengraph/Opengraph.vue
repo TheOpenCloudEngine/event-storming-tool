@@ -1081,11 +1081,7 @@
                  * @param {Function} callbackFunc 콜백함수(event, shapeElement, angle)
                  */
                 me.canvas.onRotateShape(function (event, shapeElement, angle) {
-<<<<<<< HEAD
                     me.$emit('Rotate', me.getElementById(shapeElement.id) || shapeElement, angle);
-=======
-                    me.$emit('rotateShape', me.getElementById(shapeElement.id) || shapeElement, angle);
->>>>>>> origin/master
                 });
 
                 /**

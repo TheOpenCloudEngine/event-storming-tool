@@ -15,6 +15,9 @@
         data: function () {
             return {
                 _id: null,
+                rotateMove: false,
+                tmpWidth: 0,
+                tmpHeight: 0
             }
         },
         computed: {
@@ -54,17 +57,87 @@
                 }
             }
         },
-        watch: {},
+        watch: {
+            // "value.elementView.angle": {
+            //     handler: function (newVal, oldVal) {
+            //         var me = this
+            //         me.rotateMove = true
+            //
+            //         me.value.elementView.x = me.value.elementView.x + 1
+            //         me.$nextTick(function () {
+            //             me.value.elementView.width = me.tmpWidth
+            //             me.value.elementView.height = me.tmpHeight
+            //             me.rotateMove = true
+            //             me.$nextTick(function () {
+            //                 var result = 'result: '
+            //                 me.value.elementView.x = me.value.elementView.x - 1
+            //
+            //                 me.value.elementView.width = me.tmpWidth
+            //                 me.value.elementView.height = me.tmpHeight
+            //
+            //                 console.log(result + me.tmpWidth)
+            //                 console.log(result + me.tmpHeight)
+            //             })
+            //         })
+            //     }
+            // },
+            'value.drawer': function (newValue, oldValue) {
+                var designer = this.getComponent('modeling-designer')
+
+                var me = this
+                this.aggregateList = []
+                if (newValue == true) {
+                    designer.value.definition.forEach(function (temp) {
+                        if (temp._type == "org.uengine.uml.model.Aggregate")
+                            me.aggregateList.push(temp.inputText);
+                    })
+                }
+            },
+            "value.inputText": {
+                handler: function (newVal, oldVal) {
+                    var me = this
+
+                    me.rotateMove = true
+                    me.value.elementView.x = me.value.elementView.x + 1
+                    me.$nextTick(function () {
+                        me.value.elementView.width = me.tmpWidth
+                        me.value.elementView.height = me.tmpHeight
+                        me.rotateMove = true
+                        me.value.elementView.x = me.value.elementView.x - 1
+                        me.$nextTick(function () {
+                            me.value.elementView.width = me.tmpWidth
+                            me.value.elementView.height = me.tmpHeight
+                        })
+                    })
+
+                }
+            },
+            "value.elementView.width": {
+                handler: function (newVal, oldVal) {
+                    var me = this
+                    if(me.rotateMove == true) {
+                        me.tmpWidth = oldVal
+                        console.log(newVal, oldVal)
+
+                    }
+                }
+
+            },
+            "value.elementView.height": {
+                handler: function (newVal, oldVal) {
+                    var me = this
+                    if(me.rotateMove == true) {
+                        me.tmpHeight = oldVal
+                        console.log(newVal, oldVal)
+                    }
+                }
+            }
+        },
         mounted: function () {
         },
         methods: {
-<<<<<<< HEAD
-            rotateShapeActivity: function (me, angle) {
-              this.value.elementView.angle=angle;
-=======
             onRotateShape: function (me, angle) {
                 this.value.elementView.angle = angle
->>>>>>> origin/master
             },
             selectedActivity: function () {
                 if (this.value) {
@@ -149,7 +222,8 @@
                 return component
             },
             onRemoveShape: function () {
-            }
+            },
+
         }
     }
 </script>

@@ -12,22 +12,14 @@
                 :width.sync="value.elementView.width"
                 :height.sync="value.elementView.height"
                 :angle.sync="value.elementView.angle"
-                :_style="{'label-angle': value.elementView.angle}"
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:dblclick="showProperty"
-<<<<<<< HEAD
-                v-on:rotateShape="rotateShapeActivity"
-                :label.sync="value.inputText"
-
-
-=======
                 v-on:rotateShape="onRotateShape"
                 :label.syhc="value.inputText"
                 :_style="{
                 'label-angle':value.elementView.angle
                 }"
->>>>>>> origin/master
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
             <geometry-rect
@@ -63,7 +55,7 @@
                 :titleName.sync="value.name"
                 :inputText.sync="value.inputText"
                 :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/event.png'"
-                  :aggregateList="aggregateList"
+                :aggregateList="aggregateList"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -101,7 +93,7 @@
                         'width': 100,
                         'height': 100,
                         'style': JSON.stringify({}),
-                        'angle':0,
+                        'angle': 0,
                     },
                     drawer: false,
                     selected: false,
@@ -122,39 +114,13 @@
 
         },
         watch: {
-<<<<<<< HEAD
-          'value.drawer': function (newValue, oldValue) {
-              var designer = this.getComponent('modeling-designer')
 
-              var me = this
-              console.log(me.designer);
-
-              if (newValue == true) {
-                  designer.value.forEach(function(temp) {
-                    if(temp._type == "org.uengine.uml.model.Aggregate" )
-                    me.aggregateList.push(temp.inputText);
-                  })
-              }
-
-=======
-            "value.elementView.angle": {
-                handler: function () {
-                    this.value.elementView.x = this.value.elementView.x +1
-                    this.$nextTick(function () {
-                        this.value.elementView.x = this.value.elementView.x -1
-
-                    })
-                }
->>>>>>> origin/master
-            }
         },
         mounted: function () {
         },
         methods: {}
     }
 </script>
-
-
 
 
 <style scoped lang="scss" rel="stylesheet/scss">

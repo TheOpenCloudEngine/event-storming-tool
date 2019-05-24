@@ -26,10 +26,16 @@
                     :imageBase="imageBase"
             >
                 <!--엘리먼트-->
-                <div v-for="(element, index) in value">
+                <div v-for="(element, index) in value.definition">
                     <component
                             :is="getComponentByClassName(element._type)"
-                            v-model="value[index]"
+                            v-model="value.definition[index]"
+                    ></component>
+                </div>
+                <div v-for="(element, index) in value.relation">
+                    <component
+                            :is="getComponentByClassName(element._type)"
+                            v-model="value.relation[index]"
                     ></component>
                 </div>
             </opengraph>
@@ -95,7 +101,7 @@
                 canvas: null,
                 dragPageMovable: false,
                 relationVueComponentName: 'modeling-relation',
-                value: [],
+                value: {'definition':[], 'relation':[]},
                 enableHistoryAdd: false,
                 undoing: false,
                 undoed: false,
@@ -184,7 +190,12 @@
                 var me = this
                 if (!me.drawer) {
                     me.tempValue = []
-                    me.value.forEach(function (tmp, idx) {
+                    me.value.definition.forEach(function (tmp, idx) {
+                        if (tmp.selected == true) {
+                            me.tempValue.push(tmp)
+                        }
+                    })
+                    me.value.relation.forEach(function (tmp, idx) {
                         if (tmp.selected == true) {
                             me.tempValue.push(tmp)
                         }
@@ -224,7 +235,7 @@
                 var me = this
                 if (!me.drawer) {
                     let selected = []
-                    let tmpArray = JSON.parse(JSON.stringify(me.value));
+                    let tmpArray = JSON.parse(JSON.stringify(me.value['definition']));
                     tmpArray.forEach(function (valueTmp, index) {
                         if (valueTmp.selected) {
                             if (valueTmp.elementView) {
@@ -255,7 +266,7 @@
                             }
                         })
                     })
-                    me.value = tmpArray2.filter(n => n)
+                    me.value['definition'] = tmpArray2.filter(n => n)
                 }
             },
             toggleGrip: function () {
@@ -425,12 +436,13 @@
                 }
                 // console.log(this.value, element.elementView.id)
                 if (me.value == null) {
-                    me.value = []
+                    me.value = {'definition': [], 'relation': []}
                 }
-                if(element._type) {
-
+                if(element._type == 'org.uengine.uml.model.relation') {
+                    me.value['relation'].push(element);
+                } else {
+                    me.value['definition'].push(element);
                 }
-                me.value.push(element);
                 me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                 me.redoArray = [];
             },

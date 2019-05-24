@@ -781,11 +781,7 @@
         shape.MOVABLE = this.movable;
         shape.RESIZABLE = this.resizable;
         shape.RESIZEX = this.resizex;
-<<<<<<< HEAD
-        shape.RESIZEY = this.resizey
-=======
         shape.RESIZEY = this.resizey;
->>>>>>> origin/master
         shape.CONNECTABLE = this.connectable;
         shape.ENABLE_FROM = this.enableFrom;
         shape.ENABLE_TO = this.enableTo;
@@ -875,11 +871,7 @@
         };
 
         shape.onRotateShape = function (angle) {
-<<<<<<< HEAD
           me.$emit('rotateShape',me,angle);
-=======
-          me.$emit('rotateShape', me, angle);
->>>>>>> origin/master
         };
         shape.onPasteShape = function (copied, pasted) {
           me.$emit('pasteShape',

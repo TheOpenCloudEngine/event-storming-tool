@@ -22015,6 +22015,7 @@ OG.renderer.RaphaelRenderer.prototype.drawShape = function (position, shape, siz
 
         // 좌상단으로 이동 및 크기 조정
         geometry.moveCentroid(position);
+        // console.log(width, height)
         geometry.resizeBox(width, height);
         if (size && size[2]) {
             geometry.rotate(size[2]);
@@ -24033,11 +24034,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
     }
     function _drawRotate(angle) {
         if (!_isDeletable) {
-<<<<<<< HEAD
-            return ROTATE;
-=======
             return;
->>>>>>> origin/master
         }
         _rotate = me._PAPER.image(me._CONFIG.IMAGE_BASE + 'rotate.png', 0, 0, _ctrlSize, _ctrlSize);
         _rotate.attr(me._CONFIG.DEFAULT_STYLE.GUIDE_LINE_AREA);
@@ -24051,7 +24048,6 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                 me.removeLaneShape(element);
                 me.addHistory();
             } else {
-<<<<<<< HEAD
               //Rotate 클릭 구분
                 if(rElement.attrs.cursor == 'move'){
                   me.rotate(element, 330)
@@ -24059,17 +24055,9 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                 }else if(rElement.attrs.cursor == 'default'){
                   me.rotate(element, 0)
                   rElement.attrs.cursor = 'move'
-=======
-                if(rElement.attrs.cursor == 'move'){
-                    me.rotate(element, 330)
-                    rElement.attrs.cursor = 'default'
-                }else if(rElement.attrs.cursor == 'default'){
-                    me.rotate(element, 0)
-                    rElement.attrs.cursor = 'move'
->>>>>>> origin/master
+
                 }
                 me.addHistory();
-
             }
         })
         controllers.push(_rotate);
@@ -24455,12 +24443,6 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                     _drawLine();
                 }
             }
-            // _drawTrash();
-<<<<<<< HEAD
-=======
-            // console.log(element)
->>>>>>> origin/master
-
             _drawRotate();
         }
         _setControllerPosition();
@@ -25580,6 +25562,7 @@ OG.renderer.RaphaelRenderer.prototype.rotate = function (element, angle) {
         // rotateShape event fire
         rElement.node.shape.onRotateShape(angle);
         $(this._PAPER.canvas).trigger('rotateShape', [rElement.node, angle]);
+        console.log(rElement.node)
         return rElement.node;
 
     } else if (rElement) {

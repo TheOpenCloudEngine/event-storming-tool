@@ -117,7 +117,7 @@
               console.log(designer);
 
               if (newValue == true) {
-                  designer.value.forEach(function(temp) {
+                  designer.value.definition.forEach(function(temp) {
                     if(temp._type == "org.uengine.uml.model.Aggregate" )
                     me.aggregateList.push(temp.inputText);
                   })

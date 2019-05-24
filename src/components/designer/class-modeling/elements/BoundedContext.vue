@@ -99,7 +99,7 @@
                 me.aggregateList=[]
                 if (newValue == true) {
                     me.value.dataList.forEach(function(aggregateId) {
-                        designer.value.forEach(function (tmp) {
+                        designer.value.definition.forEach(function (tmp) {
                             if(tmp.elementView.id == aggregateId) {
                                 me.aggregateList.push(tmp.inputText)
                             }

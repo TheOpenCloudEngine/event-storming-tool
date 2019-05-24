@@ -42,11 +42,6 @@
         <v-card-title>
           <span class="headline" v-if="titleName">연결 리스트 </span>
         </v-card-title>
-
-        <v-card-text>
-          <v-autocomplete v-model="input2" :items="aggregateList" label="Aggregate" persistent-hint prepend-icon="mdi-city">
-          </v-autocomplete>
-        </v-card-text>
       </v-card>
 
       <v-card v-else>
@@ -55,11 +50,10 @@
         </v-card-text>
 
         <v-card-title>
-          <span class="headline" v-if="titleName">Aggregate 선택 </span>
+          <span class="headline" v-if="titleName">Aggregate 선택</span>
         </v-card-title>
-
         <v-card-text>
-          <v-autocomplete v-model="input2" :items="aggregateList" label="Aggregate" persistent-hint prepend-icon="mdi-city">
+          <v-autocomplete v-model="selectAggregate" :items="aggregateList" label="Aggregate" persistent-hint prepend-icon="mdi-city">
           </v-autocomplete>
         </v-card-text>
       </v-card>
@@ -146,7 +140,7 @@ export default {
       tracingTag: null,
       input: '',
       angle: null,
-      input2:''
+      selectAggregate:''
     }
   },
   created: function() {
@@ -156,18 +150,31 @@ export default {
     console.log(value)
   },
   watch: {
-    input: function(newVal) {
-      this.$emit('update:inputText', newVal)
-    },
+      input: function(newVal) {
+          if(this.titleName == "Aggregate") {
+              this.$emit('update:inputText', newVal)
+          } else if (this.titleName == "Boundary Context") {
+              this.$emit('update:inputText', newVal)
+          } else {
+              if(this.selectAggregate.length > 0){
+                  this.$emit('update:inputText', newVal +'\n \n \n Aggregate:\n' +this.selectAggregate)
+              }else{
+                  this.$emit('update:inputText', newVal)
+              }
+          }
+      },
+      selectAggregate: function(newVal) {
+          this.$emit('update:inputText', this.input +'\n \n \n Aggregate:\n' + newVal)
+      },
     drawer: function(val) {
       this.navigationDrawer = val;
     },
-    value: {
-      handler: function() {
-        this.$emit("input", this.value);
-      },
-      deep: true
-    },
+    // value: {
+    //   handler: function() {
+    //     this.$emit("input", this.value);
+    //   },
+    //   deep: true
+    // },
     //프로퍼티 창이 오픈되었을 때 모델값을 새로 반영한다.
     navigationDrawer: {
       handler: function(val, oldval) {
@@ -184,7 +191,6 @@ export default {
         } else {
           //프로퍼티 에디팅 해제.
           this.$emit('update:drawer', false);
-
         }
       }
     },
