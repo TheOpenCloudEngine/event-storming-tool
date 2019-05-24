@@ -44,11 +44,48 @@
                         <span class="headline" v-if="titleName">연결 리스트 </span>
                     </v-card-title>
 
-                    <v-card-text>
-                        <v-autocomplete v-model="selectAggregate" :items="aggregateList" label="Aggregate"
-                                        persistent-hint prepend-icon="mdi-city">
-                        </v-autocomplete>
-                    </v-card-text>
+
+                    <!--expand 표시 부분  -->
+                    <template>
+                        <div>
+                            <v-expansion-panel>
+
+                                <v-expansion-panel-content EventExpand>
+                                    <template v-slot:header>연결된 리스트</template>
+                                    <v-card>
+                                        <v-card-text>
+                                            연결된 리스트
+                                        </v-card-text>
+
+
+                                    </v-card>
+                                </v-expansion-panel-content>
+
+                                <v-expansion-panel-content CommandExpand>
+                                    <template v-slot:header>연결X 리스트</template>
+                                    <v-card>
+                                        <v-card-text>
+                                            연결 가능 리스트
+                                        </v-card-text>
+
+                                        <v-card-text row>
+                                            <v-autocomplete v-model="selectCommand" :items="commandNameList"
+                                                            label="CommandList" persistent-hint
+                                                            prepend-icon="mdi-city"></v-autocomplete>
+                                            <v-autocomplete v-model="selectEvent" :items="domainNameList"
+                                                            label="EventList" persistent-hint
+                                                            prepend-icon="mdi-city"></v-autocomplete>
+                                            <v-btn @click="addRelation(selectCommand,selectEvent)" color="success">추가
+                                            </v-btn>
+                                        </v-card-text>
+
+                                    </v-card>
+                                </v-expansion-panel-content>
+
+                            </v-expansion-panel>
+                        </div>
+                    </template>
+
                 </v-card>
 
                 <v-card v-else>
@@ -71,55 +108,6 @@
     </v-layout>
 </template>
 
-
-<!--
-<template>
-<v-layout row justify-center>
-  <v-dialog v-model="navigationDrawer" max-width="600px"> -->
-<!-- Bounded Context Setting Start -->
-<!-- <v-card v-if="value.name == 'Bounded Context'">
-            <v-card-title>
-                <span class="headline" v-if="titleName">{{titleName}} 내용 입력 </span>
-            </v-card-title>
-
-            <v-card-text>
-                <v-autocomplete
-                        v-model="input"
-                        :items="aggregateList"
-                        label="Aggregate"
-                        persistent-hint
-                        prepend-icon="mdi-city"
-                >
-                </v-autocomplete>
-            </v-card-text>
-        </v-card> -->
-<!-- Bounded Context Setting End -->
-<!-- Other Component Setting Start -->
-<!-- <v-card v-else>
-            <v-card-title>
-                <span class="headline">{{titleName}} 내용 입력 </span>
-            </v-card-title>
-            <v-card-text>
-                <v-container fluid grid-list-md>
-                    <v-textarea
-                            name="input-7-1"
-                            outline
-                            :label="titleName"
-                            auto-grow
-                            v-model="input"
-                    ></v-textarea>
-                </v-container>
-            </v-card-text>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click="navigationDrawer = false">확인</v-btn>
-            </v-card-actions> -->
-<!-- Other Component Setting Stop -->
-<!-- </v-card>
-    </v-dialog>
-</v-layout>
-</template> -->
-
 <script>
     export default {
         name: 'modeling-property-panel',
@@ -133,7 +121,25 @@
             img: String,
             innerAggregate: Object
         },
-        computed: {},
+        computed: {
+            commandNameList: function () {
+                var tmp = []
+                this.innerAggregate.command.forEach(function (domain) {
+                    tmp.push(domain.inputText)
+                })
+
+                return tmp
+            },
+            domainNameList: function () {
+                var tmp = []
+
+                this.innerAggregate.domain.forEach(function (event) {
+                    tmp.push(event.inputText)
+                })
+
+                return tmp
+            }
+        },
         data: function () {
             return {
                 navigationDrawer: false,
@@ -148,7 +154,9 @@
                 tracingTag: null,
                 input: '',
                 angle: null,
-                selectAggregate: ''
+                selectAggregate: '',
+                selectEvent: '',
+                selectCommand: ''
             }
         },
         created: function () {
@@ -165,7 +173,8 @@
                     this.$emit('update:inputText', newVal)
                 } else {
                     if (this.selectAggregate.length > 0) {
-                        this.$emit('update:inputText', newVal + '\n \n \n Aggregate:\n' + this.selectAggregate)
+                        this.$emit('update:inputText', newVal)
+                        this.$emit('update:aggregateText', '\n \n \n Aggregate:\n' + this.selectAggregate)
                     } else {
                         this.$emit('update:inputText', newVal)
                     }
@@ -173,7 +182,9 @@
             },
             selectAggregate: function (newVal) {
                 this.$emit('update:aggregate', newVal)
-                this.$emit('update:inputText', this.input + '\n \n \n Aggregate:\n' + newVal)
+                this.$emit('update:inputText', this.input)
+                this.$emit('update:aggregateText', '\n \n \n Aggregate:\n' + newVal)
+
             },
             drawer: function (val) {
                 this.navigationDrawer = val;
@@ -241,7 +252,11 @@
         mounted: function () {
 
         },
-        methods: {}
+        methods: {
+            addRelation:function (commandId, eventId){
+
+            }
+        }
     }
 </script>
 

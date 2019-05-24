@@ -16,7 +16,7 @@
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:addedToGroup="onAddedToGroup"
-                :label="value.inputText"
+                :label="value.inputText + value.aggregateText"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
             <geometry-rect
@@ -54,6 +54,7 @@
                 :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/event.png'"
                 :aggregate.sync="value.aggregate"
                 :aggregateList.sync="aggregateList"
+                :aggregateText.sync="value.aggregateText"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -95,7 +96,8 @@
                     drawer: false,
                     selected: false,
                     inputText: '',
-                    aggregate: ''
+                    aggregate: '',
+                    aggregateText: ''
                 }
             }
         },
