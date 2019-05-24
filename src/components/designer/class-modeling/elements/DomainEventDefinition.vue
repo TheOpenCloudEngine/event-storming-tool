@@ -55,7 +55,8 @@
                 :titleName.sync="value.name"
                 :inputText.sync="value.inputText"
                 :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/event.png'"
-                :aggregateList="aggregateList"
+                :aggregate.sync="value.aggregate"
+                :aggregateList.sync="aggregateList"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -97,7 +98,8 @@
                     },
                     drawer: false,
                     selected: false,
-                    inputText: ''
+                    inputText: '',
+                    aggregate: ''
                 }
             }
         },

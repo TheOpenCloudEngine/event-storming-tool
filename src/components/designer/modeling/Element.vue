@@ -48,7 +48,6 @@
                 },
                 set: function (val) {
                     if (this.value) {
-
                         if (this.value.elementView)
                             this.value.elementView.style = JSON.stringify(val);
                         else
@@ -58,29 +57,20 @@
             }
         },
         watch: {
-            // "value.elementView.angle": {
-            //     handler: function (newVal, oldVal) {
-            //         var me = this
-            //         me.rotateMove = true
-            //
-            //         me.value.elementView.x = me.value.elementView.x + 1
-            //         me.$nextTick(function () {
-            //             me.value.elementView.width = me.tmpWidth
-            //             me.value.elementView.height = me.tmpHeight
-            //             me.rotateMove = true
-            //             me.$nextTick(function () {
-            //                 var result = 'result: '
-            //                 me.value.elementView.x = me.value.elementView.x - 1
-            //
-            //                 me.value.elementView.width = me.tmpWidth
-            //                 me.value.elementView.height = me.tmpHeight
-            //
-            //                 console.log(result + me.tmpWidth)
-            //                 console.log(result + me.tmpHeight)
-            //             })
-            //         })
-            //     }
-            // },
+            "value.aggregate": {
+                handler: function (newVal) {
+                    var me = this
+                    var designer = this.getComponent('modeling-designer')
+                    console.log(me.type)
+                    if(me.type == 'Domain' || me.type == 'Command' || me.type == 'View') {
+                        designer.value.definition.forEach(function(tmp) {
+                            if(tmp.inputText == newVal) {
+                                tmp.innerAggregate[me.type.toLowerCase()].push(me.value.elementView.id)
+                            }
+                        })
+                    }
+                }
+            },
             'value.drawer': function (newValue, oldValue) {
                 var designer = this.getComponent('modeling-designer')
 
@@ -117,7 +107,7 @@
                     var me = this
                     if(me.rotateMove == true) {
                         me.tmpWidth = oldVal
-                        console.log(newVal, oldVal)
+                        // console.log(newVal, oldVal)
 
                     }
                 }
@@ -128,7 +118,7 @@
                     var me = this
                     if(me.rotateMove == true) {
                         me.tmpHeight = oldVal
-                        console.log(newVal, oldVal)
+                        // console.log(newVal, oldVal)
                     }
                 }
             }
@@ -177,7 +167,7 @@
                 // console.log("groupOpengraphComponent: " , groupOpengraphComponent)
 
                 if (groupOpengraphComponent.tagName) {
-                    designer.value.some(function (definitionTmp, definitionIndex) {
+                    designer.value.definition.some(function (definitionTmp, definitionIndex) {
                         if (definitionTmp.name == 'Bounded Context') {
                             // console.log('ROOT')
                             definitionTmp.dataList.some(function (deleteTmp, index) {
@@ -190,16 +180,15 @@
                         }
                     })
                 } else {
-                    designer.value.some(function (definitionTmp, definitionIndex) {
+                    designer.value.definition.some(function (definitionTmp, definitionIndex) {
                         var copyTmp = JSON.parse(JSON.stringify(definitionTmp))
                         if (definitionTmp.elementView) {
                             if (definitionTmp.elementView.id == opengraphComponent.element.id) {
-                                designer.value.some(function (boundedTmp, boundedIndex) {
+                                designer.value.definition.some(function (boundedTmp, boundedIndex) {
                                     if (boundedTmp.elementView) {
                                         if (boundedTmp.elementView.id == groupOpengraphComponent.element.id) {
-                                            designer.value[boundedIndex].dataList.push(copyTmp.elementView.id)
-
-                                            designer.value = designer.value.filter(n => n)
+                                            designer.value.definition[boundedIndex].dataList.push(copyTmp.elementView.id)
+                                            designer.value.definition = designer.value.definition.filter(n => n)
                                             return;
                                         }
                                     }

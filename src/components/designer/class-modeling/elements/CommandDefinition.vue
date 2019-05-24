@@ -45,13 +45,13 @@
             </sub-elements>
         </geometry-element>
 
-
         <modeling-property-panel
                 :drawer.sync="value.drawer"
-                :titleName="value.name"
+                :titleName.sync="value.name"
                 :inputText.sync="value.inputText"
-                :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/command.png'"
-                :aggregateList="aggregateList"
+                :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/event.png'"
+                :aggregate.sync="value.aggregate"
+                :aggregateList.sync="aggregateList"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -71,7 +71,7 @@
                 return {}
             },
             type() {
-                return 'Event'
+                return 'Command'
             },
             className() {
                 return 'org.uengine.uml.model.Command'

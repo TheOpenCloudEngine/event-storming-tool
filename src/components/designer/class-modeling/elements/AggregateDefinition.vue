@@ -50,7 +50,7 @@
                 :drawer.sync="value.drawer"
                 :titleName="value.name"
                 :inputText.sync="value.inputText"
-                :aggregateList="value.innerAggregate"
+                :innerAggregate="value.innerAggregate"
                 :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/aggregate.png'"
                 v-model="value"
         >
@@ -80,7 +80,11 @@
                 return {
                     _type: this.className(),
                     name: 'Aggregate',
-                    innerAggregate: [],
+                    innerAggregate: {
+                        'domain': [],
+                        'command': [],
+                        'view': [],
+                    },
                     elementView: {
                         '_type': 'org.uengine.modeling.Aggregate',
                         'id': elementId,
