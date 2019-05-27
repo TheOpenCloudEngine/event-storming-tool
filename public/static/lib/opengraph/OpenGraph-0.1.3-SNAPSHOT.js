@@ -23392,7 +23392,7 @@ OG.renderer.RaphaelRenderer.prototype.connect = function (fromTerminal, toTermin
 
     //if label null, convert undefined
     label = label ? label : undefined;
-
+    console.log("opengraph connect")
     var me = this, _style = {}, fromShape, toShape, fromXY, toXY,
         isSelf, beforeEvent,
         addAttrValues = function (element, name, value) {
@@ -24078,7 +24078,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         if (me._CONFIG.GUIDE_CONTROL_LINE_NUM == 2) {
             _linePath1 = me._PAPER.path(createLinePath(0, 0, 0, 8));
             _linePath2 = me._PAPER.path(createLinePath(0, 0, 8, 8));
-        } else {ㄱ
+        } else {
             _linePath1 = me._PAPER.path(createLinePath(0, 0, 0, 4));
         }
         _line.attr(me._CONFIG.DEFAULT_STYLE.GUIDE_LINE_AREA);
@@ -24440,7 +24440,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                         _drawTextLine(i, text);
                     })
                 } else {
-                    _drawLine();
+                     _drawLine();
                 }
             }
             _drawRotate();
@@ -30503,6 +30503,7 @@ OG.handler.EventHandler.prototype = {
                                     if (connectShape) {
                                         eval('connectShape = new ' + connectShape + '()');
                                     }
+                                    console.log("a")
                                     me._RENDERER._CANVAS.connect(target, element, null, connectLabel, null, null, null, null, connectShape);
                                     $(root).removeData(OG.Constants.GUIDE_SUFFIX.LINE_CONNECT_SHAPE);
                                     $(root).removeData(OG.Constants.GUIDE_SUFFIX.LINE_CONNECT_TEXT);
@@ -30771,6 +30772,7 @@ OG.handler.EventHandler.prototype = {
                 if (isConnectable) {
                     newShape.setData(JSON.parse(JSON.stringify(target.shape.getData())));
                     var rectShape = renderer._CANVAS.drawShape([eventOffset.x, eventOffset.y], newShape, [width, height], style);
+                    console.log("bb")
                     var edge = renderer._CANVAS.connect(target, rectShape, null, null, null, null, true);
                     $(renderer._PAPER.canvas).trigger('duplicated', [edge, target, rectShape]);
                 }
@@ -30798,6 +30800,7 @@ OG.handler.EventHandler.prototype = {
                 }
                 if (isConnectable) {
                     var rectShape = renderer._CANVAS.drawShape([eventOffset.x, eventOffset.y], newShape, [width, height], style);
+                    console.log("C")
                     var edge = renderer._CANVAS.connect(target, rectShape, null, null, null, null, true);
                     if (target.shape.onDuplicated) {
                         target.shape.onDuplicated(edge, target, rectShape);
@@ -34515,11 +34518,14 @@ OG.handler.EventHandler.prototype = {
                                         if (isConnectable) {
                                             if (connectableDirection === 'from') {
                                                 if (me._isConnectableFrom(frontElement.shape)) {
+                                                    console.log("d")
                                                     renderer.connect(terminal, null, element, element.shape.geom.style);
                                                 }
                                             }
                                             if (connectableDirection === 'to') {
                                                 if (me._isConnectableTo(frontElement.shape)) {
+                                                    console.log("e" +
+                                                        "")
                                                     renderer.connect(null, terminal, element, element.shape.geom.style);
                                                 }
                                             }

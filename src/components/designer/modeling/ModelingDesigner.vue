@@ -359,7 +359,7 @@
             },
             onConnectShape: function (edge, from, to) {
                 var me = this;
-
+                console.log(edge)
                 //존재하는 릴레이션인 경우 (뷰 컴포넌트), 데이터 매핑에 의해 자동으로 from, to 가 변경되어있기 때문에 따로 로직은 필요없음.
                 //=> 바뀌어야 함.
                 //신규 릴레이션인 경우에는 릴레이션 생성

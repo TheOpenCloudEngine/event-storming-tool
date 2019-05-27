@@ -1141,6 +1141,7 @@
                  */
                 me.canvas.onConnectShape(function (event, edgeElement, fromElement, toElement) {
                     me.$emit('connectShape',
+
                         me.getElementById(edgeElement.id) || edgeElement,
                         me.getElementById(fromElement.id) || fromElement,
                         me.getElementById(toElement.id) || toElement);
