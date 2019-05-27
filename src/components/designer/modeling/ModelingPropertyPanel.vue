@@ -59,7 +59,7 @@
                                                         <v-card-text class="px-0" align="center">{{item.to.inputText}}</v-card-text>
                                                 </v-flex>
                                                 <v-flex xs4>
-                                                        <v-img :src="'@/public/static/image/symbol/right-arrow-icon.png'"></v-img>
+                                                        <v-img :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow-icon.png'"></v-img>
                                                 </v-flex>
                                                 <v-flex xs4>
                                                         <v-card-text class="px-0" align="center">{{item.from.inputText}}</v-card-text>
