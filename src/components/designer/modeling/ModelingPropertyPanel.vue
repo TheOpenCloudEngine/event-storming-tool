@@ -44,7 +44,6 @@
                         <span class="headline" v-if="titleName">연결 리스트 </span>
                     </v-card-title>
 
-
                     <!--expand 표시 부분  -->
                     <template>
                         <div>
@@ -53,15 +52,32 @@
                                 <v-expansion-panel-content EventExpand>
                                     <template v-slot:header>연결된 리스트</template>
                                     <v-card>
-                                        <v-card-text v-if="connectedList.length > 0">
-                                            <v-layout v-for="item in connectedList" row wrap>
-                                                <v-flex xs4>
+                                        <v-card-text style="padding-top: 0px" v-if="connectedList.length > 0">
+                                            <v-layout row wrap>
+                                                <v-flex xs1>
+                                                    <v-card-text class="px-0" align="center">Index</v-card-text>
+                                                </v-flex>
+                                                <v-flex xs3>
+                                                    <v-card-text class="px-0" align="center">To</v-card-text>
+                                                </v-flex>
+                                                <v-flex xs3>
+                                                    <v-img style="margin-top: 13px" :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>
+                                                </v-flex>
+                                                <v-flex xs3>
+                                                    <v-card-text class="px-0" align="center">From</v-card-text>
+                                                </v-flex>
+                                            </v-layout>
+                                            <v-layout v-for="(item, index) in connectedList" row wrap>
+                                                <v-flex xs1>
+                                                    <v-card-text class="px-0" align="center">{{index + 1}}</v-card-text>
+                                                </v-flex>
+                                                <v-flex xs3>
                                                         <v-card-text class="px-0" align="center">{{item.to.inputText}}</v-card-text>
                                                 </v-flex>
-                                                <v-flex xs4>
-                                                        <v-img :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow-icon.png'"></v-img>
+                                                <v-flex xs3 grow>
+                                                        <v-img style="margin-top: 13px" :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>
                                                 </v-flex>
-                                                <v-flex xs4>
+                                                <v-flex xs3>
                                                         <v-card-text class="px-0" align="center">{{item.from.inputText}}</v-card-text>
                                                 </v-flex>
                                             </v-layout>
@@ -207,6 +223,7 @@
                 handler: function (val, oldval) {
                     if(this.titleName == 'Aggregate') {
                         var me = this
+                        me.connectedList = []
                         var designer = this.$parent.getComponent('modeling-designer')
                         let commandList = this.innerAggregate.command
                         let domainList = this.innerAggregate.domain
