@@ -85,7 +85,7 @@
             createNew(elementId, x, y, width, height, angle) {
                 return {
                     _type: this.className(),
-                    name: 'Event',
+                    name: 'domain',
                     fieldDescriptors: [],
                     elementView: {
                         '_type': 'org.uengine.modeling.Domain',
@@ -101,7 +101,8 @@
                     selected: false,
                     inputText: '',
                     aggregate: '',
-                    aggregateText: ''
+                    aggregateText: '',
+                    closedAggreate: [],
                 }
             }
         },

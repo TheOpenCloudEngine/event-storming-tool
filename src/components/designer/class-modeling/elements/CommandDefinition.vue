@@ -94,7 +94,8 @@
                     drawer: false,
                     selected: false,
                     inputText: '',
-                    aggregateText: ''
+                    aggregateText: '',
+                    closedAggreate: [],
                 }
             }
         },

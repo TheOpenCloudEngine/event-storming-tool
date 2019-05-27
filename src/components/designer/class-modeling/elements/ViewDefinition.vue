@@ -97,7 +97,8 @@
                     selected: false,
                     inputText: '',
                     aggregate: '',
-                    aggregateText: ''
+                    aggregateText: '',
+                    closedAggreate: [],
                 }
             }
         },

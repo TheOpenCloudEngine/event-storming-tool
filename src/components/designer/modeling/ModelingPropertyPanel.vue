@@ -122,12 +122,11 @@
                     </v-card-text>
 
                     <v-card-title>
-                        <span class="headline" v-if="titleName">Aggregate 선택</span>
+                        <span class="headline" v-if="titleName">연결된 Aggregate</span>
                     </v-card-title>
                     <v-card-text>
-                        <v-autocomplete v-model="selectAggregate" :items="aggregateList" label="Aggregate"
-                                        persistent-hint prepend-icon="mdi-city">
-                        </v-autocomplete>
+                      <span>{{ this.value.closedAggreate.inputText}}</span>
+
                     </v-card-text>
                 </v-card>
 
@@ -298,7 +297,7 @@
         },
         methods: {
             addRelation:function (commandId, eventId){
-
+              console.log(this.$parent.value);
             }
         }
     }

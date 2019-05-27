@@ -108,7 +108,6 @@
                 undoing: false,
                 undoed: false,
                 undoIndex: 0,
-                aggregateList: [],
                 tmpValue: [],
                 projectName: '',
                 noPushUndo: false,
@@ -145,9 +144,17 @@
         mounted() {
             var me = this
             me.$ModelingBus.$on('MoveEvent', function () {
+
                 me.$nextTick(function () {
                     me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                     me.redoArray = [];
+
+                    me.value.definition.forEach(function(element){
+                      console.log(element.selected);
+                      if(element.selected){
+                          me.searchAggregate(element);
+                      }
+                    })
                 })
             })
             this.$nextTick(function () {
@@ -187,6 +194,23 @@
         },
 
         methods: {
+          //근접 어글리게이트 찾기
+            searchAggregate: function(selectDefinition){
+              var shortdistance=4000;
+              var selectAggregate=[];
+              console.log(selectDefinition)
+              this.value.definition.forEach(function(tmp){
+                if(tmp._type== "org.uengine.uml.model.Aggregate")
+                {
+                    var distance = Math.sqrt( (Math.pow(tmp.elementView.x-selectDefinition.elementView.x,2)+Math.pow(tmp.elementView.y-selectDefinition.elementView.y,2)) );
+                    if(distance<shortdistance){
+                      shortdistance=distance
+                      selectDefinition.closedAggreate=JSON.parse(JSON.stringify(tmp));
+                      tmp.innerAggregate[selectDefinition.name.toLowerCase()].push({'id':selectDefinition.elementView.id, 'inputText':selectDefinition.inputText})
+                    }
+                }
+              })
+            },
             //복사
             copy: function () {
                 var me = this
@@ -216,8 +240,8 @@
                             tmp.elementView.x = tmp.elementView.x + 10
                             tmp.elementView.y = tmp.elementView.y + 10
 
-                            me.value.push(tmp);
-                            me.history.push(tmp);
+                            me.value.definition.push(tmp);
+                            me.redoArray.push(tmp);
                         })
                         //초기화
                     } else {
