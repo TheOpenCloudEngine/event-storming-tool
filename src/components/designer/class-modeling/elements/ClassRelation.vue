@@ -4,7 +4,6 @@
                 selectable
                 connectable
                 deletable
-                :id="null"
                 :vertices.sync="vertices"
                 :from.sync="value.from"
                 :to.sync="value.to"

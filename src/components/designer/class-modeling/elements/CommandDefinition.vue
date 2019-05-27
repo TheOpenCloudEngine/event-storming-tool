@@ -115,8 +115,6 @@
               var designer = this.getComponent('modeling-designer')
 
               var me = this
-              console.log(me);
-              console.log(designer);
 
               if (newValue == true) {
                   designer.value.definition.forEach(function(temp) {

@@ -122,7 +122,7 @@
                 get: function () {
                     var me = this
                     var temp = false;
-                    var tmpArray = JSON.parse(JSON.stringify(me.value))
+                    var tmpArray = JSON.parse(JSON.stringify(me.value.definition))
                     if (tmpArray.length > 0) {
                         tmpArray.some(function (tmp, index) {
                             if (tmp.drawer) {
@@ -416,7 +416,7 @@
                 // console.log(componentInfo.component , this.relationVueComponentName)
                 var element;
 
-
+                console.log(componentInfo)
                 if (componentInfo.component == 'class-relation') {
                     element = vueComponent.computed.createNew(
                         componentInfo.sourceElement.value,

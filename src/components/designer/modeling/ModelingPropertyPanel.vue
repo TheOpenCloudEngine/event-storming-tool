@@ -4,7 +4,7 @@
 
 <template>
     <v-layout wrap>
-        <v-navigation-drawer v-model="navigationDrawer" absolute right temporary>
+        <v-navigation-drawer v-model="navigationDrawer" absolute right temporary width="390">
 
             <v-list class="pa-1">
                 <v-list-tile avatar>
@@ -53,10 +53,22 @@
                                 <v-expansion-panel-content EventExpand>
                                     <template v-slot:header>연결된 리스트</template>
                                     <v-card>
-                                        <v-card-text>
-                                            연결된 리스트
+                                        <v-card-text v-if="connectedList.length > 0">
+                                            <v-layout v-for="item in connectedList" row wrap>
+                                                <v-flex xs4>
+                                                        <v-card-text class="px-0" align="center">{{item.to.inputText}}</v-card-text>
+                                                </v-flex>
+                                                <v-flex xs4>
+                                                        <v-img :src="'@/public/static/image/symbol/right-arrow-icon.png'"></v-img>
+                                                </v-flex>
+                                                <v-flex xs4>
+                                                        <v-card-text class="px-0" align="center">{{item.from.inputText}}</v-card-text>
+                                                </v-flex>
+                                            </v-layout>
                                         </v-card-text>
-
+                                        <v-card-text v-else>
+                                            연결된 선이 없습니다.
+                                        </v-card-text>
 
                                     </v-card>
                                 </v-expansion-panel-content>
@@ -156,7 +168,8 @@
                 angle: null,
                 selectAggregate: '',
                 selectEvent: '',
-                selectCommand: ''
+                selectCommand: '',
+                connectedList: []
             }
         },
         created: function () {
@@ -189,15 +202,28 @@
             drawer: function (val) {
                 this.navigationDrawer = val;
             },
-            // value: {
-            //   handler: function() {
-            //     this.$emit("input", this.value);
-            //   },
-            //   deep: true
-            // },
             //프로퍼티 창이 오픈되었을 때 모델값을 새로 반영한다.
             navigationDrawer: {
                 handler: function (val, oldval) {
+                    if(this.titleName == 'Aggregate') {
+                        var me = this
+                        var designer = this.$parent.getComponent('modeling-designer')
+                        let commandList = this.innerAggregate.command
+                        let domainList = this.innerAggregate.domain
+                        let relationList = designer.value.relation
+
+                        commandList.forEach(function (commandTmp) {
+                            relationList.forEach(function (relationTmp) {
+                                if(commandTmp.id == relationTmp.from) {
+                                    domainList.forEach(function (domainTmp) {
+                                        if(domainTmp.id == relationTmp.to) {
+                                            me.connectedList.push({'to': commandTmp, 'from': domainTmp})
+                                        }
+                                    })
+                                }
+                            })
+                        })
+                    }
                     if (val == true) {
                         this._item = this.value;
 
@@ -208,6 +234,7 @@
                             this.height = this.value.elementView.height;
                         }
                         this.$emit('update:drawer', val);
+
                     } else {
                         //프로퍼티 에디팅 해제.
                         this.$emit('update:drawer', false);
