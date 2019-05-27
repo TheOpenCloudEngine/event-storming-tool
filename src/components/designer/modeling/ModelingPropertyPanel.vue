@@ -61,7 +61,8 @@
                                                     <v-card-text class="px-0" align="center">To</v-card-text>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                    <v-img style="margin-top: 13px" :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>
+                                                    <v-img style="margin-top: 13px"
+                                                           :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>
                                                 </v-flex>
                                                 <v-flex xs3>
                                                     <v-card-text class="px-0" align="center">From</v-card-text>
@@ -72,13 +73,16 @@
                                                     <v-card-text class="px-0" align="center">{{index + 1}}</v-card-text>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                        <v-card-text class="px-0" align="center">{{item.to.inputText}}</v-card-text>
+                                                    <v-card-text class="px-0" align="center">{{item.to.inputText}}
+                                                    </v-card-text>
                                                 </v-flex>
                                                 <v-flex xs3 grow>
-                                                        <v-img style="margin-top: 13px" :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>
+                                                    <v-img style="margin-top: 13px"
+                                                           :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                        <v-card-text class="px-0" align="center">{{item.from.inputText}}</v-card-text>
+                                                    <v-card-text class="px-0" align="center">{{item.from.inputText}}
+                                                    </v-card-text>
                                                 </v-flex>
                                             </v-layout>
                                         </v-card-text>
@@ -95,18 +99,28 @@
                                         <v-card-text>
                                             연결 가능 리스트
                                         </v-card-text>
+                                        <v-layout row wrap>
+                                            <v-flex xs4>
+                                                <v-autocomplete v-model="selectCommand" :items="commandNameList"
+                                                                label="CommandList" persistent-hint
+                                                                prepend-icon="mdi-city"></v-autocomplete>
+                                            </v-flex>
 
-                                        <v-card-text row>
-                                            <v-autocomplete v-model="selectCommand" :items="commandNameList"
-                                                            label="CommandList" persistent-hint
-                                                            prepend-icon="mdi-city"></v-autocomplete>
-                                            <v-autocomplete v-model="selectEvent" :items="domainNameList"
-                                                            label="EventList" persistent-hint
-                                                            prepend-icon="mdi-city"></v-autocomplete>
-                                            <v-btn @click="addRelation(selectCommand,selectEvent)" color="success">추가
-                                            </v-btn>
-                                        </v-card-text>
-
+                                            <!--<v-flex xs3>-->
+                                                <!--<v-img style="margin-top: 13px"-->
+                                                       <!--:src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>-->
+                                            <!--</v-flex>-->
+                                            <v-flex xs4>
+                                                <v-autocomplete v-model="selectEvent" :items="domainNameList"
+                                                                label="EventList" persistent-hint
+                                                                prepend-icon="mdi-city"></v-autocomplete>
+                                            </v-flex>
+                                            <v-flex xs1>
+                                                    <v-btn style="margin-top: 17px" small @click="addRelation(selectCommand,selectEvent)"
+                                                           color="success">추가
+                                                    </v-btn>
+                                            </v-flex>
+                                        </v-layout>
                                     </v-card>
                                 </v-expansion-panel-content>
 
@@ -192,7 +206,6 @@
 
         },
         mounted: function () {
-            console.log(value)
         },
         watch: {
             input: function (newVal) {
@@ -213,7 +226,6 @@
                 this.$emit('update:aggregate', newVal)
                 this.$emit('update:inputText', this.input)
                 this.$emit('update:aggregateText', '\n \n \n Aggregate:\n' + newVal)
-
             },
             drawer: function (val) {
                 this.navigationDrawer = val;
@@ -221,7 +233,8 @@
             //프로퍼티 창이 오픈되었을 때 모델값을 새로 반영한다.
             navigationDrawer: {
                 handler: function (val, oldval) {
-                    if(this.titleName == 'Aggregate') {
+                    var opengraph = this.$parent.getComponent('opengraph')
+                    if (this.titleName == 'Aggregate') {
                         var me = this
                         me.connectedList = []
                         var designer = this.$parent.getComponent('modeling-designer')
@@ -231,9 +244,9 @@
 
                         commandList.forEach(function (commandTmp) {
                             relationList.forEach(function (relationTmp) {
-                                if(commandTmp.id == relationTmp.from) {
+                                if (commandTmp.elementView.id == relationTmp.from) {
                                     domainList.forEach(function (domainTmp) {
-                                        if(domainTmp.id == relationTmp.to) {
+                                        if (domainTmp.elementView.id == relationTmp.to) {
                                             me.connectedList.push({'to': commandTmp, 'from': domainTmp})
                                         }
                                     })
@@ -297,8 +310,14 @@
 
         },
         methods: {
-            addRelation:function (commandId, eventId){
+            addRelation: function (commandId, eventId) {
+                var designer = this.$parent.getComponent('modeling-designer')
+                var opengraph = this.$parent.getComponent('opengraph')
 
+                console.log(opengraph.getElementById(commandId))
+                console.log(opengraph.getElementById(eventId))
+
+                console.log(opengraph.canvas._RENDERER)
             }
         }
     }
