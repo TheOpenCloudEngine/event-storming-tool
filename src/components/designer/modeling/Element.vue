@@ -61,7 +61,6 @@
                 handler: function (newVal) {
                     var me = this
                     var designer = this.getComponent('modeling-designer')
-                    console.log(me.type)
                     if(me.type == 'Domain' || me.type == 'Command' || me.type == 'View') {
                         designer.value.definition.forEach(function(tmp) {
                             if(tmp.name == 'Aggregate' && tmp.inputText == newVal) {
@@ -86,6 +85,7 @@
             "value.inputText": {
                 handler: function (newVal, oldVal) {
                     var me = this
+                    var designer = this.getComponent('modeling-designer')
 
                     me.rotateMove = true
                     me.value.elementView.x = me.value.elementView.x + 1

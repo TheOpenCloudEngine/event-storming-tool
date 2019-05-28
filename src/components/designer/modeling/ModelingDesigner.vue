@@ -85,6 +85,8 @@
 
 <script>
     import TextReader from "@/components/yaml.vue";
+    import { v4 } from 'uuid';
+    import Pusher from 'pusher-js';
 
     var FileSaver = require('file-saver');
     import {saveAs} from 'file-saver';
@@ -94,6 +96,7 @@
         components: {
             TextReader,
             saveAs,
+            Pusher
         },
         props: {
             elementTypes: Array
@@ -113,7 +116,8 @@
                 noPushUndo: false,
                 redoArray: [],
                 undoArray: [],
-                imageBase: 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/symbol/'
+                imageBase: 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/symbol/',
+                userId: ''
             }
         },
         computed: {
@@ -144,10 +148,10 @@
         mounted() {
             var me = this
             me.$ModelingBus.$on('MoveEvent', function () {
-
                 me.$nextTick(function () {
                     me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                     me.redoArray = [];
+                    this.syncOthers();
 
                     me.value.definition.forEach(function(element){
                       console.log(element.selected);
@@ -157,6 +161,20 @@
                     })
                 })
             })
+
+            const pusher = new Pusher('33169ca8c59c1f7f97cd', {
+                cluster: 'ap3',
+            });
+            const channel = pusher.subscribe('painting');
+            this.userId = v4();
+
+            channel.bind('draw', (data) => {
+                const { userId: id, newVal } = data;
+                if (me.userId !== id) {
+                    me.value = newVal
+                }
+            });
+
             this.$nextTick(function () {
                 let startTime = new Date().getTime()
                 //$nextTick delays the callback function until Vue has updated the DOM
@@ -187,10 +205,12 @@
             });
         },
         watch: {
-            value: function () {
-                var me = this
-                me.$refs['modeler-image-generator'].save(me.id, me.canvas);
-            }
+            // value: {
+            //     handler: function (newVal) {
+            //
+            //     },
+            //     deep: true
+            // }
         },
 
         methods: {
@@ -212,6 +232,22 @@
           //     })
           //   },
             //복사
+            syncOthers() {
+                var me = this
+                let userId = this.userId
+                let newVal = me.value
+                const body = {
+                    newVal,
+                    userId,
+                };
+                fetch('http://10.0.2.198:4000/paint', {
+                    method: 'post',
+                    body: JSON.stringify(body),
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                }).then(() => console.log());
+            },
             copy: function () {
                 var me = this
                 if (!me.drawer) {
@@ -226,7 +262,9 @@
                             me.tempValue.push(tmp)
                         }
                     })
+                    this.syncOthers();
                 }
+
             },
             //붙여넣기
             paste: function () {
@@ -243,6 +281,7 @@
                             me.value.definition.push(tmp);
                             me.redoArray.push(tmp);
                         })
+                        this.syncOthers();
                         //초기화
                     } else {
                     }
@@ -289,6 +328,7 @@
 
                     me.value.definition = definitionArray
                     me.value.relation = relationArray
+                    this.syncOthers();
                 }
             },
             toggleGrip: function () {
@@ -359,7 +399,7 @@
             },
             onConnectShape: function (edge, from, to) {
                 var me = this;
-                console.log(edge)
+                // console.log(edge)
                 //존재하는 릴레이션인 경우 (뷰 컴포넌트), 데이터 매핑에 의해 자동으로 from, to 가 변경되어있기 때문에 따로 로직은 필요없음.
                 //=> 바뀌어야 함.
                 //신규 릴레이션인 경우에는 릴레이션 생성
@@ -400,6 +440,7 @@
                         //기존 컴포넌트가 없는 경우 신규 생성
                         this.addElement(componentInfo);
                     }
+                    this.syncOthers();
                 }
             },
             redo: function () {
@@ -412,6 +453,7 @@
                             me.undoArray.push({'definition': [], 'relation': []})
                         }
                         me.undoArray.push(JSON.parse(JSON.stringify(tmpData)));
+                        this.syncOthers();
                     } else {
                     }
                 }
@@ -425,8 +467,9 @@
                         me.value = JSON.parse(JSON.stringify(me.undoArray[me.undoArray.length - 1]))
                     } else if (me.undoArray.length == 1) {
                         me.undoArray.pop();
-                        console.log("undo length 0")
+                        // console.log("undo length 0")
                         me.undoArray.push(JSON.parse(JSON.stringify(me.value)))
+                        this.syncOthers();
                     } else {
                     }
                 }
@@ -440,7 +483,7 @@
                 // console.log(componentInfo.component , this.relationVueComponentName)
                 var element;
 
-                console.log(componentInfo)
+                // console.log(componentInfo)
                 if (componentInfo.component == 'class-relation') {
                     element = vueComponent.computed.createNew(
                         componentInfo.sourceElement.value,
@@ -467,6 +510,7 @@
                 }
                 me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                 me.redoArray = [];
+                this.syncOthers();
             },
 
             getComponentByName: function (name) {
