@@ -52,7 +52,7 @@
                                 <v-expansion-panel-content EventExpand>
                                     <template v-slot:header>연결된 리스트</template>
                                     <v-card>
-                                        <v-card-text style="padding-top: 0px" v-if="connectedList.length > 0">
+                                        <v-card-text style="padding-top: 0px">
                                             <v-layout row wrap>
                                                 <v-flex xs1>
                                                     <v-card-text class="px-0" align="center">Index</v-card-text>
@@ -65,7 +65,7 @@
                                                            :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                    <v-card-text class="px-0" align="center">From</v-card-text>
+                                                    <v-card-text class="px-0" align="   center">From</v-card-text>
                                                 </v-flex>
                                             </v-layout>
                                             <v-layout v-for="(item, index) in connectedList" row wrap>
@@ -86,10 +86,6 @@
                                                 </v-flex>
                                             </v-layout>
                                         </v-card-text>
-                                        <v-card-text v-else>
-                                            연결된 선이 없습니다.
-                                        </v-card-text>
-
                                     </v-card>
                                 </v-expansion-panel-content>
 
@@ -107,8 +103,8 @@
                                             </v-flex>
 
                                             <!--<v-flex xs3>-->
-                                                <!--<v-img style="margin-top: 13px"-->
-                                                       <!--:src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>-->
+                                            <!--<v-img style="margin-top: 13px"-->
+                                            <!--:src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>-->
                                             <!--</v-flex>-->
                                             <v-flex xs4>
                                                 <v-autocomplete v-model="selectEvent" :items="domainNameList"
@@ -116,9 +112,10 @@
                                                                 prepend-icon="mdi-city"></v-autocomplete>
                                             </v-flex>
                                             <v-flex xs1>
-                                                    <v-btn style="margin-top: 17px" small @click="addRelation(selectCommand,selectEvent)"
-                                                           color="success">추가
-                                                    </v-btn>
+                                                <v-btn style="margin-top: 17px" small
+                                                       @click="addRelation(selectCommand,selectEvent)"
+                                                       color="success">추가
+                                                </v-btn>
                                             </v-flex>
                                         </v-layout>
                                     </v-card>
@@ -136,11 +133,12 @@
                     </v-card-text>
 
                     <v-card-title>
-                        <span class="headline" v-if="titleName">연결된 Aggregate</span>
+                        <span class="headline" v-if="titleName">Aggregate 선택</span>
                     </v-card-title>
                     <v-card-text>
-                      <span>{{ this.value.closedAggreate.inputText}}</span>
-
+                        <v-autocomplete v-model="selectAggregate" :items="aggregateList" label="Aggregate"
+                                        persistent-hint prepend-icon="mdi-city">
+                        </v-autocomplete>
                     </v-card-text>
                 </v-card>
 
@@ -164,20 +162,47 @@
         },
         computed: {
             commandNameList: function () {
+                var designer = this.$parent.getComponent('modeling-designer')
                 var tmp = []
-                this.innerAggregate.command.forEach(function (domain) {
-                    tmp.push(domain.inputText)
+                var inner = false
+                this.innerAggregate.command.forEach(function (command) {
+                    if (designer.value.relation.length == 0) {
+                        tmp.push(command.inputText)
+                    } else {
+                        designer.value.relation.forEach(function (relation, index) {
+                            if (relation.from == command.elementView.id) {
+                                inner = true
+                            }
+                            if (designer.value.relation.length - 1 == index && inner == false) {
+                                tmp.push(command.inputText)
+                            }
+                        })
+                        inner = false
+                    }
                 })
-
                 return tmp
             },
             domainNameList: function () {
+                var designer = this.$parent.getComponent('modeling-designer')
                 var tmp = []
-
-                this.innerAggregate.domain.forEach(function (event) {
-                    tmp.push(event.inputText)
+                var inner = false
+                this.innerAggregate.domain.forEach(function (domain) {
+                    if (designer.value.relation.length == 0) {
+                        tmp.push(domain.inputText)
+                    } else {
+                        designer.value.relation.forEach(function (relation, index) {
+                            console.log(relation.to)
+                            console.log(domain.elementView.id)
+                            if (relation.to == domain.elementView.id) {
+                                inner = true
+                            }
+                            if (designer.value.relation.length - 1 == index && inner == false) {
+                                tmp.push(domain.inputText)
+                            }
+                        })
+                        inner = false
+                    }
                 })
-
                 return tmp
             }
         },
@@ -198,7 +223,8 @@
                 selectAggregate: '',
                 selectEvent: '',
                 selectCommand: '',
-                connectedList: []
+                connectedList: [],
+                componentKey: 0
             }
         },
         created: function () {
@@ -234,24 +260,7 @@
                 handler: function (val, oldval) {
                     var opengraph = this.$parent.getComponent('opengraph')
                     if (this.titleName == 'Aggregate') {
-                        var me = this
-                        me.connectedList = []
-                        var designer = this.$parent.getComponent('modeling-designer')
-                        let commandList = this.innerAggregate.command
-                        let domainList = this.innerAggregate.domain
-                        let relationList = designer.value.relation
-
-                        commandList.forEach(function (commandTmp) {
-                            relationList.forEach(function (relationTmp) {
-                                if (commandTmp.elementView.id == relationTmp.from) {
-                                    domainList.forEach(function (domainTmp) {
-                                        if (domainTmp.elementView.id == relationTmp.to) {
-                                            me.connectedList.push({'to': commandTmp, 'from': domainTmp})
-                                        }
-                                    })
-                                }
-                            })
-                        })
+                        this.getRelation()
                     }
                     if (val == true) {
                         this._item = this.value;
@@ -309,19 +318,56 @@
 
         },
         methods: {
-<<<<<<< HEAD
-            addRelation:function (commandId, eventId){
-              console.log(this.$parent.value);
-=======
-            addRelation: function (commandId, eventId) {
+            addRelation: function (commandInputText, eventInputText) {
                 var designer = this.$parent.getComponent('modeling-designer')
                 var opengraph = this.$parent.getComponent('opengraph')
 
-                console.log(opengraph.getElementById(commandId))
-                console.log(opengraph.getElementById(eventId))
+                var commandId, eventId;
+                var me = this
 
-                console.log(opengraph.canvas._RENDERER)
->>>>>>> origin/master
+                console.log(this.innerAggregate['command'])
+                me.innerAggregate.command.forEach(function (commandTmp) {
+                    if (commandTmp.inputText == commandInputText) {
+                        commandId = commandTmp.elementView.id
+                    }
+                })
+
+                me.innerAggregate.domain.forEach(function (eventTmp) {
+                    if (eventTmp.inputText == eventInputText) {
+                        eventId = eventTmp.elementView.id
+                    }
+                })
+
+                var OGcommand = designer.canvas.getElementById(commandId)
+                var OGevent = designer.canvas.getElementById(eventId)
+
+                designer.canvas._RENDERER._CANVAS.connect(OGcommand, OGevent, null, null, null, null, null, null, null);
+
+                this.selectCommand = ''
+                this.selectEvent = ''
+
+                this.getRelation()
+                this.$forceUpdate()
+            },
+            getRelation() {
+                var me = this
+                me.connectedList = []
+                var designer = this.$parent.getComponent('modeling-designer')
+                let commandList = this.innerAggregate.command
+                let domainList = this.innerAggregate.domain
+                let relationList = designer.value.relation
+
+                commandList.forEach(function (commandTmp) {
+                    relationList.forEach(function (relationTmp) {
+                        if (commandTmp.elementView.id == relationTmp.from) {
+                            domainList.forEach(function (domainTmp) {
+                                if (domainTmp.elementView.id == relationTmp.to) {
+                                    me.connectedList.push({'to': commandTmp, 'from': domainTmp})
+                                }
+                            })
+                        }
+                    })
+                })
             }
         }
     }
