@@ -54,16 +54,44 @@
                             this.value.relationView.style = JSON.stringify(val);
                     }
                 }
-            }
+            },
+            closedAggregate() {
+                console.log("a")
+                if (this._type == 'org.uengine.uml.model.Command' && this._type == 'org.uengine.uml.model.View' && this._type == 'org.uengine.uml.model.Domain') {
+                    console.log("b")
+                    var dis = this.value.elementView.x + this.value.elementView.y
+
+                    var designer = this.getComponent('modeling-designer')
+                    let aggregateTmpList = []
+                    var minDis = 4000;
+                    var aggregate;
+                    designer.value.definition.forEach(function (tmp) {
+                        if (tmp._type == 'org.uengine.uml.model.Aggregate') {
+                            aggregateTmpList.push(tmp)
+                        }
+                    })
+                    aggregateTmpList.forEach(function (agTmp) {
+                        if (Math.abs(dis - (agTmp.elementView.x + agTmp.elementView.y)) < minDis) {
+                            minDis = Math.abs(dis - (agTmp.elementView.x + agTmp.elementView.y))
+                            aggregate = agTmp
+                        }
+                    })
+                    return aggregate
+
+                } else {
+                    return null
+                }
+
+            },
         },
         watch: {
             "value.aggregate": {
                 handler: function (newVal) {
                     var me = this
                     var designer = this.getComponent('modeling-designer')
-                    if(me.type == 'Domain' || me.type == 'Command' || me.type == 'View') {
-                        designer.value.definition.forEach(function(tmp) {
-                            if(tmp.name == 'Aggregate' && tmp.inputText == newVal) {
+                    if (me.type == 'Domain' || me.type == 'Command' || me.type == 'View') {
+                        designer.value.definition.forEach(function (tmp) {
+                            if (tmp.name == 'Aggregate' && tmp.inputText == newVal) {
                                 tmp.innerAggregate[me.type.toLowerCase()].push(me.value)
                             }
                         })
@@ -105,7 +133,7 @@
             "value.elementView.width": {
                 handler: function (newVal, oldVal) {
                     var me = this
-                    if(me.rotateMove == true) {
+                    if (me.rotateMove == true) {
                         me.tmpWidth = oldVal
                         // console.log(newVal, oldVal)
 
@@ -116,7 +144,7 @@
             "value.elementView.height": {
                 handler: function (newVal, oldVal) {
                     var me = this
-                    if(me.rotateMove == true) {
+                    if (me.rotateMove == true) {
                         me.tmpHeight = oldVal
                         // console.log(newVal, oldVal)
                     }
