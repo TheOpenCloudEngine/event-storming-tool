@@ -139,7 +139,7 @@
             kubeToken: '',
             items: [
                 {icon: 'home', text: 'Home', route: '/'},
-                {icon: 'fa-sticky-note', text: 'Event', route: '/event'},
+                {icon: 'home', text: 'Home2', route: '/home'},
             ],
             api: [],
             snackbar: false

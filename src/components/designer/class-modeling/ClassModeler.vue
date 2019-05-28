@@ -1,5 +1,4 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
-
     <modeling-designer
             :elementTypes="elementTypes"
             elementListBeanPath="classDefinitions"
@@ -8,8 +7,6 @@
             ref="designer"
     >
     </modeling-designer>
-
-
 </template>
 
 <script>
@@ -77,7 +74,7 @@
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
                         'component': 'bounded-context-definition',
-                        'label': 'Bounded Context',
+                        'label': 'View',
                         'width': '100',
                         'height': '100',
                         'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/bounded2.png'
