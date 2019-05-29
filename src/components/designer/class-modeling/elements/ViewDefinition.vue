@@ -17,6 +17,10 @@
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:addedToGroup="onAddedToGroup"
                 :label="value.inputText + value.aggregateText"
+                :_style="{
+                'label-angle':value.elementView.angle,
+                'font-weight': 'bold','font-size': '16'
+                }"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
             <geometry-rect
@@ -40,8 +44,7 @@
                         :sub-height="titleH"
                         :sub-top="0"
                         :sub-left="0"
-                        :sub-style="{'font-weight': 'bold'}"
-                        :text="value.classReference ? value.classReference : value.name">
+                        :text="value.classReference ? value.classReference : '<< ' + value.name + ' >>'">
                 </text-element>
             </sub-elements>
         </geometry-element>
@@ -83,7 +86,6 @@
                 return {
                     _type: this.className(),
                     name: 'View',
-                    fieldDescriptors: [],
                     elementView: {
                         '_type': 'org.uengine.modeling.View',
                         'id': elementId,

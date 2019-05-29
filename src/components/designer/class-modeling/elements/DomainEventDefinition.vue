@@ -18,7 +18,8 @@
                 v-on:rotateShape="onRotateShape"
                 :label.syhc="value.inputText + value.aggregateText"
                 :_style="{
-                'label-angle':value.elementView.angle
+                'label-angle':value.elementView.angle,
+                'font-weight': 'bold','font-size': '16'
                 }"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
@@ -42,8 +43,7 @@
                         :sub-height="titleH"
                         :sub-top="0"
                         :sub-left="0"
-                        :sub-style="{'font-weight': 'bold'}"
-                        :text="value.classReference ? value.classReference : value.name">
+                        :text="value.classReference ? value.classReference : '<< ' + value.name + ' >>'">
                 </text-element>
 
             </sub-elements>
@@ -85,8 +85,7 @@
             createNew(elementId, x, y, width, height, angle) {
                 return {
                     _type: this.className(),
-                    name: 'domain',
-                    fieldDescriptors: [],
+                    name: 'Domain',
                     elementView: {
                         '_type': 'org.uengine.modeling.Domain',
                         'id': elementId,
@@ -118,8 +117,7 @@
         created: function () {
 
         },
-        watch: {
-        },
+        watch: {},
         mounted: function () {
         },
         methods: {}
