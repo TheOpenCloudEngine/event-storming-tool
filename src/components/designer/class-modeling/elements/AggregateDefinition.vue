@@ -1,25 +1,38 @@
 <template>
     <div>
-        <image-element
+        <geometry-element
                 selectable
                 movable
                 resizable
                 connectable
                 deletable
-                labelEditable
                 :id.sync="value.elementView.id"
                 :x.sync="value.elementView.x"
                 :y.sync="value.elementView.y"
                 :width.sync="value.elementView.width"
-                :height="value.elementView.height"
+                :height.sync="value.elementView.height"
+                :angle.sync="value.elementView.angle"
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:dblclick="showProperty"
+                v-on:addedToGroup="onAddedToGroup"
                 :label="value.inputText"
-                :image="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/aggregate.png'"
         >
             <!--v-on:dblclick="$refs['dialog'].open()"-->
-            <sub-elements labelEditable>
+            <geometry-rect
+                    :_style="{
+          'fill-r': 1,
+          'fill-cx': .1,
+          'fill-cy': .1,
+          'stroke-width': 1.4,
+          'stroke': '#F8D454',
+          fill: '#F8D454',
+          'fill-opacity': 1,
+          r: '1'
+        }"
+            >
+            </geometry-rect>
+            <sub-elements>
                 <!--title-->
                 <text-element
                         :sub-width="'100%'"
@@ -30,13 +43,15 @@
                         :text="value.classReference ? value.classReference : value.name">
                 </text-element>
             </sub-elements>
-        </image-element>
+        </geometry-element>
 
 
         <modeling-property-panel
                 :drawer.sync="value.drawer"
                 :titleName="value.name"
                 :inputText.sync="value.inputText"
+                :innerAggregate="value.innerAggregate"
+                :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/aggregate.png'"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -65,7 +80,11 @@
                 return {
                     _type: this.className(),
                     name: 'Aggregate',
-                    fieldDescriptors: [],
+                    innerAggregate: {
+                        'domain': [],
+                        'command': [],
+                        'view': [],
+                    },
                     elementView: {
                         '_type': 'org.uengine.modeling.Aggregate',
                         'id': elementId,
@@ -93,8 +112,6 @@
 
         },
         watch: {
-            drawer: function () {
-            }
 
         },
         mounted: function () {
@@ -110,4 +127,3 @@
 <style scoped lang="scss" rel="stylesheet/scss">
 
 </style>
-

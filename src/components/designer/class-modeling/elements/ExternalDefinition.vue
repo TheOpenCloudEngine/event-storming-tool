@@ -1,11 +1,12 @@
 <template>
   <div>
-    <image-element
+    <geometry-element
       selectable
       movable
       resizable
       connectable
       deletable
+      :angle.sync="value.elementView.angle"
       :id.sync="value.elementView.id"
       :x.sync="value.elementView.x"
       :y.sync="value.elementView.y"
@@ -15,9 +16,21 @@
       v-on:deSelectShape="deSelectedActivity"
       v-on:dblclick="showProperty"
       :label="value.inputText"
-      :image="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/external.png'"
     >
       <!--v-on:dblclick="$refs['dialog'].open()"-->
+      <geometry-rect
+        :_style="{
+          'fill-r': 1,
+          'fill-cx': .1,
+          'fill-cy': .1,
+          'stroke-width': 1.4,
+          'stroke': '#ED73B6',
+          fill: '#ED73B6',
+          'fill-opacity': 1,
+          r: '1'
+        }"
+      >
+      </geometry-rect>
 
       <sub-elements>
         <!--title-->
@@ -30,13 +43,14 @@
           :text="value.classReference ? value.classReference : value.name">
         </text-element>
       </sub-elements>
-    </image-element>
+    </geometry-element>
 
 
     <modeling-property-panel
             :drawer.sync="value.drawer"
             :titleName="value.name"
             :inputText.sync="value.inputText"
+            :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/external.png'"
             v-model="value"
     >
     </modeling-property-panel>
@@ -101,7 +115,9 @@
 
     },
     methods: {
+        onRotateShape: function () {
 
+        }
     }
   }
 </script>
@@ -110,4 +126,3 @@
 <style scoped lang="scss" rel="stylesheet/scss">
 
 </style>
-
