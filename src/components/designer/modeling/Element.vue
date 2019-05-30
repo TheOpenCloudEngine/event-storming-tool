@@ -17,12 +17,39 @@
                 _id: null,
                 rotateMove: false,
                 tmpWidth: 0,
-                tmpHeight: 0
+                tmpHeight: 0,
+                connectAggregateName: ''
             }
         },
         computed: {
             type() {
                 return ''
+            },
+            connectAggregate() {
+                var me = this
+                if (this.value._type == 'org.uengine.uml.model.Command' || this.value._type == 'org.uengine.uml.model.View' || this.value._type == 'org.uengine.uml.model.Domain') {
+                    var designer = this.getComponent('modeling-designer');
+                    var select = {};
+                    var selectAggregate = {};
+                    var shortdis = 8000;
+
+                    designer.value.definition.forEach(function (element) {
+                        if (element._type == 'org.uengine.uml.model.Aggregate') {
+                            var newdisX = Math.abs(me.value.elementView.x - element.elementView.x);
+                            var newdisY = Math.abs(me.value.elementView.y - element.elementView.y);
+                            var newdis = Math.sqrt(Math.pow(newdisX, 2) + Math.pow(newdisY, 2))
+
+                            if (newdis < shortdis) {
+                                shortdis = newdis;
+                                select = JSON.parse(JSON.stringify(element));
+                                selectAggregate = element;
+                            }
+                        }
+                    })
+
+                    this.connectAggregateName = select.inputText
+                    return select
+                }
             },
             style: {
                 get: function () {
@@ -55,34 +82,7 @@
                     }
                 }
             },
-            closedAggregate() {
-                console.log("a")
-                if (this._type == 'org.uengine.uml.model.Command' && this._type == 'org.uengine.uml.model.View' && this._type == 'org.uengine.uml.model.Domain') {
-                    console.log("b")
-                    var dis = this.value.elementView.x + this.value.elementView.y
 
-                    var designer = this.getComponent('modeling-designer')
-                    let aggregateTmpList = []
-                    var minDis = 4000;
-                    var aggregate;
-                    designer.value.definition.forEach(function (tmp) {
-                        if (tmp._type == 'org.uengine.uml.model.Aggregate') {
-                            aggregateTmpList.push(tmp)
-                        }
-                    })
-                    aggregateTmpList.forEach(function (agTmp) {
-                        if (Math.abs(dis - (agTmp.elementView.x + agTmp.elementView.y)) < minDis) {
-                            minDis = Math.abs(dis - (agTmp.elementView.x + agTmp.elementView.y))
-                            aggregate = agTmp
-                        }
-                    })
-                    return aggregate
-
-                } else {
-                    return null
-                }
-
-            },
         },
         watch: {
             "value.aggregate": {
@@ -135,8 +135,6 @@
                     var me = this
                     if (me.rotateMove == true) {
                         me.tmpWidth = oldVal
-                        // console.log(newVal, oldVal)
-
                     }
                 }
 
@@ -146,7 +144,6 @@
                     var me = this
                     if (me.rotateMove == true) {
                         me.tmpHeight = oldVal
-                        // console.log(newVal, oldVal)
                     }
                 }
             }

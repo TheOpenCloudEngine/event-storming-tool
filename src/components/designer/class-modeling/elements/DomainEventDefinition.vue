@@ -16,7 +16,7 @@
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:dblclick="showProperty"
                 v-on:rotateShape="onRotateShape"
-                :label.syhc="value.inputText + value.aggregateText"
+                :label.syhc="value.inputText + connectAggregateName"
                 :_style="{
                 'label-angle':value.elementView.angle,
                 'font-weight': 'bold','font-size': '16'
@@ -57,7 +57,6 @@
                 :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/event.png'"
                 :aggregate.sync="value.aggregate"
                 :aggregateList.sync="aggregateList"
-                :aggregateText.sync="value.aggregateText"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -100,7 +99,6 @@
                     selected: false,
                     inputText: '',
                     aggregate: '',
-                    aggregateText: '',
                     closedAggreate: [],
                 }
             }

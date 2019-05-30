@@ -169,6 +169,7 @@
             this.userId = v4();
 
             channel.bind('draw', (data) => {
+                console.log("aa")
                 const { userId: id, newVal } = data;
                 if (me.userId !== id) {
                     me.value = newVal
@@ -240,13 +241,13 @@
                     newVal,
                     userId,
                 };
-                fetch('http://10.0.2.198:4000/paint', {
+                fetch('https://pusher-lhgws4pe7a-uc.a.run.app/paint', {
                     method: 'post',
                     body: JSON.stringify(body),
                     headers: {
                         'content-type': 'application/json',
                     },
-                }).then(() => console.log());
+                }).then(() => console.log("throw"));
             },
             copy: function () {
                 var me = this
@@ -277,7 +278,6 @@
                             tmp.elementView.id = me.uuid();
                             tmp.elementView.x = tmp.elementView.x + 10
                             tmp.elementView.y = tmp.elementView.y + 10
-
                             me.value.definition.push(tmp);
                             me.redoArray.push(tmp);
                         })
