@@ -47,7 +47,6 @@
                         }
                     })
 
-                    this.connectAggregateName = select.inputText
                     return select
                 }
             },
@@ -138,6 +137,15 @@
                     }
                 }
 
+            },
+            connectAggregate: {
+                handler: function () {
+                    if (this.value._type == 'org.uengine.uml.model.Command' || this.value._type == 'org.uengine.uml.model.View' || this.value._type == 'org.uengine.uml.model.Domain') {
+                        this.connectAggregate
+                        this.connectAggregateName = this.connectAggregate.inputText
+                    }
+                },
+                deep: true
             },
             "value.elementView.height": {
                 handler: function (newVal, oldVal) {

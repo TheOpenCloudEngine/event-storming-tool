@@ -162,19 +162,19 @@
                 })
             })
 
-            const pusher = new Pusher('33169ca8c59c1f7f97cd', {
-                cluster: 'ap3',
-            });
-            const channel = pusher.subscribe('painting');
-            this.userId = v4();
+            // const pusher = new Pusher('33169ca8c59c1f7f97cd', {
+            //     cluster: 'ap3',
+            // });
+            // const channel = pusher.subscribe('painting');
+            // this.userId = v4();
 
-            channel.bind('draw', (data) => {
-                console.log("aa")
-                const { userId: id, newVal } = data;
-                if (me.userId !== id) {
-                    me.value = newVal
-                }
-            });
+            // channel.bind('draw', (data) => {
+            //     console.log("aa")
+            //     const { userId: id, newVal } = data;
+            //     if (me.userId !== id) {
+            //         me.value = newVal
+            //     }
+            // });
 
             this.$nextTick(function () {
                 let startTime = new Date().getTime()
@@ -241,13 +241,13 @@
                     newVal,
                     userId,
                 };
-                fetch('https://pusher-lhgws4pe7a-uc.a.run.app/paint', {
-                    method: 'post',
-                    body: JSON.stringify(body),
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                }).then(() => console.log("throw"));
+                // fetch('https://pusher-lhgws4pe7a-uc.a.run.app/paint', {
+                //     method: 'post',
+                //     body: JSON.stringify(body),
+                //     headers: {
+                //         'content-type': 'application/json',
+                //     },
+                // }).then(() => console.log("throw"));
             },
             copy: function () {
                 var me = this
