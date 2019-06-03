@@ -86,7 +86,7 @@
 <script>
     import TextReader from "@/components/yaml.vue";
     import { v4 } from 'uuid';
-    import Pusher from 'pusher-js';
+    // import Pusher from 'pusher-js';
 
     var FileSaver = require('file-saver');
     import {saveAs} from 'file-saver';
@@ -96,7 +96,7 @@
         components: {
             TextReader,
             saveAs,
-            Pusher
+            // Pusher
         },
         props: {
             elementTypes: Array
@@ -152,29 +152,22 @@
                     me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                     me.redoArray = [];
                     this.syncOthers();
-
-                    me.value.definition.forEach(function(element){
-                      console.log(element.selected);
-                      if(element.selected){
-                          // me.searchAggregate(element);
-                      }
-                    })
                 })
             })
 
-            const pusher = new Pusher('33169ca8c59c1f7f97cd', {
-                cluster: 'ap3',
-            });
-            const channel = pusher.subscribe('painting');
-            this.userId = v4();
-
-            channel.bind('draw', (data) => {
-                console.log("aa")
-                const { userId: id, newVal } = data;
-                if (me.userId !== id) {
-                    me.value = newVal
-                }
-            });
+            // const pusher = new Pusher('33169ca8c59c1f7f97cd', {
+            //     cluster: 'ap3',
+            // });
+            // const channel = pusher.subscribe('painting');
+            // this.userId = v4();
+            //
+            // channel.bind('draw', (data) => {
+            //     console.log("aa")
+            //     const { userId: id, newVal } = data;
+            //     if (me.userId !== id) {
+            //         me.value = newVal
+            //     }
+            // });
 
             this.$nextTick(function () {
                 let startTime = new Date().getTime()
@@ -206,32 +199,10 @@
             });
         },
         watch: {
-            // value: {
-            //     handler: function (newVal) {
-            //
-            //     },
-            //     deep: true
-            // }
+
         },
 
         methods: {
-          //근접 어글리게이트 찾기
-          //   searchAggregate: function(selectDefinition){
-          //     var shortdistance=4000;
-          //     var selectAggregate=[];
-          //     console.log(selectDefinition)
-          //     this.value.definition.forEach(function(tmp){
-          //       if(tmp._type== "org.uengine.uml.model.Aggregate")
-          //       {
-          //           var distance = Math.sqrt( (Math.pow(tmp.elementView.x-selectDefinition.elementView.x,2)+Math.pow(tmp.elementView.y-selectDefinition.elementView.y,2)) );
-          //           if(distance<shortdistance){
-          //             shortdistance=distance
-          //             selectDefinition.closedAggreate=JSON.parse(JSON.stringify(tmp));
-          //             tmp.innerAggregate[selectDefinition.name.toLowerCase()].push({'id':selectDefinition.elementView.id, 'inputText':selectDefinition.inputText})
-          //           }
-          //       }
-          //     })
-          //   },
             //복사
             syncOthers() {
                 var me = this
@@ -241,13 +212,13 @@
                     newVal,
                     userId,
                 };
-                fetch('https://pusher-lhgws4pe7a-uc.a.run.app/paint', {
-                    method: 'post',
-                    body: JSON.stringify(body),
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                }).then(() => console.log("throw"));
+                // fetch('https://pusher-lhgws4pe7a-uc.a.run.app/paint', {
+                //     method: 'post',
+                //     body: JSON.stringify(body),
+                //     headers: {
+                //         'content-type': 'application/json',
+                //     },
+                // }).then(() => console.log("throw"));
             },
             copy: function () {
                 var me = this

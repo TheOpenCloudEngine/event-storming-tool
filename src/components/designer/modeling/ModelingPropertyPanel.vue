@@ -133,12 +133,13 @@
                     </v-card-text>
 
                     <v-card-title>
-                        <span class="headline" v-if="titleName">Aggregate 선택</span>
+                        <span class="headline" v-if="titleName">연결된 Aggregate</span>
                     </v-card-title>
-                    <v-card-text>
-                        <v-autocomplete v-model="selectAggregate" :items="aggregateList" label="Aggregate"
+                    <v-card-text style="margin-top: 17px font-size: 100px">
+                      {{ connectAggregateName }}
+                        <!-- <v-autocomplete v-model="selectAggregate" :items="aggregateList" label="Aggregate"
                                         persistent-hint prepend-icon="mdi-city">
-                        </v-autocomplete>
+                        </v-autocomplete> -->
                     </v-card-text>
                 </v-card>
 
@@ -156,6 +157,7 @@
             titleName: String,
             inputText: String,
             aggregateList: Array,
+            connectAggregateName: String,
             otherList: Array,
             img: String,
             innerAggregate: Object
@@ -163,6 +165,7 @@
         computed: {
             commandNameList: function () {
                 var designer = this.$parent.getComponent('modeling-designer')
+
                 var tmp = []
                 var inner = false
                 this.innerAggregate.command.forEach(function (command) {
@@ -184,19 +187,22 @@
             },
             domainNameList: function () {
                 var designer = this.$parent.getComponent('modeling-designer')
+
                 var tmp = []
                 var inner = false
+                // console.log(designer.value.relation);
                 this.innerAggregate.domain.forEach(function (domain) {
                     if (designer.value.relation.length == 0) {
+                      //연결
                         tmp.push(domain.inputText)
                     } else {
                         designer.value.relation.forEach(function (relation, index) {
-                            console.log(relation.to)
-                            console.log(domain.elementView.id)
+                            // console.log(relation.to)
+                            // console.log(domain.elementView.id)
                             if (relation.to == domain.elementView.id) {
                                 inner = true
                             }
-                            if (designer.value.relation.length - 1 == index && inner == false) {
+                            if ( (designer.value.relation.length - 1) == index && inner == false) {
                                 tmp.push(domain.inputText)
                             }
                         })
@@ -254,6 +260,13 @@
             },
             drawer: function (val) {
                 this.navigationDrawer = val;
+
+                // if(this.value._type=="org.uengine.uml.model.Aggregate" && val){
+                //   // this.domainNameList;
+                //   // this.commandNameList;
+                //   console.log(this.domainNameList);
+                // }
+
             },
             //프로퍼티 창이 오픈되었을 때 모델값을 새로 반영한다.
             navigationDrawer: {
@@ -325,7 +338,7 @@
                 var commandId, eventId;
                 var me = this
 
-                console.log(this.innerAggregate['command'])
+                // console.log(this.innerAggregate['command'])
                 me.innerAggregate.command.forEach(function (commandTmp) {
                     if (commandTmp.inputText == commandInputText) {
                         commandId = commandTmp.elementView.id
