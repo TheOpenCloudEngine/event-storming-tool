@@ -23020,11 +23020,12 @@ OG.renderer.RaphaelRenderer.prototype.drawLabel = function (shapeElement, text, 
             if (text !== undefined && beforeText !== undefined && text !== beforeText) {
                 // labelChanged event fire
                 element.shape.onLabelChanged(text, beforeText);
+                // console.log("onLabelChanged",text,beforeText);
                 $(this._PAPER.canvas).trigger('labelChanged', [element, text, beforeText]);
             }
         }
     }
-
+    // console.log("labelElement",labelElement);
     return labelElement;
 };
 
@@ -25564,7 +25565,7 @@ OG.renderer.RaphaelRenderer.prototype.rotate = function (element, angle) {
         // rotateShape event fire
         rElement.node.shape.onRotateShape(angle);
         $(this._PAPER.canvas).trigger('rotateShape', [rElement.node, angle]);
-        console.log(rElement.node)
+        // console.log(rElement.node)
         return rElement.node;
 
     } else if (rElement) {

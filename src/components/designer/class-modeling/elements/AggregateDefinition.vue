@@ -55,6 +55,7 @@
                 :inputText.sync="value.inputText"
                 :innerAggregate="value.innerAggregate"
                 :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/aggregate.png'"
+                :restApi.sync="value.restApi"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -99,7 +100,8 @@
                     },
                     drawer: false,
                     selected: false,
-                    inputText: ''
+                    inputText: '',
+                    restApi: '',
                 }
             }
         },

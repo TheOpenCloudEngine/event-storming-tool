@@ -39,7 +39,14 @@
                     ></component>
                 </div>
             </opengraph>
+            <v-layout left>
+            <v-btn
+            color="info" v-on:click.native="restApiPush"
+            style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD
+            </v-btn>
+          </v-layout>
 
+          <v-layout right>
             <v-flex xs12 sm6 style="display: inline-block">
                 <v-text-field
                         label="Project Name"
@@ -53,9 +60,12 @@
                     style="display: inline-block"
                     :fileName.sync="projectName"
             ></text-reader>
-            <v-btn color="info" v-on:click.native="download"
-                   style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save
+            <v-btn
+              color="info" v-on:click.native="download"
+              style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save
             </v-btn>
+          </v-layout>
+
 
             <v-card class="tools" style="top:100px; text-align: center;">
                 <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"
@@ -86,7 +96,7 @@
 <script>
     import TextReader from "@/components/yaml.vue";
     import { v4 } from 'uuid';
-    import Pusher from 'pusher-js';
+    // import Pusher from 'pusher-js';
 
     var FileSaver = require('file-saver');
     import {saveAs} from 'file-saver';
@@ -96,7 +106,7 @@
         components: {
             TextReader,
             saveAs,
-            Pusher
+            // Pusher
         },
         props: {
             elementTypes: Array
@@ -152,13 +162,6 @@
                     me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                     me.redoArray = [];
                     this.syncOthers();
-
-                    me.value.definition.forEach(function(element){
-                      console.log(element.selected);
-                      if(element.selected){
-                          // me.searchAggregate(element);
-                      }
-                    })
                 })
             })
 
@@ -206,32 +209,22 @@
             });
         },
         watch: {
-            // value: {
-            //     handler: function (newVal) {
-            //
-            //     },
-            //     deep: true
-            // }
+
         },
 
         methods: {
-          //근접 어글리게이트 찾기
-          //   searchAggregate: function(selectDefinition){
-          //     var shortdistance=4000;
-          //     var selectAggregate=[];
-          //     console.log(selectDefinition)
-          //     this.value.definition.forEach(function(tmp){
-          //       if(tmp._type== "org.uengine.uml.model.Aggregate")
-          //       {
-          //           var distance = Math.sqrt( (Math.pow(tmp.elementView.x-selectDefinition.elementView.x,2)+Math.pow(tmp.elementView.y-selectDefinition.elementView.y,2)) );
-          //           if(distance<shortdistance){
-          //             shortdistance=distance
-          //             selectDefinition.closedAggreate=JSON.parse(JSON.stringify(tmp));
-          //             tmp.innerAggregate[selectDefinition.name.toLowerCase()].push({'id':selectDefinition.elementView.id, 'inputText':selectDefinition.inputText})
-          //           }
-          //       }
-          //     })
-          //   },
+          restApiPush:function(){
+            var me = this;
+            me.$http.post(`http://localhost:8081/event/${me.projectName}`, me.value, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            ).then(function () {
+                console.log("done")
+            })
+
+          },
             //복사
             syncOthers() {
                 var me = this
