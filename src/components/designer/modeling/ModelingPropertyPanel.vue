@@ -29,7 +29,11 @@
                     </v-card-title>
 
                     <v-card-text>
-                        <v-autocomplete v-model="input" :items="aggregateList" label="Aggregate" persistent-hint
+                        <v-textarea name="input-7-1" outline :label="titleName" auto-grow v-model="input"></v-textarea>
+                    </v-card-text>
+
+                    <v-card-text>
+                        <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
                                         prepend-icon="mdi-city">
                         </v-autocomplete>
                     </v-card-text>
@@ -39,6 +43,10 @@
                     <v-card-text>
                         <v-textarea name="input-7-1" outline :label="titleName" auto-grow v-model="input"></v-textarea>
                     </v-card-text>
+
+                    <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
+                                    prepend-icon="mdi-city">
+                    </v-autocomplete>
 
                     <v-card-title>
                         <span class="headline" v-if="titleName">연결 리스트 </span>
@@ -132,14 +140,16 @@
                         <v-textarea name="input-7-1" outline :label="titleName" auto-grow v-model="input"></v-textarea>
                     </v-card-text>
 
+                    <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
+                                    prepend-icon="mdi-city">
+                    </v-autocomplete>
+
                     <v-card-title>
                         <span class="headline" v-if="titleName">연결된 Aggregate</span>
                     </v-card-title>
+
                     <v-card-text style="margin-top: 17px font-size: 100px">
                       {{ connectAggregateName }}
-                        <!-- <v-autocomplete v-model="selectAggregate" :items="aggregateList" label="Aggregate"
-                                        persistent-hint prepend-icon="mdi-city">
-                        </v-autocomplete> -->
                     </v-card-text>
                 </v-card>
 
@@ -160,6 +170,7 @@
             connectAggregateName: String,
             otherList: Array,
             img: String,
+            restApi: String,
             innerAggregate: Object
         },
         computed: {
@@ -230,7 +241,9 @@
                 selectEvent: '',
                 selectCommand: '',
                 connectedList: [],
-                componentKey: 0
+                componentKey: 0,
+                restApiList:['GET','POST','PUT','DELETE'],
+                restApiType:'',
             }
         },
         created: function () {
@@ -252,6 +265,10 @@
                         this.$emit('update:inputText', newVal)
                     }
                 }
+            },
+            restApiType:function(newVal){
+              // console.log(newVal);
+              this.$emit('update:restApi', newVal)
             },
             selectAggregate: function (newVal) {
                 this.$emit('update:aggregate', newVal)

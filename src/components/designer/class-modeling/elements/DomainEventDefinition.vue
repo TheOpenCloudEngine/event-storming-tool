@@ -59,6 +59,7 @@
                 :aggregate.sync="value.aggregate"
                 :aggregateList.sync="aggregateList"
                 :connectAggregateName.sync="this.connectAggregateName"
+                :restApi.sync="value.restApi"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -100,6 +101,7 @@
                     drawer: false,
                     selected: false,
                     inputText: '',
+                    restApi: '',
                 }
             }
         },

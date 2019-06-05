@@ -3,6 +3,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'modeling-element-base',
   props: {
@@ -32,6 +33,7 @@ export default {
         if (this.value._type == 'org.uengine.uml.model.Command' || this.value._type == 'org.uengine.uml.model.View' || this.value._type == 'org.uengine.uml.model.Domain') {
           // console.log(this.value);
 
+
           var designer = this.getComponent('modeling-designer');
           var select = {}; //
           // var selectAggregate = {};
@@ -49,6 +51,7 @@ export default {
                 select = element;
                 // selectAggregate = element;
               }
+
             }
           })
 
@@ -225,7 +228,7 @@ export default {
           if (definitionTmp.name == 'Bounded Context') {
             // console.log('ROOT')
             definitionTmp.dataList.some(function(deleteTmp, index) {
-              if (deleteTmp == opengraphComponent.element.id) {
+              if (deleteTmp.elementView.id == opengraphComponent.element.id) {
                 definitionTmp.dataList[index] = null
                 definitionTmp.dataList = definitionTmp.dataList.filter(n => n)
                 return;
@@ -235,13 +238,13 @@ export default {
         })
       } else {
         designer.value.definition.some(function(definitionTmp, definitionIndex) {
-          var copyTmp = JSON.parse(JSON.stringify(definitionTmp))
+          var copyTmp = definitionTmp;
           if (definitionTmp.elementView) {
             if (definitionTmp.elementView.id == opengraphComponent.element.id) {
               designer.value.definition.some(function(boundedTmp, boundedIndex) {
                 if (boundedTmp.elementView) {
                   if (boundedTmp.elementView.id == groupOpengraphComponent.element.id) {
-                    designer.value.definition[boundedIndex].dataList.push(copyTmp.elementView.id)
+                    designer.value.definition[boundedIndex].dataList.push(copyTmp)
                     designer.value.definition = designer.value.definition.filter(n => n)
                     return;
                   }

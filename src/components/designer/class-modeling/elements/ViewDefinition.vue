@@ -54,11 +54,12 @@
                 :drawer.sync="value.drawer"
                 :titleName.sync="value.name"
                 :inputText.sync="value.inputText"
-                :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/event.png'"
+                :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/view.png'"
                 :aggregate.sync="value.aggregate"
                 :aggregateList.sync="aggregateList"
                 :aggregateText.sync="value.aggregateText"
                 :connectAggregateName.sync="this.connectAggregateName"
+                :restApi.sync="value.restAPI"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -99,9 +100,7 @@
                     drawer: false,
                     selected: false,
                     inputText: '',
-                    aggregate: '',
-                    aggregateText: '',
-                    closedAggreate: [],
+                    restApi: '',
                 }
             }
         },

@@ -39,7 +39,14 @@
                     ></component>
                 </div>
             </opengraph>
+            <v-layout left>
+            <v-btn
+            color="info" v-on:click.native="restApiPush"
+            style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD
+            </v-btn>
+          </v-layout>
 
+          <v-layout right>
             <v-flex xs12 sm6 style="display: inline-block">
                 <v-text-field
                         label="Project Name"
@@ -53,9 +60,12 @@
                     style="display: inline-block"
                     :fileName.sync="projectName"
             ></text-reader>
-            <v-btn color="info" v-on:click.native="download"
-                   style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save
+            <v-btn
+              color="info" v-on:click.native="download"
+              style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save
             </v-btn>
+          </v-layout>
+
 
             <v-card class="tools" style="top:100px; text-align: center;">
                 <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"
@@ -160,7 +170,7 @@
             // });
             // const channel = pusher.subscribe('painting');
             // this.userId = v4();
-            //
+
             // channel.bind('draw', (data) => {
             //     console.log("aa")
             //     const { userId: id, newVal } = data;
@@ -203,6 +213,18 @@
         },
 
         methods: {
+          restApiPush:function(){
+            var me = this;
+            me.$http.post(`http://localhost:8081/event/${me.projectName}`, me.value, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            ).then(function () {
+                console.log("done")
+            })
+
+          },
             //복사
             syncOthers() {
                 var me = this
