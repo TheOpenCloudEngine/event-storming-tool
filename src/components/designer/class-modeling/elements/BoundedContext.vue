@@ -93,19 +93,19 @@
         },
         watch: {
             'value.drawer': function (newValue, oldValue) {
-                var designer = this.getComponent('modeling-designer')
-
-                var me = this
-                me.aggregateList=[]
-                if (newValue == true) {
-                    me.value.dataList.forEach(function(aggregateId) {
-                        designer.value.definition.forEach(function (tmp) {
-                            if(tmp.elementView.id == aggregateId) {
-                                me.aggregateList.push(tmp.inputText)
-                            }
-                        })
-                    })
-                }
+                // var designer = this.getComponent('modeling-designer')
+                //
+                // var me = this
+                // me.aggregateList=[]
+                // if (newValue == true) {
+                //     me.value.dataList.forEach(function(aggregateId) {
+                //         designer.value.definition.forEach(function (tmp) {
+                //             if(tmp.elementView.id == aggregateId) {
+                //                 me.aggregateList.push(tmp.inputText)
+                //             }
+                //         })
+                //     })
+                // }
             },
             'value.inputText': function (newVal) {
                 this.value.elementView.x = this.value.elementView.x + 1

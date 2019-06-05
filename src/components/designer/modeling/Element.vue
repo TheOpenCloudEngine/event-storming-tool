@@ -143,6 +143,7 @@
                     if (this.value._type == 'org.uengine.uml.model.Command' || this.value._type == 'org.uengine.uml.model.View' || this.value._type == 'org.uengine.uml.model.Domain') {
                         this.connectAggregate
                         this.connectAggregateName = this.connectAggregate.inputText
+                        this.value.elementView.x = this.value.elementView.x + 1
                     }
                 },
                 deep: true
