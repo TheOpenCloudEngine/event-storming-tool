@@ -40,31 +40,31 @@
                 </div>
             </opengraph>
             <v-layout left>
-            <v-btn
-            color="info" v-on:click.native="restApiPush"
-            style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD
-            </v-btn>
-          </v-layout>
+                <v-btn
+                        color="info" v-on:click.native="restApiPush"
+                        style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD
+                </v-btn>
+            </v-layout>
 
-          <v-layout right>
-            <v-flex xs12 sm6 style="display: inline-block">
-                <v-text-field
-                        label="Project Name"
-                        v-model="projectName"
-                        single-line
-                ></v-text-field>
-            </v-flex>
-            <text-reader
-                    :importType="'json'"
-                    @load="value = $event"
-                    style="display: inline-block"
-                    :fileName.sync="projectName"
-            ></text-reader>
-            <v-btn
-              color="info" v-on:click.native="download"
-              style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save
-            </v-btn>
-          </v-layout>
+            <v-layout right>
+                <v-flex xs12 sm6 style="display: inline-block">
+                    <v-text-field
+                            label="Project Name"
+                            v-model="projectName"
+                            single-line
+                    ></v-text-field>
+                </v-flex>
+                <text-reader
+                        :importType="'json'"
+                        @load="value = $event"
+                        style="display: inline-block"
+                        :fileName.sync="projectName"
+                ></text-reader>
+                <v-btn
+                        color="info" v-on:click.native="download"
+                        style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save
+                </v-btn>
+            </v-layout>
 
 
             <v-card class="tools" style="top:100px; text-align: center;">
@@ -95,17 +95,19 @@
 
 <script>
     import TextReader from "@/components/yaml.vue";
-    import { v4 } from 'uuid';
+    import {v4} from 'uuid';
     // import Pusher from 'pusher-js';
 
     var FileSaver = require('file-saver');
     import {saveAs} from 'file-saver';
+    import {JSZip} from 'jszip';
 
     export default {
         name: 'modeling-designer',
         components: {
             TextReader,
             saveAs,
+            JSZip,
             // Pusher
         },
         props: {
@@ -208,23 +210,29 @@
                 });
             });
         },
-        watch: {
-
-        },
+        watch: {},
 
         methods: {
-          restApiPush:function(){
-            var me = this;
-            me.$http.post(`http://localhost:8081/event/${me.projectName}`, me.value, {
-                    headers: {
-                        'Content-Type': 'application/json'
+            restApiPush: function () {
+                var me = this;
+                me.$http.post(`http://localhost:8082/event/${me.projectName}`, me.value, {
+                    responseType: "arraybuffer",
+                        headers: {
+                            'Content-Type': 'application/zip;'
+                        }
                     }
-                }
-            ).then(function () {
-                console.log("done")
-            })
+                ).then(function (response) {
+                    console.log("Trying saving zip ...");
+                    console.log(response.data.length);
+                    var blob = new Blob([response.data], {type: 'application/zip'});
+                    console.log(blob.size);
+                    var fileName = me.projectName + ".zip";
+                    saveAs(blob, fileName);
 
-          },
+                    console.log("saveBlob succeeded");
+
+                })
+            },
             //복사
             syncOthers() {
                 var me = this
@@ -241,6 +249,29 @@
                 //         'content-type': 'application/json',
                 //     },
                 // }).then(() => console.log("throw"));
+            },
+            b64toBlob : function(b64Data, contentType, sliceSize) {
+                contentType = contentType || '';
+                sliceSize = sliceSize || 512;
+
+                var byteCharacters = atob(b64Data);
+                var byteArrays = [];
+
+                for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                    var byteNumbers = new Array(slice.length);
+                    for (var i = 0; i < slice.length; i++) {
+                        byteNumbers[i] = slice.charCodeAt(i);
+                    }
+
+                    var byteArray = new Uint8Array(byteNumbers);
+
+                    byteArrays.push(byteArray);
+                }
+
+                var blob = new Blob(byteArrays, {type: contentType});
+                return blob;
             },
             copy: function () {
                 var me = this
