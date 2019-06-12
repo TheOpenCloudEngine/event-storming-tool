@@ -230,7 +230,7 @@
                     localStorage.removeItem('accessToken')
                 }
                 // window.location.href = "https://localhost:8082/login/google"
-                window.location.href = "https://service-oauth-lhgws4pe7a-uc.a.run.app/login/google"
+                window.location.href = "http://service-oauth-lhgws4pe7a-uc.a.run.app/login/google?redirect_uri=http://localhost:8081"
             },
             logout() {
                 console.log('logout')

@@ -96,7 +96,7 @@
 <script>
     import TextReader from "@/components/yaml.vue";
     import {v4} from 'uuid';
-    // import Pusher from 'pusher-js';
+    import Pusher from 'pusher-js';
 
     var FileSaver = require('file-saver');
     import {saveAs} from 'file-saver';
@@ -108,7 +108,7 @@
             TextReader,
             saveAs,
             JSZip,
-            // Pusher
+            Pusher
         },
         props: {
             elementTypes: Array
@@ -129,7 +129,8 @@
                 redoArray: [],
                 undoArray: [],
                 imageBase: 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/symbol/',
-                userId: ''
+                userId: '',
+                channel: Object
             }
         },
         computed: {
@@ -167,20 +168,30 @@
                 })
             })
 
-            // const pusher = new Pusher('33169ca8c59c1f7f97cd', {
-            //     cluster: 'ap3',
-            // });
-            // const channel = pusher.subscribe('painting');
-            // this.userId = v4();
+            const pusher = new Pusher('33169ca8c59c1f7f97cd', {
+                cluster: 'ap3',
+                authEndpoint: '/pusher/auth',
+                auth: {
+                    headers: {
+                        'X-CSRF-Token': "<%%= form_authenticity_token %>"
+                    }
+                }
+            });
+            me.channel = pusher.subscribe('presence-event');
+            this.userId = v4();
 
-            // channel.bind('draw', (data) => {
-            //     console.log("aa")
-            //     const { userId: id, newVal } = data;
-            //     if (me.userId !== id) {
-            //         me.value = newVal
-            //     }
-            // });
+            me.channel.bind('draw', (data) => {
+                console.log(data)
+                const { userId: id, newVal } = data;
+                if (me.userId !== id) {
+                    me.value = newVal
+                }
+            });
 
+            // channel.bind('users', (data) => {
+            //     console.log(data)
+            // });
+            //
             this.$nextTick(function () {
                 let startTime = new Date().getTime()
                 //$nextTick delays the callback function until Vue has updated the DOM
@@ -215,7 +226,7 @@
         methods: {
             restApiPush: function () {
                 var me = this;
-                me.$http.post(`http://localhost:8082/event/${me.projectName}`, me.value, {
+                me.$http.post(`https://event-storming-lhgws4pe7a-uc.a.run.app/event/${me.projectName}`, me.value, {
                     responseType: "arraybuffer",
                         headers: {
                             'Content-Type': 'application/zip;'
@@ -236,42 +247,25 @@
             //복사
             syncOthers() {
                 var me = this
+                // me.$http.get('http://localhost:4000/user').then(function (result) {
+                //     // handle success
+                //     console.log(result.data);
+                // })
+                // var count = me.channel.members;
+
                 let userId = this.userId
                 let newVal = me.value
                 const body = {
                     newVal,
                     userId,
                 };
-                // fetch('https://pusher-lhgws4pe7a-uc.a.run.app/paint', {
-                //     method: 'post',
-                //     body: JSON.stringify(body),
-                //     headers: {
-                //         'content-type': 'application/json',
-                //     },
-                // }).then(() => console.log("throw"));
-            },
-            b64toBlob : function(b64Data, contentType, sliceSize) {
-                contentType = contentType || '';
-                sliceSize = sliceSize || 512;
-
-                var byteCharacters = atob(b64Data);
-                var byteArrays = [];
-
-                for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-                    var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-                    var byteNumbers = new Array(slice.length);
-                    for (var i = 0; i < slice.length; i++) {
-                        byteNumbers[i] = slice.charCodeAt(i);
-                    }
-
-                    var byteArray = new Uint8Array(byteNumbers);
-
-                    byteArrays.push(byteArray);
-                }
-
-                var blob = new Blob(byteArrays, {type: contentType});
-                return blob;
+                fetch('http://localhost:4000/paint', {
+                    method: 'post',
+                    body: JSON.stringify(body),
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                }).then(() => console.log("throw"));
             },
             copy: function () {
                 var me = this

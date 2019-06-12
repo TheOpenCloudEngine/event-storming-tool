@@ -44,9 +44,30 @@
                         <v-textarea name="input-7-1" outline :label="titleName" auto-grow v-model="input"></v-textarea>
                     </v-card-text>
 
-                    <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
-                                    prepend-icon="mdi-city">
-                    </v-autocomplete>
+                    <v-data-table :items="aggregateEntity"  class="elevation-1" hide-actions hide-headers>
+                        <template v-slot:items="props">
+                            <td>{{ props.item.type }}</td>
+                            <td class="text-xs-right">{{ props.item.name }}</td>
+                            <v-icon
+                                    small
+                                    @click="entitySub(props.index)"
+                            >
+                                delete
+                            </v-icon>
+                        </template>
+                    </v-data-table>
+                    <v-layout row wrap>
+                        <v-flex xs3>
+                            <v-select v-model="entityType" :items="entityTypeList" label="Standard"></v-select>
+                        </v-flex>
+                        <v-flex xs6>
+                            <v-text-field v-model="entityName" :counter="10" label="Name" required></v-text-field>
+                        </v-flex>
+                    </v-layout>
+
+                    <v-layout row wrap center>
+                        <v-btn round color="primary" @click="entityAdd(entityType,entityName);" dark>Entity ADD</v-btn>
+                    </v-layout>
 
                     <v-card-title>
                         <span class="headline" v-if="titleName">연결 리스트 </span>
@@ -56,7 +77,6 @@
                     <template>
                         <div>
                             <v-expansion-panel>
-
                                 <v-expansion-panel-content EventExpand>
                                     <template v-slot:header>연결된 리스트</template>
                                     <v-card>
@@ -148,8 +168,8 @@
                         <span class="headline" v-if="titleName">연결된 Aggregate</span>
                     </v-card-title>
 
-                    <v-card-text style="margin-top: 17px font-size: 100px">
-                      {{ connectAggregateName }}
+                    <v-card-text style="margin-top: 17px; font-size: 100px">
+                        {{ connectAggregateName }}
                     </v-card-text>
                 </v-card>
 
@@ -171,7 +191,8 @@
             otherList: Array,
             img: String,
             restApi: String,
-            innerAggregate: Object
+            innerAggregate: Object,
+            aggregateEntity: Array,
         },
         computed: {
             commandNameList: function () {
@@ -204,7 +225,7 @@
                 // console.log(designer.value.relation);
                 this.innerAggregate.domain.forEach(function (domain) {
                     if (designer.value.relation.length == 0) {
-                      //연결
+                        //연결
                         tmp.push(domain.inputText)
                     } else {
                         designer.value.relation.forEach(function (relation, index) {
@@ -213,7 +234,7 @@
                             if (relation.to == domain.elementView.id) {
                                 inner = true
                             }
-                            if ( (designer.value.relation.length - 1) == index && inner == false) {
+                            if ((designer.value.relation.length - 1) == index && inner == false) {
                                 tmp.push(domain.inputText)
                             }
                         })
@@ -242,8 +263,11 @@
                 selectCommand: '',
                 connectedList: [],
                 componentKey: 0,
-                restApiList:['GET','POST','PUT','DELETE'],
-                restApiType:'',
+                restApiList: ['GET', 'POST', 'PUT', 'DELETE'],
+                restApiType: '',
+                entityTypeList: ['int', 'String', 'float', 'double', 'long'],
+                entityType:'',
+                entityName:''
             }
         },
         created: function () {
@@ -266,9 +290,9 @@
                     }
                 }
             },
-            restApiType:function(newVal){
-              // console.log(newVal);
-              this.$emit('update:restApi', newVal)
+            restApiType: function (newVal) {
+                // console.log(newVal);
+                this.$emit('update:restApi', newVal)
             },
             selectAggregate: function (newVal) {
                 this.$emit('update:aggregate', newVal)
@@ -398,7 +422,19 @@
                         }
                     })
                 })
-            }
+            },
+            entityAdd:function(type, name){
+                var me =this
+                let tmpObject = {"type": type, "name": name}
+                me.aggregateEntity.push(tmpObject);
+            },
+
+            entitySub:function(idx){
+                var me = this
+                me.aggregateEntity[idx] = null
+                me.aggregateEntity = me.aggregateEntity.filter(n => n)
+
+            },
         }
     }
 </script>
