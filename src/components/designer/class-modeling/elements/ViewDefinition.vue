@@ -2,8 +2,8 @@
     <div>
         <geometry-element
                 selectable
-                movable
-                resizable
+                :movable="!value.editing"
+                :resizable="!value.editing"
                 connectable
                 deletable
                 :angle.sync="value.elementView.angle"
@@ -15,7 +15,7 @@
                 v-on:dblclick="showProperty"
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
-                v-on:addedToGroup="onAddedToGroup"
+                v-on:rotateShape="onRotateShape"
                 :label.sync="value.inputText + '\n\nConnect:: '+this.connectAggregateName"
                 :_style="{
                 'label-angle':value.elementView.angle,
@@ -101,6 +101,7 @@
                     selected: false,
                     inputText: '',
                     restApi: '',
+                    editing: false
                 }
             }
         },

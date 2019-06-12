@@ -1,113 +1,114 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="canvas-panel">
         <v-layout right>
-            <opengraph
-                    ref="opengraph"
-                    focus-canvas-on-select
-                    wheelScalable
-                    :labelEditable="true"
-                    :dragPageMovable="dragPageMovable"
-                    :enableContextmenu="false"
-                    :enableRootContextmenu="false"
-                    :enableHotkeyCtrlC="false"
-                    :enableHotkeyCtrlV="false"
-                    :enableHotkeyDelete="false"
-                    :enableHotkeyCtrlZ="false"
-                    :enableHotkeyCtrlD="false"
-                    :enableHotkeyCtrlG="false"
-                    :slider="false"
-                    :movable="true"
-                    :resizable="true"
-                    :selectable="true"
-                    :connectable="true"
-                    v-if="value"
-                    v-on:canvasReady="bindEvents"
-                    v-on:connectShape="onConnectShape"
-                    :imageBase="imageBase"
-            >
+            <opengraph ref="opengraph" focus-canvas-on-select wheelScalable :labelEditable="true"
+                       :dragPageMovable="dragPageMovable" :enableContextmenu="false" :enableRootContextmenu="false"
+                       :enableHotkeyCtrlC="false" :enableHotkeyCtrlV="false"
+                       :enableHotkeyDelete="false" :enableHotkeyCtrlZ="false" :enableHotkeyCtrlD="false"
+                       :enableHotkeyCtrlG="false" :slider="false" :movable="true" :resizable="true" :selectable="true"
+                       :connectable="true" v-if="value" v-on:canvasReady="bindEvents"
+                       v-on:connectShape="onConnectShape" :imageBase="imageBase">
                 <!--엘리먼트-->
                 <div v-for="(element, index) in value.definition">
-                    <component
-                            :is="getComponentByClassName(element._type)"
-                            v-model="value.definition[index]"
-                    ></component>
+                    <component :is="getComponentByClassName(element._type)"
+                               v-model="value.definition[index]"></component>
                 </div>
                 <div v-for="(element, index) in value.relation">
-                    <component
-                            :is="getComponentByClassName(element._type)"
-                            v-model="value.relation[index]"
-                    ></component>
+                    <component :is="getComponentByClassName(element._type)" v-model="value.relation[index]"></component>
                 </div>
             </opengraph>
-            <v-layout left>
-                <v-btn
-                        color="info" v-on:click.native="restApiPush"
-                        style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD
+
+
+            <v-layout style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">
+                <v-badge overlap>
+                    <template v-slot:badge>
+                        <span>{{ connectCount }}</span>
+                    </template>
+
+                    <v-avatar>
+                        <v-layout justify-end row v-if="show">
+                            <v-tooltip v-for="item in connectInfo" bottom>
+                                <template v-slot:activator="{ on }">
+                                    <v-avatar v-on="on">
+                                        <img :src='item.img'>
+                                    </v-avatar>
+                                </template>
+                                <span>{{ item.name }}</span>
+                            </v-tooltip>
+                        </v-layout>
+                        <v-btn
+                                fab
+                                small
+                                @click="connectshow()">
+                        </v-btn>
+                    </v-avatar>
+                </v-badge>
+
+                <v-btn color="info" v-on:click.native="restApiPush">BUILD
                 </v-btn>
             </v-layout>
 
             <v-layout right>
                 <v-flex xs12 sm6 style="display: inline-block">
-                    <v-text-field
-                            label="Project Name"
-                            v-model="projectName"
-                            single-line
-                    ></v-text-field>
+                    <v-text-field label="Project Name" v-model="projectName" single-line></v-text-field>
                 </v-flex>
-                <text-reader
-                        :importType="'json'"
-                        @load="value = $event"
-                        style="display: inline-block"
-                        :fileName.sync="projectName"
-                ></text-reader>
-                <v-btn
-                        color="info" v-on:click.native="download"
-                        style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save
+                <text-reader :importType="'json'" @load="value = $event" style="display: inline-block"
+                             :fileName.sync="projectName"></text-reader>
+                <v-btn color="info" v-on:click.native="download"
+                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save
                 </v-btn>
             </v-layout>
 
 
             <v-card class="tools" style="top:100px; text-align: center;">
-                <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"
-                      _width="30" _height="30" v-on:click="toggleGrip">
-                <v-tooltip md-direction="right">Hands</v-tooltip>
-                </span>
-                <v-tooltip right
-                           v-for="(item, key) in elementTypes"
-                           :key="key"
-                >
+      <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }" _width="30"
+            _height="30" v-on:click="toggleGrip">
+        <v-tooltip md-direction="right">Hands</v-tooltip>
+      </span>
+                <v-tooltip right v-for="(item, key) in elementTypes" :key="key">
                     <template v-slot:activator="{ on }">
-                        <span class="icons draggable"
-                              align="center"
-                              :_component="item.component"
-                              :_width="item.width"
-                              :_height="item.height">
-                        <img height="30px" width="30px" :src="item.src" v-on="on">
-                            </span>
+          <span
+                  class="icons draggable"
+                  align="center"
+                  :_component="item.component"
+                  :_width="item.width"
+                  :_height="item.height">
+          <img height="30px" width="30px" :src="item.src" v-on="on">
+          </span>
                     </template>
                     <span>{{item.label}}</span>
                 </v-tooltip>
             </v-card>
         </v-layout>
+
+        <v-snackbar v-model="snackbar" :color="color" :multi-line="mode === 'multi-line'" :timeout="timeout"
+                    :vertical="mode === 'vertical'">
+            {{ text }}
+            <v-btn dark flat @click="snackbar = false">
+                Close
+            </v-btn>
+        </v-snackbar>
         <modeler-image-generator ref="modeler-image-generator"></modeler-image-generator>
     </div>
 </template>
 
 <script>
     import TextReader from "@/components/yaml.vue";
-    import {v4} from 'uuid';
+    import {
+        v4
+    } from 'uuid';
     import Pusher from 'pusher-js';
 
     var FileSaver = require('file-saver');
-    import {saveAs} from 'file-saver';
-    import {JSZip} from 'jszip';
+    import {
+        saveAs
+    } from 'file-saver';
 
     export default {
         name: 'modeling-designer',
         components: {
             TextReader,
             saveAs,
-            JSZip,
             Pusher
         },
         props: {
@@ -118,7 +119,10 @@
                 canvas: null,
                 dragPageMovable: false,
                 relationVueComponentName: 'modeling-relation',
-                value: {'definition': [], 'relation': []},
+                value: {
+                    'definition': [],
+                    'relation': []
+                },
                 enableHistoryAdd: false,
                 undoing: false,
                 undoed: false,
@@ -130,7 +134,18 @@
                 undoArray: [],
                 imageBase: 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/symbol/',
                 userId: '',
-                channel: Object
+
+                snackbar: false,
+                color: 'error',
+                mode: 'multi-line',
+                timeout: 6000,
+                text: '수정중입니다.',
+
+                connectCount: 0,
+                connectInfo: [],
+                show: false
+
+
             }
         },
         computed: {
@@ -160,38 +175,84 @@
         },
         mounted() {
             var me = this
+
             me.$ModelingBus.$on('MoveEvent', function () {
                 me.$nextTick(function () {
+                    me.connectInfoR("add", 'https://stickershop.line-scdn.net/stickershop/v1/product/718/LINEStorePC/main.png;compress=true', 'Zang')
                     me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                     me.redoArray = [];
-                    this.syncOthers();
+                    me.value.definition.forEach(function (tmp) {
+                        if (tmp.selected == true) {
+                            me.syncOthers(tmp);
+                        }
+                    })
                 })
             })
 
             const pusher = new Pusher('33169ca8c59c1f7f97cd', {
                 cluster: 'ap3',
-                authEndpoint: '/pusher/auth',
-                auth: {
-                    headers: {
-                        'X-CSRF-Token': "<%%= form_authenticity_token %>"
-                    }
-                }
             });
-            me.channel = pusher.subscribe('presence-event');
+
+            const channel = pusher.subscribe('painting');
             this.userId = v4();
 
-            me.channel.bind('draw', (data) => {
-                console.log(data)
-                const { userId: id, newVal } = data;
+            console.log(channel);
+
+            //
+            // channel.bind('pusher:subscription_succeeded', function(members) {
+            //   // for example
+            //   update_member_count(members.count);
+            //
+            //   console.log(members.count);
+            //   members.ForEach(function(member) {
+            //     // for example:
+            //     // add_member(member.id, member.info);
+            //   });
+            // })
+            //
+            channel.bind('draw', (data) => {
+                // console.log(data)
+                //https://event-lhgws4pe7a-uc.a.run.app/
+                // me.$http.get('http://api-ap3.pusher.com/apps/791580/channels/painting').then(function (result) {
+                //   console.log(result)
+                // })
+
+                const {
+                    userId: id,
+                    newVal
+                } = data;
+                console.log(newVal);
+                console.log("비교", me.userId, id);
+                //다른 창에서 바꿨을때
                 if (me.userId !== id) {
-                    me.value = newVal
+                    var check = true
+                    me.value.definition.forEach(function (elementA) {
+                        if (elementA.elementView.id == newVal.elementView.id) {
+                            console.log("변경");
+                            elementA.selected = false
+                            elementA.elementView = newVal.elementView
+                            elementA.inputText = newVal.inputText
+                            elementA.restApi = newVal.restApi
+                            check = false
+                            if (newVal.drawer == true) {
+                                elementA.editing = true
+                            } else {
+                                elementA.editing = false
+                            }
+
+                        }
+                    })
+
+                    if (check) {
+                        console.log("추가");
+                        me.value.definition.push(newVal);
+                    }
+                } else {
+                    //같은창에서 변경 했을때
+
                 }
             });
 
-            // channel.bind('users', (data) => {
-            //     console.log(data)
-            // });
-            //
             this.$nextTick(function () {
                 let startTime = new Date().getTime()
                 //$nextTick delays the callback function until Vue has updated the DOM
@@ -201,7 +262,10 @@
                 this.canvas._CONFIG.FAST_LOADING = false;
                 this.canvas.updateSlider();
                 //timer end
-                me.undoArray.push({'definition': [], 'relation': []})
+                me.undoArray.push({
+                    'definition': [],
+                    'relation': []
+                })
                 this.$refs.opengraph.printTimer(startTime, new Date().getTime());
 
                 $(document).keydown((evt) => {
@@ -224,37 +288,43 @@
         watch: {},
 
         methods: {
+            connectInfoR: function (state, img, name) {
+                var me = this
+                if (state == "add") {
+                    let tmpObject = {"img": img, "name": name}
+                    me.connectCount = me.connectCount + 1
+                    me.connectInfo.push(tmpObject);
+                } else {
+                    me.connectCount = me.connectCount - 1
+                    me.connectInfo.pop();
+                }
+
+            },
+            connectshow: function () {
+                var me = this
+                if (me.show == true) {
+                    me.show = false
+                } else {
+                    me.show = true
+                }
+            },
             restApiPush: function () {
                 var me = this;
-                me.$http.post(`https://event-storming-lhgws4pe7a-uc.a.run.app/event/${me.projectName}`, me.value, {
-                    responseType: "arraybuffer",
-                        headers: {
-                            'Content-Type': 'application/zip;'
-                        }
+                me.$http.post(`http://localhost:8081/event/${me.projectName}`, me.value, {
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
-                ).then(function (response) {
-                    console.log("Trying saving zip ...");
-                    console.log(response.data.length);
-                    var blob = new Blob([response.data], {type: 'application/zip'});
-                    console.log(blob.size);
-                    var fileName = me.projectName + ".zip";
-                    saveAs(blob, fileName);
-
-                    console.log("saveBlob succeeded");
-
+                }).then(function () {
+                    console.log("done")
                 })
-            },
-            //복사
-            syncOthers() {
-                var me = this
-                // me.$http.get('http://localhost:4000/user').then(function (result) {
-                //     // handle success
-                //     console.log(result.data);
-                // })
-                // var count = me.channel.members;
 
+            },
+            //멀티
+            syncOthers(elements) {
+                var me = this
                 let userId = this.userId
-                let newVal = me.value
+                let newVal = elements
+
                 const body = {
                     newVal,
                     userId,
@@ -267,6 +337,7 @@
                     },
                 }).then(() => console.log("throw"));
             },
+            //복사
             copy: function () {
                 var me = this
                 if (!me.drawer) {
@@ -281,7 +352,7 @@
                             me.tempValue.push(tmp)
                         }
                     })
-                    this.syncOthers();
+                    this.syncOthers(tmp);
                 }
 
             },
@@ -299,7 +370,7 @@
                             me.value.definition.push(tmp);
                             me.redoArray.push(tmp);
                         })
-                        this.syncOthers();
+                        this.syncOthers(tmp);
                         //초기화
                     } else {
                     }
@@ -311,7 +382,9 @@
 
                 var filename = this.projectName + '.json';
 
-                var file = new File([text], filename, {type: "text/json;charset=utf-8"});
+                var file = new File([text], filename, {
+                    type: "text/json;charset=utf-8"
+                });
                 FileSaver.saveAs(file);
             },
             deleteActivity: function () {
@@ -383,7 +456,8 @@
 
                 canvasEl.droppable({
                     drop: function (event, ui) {
-                        var componentInfo = canvasEl.data('DRAG_SHAPE'), shape, element;
+                        var componentInfo = canvasEl.data('DRAG_SHAPE'),
+                            shape, element;
                         if (componentInfo) {
                             var dropX = event.pageX - canvasEl.offset().left + canvasEl[0].scrollLeft;
                             var dropY = event.pageY - canvasEl.offset().top + canvasEl[0].scrollTop;
@@ -452,8 +526,7 @@
                         //this.removeComponentByOpenGraphComponentId(edgeElement.id);
                         //기존 컴포넌트가 있는 경우 originalData 와 함께 생성
                         this.addElement(componentInfo, null, JSON.parse(JSON.stringify(originalData)));
-                    }
-                    else {
+                    } else {
                         me.canvas.removeShape(edgeElement, true);
                         //기존 컴포넌트가 없는 경우 신규 생성
                         this.addElement(componentInfo);
@@ -468,10 +541,13 @@
                         var tmpData = me.redoArray.pop();
                         me.value = JSON.parse(JSON.stringify(tmpData));
                         if (me.undoArray.length == 0 && me.value.length == 0) {
-                            me.undoArray.push({'definition': [], 'relation': []})
+                            me.undoArray.push({
+                                'definition': [],
+                                'relation': []
+                            })
                         }
                         me.undoArray.push(JSON.parse(JSON.stringify(tmpData)));
-                        this.syncOthers();
+                        this.syncOthers(JSON.parse(JSON.stringify(tmpData)));
                     } else {
                     }
                 }
@@ -487,7 +563,7 @@
                         me.undoArray.pop();
                         // console.log("undo length 0")
                         me.undoArray.push(JSON.parse(JSON.stringify(me.value)))
-                        this.syncOthers();
+                        // this.syncOthers(JSON.parse(JSON.stringify(me.value)));
                     } else {
                     }
                 }
@@ -519,7 +595,10 @@
                 }
                 // console.log(this.value, element.elementView.id)
                 if (me.value == null) {
-                    me.value = {'definition': [], 'relation': []}
+                    me.value = {
+                        'definition': [],
+                        'relation': []
+                    }
                 }
                 if (element._type == 'org.uengine.uml.model.relation') {
                     me.value['relation'].push(element);
@@ -528,7 +607,7 @@
                 }
                 me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                 me.redoArray = [];
-                this.syncOthers();
+                this.syncOthers(element);
             },
 
             getComponentByName: function (name) {
@@ -557,10 +636,10 @@
 
 <style scoped lang="scss" rel="stylesheet/scss">
     .canvas-panel {
-        top: 0px;
-        bottom: 0px;
-        left: 0px;
-        right: 0px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
         position: absolute;
         overflow: hidden;
 
@@ -569,7 +648,7 @@
             width: 100%;
             height: 100%;
             top: 10%;
-            left: 0px;
+            left: 0;
             overflow: hidden;
         }
 
@@ -578,7 +657,7 @@
             width: 100%;
             height: 100%;
             top: 10%;
-            left: 0px;
+            left: 0;
             overflow: hidden;
             cursor: url('../../../../public/static/image/symbol/hands.png'), auto;
         }
@@ -630,7 +709,10 @@
             font-size: 30px;
             color: #ffc124;
         }
-        .import, .export, .save, .history {
+        .export,
+        .history,
+        .import,
+        .save {
             position: absolute;
             padding: 8px;
             .icons {
@@ -672,7 +754,7 @@
         padding: 8px 12px;
         cursor: pointer;
         list-style-type: none;
-        transition: all .3s ease;
+        transition: all 0.3s ease;
         user-select: none;
     }
 

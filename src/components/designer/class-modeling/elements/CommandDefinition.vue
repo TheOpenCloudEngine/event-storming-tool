@@ -2,8 +2,8 @@
     <div>
         <geometry-element
                 selectable
-                movable
-                resizable
+                :movable="!value.editing"
+                :resizable="!value.editing"
                 connectable
                 deletable
                 :angle.sync="value.elementView.angle"
@@ -100,6 +100,7 @@
                     selected: false,
                     inputText: '',
                     restApi: '',
+                    editing: false
                 }
             }
         },

@@ -2,8 +2,8 @@
     <div>
         <group-element
                 selectable
-                movable
-                resizable
+                :movable="!value.editing"
+                :resizable="!value.editing"
                 connectable
                 deletable
                 :id.sync="value.elementView.id"

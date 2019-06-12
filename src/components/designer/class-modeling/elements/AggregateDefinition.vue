@@ -103,8 +103,7 @@
                     selected: false,
                     inputText: '',
                     restApi: '',
-                    aggregateEntity: {
-                    }
+                    aggregateEntity: []
                 }
             }
         },
