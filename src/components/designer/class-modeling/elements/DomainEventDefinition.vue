@@ -2,8 +2,8 @@
     <div>
         <geometry-element
                 selectable
-                movable
-                resizable
+                :movable="!value.editing"
+                :resizable="!value.editing"
                 connectable
                 deletable
                 :id.sync="value.elementView.id"
@@ -102,7 +102,8 @@
                     selected: false,
                     inputText: '',
                     restApi: '',
-                }
+                    editing: false
+                  }
             }
         },
         data: function () {
@@ -175,6 +176,7 @@
                                       // console.log("oldVal Delete NewVal Add")
                                       newVal.innerAggregate[tmp.name.toLowerCase()].push(tmp);
 
+
                               }
                               else
                               {
@@ -190,6 +192,7 @@
                                     if(!is){
                                       // console.log("notEqual Aggregate");
                                       newVal.innerAggregate[tmp.name.toLowerCase()].push(tmp);
+
                                     }
                               }
 

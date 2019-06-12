@@ -20,7 +20,7 @@ export default {
       tmpWidth: 0,
       tmpHeight: 0,
       connectAggregateName: '',
-      loopcheck: true
+      loopcheck: true,
     }
   },
   computed: {
@@ -107,6 +107,8 @@ export default {
       var designer = this.getComponent('modeling-designer')
 
       var me = this
+      designer.syncOthers(this.value);
+
       this.aggregateList = []
       if (newValue == true) {
         designer.value.definition.forEach(function(temp) {
@@ -189,6 +191,8 @@ export default {
     },
     selectedActivity: function() {
       if (this.value) {
+        // var designer = this.getComponent('modeling-designer')
+        // designer.syncOthers(this.value);
         this.value.selected = true
       }
       // this._selected = true;
@@ -203,8 +207,13 @@ export default {
       }
     },
     showProperty: function() {
-      // console.log('Property' + this.value.drawer)
-      this.value.drawer = true;
+      var designer = this.getComponent('modeling-designer')
+      if(!this.value.editing){
+        this.value.drawer = true;
+      } else {
+        designer.snackbar = true
+      }
+
     },
     uuid: function() {
       function s4() {
@@ -224,29 +233,50 @@ export default {
       // console.log("groupOpengraphComponent: " , groupOpengraphComponent)
 
       if (groupOpengraphComponent.tagName) {
+        //바운더리 삭제
         designer.value.definition.some(function(definitionTmp, definitionIndex) {
           if (definitionTmp.name == 'Bounded Context') {
-            // console.log('ROOT')
+
             definitionTmp.dataList.some(function(deleteTmp, index) {
-              if (deleteTmp.elementView.id == opengraphComponent.element.id) {
+              // console.log(deleteTmp.elementView.id)
+              // console.log(opengraphComponent)
+              if (deleteTmp.elementView.id == opengraphComponent.id) {
+
                 definitionTmp.dataList[index] = null
                 definitionTmp.dataList = definitionTmp.dataList.filter(n => n)
                 return;
               }
+
             })
           }
         })
       } else {
+        //바운더리 추가
         designer.value.definition.some(function(definitionTmp, definitionIndex) {
+
           var copyTmp = definitionTmp;
           if (definitionTmp.elementView) {
-            if (definitionTmp.elementView.id == opengraphComponent.element.id) {
+            if (definitionTmp.elementView.id == opengraphComponent.id) {
               designer.value.definition.some(function(boundedTmp, boundedIndex) {
                 if (boundedTmp.elementView) {
-                  if (boundedTmp.elementView.id == groupOpengraphComponent.element.id) {
-                    designer.value.definition[boundedIndex].dataList.push(copyTmp)
-                    designer.value.definition = designer.value.definition.filter(n => n)
-                    return;
+                  if (boundedTmp.elementView.id == groupOpengraphComponent.id) {
+
+                    if(designer.value.definition[boundedIndex].dataList.length > 0) {
+                      designer.value.definition[boundedIndex].dataList.some(function (innerTmp, innerIndex) {
+                        if(innerTmp.elementView.id == copyTmp.elementView.id) {
+                          return;
+                        }
+                        designer.value.definition[boundedIndex].dataList.push(copyTmp)
+                        designer.value.definition = designer.value.definition.filter(n => n)
+                        return;
+                      })
+                    }
+
+                    else {
+                      designer.value.definition[boundedIndex].dataList.push(copyTmp)
+                      designer.value.definition = designer.value.definition.filter(n => n)
+                      return;
+                    }
                   }
                 }
               })

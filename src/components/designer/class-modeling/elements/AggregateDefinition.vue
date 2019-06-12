@@ -54,6 +54,7 @@
                 :titleName="value.name"
                 :inputText.sync="value.inputText"
                 :innerAggregate="value.innerAggregate"
+                :aggregateEntity.sync="value.aggregateEntity"
                 :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/aggregate.png'"
                 :restApi.sync="value.restApi"
                 v-model="value"
@@ -102,6 +103,7 @@
                     selected: false,
                     inputText: '',
                     restApi: '',
+                    aggregateEntity: []
                 }
             }
         },
