@@ -27,4 +27,17 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
 # k8s-UI
+
+## node.js install
+https://nodejs.org/ko/download/
+
+
+
+
+### Project setup
+```
+npm install
+```
+
