@@ -112,31 +112,20 @@ npm run serve
 
 
 
-### Common Function
+### Common Function  
 
-```
-<< Save >>
-```
-![image](https://user-images.githubusercontent.com/48536615/59987060-53559080-9674-11e9-939c-c46e503ca6c8.png)
+#### Save  
+![image](https://user-images.githubusercontent.com/48536615/59987060-53559080-9674-11e9-939c-c46e503ca6c8.png)  
 
+#### Upload  
+![image](https://user-images.githubusercontent.com/48536615/59987015-2e611d80-9674-11e9-8315-bfbdba6da41c.png)  
 
-```
-<< Upload >>
-```
-![image](https://user-images.githubusercontent.com/48536615/59987015-2e611d80-9674-11e9-8315-bfbdba6da41c.png)
-
-
-```
-<< undo & redo >>
- - undo: ctrl +C  
- - redo: Ctrl + shift + C
+#### undo & redo  
+  1.1 undo: ctrl +C  
+  1.2 redo: Ctrl + shift + C  
  
-```
-
-```
-** Confrim Connect Elements
-```
-![image](https://user-images.githubusercontent.com/48536615/59986310-4a16f480-9671-11e9-9f3a-25c678f5b063.png)
+#### How to Connect Elements  
+![image](https://user-images.githubusercontent.com/48536615/59995182-6aef4200-9691-11e9-9ab3-fbc328be3cf4.png)  
 
 
 ### Build
