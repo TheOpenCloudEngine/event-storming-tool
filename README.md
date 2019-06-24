@@ -24,32 +24,30 @@ npm run serve
 ```
 << Upload >>
 ```
-![image](https://user-images.githubusercontent.com/48536615/59986963-fa85f800-9673-11e9-9023-0de047a6a416.png)
+![image](https://user-images.githubusercontent.com/48536615/59987015-2e611d80-9674-11e9-8315-bfbdba6da41c.png)
 ```
 << Save >>
 ```
-![image](https://user-images.githubusercontent.com/48536615/59986849-77fd3880-9673-11e9-961b-6e201d49d2a7.png)
+![image](https://user-images.githubusercontent.com/48536615/59987060-53559080-9674-11e9-939c-c46e503ca6c8.png)
 
 ```
-<< Bulid >>
-```
-<img src=" " width="90%"></img>
 
-```
 << Connect Line >
 - Easy connect each elements (side function Click)
 ```
-<img src="https://user-images.githubusercontent.com/48536615/59908234-e3fb5900-9447-11e9-9575-89365f0699b4.PNG" width="90%"></img>
+![image](https://user-images.githubusercontent.com/48536615/59988715-18089100-9677-11e9-816e-d89cd7f66d72.png)
 
 ```
 << undo & redo >>
  - undo: ctrl +C  
  - redo: Ctrl + shift + C
+ 
 ```
 
 ```
 << All Select >>
- - ctrl + A 
+ - ctrl + A
+ All element State => Select
 ```
 
 ### Element Function
@@ -82,4 +80,9 @@ npm run serve
 ```
 ![image](https://user-images.githubusercontent.com/48536615/59986448-da553980-9671-11e9-8b52-1d4d835ab4ce.png)
 
- 
+### Build
+<< Bulid >>
+```
+<img src=" " width="90%"></img>
+
+```
