@@ -20,16 +20,15 @@ npm run serve
 ```
 << Drag & Drop >> 
 ```
-![image](https://user-images.githubusercontent.com/48536615/59984427-f9010380-9664-11e9-8ea9-474c91b02226.png)
-
+![image](https://user-images.githubusercontent.com/48536615/59985552-54cf8a80-966d-11e9-9118-4adc24cb18cc.png)
 ```
 << Upload >>
 ```
-<img src="https://user-images.githubusercontent.com/48536615/59908233-e3fb5900-9447-11e9-879f-90313e03e9a9.PNG" width="90%"></img>
+![image](https://user-images.githubusercontent.com/48536615/59986963-fa85f800-9673-11e9-9023-0de047a6a416.png)
 ```
 << Save >>
 ```
-<img src=" " width="90%"></img>
+![image](https://user-images.githubusercontent.com/48536615/59986849-77fd3880-9673-11e9-961b-6e201d49d2a7.png)
 
 ```
 << Bulid >>
@@ -63,9 +62,8 @@ npm run serve
   - when you want to build, Auto mapping API tpye.
   - make functions
 ```
-<img src="https://user-images.githubusercontent.com/48536615/59908236-e493ef80-9447-11e9-9026-78dbb9c016b0.PNG" width="90%"></img>
-<img src="https://user-images.githubusercontent.com/48536615/59908237-e493ef80-9447-11e9-91cd-41cd5eafe13c.PNG" width="90%"></img>
-<img src="https://user-images.githubusercontent.com/48536615/59908228-e362c280-9447-11e9-821b-6f0f6a85f6c2.PNG" width="90%"></img>
+![image](https://user-images.githubusercontent.com/48536615/59986543-4172ee00-9672-11e9-8d91-4a9af635b92e.png)
+
 
 ```
 << Aggregate >>
@@ -74,12 +72,14 @@ npm run serve
 3. Show connect List & disconnect List (Between Command -> Event )
   * standard of Command
 ```  
-  <img src="https://user-images.githubusercontent.com/48536615/59908235-e493ef80-9447-11e9-818c-7161b83f3e64.PNG" width="90%"></img>
-  
+![image](https://user-images.githubusercontent.com/48536615/59985877-e986b800-966e-11e9-8b68-3ca1d6219821.png)
+![image](https://user-images.githubusercontent.com/48536615/59986310-4a16f480-9671-11e9-9f3a-25c678f5b063.png)
+
 ```  
 << Boundary Context >>
 1. Auto Grouping
   -make element value in inner boundary. 
 ```
- <img src="https://user-images.githubusercontent.com/48536615/59908232-e3fb5900-9447-11e9-88b4-93158d1e7c29.PNG" width="90%"></img>
+![image](https://user-images.githubusercontent.com/48536615/59986448-da553980-9671-11e9-8b52-1d4d835ab4ce.png)
+
  
