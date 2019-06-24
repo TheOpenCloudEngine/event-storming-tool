@@ -70,7 +70,14 @@ npm run serve
 3. Show connect List & disconnect List (Between Command -> Event )
   * standard of Command
 ```  
-![image](https://user-images.githubusercontent.com/48536615/59985877-e986b800-966e-11e9-8b68-3ca1d6219821.png)
+```
+ ** input entity Name && Select entity API
+```
+![image](https://user-images.githubusercontent.com/48536615/59988931-df1cec00-9677-11e9-8918-bd73c35f9739.png)
+
+```
+** Confrim Connect Elements
+```
 ![image](https://user-images.githubusercontent.com/48536615/59986310-4a16f480-9671-11e9-9f3a-25c678f5b063.png)
 
 ```  
@@ -78,7 +85,7 @@ npm run serve
 1. Auto Grouping
   -make element value in inner boundary. 
 ```
-![image](https://user-images.githubusercontent.com/48536615/59986448-da553980-9671-11e9-8b52-1d4d835ab4ce.png)
+![image](https://user-images.githubusercontent.com/48536615/59988952-f9ef6080-9677-11e9-8a7e-a4fcf7b982e5.png)
 
 ### Build
 << Bulid >>
