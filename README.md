@@ -93,38 +93,37 @@ npm run serve
 #### 내용
   1.1 외부 서비스, 상품 서비스에서 외부 서비스를 필요 하거나, 정보가 필요 할때 사용 하는 External    
   외부 서비스 명 작성 (*자동적으로 aggregate 연결)
-   
-![image](https://user-images.githubusercontent.com/48536615/59992844-b51ff580-9688-11e9-8ac5-e8ad86f73132.png)
+  
+ ![image](https://user-images.githubusercontent.com/48536615/59994703-cf110680-968f-11e9-9313-4bfd6ef0ebff.png)
 
 ### View
 #### 내용
-  1.1 상품 추가, '상품이 추가됨'이라는 Event 로 추가 되었을때 발생 되는 Evnet.   
-  이벤트 명을 작성하고, API을 설정 해야합니다. (*자동적으로 aggregate 연결)
+  1.1 조회, 상품을 리스트를 조회하거나, Read 를 할 때 필요한 View   
+   View 명을 작성하고, API(GET) 을 설정 해야합니다. (*자동적으로 aggregate 연결)
    
-![image](https://user-images.githubusercontent.com/48536615/59992844-b51ff580-9688-11e9-8ac5-e8ad86f73132.png)
+![image](https://user-images.githubusercontent.com/48536615/59994853-52caf300-9690-11e9-853a-79d05f5bc8bf.png)
 
 ### Bounded Context
 #### 내용
-  1.1 상품 추가, '상품이 추가됨'이라는 Event 로 추가 되었을때 발생 되는 Evnet.   
-  이벤트 명을 작성하고, API을 설정 해야합니다. (*자동적으로 aggregate 연결)
-   
-![image](https://user-images.githubusercontent.com/48536615/59992844-b51ff580-9688-11e9-8ac5-e8ad86f73132.png)
+  1.1 서비스 단위, 하나의 서비스를 묶이기 위한 Boundary.
+  Bounded 명을 작성 해야합니다. 
+ 
+![image](https://user-images.githubusercontent.com/48536615/59994972-c0771f00-9690-11e9-89cd-9c2d93721f67.png)
 
 
 
 ### Common Function
 
 ```
-<< Upload >>
-```
-![image](https://user-images.githubusercontent.com/48536615/59987015-2e611d80-9674-11e9-8315-bfbdba6da41c.png)
-
-```
 << Save >>
 ```
 ![image](https://user-images.githubusercontent.com/48536615/59987060-53559080-9674-11e9-939c-c46e503ca6c8.png)
 
+
 ```
+<< Upload >>
+```
+![image](https://user-images.githubusercontent.com/48536615/59987015-2e611d80-9674-11e9-8315-bfbdba6da41c.png)
 
 
 ```
@@ -134,23 +133,11 @@ npm run serve
  
 ```
 
-
-```
- ** input entity Name && Select entity API
-```
-![image](https://user-images.githubusercontent.com/48536615/59988931-df1cec00-9677-11e9-8918-bd73c35f9739.png)
-
 ```
 ** Confrim Connect Elements
 ```
 ![image](https://user-images.githubusercontent.com/48536615/59986310-4a16f480-9671-11e9-9f3a-25c678f5b063.png)
 
-```  
-<< Boundary Context >>
-1. Auto Grouping
-  -make element value in inner boundary. 
-```
-![image](https://user-images.githubusercontent.com/48536615/59988952-f9ef6080-9677-11e9-8a7e-a4fcf7b982e5.png)
 
 ### Build
 << Bulid >>
