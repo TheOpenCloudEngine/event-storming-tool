@@ -115,9 +115,11 @@ npm run serve
 ### Common Function  
 
 #### Save  
+    1. 정보를 저장하기 위하여 JSON 형식으로 값 저장.  
 ![image](https://user-images.githubusercontent.com/48536615/59987060-53559080-9674-11e9-939c-c46e503ca6c8.png)  
 
 #### Upload  
+    1. JSON 저장 값을 Upload  
 ![image](https://user-images.githubusercontent.com/48536615/59987015-2e611d80-9674-11e9-8315-bfbdba6da41c.png)  
 
 #### undo & redo  
@@ -128,8 +130,9 @@ npm run serve
 ![image](https://user-images.githubusercontent.com/48536615/59995182-6aef4200-9691-11e9-9ab3-fbc328be3cf4.png)  
 
 
-### Build
-<< Bulid >>
+### Build  
+#### Bulid
+ ZIP 파일 생성.
 ```
 <img src=" " width="90%"></img>
 
