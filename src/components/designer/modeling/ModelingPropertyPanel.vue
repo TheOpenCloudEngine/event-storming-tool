@@ -1,7 +1,6 @@
 <!--
        * Todo: Property 작성 하는 부분 *
 -->
-
 <template>
     <v-layout wrap>
         <v-navigation-drawer v-model="navigationDrawer" absolute right temporary width="390">
@@ -43,7 +42,7 @@
                         <v-textarea name="input-7-1" outline :label="titleName" auto-grow v-model="input"></v-textarea>
                     </v-card-text>
 
-                    <v-data-table :items="aggregateEntity"  class="elevation-1" hide-actions hide-headers>
+                    <v-data-table :items="aggregateEntity" class="elevation-1" hide-actions hide-headers>
                         <template v-slot:items="props">
                             <td>{{ props.item.type }}</td>
                             <td class="text-xs-right">{{ props.item.name }}</td>
@@ -59,15 +58,16 @@
 
                     <v-layout justify-center row style="align: center;">
                         <v-flex xs4>
-                            <v-select v-model="entityType" :items="entityTypeList" label="Standard" style="margin-left: 10px; margin-right: 15px;"></v-select>
+                            <v-select v-model="entityType" :items="entityTypeList" label="Standard"
+                                      style="margin-left: 10px; margin-right: 15px;"></v-select>
                         </v-flex>
                         <v-flex xs6>
                             <v-text-field v-model="entityName" :counter="10" label="Name" required></v-text-field>
                         </v-flex>
                     </v-layout>
 
-                    <v-layout  justify-end row wrap>
-                        <v-btn  round color="primary" @click="entityADD(entityType,entityName);" dark>Entity ADD</v-btn>
+                    <v-layout justify-end row wrap>
+                        <v-btn round color="primary" @click="entityADD(entityType,entityName);" dark>Entity ADD</v-btn>
                     </v-layout>
 
                     <!-- <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
@@ -77,7 +77,6 @@
                     <v-card-title>
                         <span class="headline" v-if="titleName">연결 리스트 </span>
                     </v-card-title>
-
                     <!--expand 표시 부분  -->
                     <template>
                         <div>
@@ -95,10 +94,11 @@
                                                     <v-card-text class="px-0" align="center">To</v-card-text>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                    <v-img style="margin-top: 13px" :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>
+                                                    <v-img style="margin-top: 13px"
+                                                           :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>
                                                 </v-flex>
                                                 <v-flex xs3>
-                                                    <v-card-text class="px-0" align="   center">From</v-card-text>
+                                                    <v-card-text class="px-0" align="center">From</v-card-text>
                                                 </v-flex>
                                             </v-layout>
                                             <v-layout v-for="(item, index) in connectedList" row wrap>
@@ -110,7 +110,8 @@
                                                     </v-card-text>
                                                 </v-flex>
                                                 <v-flex xs3 grow>
-                                                    <v-img style="margin-top: 13px" :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>
+                                                    <v-img style="margin-top: 13px"
+                                                           :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>
                                                 </v-flex>
                                                 <v-flex xs3>
                                                     <v-card-text class="px-0" align="center">{{item.from.inputText}}
@@ -129,7 +130,9 @@
                                         </v-card-text>
                                         <v-layout row wrap>
                                             <v-flex xs4>
-                                                <v-autocomplete v-model="selectCommand" :items="commandNameList" label="CommandList" persistent-hint prepend-icon="mdi-city"></v-autocomplete>
+                                                <v-autocomplete v-model="selectCommand" :items="commandNameList"
+                                                                label="CommandList" persistent-hint
+                                                                prepend-icon="mdi-city"></v-autocomplete>
                                             </v-flex>
 
                                             <!--<v-flex xs3>-->
@@ -137,10 +140,14 @@
                                             <!--:src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>-->
                                             <!--</v-flex>-->
                                             <v-flex xs4>
-                                                <v-autocomplete v-model="selectEvent" :items="domainNameList" label="EventList" persistent-hint prepend-icon="mdi-city"></v-autocomplete>
+                                                <v-autocomplete v-model="selectEvent" :items="domainNameList"
+                                                                label="EventList" persistent-hint
+                                                                prepend-icon="mdi-city"></v-autocomplete>
                                             </v-flex>
                                             <v-flex xs1>
-                                                <v-btn style="margin-top: 17px" small @click="addRelation(selectCommand,selectEvent)" color="success">추가
+                                                <v-btn style="margin-top: 17px" small
+                                                       @click="addRelation(selectCommand,selectEvent)" color="success">
+                                                    추가
                                                 </v-btn>
                                             </v-flex>
                                         </v-layout>
@@ -158,7 +165,8 @@
                         <v-textarea name="input-7-1" outline :label="titleName" auto-grow v-model="input"></v-textarea>
                     </v-card-text>
 
-                    <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint prepend-icon="mdi-city">
+                    <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
+                                    prepend-icon="mdi-city">
                     </v-autocomplete>
 
                     <v-card-title>
@@ -192,16 +200,16 @@
             aggregateEntity: Array,
         },
         computed: {
-            commandNameList: function() {
+            commandNameList: function () {
                 var designer = this.$parent.getComponent('modeling-designer')
 
                 var tmp = []
                 var inner = false
-                this.innerAggregate.command.forEach(function(command) {
+                this.innerAggregate.command.forEach(function (command) {
                     if (designer.value.relation.length == 0) {
                         tmp.push(command.inputText)
                     } else {
-                        designer.value.relation.forEach(function(relation, index) {
+                        designer.value.relation.forEach(function (relation, index) {
                             if (relation.from == command.elementView.id) {
                                 inner = true
                             }
@@ -214,18 +222,18 @@
                 })
                 return tmp
             },
-            domainNameList: function() {
+            domainNameList: function () {
                 var designer = this.$parent.getComponent('modeling-designer')
 
                 var tmp = []
                 var inner = false
                 // console.log(designer.value.relation);
-                this.innerAggregate.domain.forEach(function(domain) {
+                this.innerAggregate.domain.forEach(function (domain) {
                     if (designer.value.relation.length == 0) {
                         //연결
                         tmp.push(domain.inputText)
                     } else {
-                        designer.value.relation.forEach(function(relation, index) {
+                        designer.value.relation.forEach(function (relation, index) {
                             // console.log(relation.to)
                             // console.log(domain.elementView.id)
                             if (relation.to == domain.elementView.id) {
@@ -241,7 +249,7 @@
                 return tmp
             }
         },
-        data: function() {
+        data: function () {
             return {
                 navigationDrawer: false,
                 _item: this.value,
@@ -263,17 +271,25 @@
                 restApiList: ['GET', 'POST', 'PUT', 'DELETE'],
                 restApiType: '',
                 entityTypeList: ['int', 'String', 'float', 'double', 'long'],
-                entityType:'',
-                entityName:'',
+                entityType: '',
+                entityName: '',
 
             }
         },
-        created: function() {
+        created: function () {
 
         },
-        mounted: function() {},
+        mounted: function () {
+
+        },
         watch: {
-            input: function(newVal) {
+            inputText: function (newVal) {
+                console.log(newVal)
+                if(this.input != newVal) {
+                    this.input = newVal
+                }
+            },
+            input: function (newVal) {
                 if (this.titleName == "Aggregate") {
                     this.$emit('update:inputText', newVal)
                 } else if (this.titleName == "Boundary Context") {
@@ -287,23 +303,27 @@
                     }
                 }
             },
-            restApiType: function(newVal) {
+            restApiType: function (newVal) {
                 // console.log(newVal);
                 this.$emit('update:restApi', newVal)
             },
             restApi: function (newVal) {
-                if(newVal != this.restApiType) {
+                if (newVal != this.restApiType) {
                     this.restApiType = newVal
                 }
             },
-            selectAggregate: function(newVal) {
+            selectAggregate: function (newVal) {
                 this.$emit('update:aggregate', newVal)
                 this.$emit('update:inputText', this.input)
                 this.$emit('update:aggregateText', '\n \n \n Aggregate:\n' + newVal)
             },
-            drawer: function(val) {
+            drawer: function (val) {
                 this.navigationDrawer = val;
-
+                console.log(this.input)
+                console.log(this.inputText)
+                if(this.inputText != this.input) {
+                    this.input = this.inputText
+                }
                 // if(this.value._type=="org.uengine.uml.model.Aggregate" && val){
                 //   // this.domainNameList;
                 //   // this.commandNameList;
@@ -313,7 +333,7 @@
             },
             //프로퍼티 창이 오픈되었을 때 모델값을 새로 반영한다.
             navigationDrawer: {
-                handler: function(val, oldval) {
+                handler: function (val, oldval) {
                     var opengraph = this.$parent.getComponent('opengraph')
                     if (this.titleName == 'Aggregate') {
                         this.getRelation()
@@ -335,31 +355,31 @@
                     }
                 }
             },
-            x: function(val) {
+            x: function (val) {
                 this._item.elementView.x = val;
                 this.$emit('update:value', this._item);
             },
-            y: function(val) {
+            y: function (val) {
                 this._item.elementView.y = val;
                 this.$emit('update:value', this._item);
             },
-            width: function(val) {
+            width: function (val) {
                 this._item.elementView.width = val;
                 this.$emit('update:value', this._item);
             },
-            height: function(val) {
+            height: function (val) {
                 this._item.elementView.height = val;
                 this.$emit('update:value', this._item);
             },
-            angle: function(val) {
+            angle: function (val) {
                 this._item.elementView.angle = val;
                 this.$emit('update:value', this._item);
             },
             style: {
-                handler: function(newVal, oldVal) {
+                handler: function (newVal, oldVal) {
                     var style = {};
                     if (newVal && newVal.length) {
-                        $.each(newVal, function(i, item) {
+                        $.each(newVal, function (i, item) {
                             style[item.key] = item.value;
                         });
                     }
@@ -370,35 +390,35 @@
                 deep: true
             }
         },
-        mounted: function() {
+        mounted: function () {
 
         },
         methods: {
-            entityADD:function(type, name){
-                var me =this
-                console.log(type,name);
-                if(type.length != 0 && name.length != 0){
+            entityADD: function (type, name) {
+                var me = this
+                console.log(type, name);
+                if (type.length != 0 && name.length != 0) {
 
                     let tmpObject = {"type": type, "name": name}
                     me.aggregateEntity.push(tmpObject);
-                    this.entityType=""
-                    this.entityName=""
-                }else{
+                    this.entityType = ""
+                    this.entityName = ""
+                } else {
                     var designer = this.$parent.getComponent('modeling-designer')
-                    designer.text= "TYPE & NAME INPUT REQUEST"
+                    designer.text = "TYPE & NAME INPUT REQUEST"
                     designer.snackbar = true
 
                     console.log("GI");
                 }
             },
 
-            entitySub:function(idx){
+            entitySub: function (idx) {
                 var me = this
                 me.aggregateEntity[idx] = null
                 me.aggregateEntity = me.aggregateEntity.filter(n => n)
 
             },
-            addRelation: function(commandInputText, eventInputText) {
+            addRelation: function (commandInputText, eventInputText) {
                 var designer = this.$parent.getComponent('modeling-designer')
                 var opengraph = this.$parent.getComponent('opengraph')
 
@@ -406,13 +426,13 @@
                 var me = this
 
                 // console.log(this.innerAggregate['command'])
-                me.innerAggregate.command.forEach(function(commandTmp) {
+                me.innerAggregate.command.forEach(function (commandTmp) {
                     if (commandTmp.inputText == commandInputText) {
                         commandId = commandTmp.elementView.id
                     }
                 })
 
-                me.innerAggregate.domain.forEach(function(eventTmp) {
+                me.innerAggregate.domain.forEach(function (eventTmp) {
                     if (eventTmp.inputText == eventInputText) {
                         eventId = eventTmp.elementView.id
                     }
@@ -437,10 +457,10 @@
                 let domainList = this.innerAggregate.domain
                 let relationList = designer.value.relation
 
-                commandList.forEach(function(commandTmp) {
-                    relationList.forEach(function(relationTmp) {
+                commandList.forEach(function (commandTmp) {
+                    relationList.forEach(function (relationTmp) {
                         if (commandTmp.elementView.id == relationTmp.from) {
-                            domainList.forEach(function(domainTmp) {
+                            domainList.forEach(function (domainTmp) {
                                 if (domainTmp.elementView.id == relationTmp.to) {
                                     me.connectedList.push({
                                         'to': commandTmp,

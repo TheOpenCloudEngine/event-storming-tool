@@ -151,6 +151,7 @@
                 },
                 deep: true
             },
+
             "value.elementView.width": {
                 handler: function(newVal, oldVal) {
                     var me = this

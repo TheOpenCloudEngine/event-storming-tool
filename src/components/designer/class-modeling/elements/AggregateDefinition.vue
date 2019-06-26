@@ -105,6 +105,7 @@
                     restApi: '',
                     aggregateEntity: []
                 }
+
             }
         },
         data: function () {

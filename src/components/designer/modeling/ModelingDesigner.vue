@@ -44,13 +44,15 @@
                     </v-avatar>
                 </v-badge>
 
+                <v-btn color="info" v-on:click.native="addNewMember">addNewMember
+                </v-btn>
                 <v-btn color="info" v-on:click.native="restApiPush">BUILD
                 </v-btn>
             </v-layout>
 
             <v-layout right>
                 <v-flex xs12 sm6 style="display: inline-block">
-                    <v-text-field label="Project Name" v-model="projectName" single-line></v-text-field>
+                    <v-text-field label="Project Name" v-model="projectName" single-line @click="unselectedAll"></v-text-field>
                 </v-flex>
                 <text-reader :importType="'json'" @load="value = $event" style="display: inline-block"
                              :fileName.sync="projectName"></text-reader>
@@ -134,19 +136,22 @@
                 undoArray: [],
                 imageBase: 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/symbol/',
                 userId: '',
-
                 snackbar: false,
                 color: 'error',
                 mode: 'multi-line',
                 timeout: 6000,
                 text: '수정중입니다.',
-
+                pusher: {},
                 connectCount: 0,
                 connectInfo: [],
-                show: false
-
-
+                show: false,
+                channel: {},
+                members:[],
+                valueTmp: {}
             }
+        },
+        beforeDestroy: function () {
+            this.channel.pusher.unsubscribe('presence-event');
         },
         computed: {
             drawer: {
@@ -169,16 +174,18 @@
                 get: function () {
                     return this.projectName
                 }
-            }
+            },
         },
         created: function () {
+
         },
         mounted() {
             var me = this
+            this.userId = v4();
 
             me.$ModelingBus.$on('MoveEvent', function () {
                 me.$nextTick(function () {
-                    me.connectInfoR("add", 'https://stickershop.line-scdn.net/stickershop/v1/product/718/LINEStorePC/main.png;compress=true', 'Zang')
+                    // me.connectInfoR("add", 'https://stickershop.line-scdn.net/stickershop/v1/product/718/LINEStorePC/main.png;compress=true', 'Zang')
                     me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                     me.redoArray = [];
                     me.value.definition.forEach(function (tmp) {
@@ -189,72 +196,20 @@
                 })
             })
 
-            const pusher = new Pusher('33169ca8c59c1f7f97cd', {
+            me.pusher = new Pusher('33169ca8c59c1f7f97cd', {
                 cluster: 'ap3',
+                authEndpoint: 'http://localhost:4000/usersystem/auth',
+                encrypted: true
             });
-
-            const channel = pusher.subscribe('painting');
-            this.userId = v4();
-
-            console.log(channel);
-
-            //
-            // channel.bind('pusher:subscription_succeeded', function(members) {
-            //   // for example
-            //   update_member_count(members.count);
-            //
-            //   console.log(members.count);
-            //   members.ForEach(function(member) {
-            //     // for example:
-            //     // add_member(member.id, member.info);
-            //   });
-            // })
-            //
-            channel.bind('draw', (data) => {
-                // console.log(data)
-                //https://event-lhgws4pe7a-uc.a.run.app/
-                // me.$http.get('http://api-ap3.pusher.com/apps/791580/channels/painting').then(function (result) {
-                //   console.log(result)
-                // })
-
-                const {
-                    userId: id,
-                    newVal
-                } = data;
-                console.log(newVal);
-                console.log("비교", me.userId, id);
-                //다른 창에서 바꿨을때
-                if (me.userId !== id) {
-                    var check = true
-                    me.value.definition.forEach(function (elementA) {
-                        if (elementA.elementView.id == newVal.elementView.id) {
-                            console.log("변경");
-                            elementA.selected = false
-                            elementA.elementView = newVal.elementView
-                            elementA.inputText = newVal.inputText
-                            elementA.restApi = newVal.restApi
-                            check = false
-                            if (newVal.drawer == true) {
-                                elementA.editing = true
-                            } else {
-                                elementA.editing = false
-                            }
-
-                        }
-                    })
-
-                    if (check) {
-                        console.log("추가");
-                        me.value.definition.push(newVal);
-                    }
-                } else {
-                    //같은창에서 변경 했을때
-
-                }
-            });
-
+            // var serverUrl = "/", members = [],
+            //     pusher = new Pusher('73xxxxxxxxxxxxxxxdb',
+            //         {authEndpoint: '/usersystem/auth', encrypted: true}),
+            //     channel
             this.$nextTick(function () {
                 let startTime = new Date().getTime()
+
+                // var count = me.channel.members;
+
                 //$nextTick delays the callback function until Vue has updated the DOM
                 // (which usually happens as a result of us changing the data
                 //  so make any DOM changes here
@@ -285,20 +240,49 @@
                 });
             });
         },
-        watch: {},
+        watch: {
+            // valueTmp: function (newVal) {
+            //     console.log(newVal.definition)
+            //     if(newVal.definition && newVal.relation) {
+            //         newVal.definition
+            //         this.valueTmp = {}
+            //     }
+            // }
+        },
 
         methods: {
-            connectInfoR: function (state, img, name) {
+            unselectedAll: function () {
+                this.value.definition.forEach(function (definition) {
+                    console.log(definition)
+                    definition.selected = false
+                })
+                this.value.relation.forEach(function (relation) {
+                    relation.selected = false
+                })
+            },
+            ajax: function (url, method, payload, successCallback) {
+                var xhr = new XMLHttpRequest();
+                xhr.open(method, url, true);
+                // xhr.withCredentials = true;
+                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState != 4 || xhr.status != 200) return;
+                    successCallback(xhr.responseText);
+                };
+                xhr.send(JSON.stringify(payload));
+            },
+            addNewMember: function (event) {
                 var me = this
-                if (state == "add") {
-                    let tmpObject = {"img": img, "name": name}
-                    me.connectCount = me.connectCount + 1
-                    me.connectInfo.push(tmpObject);
-                } else {
-                    me.connectCount = me.connectCount - 1
-                    me.connectInfo.pop();
-                }
-
+                event.preventDefault();
+                var newMember = {'userId': me.userId, 'userName': 'sanghoon'}
+                me.ajax("http://localhost:4000/register", "POST", newMember, me.onMemberAddSuccess);
+            },
+            onMemberAddSuccess: function (response) {
+                var me = this
+                // On Success of registering a new member
+                console.log("Success: " + response);
+                // Subscribing to the 'presence-members' Channel
+                me.channel = me.pusher.subscribe('presence-event');
             },
             connectshow: function () {
                 var me = this
@@ -310,14 +294,21 @@
             },
             restApiPush: function () {
                 var me = this;
-                me.$http.post(`http://localhost:8081/event/${me.projectName}`, me.value, {
-                    headers: {
-                        'Content-Type': 'application/json'
+                me.$http.post(`https://event-storming-lhgws4pe7a-uc.a.run.app/event/${me.projectName}`, me.value, {
+                        responseType: "arraybuffer",
+                        headers: {
+                            'Content-Type': 'application/zip;'
+                        }
                     }
-                }).then(function () {
-                    console.log("done")
+                ).then(function (response) {
+                    console.log("Trying saving zip ...");
+                    console.log(response.data.length);
+                    var blob = new Blob([response.data], {type: 'application/zip'});
+                    console.log(blob.size);
+                    var fileName = me.projectName + ".zip";
+                    saveAs(blob, fileName);
+                    console.log("saveBlob succeeded");
                 })
-
             },
             //멀티
             syncOthers(elements) {
@@ -354,7 +345,29 @@
                     })
                     this.syncOthers(tmp);
                 }
+            },
+            b64toBlob: function (b64Data, contentType, sliceSize) {
+                contentType = contentType || '';
+                sliceSize = sliceSize || 512;
 
+                var byteCharacters = atob(b64Data);
+                var byteArrays = [];
+
+                for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                    var byteNumbers = new Array(slice.length);
+                    for (var i = 0; i < slice.length; i++) {
+                        byteNumbers[i] = slice.charCodeAt(i);
+                    }
+
+                    var byteArray = new Uint8Array(byteNumbers);
+
+                    byteArrays.push(byteArray);
+                }
+
+                var blob = new Blob(byteArrays, {type: contentType});
+                return blob;
             },
             //붙여넣기
             paste: function () {
@@ -603,7 +616,24 @@
                 if (element._type == 'org.uengine.uml.model.relation') {
                     me.value['relation'].push(element);
                 } else {
-                    me.value['definition'].push(element);
+                    if(element._type == 'org.uengine.uml.model.bounded' && me.value['definition'].length != 0) {
+                        me.value['definition'].some(function (tmp, index) {
+                            console.log(tmp, index)
+                            if(tmp._type != 'org.uengine.uml.model.bounded') {
+                                me.value['definition'] = [
+                                    ...me.value['definition'].slice(0, index),
+                                    element,
+                                    ...me.value['definition'].slice(index)
+                                ]
+                                return;
+                            }
+                            if(me.value['definition'].length - 1 == index) {
+                                me.value['definition'].push(element);
+                            }
+                        })
+                    } else {
+                        me.value['definition'].push(element);
+                    }
                 }
                 me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                 me.redoArray = [];
