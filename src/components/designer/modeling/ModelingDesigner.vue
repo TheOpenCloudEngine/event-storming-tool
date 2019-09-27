@@ -52,7 +52,8 @@
 
             <v-layout right>
                 <v-flex xs12 sm6 style="display: inline-block">
-                    <v-text-field label="Project Name" v-model="projectName" single-line @click="unselectedAll"></v-text-field>
+                    <v-text-field label="Project Name" v-model="projectName" single-line
+                                  @click="unselectedAll"></v-text-field>
                 </v-flex>
                 <text-reader :importType="'json'" @load="value = $event" style="display: inline-block"
                              :fileName.sync="projectName"></text-reader>
@@ -146,12 +147,12 @@
                 connectInfo: [],
                 show: false,
                 channel: {},
-                members:[],
+                members: [],
                 valueTmp: {}
             }
         },
         beforeDestroy: function () {
-            this.channel.pusher.unsubscribe('presence-event');
+            // this.channel.pusher.unsubscribe('presence-event');
         },
         computed: {
             drawer: {
@@ -189,22 +190,65 @@
                     me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                     me.redoArray = [];
                     me.value.definition.forEach(function (tmp) {
+                        console.log(tmp)
                         if (tmp.selected == true) {
+                            console.log(tmp)
                             me.syncOthers(tmp);
                         }
                     })
                 })
             })
-
+            this.userId = v4();
             me.pusher = new Pusher('33169ca8c59c1f7f97cd', {
                 cluster: 'ap3',
-                authEndpoint: 'http://localhost:4000/usersystem/auth',
-                encrypted: true
             });
-            // var serverUrl = "/", members = [],
-            //     pusher = new Pusher('73xxxxxxxxxxxxxxxdb',
-            //         {authEndpoint: '/usersystem/auth', encrypted: true}),
-            //     channel
+
+            const channel = me.pusher.subscribe('paint');
+            // channel.bind('draw', function(data) {
+            //     console.log(data)
+            //     me.value = data.newVal
+            // });
+            channel.bind('draw', (data) => {
+                const {userId: id, newVal} = data;
+                if (me.userId !== id) {
+                    let used = false;
+                    if (newVal.name != 'class-relation') {
+                        me.value['definition'].some(function (tmp, index) {
+                            if (tmp.elementView.id == newVal.elementView.id) {
+                                me.value['definition'] = [
+                                    ...me.value['definition'].slice(0, index),
+                                    newVal,
+                                    ...me.value['definition'].slice(index)
+                                ]
+                                used = true;
+                                return;
+                            }
+                        })
+                        if(used == false) {
+                            me.value.definition.push(newVal)
+                        }
+                        // me.value.definition.push(newVal)
+                    }
+                    else {
+                        me.value['relation'].some(function (tmp, index) {
+                            console.log(tmp, index)
+                            if (tmp._type != 'org.uengine.uml.model.bounded') {
+                                me.value['relation'] = [
+                                    ...me.value['relation'].slice(0, index),
+                                    element,
+                                    ...me.value['relation'].slice(index)
+                                ]
+                                return;
+                            }
+                            if (me.value['relation'].length - 1 == index) {
+                                me.value['relation'].push(element);
+                            }
+                        })
+                    }
+
+                }
+            });
+
             this.$nextTick(function () {
                 let startTime = new Date().getTime()
 
@@ -271,19 +315,6 @@
                 };
                 xhr.send(JSON.stringify(payload));
             },
-            addNewMember: function (event) {
-                var me = this
-                event.preventDefault();
-                var newMember = {'userId': me.userId, 'userName': 'sanghoon'}
-                me.ajax("http://localhost:4000/register", "POST", newMember, me.onMemberAddSuccess);
-            },
-            onMemberAddSuccess: function (response) {
-                var me = this
-                // On Success of registering a new member
-                console.log("Success: " + response);
-                // Subscribing to the 'presence-members' Channel
-                me.channel = me.pusher.subscribe('presence-event');
-            },
             connectshow: function () {
                 var me = this
                 if (me.show == true) {
@@ -294,7 +325,7 @@
             },
             restApiPush: function () {
                 var me = this;
-                me.$http.post(`https://event-storming-lhgws4pe7a-uc.a.run.app/event/${me.projectName}`, me.value, {
+                me.$http.post(`http://localhost:8080/event/${me.projectName}`, me.value, {
                         responseType: "arraybuffer",
                         headers: {
                             'Content-Type': 'application/zip;'
@@ -576,7 +607,7 @@
                         me.undoArray.pop();
                         // console.log("undo length 0")
                         me.undoArray.push(JSON.parse(JSON.stringify(me.value)))
-                        // this.syncOthers(JSON.parse(JSON.stringify(me.value)));
+                        this.syncOthers(JSON.parse(JSON.stringify(me.value)));
                     } else {
                     }
                 }
@@ -616,10 +647,10 @@
                 if (element._type == 'org.uengine.uml.model.relation') {
                     me.value['relation'].push(element);
                 } else {
-                    if(element._type == 'org.uengine.uml.model.bounded' && me.value['definition'].length != 0) {
+                    if (element._type == 'org.uengine.uml.model.bounded' && me.value['definition'].length != 0) {
                         me.value['definition'].some(function (tmp, index) {
                             console.log(tmp, index)
-                            if(tmp._type != 'org.uengine.uml.model.bounded') {
+                            if (tmp._type != 'org.uengine.uml.model.bounded') {
                                 me.value['definition'] = [
                                     ...me.value['definition'].slice(0, index),
                                     element,
@@ -627,7 +658,7 @@
                                 ]
                                 return;
                             }
-                            if(me.value['definition'].length - 1 == index) {
+                            if (me.value['definition'].length - 1 == index) {
                                 me.value['definition'].push(element);
                             }
                         })

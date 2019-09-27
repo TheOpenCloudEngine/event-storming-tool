@@ -159,7 +159,6 @@
                         me.tmpWidth = oldVal
                     }
                 }
-
             },
             "value.elementView.height": {
                 handler: function(newVal, oldVal) {
@@ -168,7 +167,7 @@
                         me.tmpHeight = oldVal
                     }
                 }
-            }
+            },
         },
         mounted: function() {
 
