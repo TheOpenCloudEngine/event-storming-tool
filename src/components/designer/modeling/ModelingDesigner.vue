@@ -1,6 +1,56 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="canvas-panel">
         <v-layout right>
+            <modal name="code-modal" scrollable :height='"auto"' :width="'80%'">
+                <v-card>
+                    <v-card-title>
+                        <span class="headline">Use Google's location service?</span>
+                    </v-card-title>
+                    <v-card-text>
+                        <!-- 형태:
+                        Item: [ {name: fileName, file:'fileType'}, {name: folderName, children: [{name: fileName, file:'fileType'}]} ] -->
+                        <v-row
+                                class="mb-6"
+                                no-gutters
+                        >
+                            <v-col  :lg="3"
+                                    :md="6"
+                                    :sm="2"
+                                    style="margin-right: 15px;"
+                            >
+                                <v-treeview
+                                        v-model="tree"
+                                        :open="open"
+                                        :items="items"
+                                        activatable
+                                        item-key="name"
+                                        open-on-click
+                                >
+                                    <template v-slot:prepend="{ item, open }">
+                                        <v-icon v-if="!item.file">
+                                            {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
+                                        </v-icon>
+                                        <v-icon v-else>
+                                            {{ files[item.file] }}
+                                        </v-icon>
+                                    </template>
+                                </v-treeview>
+                            </v-col>
+                            <v-col  :lg="8"
+                                    :md="8"
+                                    :sm="9"
+                            >
+                                <!--<highlight-code lang="javascript">-->
+                                <!--let str = 'Hello, World!';-->
+                                <!--console.log(str);-->
+                                <!--</highlight-code>-->
+
+                                <code-viewer></code-viewer>
+                            </v-col>
+                        </v-row>
+                    </v-card-text>
+                </v-card>
+            </modal>
             <opengraph ref="opengraph" focus-canvas-on-select wheelScalable :labelEditable="true"
                        :dragPageMovable="dragPageMovable" :enableContextmenu="false" :enableRootContextmenu="false"
                        :enableHotkeyCtrlC="false" :enableHotkeyCtrlV="false"
@@ -47,6 +97,8 @@
                 <v-btn color="info" v-on:click.native="addNewMember">addNewMember
                 </v-btn>
                 <v-btn color="info" v-on:click.native="restApiPush">BUILD
+                </v-btn>
+                <v-btn color="info" v-on:click.native="codeModalShow">Generate
                 </v-btn>
             </v-layout>
 
@@ -101,7 +153,7 @@
         v4
     } from 'uuid';
     import Pusher from 'pusher-js';
-
+    import codeViewer from '../CodeViewer'
     var FileSaver = require('file-saver');
     import {
         saveAs
@@ -112,13 +164,123 @@
         components: {
             TextReader,
             saveAs,
-            Pusher
+            Pusher,
+            codeViewer
         },
         props: {
             elementTypes: Array
         },
         data() {
             return {
+                open: ['public'],
+                files: {
+                    html: 'mdi-language-html5',
+                    js: 'mdi-nodejs',
+                    json: 'mdi-json',
+                    md: 'mdi-markdown',
+                    pdf: 'mdi-file-pdf',
+                    png: 'mdi-file-image',
+                    txt: 'mdi-file-document-outline',
+                    xls: 'mdi-file-excel',
+                },
+                tree: [],
+                items: [
+                    {
+                        name: 'src',
+                        children:[
+                            {
+                                name:'main',
+                                children: [
+                                    { name:'resources',
+                                        children: [
+                                            {
+                                                name:'application.yml',
+                                                file:'txt'
+                                            },
+                                        ]
+                                    },
+                                    { name:'java',
+                                        children: [
+                                            {
+                                                name:'com',
+                                                children: [
+                                                    {
+                                                        name:'example',
+                                                        children: [
+                                                            {
+                                                                name:'template',
+                                                                children:[
+                                                                    {
+                                                                        name:'config',
+                                                                        children:[
+                                                                            { name:'kafaka'}
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        name:'DELIVET.java',
+                                                                        file:'txt'
+                                                                    }
+
+                                                                ]
+
+                                                            }
+                                                        ]
+                                                    }]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        name: 'node_modules',
+                    },
+                    {
+                        name: 'public',
+                        children: [
+                            {
+                                name: 'static',
+                                children: [{
+                                    name: 'logo.png',
+                                    file: 'png',
+                                }],
+                            },
+                            {
+                                name: 'favicon.ico',
+                                file: 'png',
+                            },
+                            {
+                                name: 'index.html',
+                                file: 'html',
+                            },
+                        ],
+                    },
+                    {
+                        name: '.gitignore',
+                        file: 'txt',
+                    },
+                    {
+                        name: 'babel.config.js',
+                        file: 'js',
+                    },
+                    {
+                        name: 'package.json',
+                        file: 'json',
+                    },
+                    {
+                        name: 'README.md',
+                        file: 'md',
+                    },
+                    {
+                        name: 'vue.config.js',
+                        file: 'js',
+                    },
+                    {
+                        name: 'yarn.lock',
+                        file: 'txt',
+                    },
+                ],
                 canvas: null,
                 dragPageMovable: false,
                 relationVueComponentName: 'modeling-relation',
@@ -295,6 +457,12 @@
         },
 
         methods: {
+            codeModalShow() {
+                this.$modal.show('code-modal');
+            },
+            codeModalhide() {
+                this.$modal.hide('code-modal');
+            },
             unselectedAll: function () {
                 this.value.definition.forEach(function (definition) {
                     console.log(definition)
