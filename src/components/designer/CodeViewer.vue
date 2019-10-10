@@ -42,7 +42,7 @@
           value(newVal) {
               this.code = ''
               let fileName = newVal[0];
-              this.setFormat(fileName)
+              this.setFormat(fileName,'[{123},{345}]')
           }
         },
         methods: {
@@ -54,37 +54,59 @@
                 console.log('the editor is focus!', cm)
             },
             onCmCodeChange(newCode) {
-                console.log('this is new code', newCode)
+                // console.log('this is new code', newCode)
                 // this.code = newCode
             },
-            setFormat(name){
-                var setformat=[
-                    {
-                        type:"Aggregate",
-                        header: "Products",
-                        variable:[
-                            { attribute:"private", type : "Long", name:"id" , upName:"Id" },
-                            { attribute:"public", type : "String", name:"stock" ,upName:"Stock"},
-                            { attribute:"public", type : "int", name:"price",upName:"Price"}
-                        ]
-                    },
-                    {
-                        type:"Aggregate",
-                        header: "Products",
-                        variable:[
-                            { attribute:"private", type : "Long", name:"id" , upName:"Id" },
-                            { attribute:"public", type : "String", name:"stock" ,upName:"Stock"},
-                            { attribute:"public", type : "int", name:"price",upName:"Price"}
-                        ]
-                    }
-                ]
-                this.format=setformat;
+            setFormat(name,DefinitionList){
+                var me = this
+                let Definition=
+                    [
+                        {
+                            type:"Aggregate",
+                            header: "Product",
+                            variable:[
+                            ],
+                            eventName:[
+                                {name: "ProductChanged" }
+                            ],
+                            commandName:[
 
-                this.setTemplate(name)
+                            ]
+                        },
+                        {
+                            type:"Event",
+                            header: "ProductChanged",
+                            variable:[
+                                { attribute:"private", type : "Long", name:"id" , upName:"Id" },
+                                { attribute:"public", type : "String", name:"stock" ,upName:"Stock"},
+                                { attribute:"public", type : "int", name:"price",upName:"Price"}
+                            ]
+                        },
+                        {
+                            type:"Command",
+                            header: "ProductController",
+                            variable:[
+                            ]
+                        }
+                    ]
+                if(name.includes('.java')){
+
+                    Definition.some(function(definition){
+                        if( definition.type == 'Event' ){
+                            me.setEventTemplate(definition)
+                        } else if(definition.type == 'Command'){
+                            me.setCommandTemplate(definition)
+                        } else if(definition.type == 'Aggregate'){
+                            me.setAggregateTemplate(name,definition)
+                        }
+
+                    })
+                }else{
+                    me.setDefaultTemplate(name)
+                }
 
             },
-            setTemplate(name){
-                if(name=='123'){
+            setEventTemplate(definition) {
                     this.code = Mustache.render(
                         "package hello;\n" +
                         "\n" +
@@ -96,7 +118,7 @@
                         "public class {{header}} {\n" +
                         "\n" +
                         "    @Id\n" +
-                        "    @GeneratedValue\n"+
+                        "    @GeneratedValue\n" +
                         "    {{#variable}}\n" +
                         "     {{attribute}} {{type}} {{name}};\n" +
                         "    {{/variable}}\n" +
@@ -107,7 +129,7 @@
                         "       }\n" +
                         "      public void set{{upName}}({{attribute}} {{name}}) {\n" +
                         "           this.{{name}} = {{name}};\n" +
-                        "       }\n\n\n"+
+                        "       }\n\n\n" +
                         "    {{ /variable }}\n" +
                         "\n\n\n\n" +
                         "@PostPersist @PostUpdate\n" +
@@ -134,8 +156,52 @@
                         "            kafkaTemplate.send(producerRecord);\n" +
                         "        }\n" +
                         "    }" +
-                        "}\n", this.format)
-                }else if('.gitignore'== name){
+                        "}\n", definition)
+
+            },
+            setAggregateTemplate(name,definition){
+                console.log(name, definition)
+
+                if(name.includes('Repository')){
+                    this.code = Mustache.render(
+                        "package com.example.template;\n " +
+                        "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
+                        "public interface {{ header }}Repository extends PagingAndSortingRepository &lt; {{ header }}, Long &gt; { \n " +
+                        "}\n", definition)
+                }else{
+                    this.code = Mustache.render(
+                        "package com.example.template;\n " +
+                        "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
+                        "public interface {{ header }}Repository extends PagingAndSortingRepository &lt; {{ header }}, Long &gt; { \n " +
+                        "}\n", definition)
+                }
+
+
+            },
+            setViewTemplate(){
+
+            },
+            setCommandTemplate(definition){
+                    this.code = Mustache.render(
+                        "package com.example.template;\n" +
+                        "\n" +
+                        "import org.springframework.beans.factory.annotation.Autowired;\n" +
+                        "import org.springframework.web.bind.annotation.PathVariable;\n" +
+                        "import org.springframework.web.bind.annotation.RequestMapping;\n" +
+                        "import org.springframework.web.bind.annotation.RequestMethod;\n" +
+                        "import org.springframework.web.bind.annotation.RestController;\n" +
+                        "\n" +
+                        "import javax.servlet.http.HttpServletRequest;\n" +
+                        "import javax.servlet.http.HttpServletResponse;\n" +
+                        "import java.util.List;\n" +
+                        "\n" +
+                        "@RestController\n" +
+                        "public class {{ header }}Controller {\n" +
+                        "\n" +
+                        "}", definition)
+            },
+            setDefaultTemplate(name){
+             if('.gitignore'== name){
                     this.code="/target/\n" +
                         "/bin/\n" +
                         "/.settings/\n" +

@@ -439,6 +439,7 @@
         methods: {
             codeModalShow() {
                 var me = this
+
                 me.jsonStr.definition.forEach(function(item){
                     var event={
                         name:'',
@@ -457,7 +458,7 @@
                         event.name = item.name+'.java';
                     }
                     if(event.name != ''){
-                        me.items[1].children[0].children[1].children[0].children[0].children[0].children.push(event)
+                        me.items[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)))
                     }
                 });
 
