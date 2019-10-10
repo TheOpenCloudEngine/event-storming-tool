@@ -169,12 +169,12 @@
                     </v-autocomplete>
 
                     <v-card-title>
-                        <span class="headline" v-if="titleName">연결된 Aggregate</span>
+                        <span class="headline" v-if="titleName">Aggregate 선택</span>
                     </v-card-title>
+                    <v-autocomplete v-model="aggregate" :items="aggregateList" label="Select Aggregate" persistent-hint
+                                    prepend-icon="mdi-city">
+                    </v-autocomplete>
 
-                    <v-card-text style="margin-top: 17px font-size: 100px">
-                        {{ connectAggregateName }}
-                    </v-card-text>
                 </v-card>
 
             </v-list>
@@ -190,7 +190,6 @@
             value: Object,
             titleName: String,
             inputText: String,
-            // aggregateList: Array,
             connectAggregateName: String,
             otherList: Array,
             img: String,
@@ -199,6 +198,16 @@
             aggregateEntity: Array,
         },
         computed: {
+            aggregateList: function () {
+                var designer = this.$parent.getComponent('modeling-designer')
+
+                var tmp = []
+                designer.value.definition.forEach(function (tmpData) {
+                    if (tmpData._type == 'org.uengine.uml.model.Aggregate')
+                        tmp.push(tmpData.inputText)
+                })
+                return tmp
+            },
             commandNameList: function () {
                 var designer = this.$parent.getComponent('modeling-designer')
 
@@ -272,6 +281,7 @@
                 entityTypeList: ['int', 'String', 'float', 'double', 'long'],
                 entityType: '',
                 entityName: '',
+                aggregate: ''
 
             }
         },
@@ -328,7 +338,6 @@
                 //   // this.commandNameList;
                 //   console.log(this.domainNameList);
                 // }
-
             },
             //프로퍼티 창이 오픈되었을 때 모델값을 새로 반영한다.
             navigationDrawer: {
@@ -387,6 +396,10 @@
                     this.$emit('update:value', this._item);
                 },
                 deep: true
+            },
+            aggregate: function (val) {
+                console.log(val)
+                this.$emit('update:connectAggregateName', val);
             }
         },
         mounted: function () {

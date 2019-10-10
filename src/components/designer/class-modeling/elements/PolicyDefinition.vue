@@ -54,7 +54,9 @@
             :titleName="value.name"
             :inputText.sync="value.inputText"
             :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/policy.png'"
-            :restApi.sync="value.restApi"
+            :aggregate.sync="value.aggregate"
+            :aggregateList.sync="aggregateList"
+            :connectAggregateName.sync="connectAggregateName"
             v-model="value"
     >
     </modeling-property-panel>
