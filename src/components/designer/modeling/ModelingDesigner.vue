@@ -21,10 +21,10 @@
                                 <v-treeview
                                         :open="open"
                                         :items="items"
+                                        :active.sync="active"
                                         activatable
                                         item-key="name"
                                         open-on-click
-                                        :active.sync="active"
                                         @update:active="treeName(active)"
                                 >
                                     <template v-slot:prepend="{ item, open }">
@@ -69,46 +69,43 @@
                 </div>
             </opengraph>
 
-
-            <v-layout style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">
-                <v-badge overlap>
-                    <template v-slot:badge>
-                        <span>{{ connectCount }}</span>
-                    </template>
-
-                    <v-avatar>
-                        <v-layout justify-end row v-if="show">
-                            <v-tooltip v-for="item in connectInfo" bottom>
-                                <template v-slot:activator="{ on }">
-                                    <v-avatar v-on="on">
-                                        <img :src='item.img'>
-                                    </v-avatar>
-                                </template>
-                                <span>{{ item.name }}</span>
-                            </v-tooltip>
-                        </v-layout>
-                        <v-btn
-                                fab
-                                small
-                                @click="connectshow()">
-                        </v-btn>
-                    </v-avatar>
-                </v-badge>
-
-                <v-btn color="info" v-on:click.native="addNewMember">addNewMember
-                </v-btn>
-                <v-btn color="info" v-on:click.native="restApiPush">BUILD
-                </v-btn>
-                <v-btn color="info" v-on:click.native="codeModalShow">Generate
-                </v-btn>
-            </v-layout>
-
             <v-layout right>
-                <v-flex xs12 sm6 style="display: inline-block">
+                <v-divider></v-divider>
+                <!--<v-badge overlap>-->
+                <!--<template v-slot:badge>-->
+                <!--<span>{{ connectCount }}</span>-->
+                <!--</template>-->
+
+                <!--<v-avatar>-->
+                <!--<v-layout justify-end row v-if="show">-->
+                <!--<v-tooltip v-for="item in connectInfo" bottom>-->
+                <!--<template v-slot:activator="{ on }">-->
+                <!--<v-avatar v-on="on">-->
+                <!--<img :src='item.img'>-->
+                <!--</v-avatar>-->
+                <!--</template>-->
+                <!--<span>{{ item.name }}</span>-->
+                <!--</v-tooltip>-->
+                <!--</v-layout>-->
+                <!--<v-btn-->
+                <!--fab-->
+                <!--small-->
+                <!--@click="connectshow()">-->
+                <!--</v-btn>-->
+                <!--</v-avatar>-->
+                <!--</v-badge>-->
+
+                <!--<v-btn color="info" v-on:click.native="addNewMember">addNewMember-->
+                <!--</v-btn>-->
+                <v-btn color="info" v-on:click.native="restApiPush" style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD
+                </v-btn>
+                <v-btn color="info" v-on:click.native="codeModalShow" style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">Generate
+                </v-btn >
+                <v-flex xs12 sm6 style="display: inline-block; max-width:400px;">
                     <v-text-field label="Project Name" v-model="projectName" single-line
                                   @click="unselectedAll"></v-text-field>
                 </v-flex>
-                <text-reader :importType="'json'" @load="value = $event" style="display: inline-block"
+                <text-reader :importType="'json'" @load="value = $event" style="display: inline-block;"
                              :fileName.sync="projectName"></text-reader>
                 <v-btn color="info" v-on:click.native="download"
                        style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save
@@ -300,7 +297,8 @@
                 show: false,
                 channel: {},
                 members: [],
-                valueTmp: {}
+                valueTmp: {},
+                active: []
             }
         },
         beforeDestroy: function () {
