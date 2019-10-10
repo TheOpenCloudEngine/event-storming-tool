@@ -16,7 +16,7 @@
                 v-on:selectShape="selectedActivity"
                 v-on:deSelectShape="deSelectedActivity"
                 v-on:rotateShape="onRotateShape"
-                :label.sync="value.inputText + '\n\nConnect:: '+this.connectAggregateName"
+                :label.sync="value.inputText"
                 :_style="{
                 'label-angle':value.elementView.angle,
                 'font-weight': 'bold','font-size': '16'
@@ -57,9 +57,7 @@
                 :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/view.png'"
                 :aggregate.sync="value.aggregate"
                 :aggregateList.sync="aggregateList"
-                :aggregateText.sync="value.aggregateText"
-                :connectAggregateName.sync="this.connectAggregateName"
-                :restApi.sync="value.restAPI"
+                :connectAggregateName.sync="connectAggregateName"
                 v-model="value"
         >
         </modeling-property-panel>

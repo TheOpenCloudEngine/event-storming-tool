@@ -89,6 +89,8 @@
                         'domain': [],
                         'command': [],
                         'view': [],
+                        'policy': [],
+                        'external': []
                     },
                     elementView: {
                         '_type': 'org.uengine.modeling.Aggregate',
