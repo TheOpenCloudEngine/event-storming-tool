@@ -19,12 +19,13 @@
                                     style="margin-right: 15px;"
                             >
                                 <v-treeview
-                                        v-model="tree"
                                         :open="open"
                                         :items="items"
                                         activatable
                                         item-key="name"
                                         open-on-click
+                                        :active.sync="active"
+                                        @update:active="treeName(active)"
                                 >
                                     <template v-slot:prepend="{ item, open }">
                                         <v-icon v-if="!item.file">
@@ -45,7 +46,7 @@
                                 <!--console.log(str);-->
                                 <!--</highlight-code>-->
 
-                                <code-viewer></code-viewer>
+                                <code-viewer v-model="active" ></code-viewer>
                             </v-col>
                         </v-row>
                     </v-card-text>
@@ -149,6 +150,7 @@
 
 <script>
     import TextReader from "@/components/yaml.vue";
+    import CodeViewer from "../CodeViewer";
     import {
         v4
     } from 'uuid';
@@ -165,14 +167,14 @@
             TextReader,
             saveAs,
             Pusher,
-            codeViewer
+            CodeViewer
         },
         props: {
             elementTypes: Array
         },
         data() {
             return {
-                open: ['public'],
+                open: [],
                 files: {
                     html: 'mdi-language-html5',
                     js: 'mdi-nodejs',
@@ -183,8 +185,22 @@
                     txt: 'mdi-file-document-outline',
                     xls: 'mdi-file-excel',
                 },
-                tree: [],
+                code:'',
                 items: [
+                    {
+                        name: '.mvn',
+                        children: [
+                            {
+                                name: 'wrapper',
+                                children: [
+                                    {
+                                        name: 'maven-wrapper.properties',
+                                        file: 'txt',
+                                    }
+                                ],
+                            },
+                        ],
+                    },
                     {
                         name: 'src',
                         children:[
@@ -212,15 +228,7 @@
                                                                 children:[
                                                                     {
                                                                         name:'config',
-                                                                        children:[
-                                                                            { name:'kafaka'}
-                                                                        ]
                                                                     },
-                                                                    {
-                                                                        name:'DELIVET.java',
-                                                                        file:'txt'
-                                                                    }
-
                                                                 ]
 
                                                             }
@@ -234,53 +242,35 @@
                         ]
                     },
                     {
-                        name: 'node_modules',
-                    },
-                    {
-                        name: 'public',
-                        children: [
-                            {
-                                name: 'static',
-                                children: [{
-                                    name: 'logo.png',
-                                    file: 'png',
-                                }],
-                            },
-                            {
-                                name: 'favicon.ico',
-                                file: 'png',
-                            },
-                            {
-                                name: 'index.html',
-                                file: 'html',
-                            },
-                        ],
-                    },
-                    {
                         name: '.gitignore',
+                        file: 'txt'
+                    },
+                    {
+                        name: 'Dockerfile',
                         file: 'txt',
                     },
                     {
-                        name: 'babel.config.js',
-                        file: 'js',
+                        name: 'README.mc',
+                        file: 'txt',
                     },
                     {
-                        name: 'package.json',
-                        file: 'json',
+                        name: 'cloudbuild.yaml',
+                        file: 'txt',
                     },
                     {
-                        name: 'README.md',
-                        file: 'md',
+                        name: 'mvnw',
+                        file: 'txt',
                     },
                     {
-                        name: 'vue.config.js',
-                        file: 'js',
+                        name: 'mvnw.cmd',
+                        file: 'txt',
                     },
                     {
-                        name: 'yarn.lock',
+                        name: 'pom.xml',
                         file: 'txt',
                     },
                 ],
+                active:[],
                 canvas: null,
                 dragPageMovable: false,
                 relationVueComponentName: 'modeling-relation',
@@ -446,17 +436,13 @@
                 });
             });
         },
-        watch: {
-            // valueTmp: function (newVal) {
-            //     console.log(newVal.definition)
-            //     if(newVal.definition && newVal.relation) {
-            //         newVal.definition
-            //         this.valueTmp = {}
-            //     }
-            // }
-        },
+        watch: { },
 
         methods: {
+            treeName(selectTree){
+                console.log( selectTree[0] )
+                this.code = selectTree[0]
+            },
             codeModalShow() {
                 this.$modal.show('code-modal');
             },
