@@ -16,7 +16,6 @@ import Modeling from './components/designer/modeling'
 import CodeMirror from 'vue-codemirror'
 
 Vue.use(CodeMirror)
-
 Vue.use(Opengraph);
 Vue.use(ClassModeling);
 Vue.use(Modeling);

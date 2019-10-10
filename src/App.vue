@@ -7,32 +7,32 @@
             app
     >
       <v-list dense>
-        <v-list-tile avatar style="margin-top: 10px;" v-if="userInfo">
-          <v-list-tile-avatar>
-            <img :src=userInfo.thumbnail>
-          </v-list-tile-avatar>
+        <!--<v-list-tile avatar style="margin-top: 10px;" v-if="userInfo">-->
+          <!--<v-list-tile-avatar>-->
+            <!--<img :src=userInfo.thumbnail>-->
+          <!--</v-list-tile-avatar>-->
 
-          <v-list-tile-content>
-            <v-list-tile-title>{{ userInfo.user_name}}</v-list-tile-title>
-            <v-list-tile-title>{{ userInfo.nickname}}</v-list-tile-title>
+          <!--<v-list-tile-content>-->
+            <!--<v-list-tile-title>{{ userInfo.user_name}}</v-list-tile-title>-->
+            <!--<v-list-tile-title>{{ userInfo.nickname}}</v-list-tile-title>-->
 
-          </v-list-tile-content>
-        </v-list-tile>
+          <!--</v-list-tile-content>-->
+        <!--</v-list-tile>-->
         <template v-for="item in items">
-          <v-list-tile :key="item.text" ripple :to="item.route">
-            <v-list-tile-action>
+          <v-list-item :key="item.text" ripple :to="item.route">
+            <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
                 {{ item.text }}
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </template>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar
+    <v-app-bar
             :clipped-left="$vuetify.breakpoint.lgAndUp"
             color="blue darken-3"
             dark
@@ -40,14 +40,14 @@
             fixed
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <span class="hidden-sm-and-down">uEngine</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn flat color="white" @click="logout()" v-if="authorized">
+      <v-btn text color="white" @click="logout()" v-if="authorized">
         Logout
       </v-btn>
-      <v-btn flat color="white" @click="googleLogin()" v-if="!authorized">
+      <v-btn text color="white" @click="googleLogin()" v-if="!authorized">
         Login
       </v-btn>
       <!--<v-btn flat color="white" @click="callCurl()">-->
@@ -56,7 +56,7 @@
       <v-btn icon @click="dialog = true">
         <v-icon>settings</v-icon>
       </v-btn>
-    </v-toolbar>
+    </v-app-bar>
     <v-content>
       <v-container fluid fill-height>
         <v-layout row wrap>

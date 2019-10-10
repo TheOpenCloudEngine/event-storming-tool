@@ -6,17 +6,16 @@
         <v-navigation-drawer v-model="navigationDrawer" absolute right temporary width="390">
 
             <v-list class="pa-1">
-                <v-list-tile avatar>
-
-                    <v-list-tile-avatar>
+                <v-list-item>
+                    <v-list-item-avatar>
                         <img :src="img">
-                    </v-list-tile-avatar>
+                    </v-list-item-avatar>
 
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{ titleName }}</v-list-tile-title>
-                    </v-list-tile-content>
+                    <v-list-item-content>
+                        <v-list-item-title>{{ titleName }}</v-list-item-title>
+                    </v-list-item-content>
 
-                </v-list-tile>
+                </v-list-item>
             </v-list>
 
             <v-list class="pt-0" dense>
