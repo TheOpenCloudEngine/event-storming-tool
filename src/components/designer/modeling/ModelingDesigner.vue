@@ -339,22 +339,30 @@
                     let tmpList = JSON.parse(JSON.stringify(me.items));
                     console.log(me.items)
 
-                    me.value.definition.forEach(function (item) {
-                        var event = {
-                            name: '',
-                            file: 'txt'
+                    me.value.definition.forEach(function(item){
+                        var event={
+                            name:'',
+                            file:'txt',
+                            type: ''
                         }
                         console.log(item)
-                        if (item._type == 'org.uengine.uml.model.Domain') {
-                            event.name = item.inputText + '.java';
-                        } else if (item._type == 'org.uengine.uml.model.Command') {
-                            event.name = item.inputText + 'Controller.java';
-                        } else if (item._type == 'org.uengine.uml.model.Policy') {
-                            event.name = item.inputText + 'Service.java';
-                        } else if (item._type == 'org.uengine.uml.model.Aggregate') {
-                            event.name = item.inputText + 'Repository.java';
+                        if(item._type == 'org.uengine.uml.model.Domain'){
+                            event.name = item.inputText+'.java';
+                            event.type = item._type;
+                        } else if ( item._type == 'org.uengine.uml.model.Command' ){
+                            event.name = item.inputText+'Controller.java';
+                            event.type = item._type;
+
+                        } else if ( item._type == 'org.uengine.uml.model.Policy' ){
+                            event.name = item.inputText+'Service.java';
+                            event.type = item._type;
+
+                        } else if ( item._type == 'org.uengine.uml.model.Aggregate') {
+                            event.type = item._type;
+                            event.name = item.inputText+'Repository.java';
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
-                            event.name = item.inputText + '.java';
+                            event.type = item._type;
+                            event.name = item.inputText+'.java';
                         }
                         if (event.name != '') {
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(event)

@@ -31,7 +31,7 @@
           'stroke': '#5099F7',
           fill: '#5099F7',
           'fill-opacity': 1,
-          r: '1'
+          r: '1', 'z-index': '998'
         }"
             >
             </geometry-rect>
@@ -94,7 +94,8 @@
                         'y': y,
                         'width': width,
                         'height': height,
-                        'style': JSON.stringify({})
+                        'style': JSON.stringify({}),
+                        'z-index': 999
                     },
                     drawer: false,
                     selected: false,
