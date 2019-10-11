@@ -470,28 +470,6 @@
         methods: {
             codeModalShow() {
                 var me = this
-                // me.jsonStr.definition.forEach(function(item){
-                //     var event={
-                //         name:'',
-                //         file:'txt'
-                //     }
-                //
-                //     if(item._type == 'org.uengine.uml.model.Domain'){
-                //         event.name = item.name+'.java';
-                //     } else if ( item._type == 'org.uengine.uml.model.Command' ){
-                //         event.name = item.name+'Controller.java';
-                //     } else if ( item._type == 'org.uengine.uml.model.Policy' ){
-                //         event.name = item.name+'Service.java';
-                //     } else if ( item._type == 'org.uengine.uml.model.Aggregate') {
-                //         event.name = item.name+'Repository.java';
-                //         me.items[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
-                //         event.name = item.name+'.java';
-                //     }
-                //     if(event.name != ''){
-                //         me.items[1].children[0].children[1].children[0].children[0].children[0].children.push(event)
-                //     }
-                // });
-
                 this.$modal.show('code-modal');
             },
             codeModalhide() {

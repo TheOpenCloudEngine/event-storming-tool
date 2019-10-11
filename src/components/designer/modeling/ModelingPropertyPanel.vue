@@ -41,18 +41,13 @@
                         <v-textarea name="input-7-1" outline :label="titleName" auto-grow v-model="input"></v-textarea>
                     </v-card-text>
 
-                    <v-data-table :items="aggregateEntity" class="elevation-1" hide-actions hide-headers>
-                        <template v-slot:items="props">
-                            <td>{{ props.item.type }}</td>
-                            <td class="text-xs-right">{{ props.item.name }}</td>
-                            <v-icon
-                                    small
-                                    @click="entitySub(props.index)"
-                            >
-                                delete
-                            </v-icon>
-                        </template>
-                    </v-data-table>
+                    <v-data-table
+                            :headers="headers"
+                            :items="entity"
+                            hide-default-header
+                            hide-default-footer
+                            class="elevation-1"
+                    ></v-data-table>
 
 
                     <v-layout justify-center row style="align: center;">
@@ -66,7 +61,7 @@
                     </v-layout>
 
                     <v-layout justify-end row wrap>
-                        <v-btn round color="primary" @click="entityADD(entityType,entityName);" dark>Entity ADD</v-btn>
+                        <v-btn rounded color="primary" @click="entityADD(entityType,entityName);" dark>Entity ADD</v-btn>
                     </v-layout>
 
                     <!-- <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
@@ -80,7 +75,6 @@
                     <template>
                         <div>
                             <v-expansion-panel>
-
                                 <v-expansion-panel-content EventExpand>
                                     <template v-slot:header>연결된 리스트</template>
                                     <v-card>
@@ -164,15 +158,35 @@
                         <v-textarea name="input-7-1" outline :label="titleName" auto-grow v-model="input"></v-textarea>
                     </v-card-text>
 
-                    <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
+                    <v-data-table
+                            v-if="value.name == 'event'"
+                            :headers="headers"
+                            :items="entity"
+                            hide-default-header
+                            hide-default-footer
+                            class="elevation-1"
+                    ></v-data-table>
+                    <v-layout v-if="value.name == 'event'" justify-center row style="align: center;">
+                        <v-flex xs4>
+                            <v-select v-model="entityType" :items="entityTypeList" label="Standard"
+                                      style="margin-left: 10px; margin-right: 15px;"></v-select>
+                        </v-flex>
+                        <v-flex xs6>
+                            <v-text-field v-model="entityName" :counter="10" label="Name" required></v-text-field>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout  v-if="value.name == 'event'"  justify-end row wrap>
+                        <v-btn rounded color="primary" @click="entityADD(entityType,entityName);" dark>Entity ADD</v-btn>
+                    </v-layout>
+
+                    <v-autocomplete v-if="value.name == 'Command'" v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
                                     prepend-icon="mdi-city">
                     </v-autocomplete>
 
                     <v-card-title>
                         <span class="headline" v-if="titleName">Aggregate 선택</span>
                     </v-card-title>
-                    <v-autocomplete v-model="aggregate" :items="aggregateList" label="Select Aggregate" persistent-hint
-                                    prepend-icon="mdi-city">
+                    <v-autocomplete style="margin-left: 20px; margin-right: 20px;" v-model="aggregate" :items="aggregateList" label="Select Aggregate" persistent-hint>
                     </v-autocomplete>
 
                 </v-card>
@@ -195,7 +209,7 @@
             img: String,
             restApi: String,
             innerAggregate: Object,
-            aggregateEntity: Array,
+            entity: Array,
         },
         computed: {
             aggregateList: function () {
@@ -281,7 +295,8 @@
                 entityTypeList: ['int', 'String', 'float', 'double', 'long'],
                 entityType: '',
                 entityName: '',
-                aggregate: ''
+                aggregate: '',
+                headers: [{value: 'type'}, {value: 'name'}]
 
             }
         },
@@ -412,22 +427,20 @@
                 if (type.length != 0 && name.length != 0) {
 
                     let tmpObject = {"type": type, "name": name}
-                    me.aggregateEntity.push(tmpObject);
+                    me.entity.push(tmpObject);
                     this.entityType = ""
                     this.entityName = ""
                 } else {
                     var designer = this.$parent.getComponent('modeling-designer')
                     designer.text = "TYPE & NAME INPUT REQUEST"
                     designer.snackbar = true
-
-                    console.log("GI");
                 }
             },
 
             entitySub: function (idx) {
                 var me = this
-                me.aggregateEntity[idx] = null
-                me.aggregateEntity = me.aggregateEntity.filter(n => n)
+                me.entity[idx] = null
+                me.entity = me.entity.filter(n => n)
 
             },
             addRelation: function (commandInputText, eventInputText) {

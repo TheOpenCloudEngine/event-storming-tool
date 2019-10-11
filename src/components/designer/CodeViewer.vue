@@ -34,6 +34,7 @@
                     theme: 'darcula',
                     lineWrapping: true,
                     matchBrackets: true,
+                    scroll: true
                 },
                 format :{},
             }

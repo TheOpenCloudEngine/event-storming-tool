@@ -56,7 +56,7 @@
             :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/policy.png'"
             :aggregate.sync="value.aggregate"
             :aggregateList.sync="aggregateList"
-            :connectAggregateName.sync="connectAggregateName"
+            :connectAggregateName.sync="value.connectAggregateName"
             v-model="value"
     >
     </modeling-property-panel>
@@ -99,7 +99,8 @@
             selected: false,
             inputText: '',
             restApi: '',
-            editing: false
+            editing: false,
+            connectAggregateName: ''
         }
       }
     },
@@ -115,7 +116,18 @@
 
     },
     watch: {
-
+        "value.connectAggregateName": function (newVal) {
+            console.log(newVal)
+            var me = this
+            var designer = this.getComponent('modeling-designer')
+            console.log(me.value.inputText)
+            designer.value.definition.forEach(function (temp) {
+                console.log(temp.inputText, newVal)
+                if (temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == newVal) {
+                    temp.innerAggregate[me.type.toLowerCase()].push(me.value.inputText)
+                }
+            })
+        }
     },
     mounted: function () {
 
