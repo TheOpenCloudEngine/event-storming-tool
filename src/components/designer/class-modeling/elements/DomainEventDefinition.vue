@@ -165,7 +165,7 @@
                     "\n" +
                     "{{#entity}}" +
                     "    public {{type}} {{name}};\n" +
-                    "{{/entity}}" +
+                    "{{/entity}}\n" +
                     "\n" +
                     "{{#entity}}" +
                     "    public {{type}} get{{upName}}() {\n" +
