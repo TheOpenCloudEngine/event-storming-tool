@@ -4,7 +4,7 @@
             <modal name="code-modal" scrollable :height='"auto"' :width="'80%'">
                 <v-card>
                     <v-card-title>
-                        <span class="headline">Use Google's location service?</span>
+                        <span class="headline">Code View</span>
                     </v-card-title>
                     <v-card-text>
                         <!-- 형태:
@@ -16,7 +16,7 @@
                             <v-col :lg="3"
                                    :md="6"
                                    :sm="2"
-                                   style="margin-right: 15px;"
+                                   style="margin-right: 15px; border-right: 1px solid black"
                             >
                                 <v-treeview
                                         :items="codeList"
@@ -179,14 +179,13 @@
         data() {
             return {
                 files: {
-                    html: 'mdi-language-html5',
-                    js: 'mdi-nodejs',
-                    json: 'mdi-json',
                     md: 'mdi-markdown',
-                    pdf: 'mdi-file-pdf',
-                    png: 'mdi-file-image',
                     txt: 'mdi-file-document-outline',
-                    xls: 'mdi-file-excel',
+                    java: 'mdi-language-java',
+                    xml: 'mdi-xml',
+                    shell: 'mdi-powershell',
+                    docker: 'mdi-docker',
+
                 },
                 code: '',
                 items: [
@@ -272,6 +271,7 @@
                                                                     },
                                                                     {
                                                                         name: 'application.java',
+                                                                        file: 'java',
                                                                         code: 'package com.example.template;\n' +
                                                                             '\n' +
                                                                             'import org.springframework.beans.factory.annotation.Autowired;\n' +
@@ -295,6 +295,7 @@
                                                                     },
                                                                     {
                                                                         name: 'AbstractEvent.java',
+                                                                        file: 'java',
                                                                         code: 'package com.example.template;\n' +
                                                                             '\n' +
                                                                             'import org.springframework.stereotype.Service;\n' +
@@ -336,7 +337,7 @@
                     },
                     {
                         name: 'Dockerfile',
-                        file: 'txt',
+                        file: 'docker',
                         code: "FROM openjdk:8u212-jdk-alpine\n" +
                             "COPY target/*SNAPSHOT.jar app.jar\n" +
                             "EXPOSE 8080\n" +
@@ -344,7 +345,7 @@
                     },
                     {
                         name: 'README.md',
-                        file: 'txt',
+                        file: 'md',
                         code: ''
                     },
                     {
@@ -438,7 +439,7 @@
                     },
                     {
                         name: 'mvnw',
-                        file: 'txt',
+                        file: 'shell',
                         code: "#!/bin/sh\n" +
                             "# ----------------------------------------------------------------------------\n" +
                             "# Licensed to the Apache Software Foundation (ASF) under one\n" +
@@ -729,7 +730,7 @@
                     },
                     {
                         name: 'mvnw.cmd',
-                        file: 'txt',
+                        file: 'shell',
                         code: "@REM ----------------------------------------------------------------------------\n" +
                             "@REM Licensed to the Apache Software Foundation (ASF) under one\n" +
                             "@REM or more contributor license agreements.  See the NOTICE file\n" +
@@ -894,7 +895,7 @@
                     },
                     {
                         name: 'pom.xml',
-                        file: 'txt',
+                        file: 'xml',
                         code: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                             "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
                             "\txsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n" +

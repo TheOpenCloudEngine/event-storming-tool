@@ -1,16 +1,24 @@
 <template>
     <v-container>
-        <!--<v-card>{{value[0].name[0]}}</v-card>-->
-        <codemirror
-                ref="codemirror"
-                :value="code"
-                :options="cmOption"
-                @ready="onCmReady"
-                @Focus="onCmFocus"
-                @input="onCmCodeChange"
-                :height="500"
-        >
-        </codemirror>
+        <v-card>
+            <v-card-title v-if="value[0][0]">
+                {{value[0][0].name}}
+            </v-card-title>
+            <v-card-text>
+                <codemirror
+                        ref="codemirror"
+                        :value="code"
+                        :options="cmOption"
+                        @ready="onCmReady"
+                        @Focus="onCmFocus"
+                        @input="onCmCodeChange"
+                        :height="500"
+                >
+                </codemirror>
+            </v-card-text>
+
+        </v-card>
+
     </v-container>
 </template>
 <script>
