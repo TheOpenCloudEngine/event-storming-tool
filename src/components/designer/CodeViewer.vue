@@ -1,6 +1,6 @@
 <template>
     <v-container>
-    <v-card>{{value[0]}}</v-card>
+    <v-card>{{value[0].name[0]}}</v-card>
     <codemirror
                 ref="codemirror"
                 :value="code"
@@ -35,73 +35,81 @@
                     matchBrackets: true,
                     scroll: true
                 },
-                DefinitionList:[],
+                definitionList:[]
             }
         },
         watch: {
           value(newVal) {
               this.code = ''
-              let fileName = newVal[0];
-
+              let fileName = newVal[0].name[0];
+              let list=newVal[1].value;
+              this.definitionList=list
               this.setFormat(fileName);
           }
         },
         methods: {
+
             onCmReady(cm) {
-                console.log('the editor is readied!', cm)
+                // console.log('the editor is readied!', cm)
 
             },
             onCmFocus(cm) {
-                console.log('the editor is focus!', cm)
+                // console.log('the editor is focus!', cm)
             },
             onCmCodeChange(newCode) {
+                console.log(newCode)
                 // console.log('this is new code', newCode)
                 // this.code = newCode
             },
             setFormat(name){
                 var me = this
-                let Definition=
-                    [
-                        {
-                            type:"Aggregate",
-                            header: "Product",
-                            variable:[
-                                { attribute:"private", type : "Long", name:"id" , upName:"Id" },
-                                { attribute:"private", type : "Long", name:"id" , upName:"Id" },
-                            ],
-                        },
-                        {
-                            type:"Event",
-                            header: "ProductChanged",
-                            variable:[
-                                { attribute:"private", type : "Long", name:"id" , upName:"Id" },
-                                { attribute:"public", type : "String", name:"stock" ,upName:"Stock"},
-                                { attribute:"public", type : "int", name:"price",upName:"Price"}
-                            ]
-                        },
-                        {
-                            type: "Command",
-                            header: "ProductController",
-                            aggregateName : "Product",
-                        },
-                        {
-                            type : "Policy",
-                            header : "onDeliveryCompleted",
-                            aggregateName : "Product",
-                        }
-                    ];
+                // let Definition=
+                //     [
+                //         {
+                //             type:"Aggregate",
+                //             header: "Product",
+                //             variable:[
+                //                 { attribute:"private", type : "Long", name:"id" , upName:"Id" },
+                //                 { attribute:"private", type : "Long", name:"id" , upName:"Id" },
+                //             ],
+                //         },
+                //         {
+                //             type:"Event",
+                //             header: "ProductChanged",
+                //             variable:[
+                //                 { attribute:"private", type : "Long", name:"id" , upName:"Id" },
+                //                 { attribute:"public", type : "String", name:"stock" ,upName:"Stock"},
+                //                 { attribute:"public", type : "int", name:"price",upName:"Price"}
+                //             ]
+                //         },
+                //         {
+                //             type: "Command",
+                //             header: "ProductController",
+                //             aggregateName : "Product",
+                //         },
+                //         {
+                //             type : "Policy",
+                //             header : "onDeliveryCompleted",
+                //             aggregateName : "Product",
+                //         }
+                //     ];
 
                 if(name.includes('.java')){
 
-                    Definition.some(function(definition){
-                        if( definition.type == 'Event' ){
+                    console.log(name)
+                    this.definitionList.some(function(definition){
+                        console.log(name,definition)
+
+                        if( name.includes('ed.java') ){
                             me.setEventTemplate(name,definition)
-                        } else if(definition.type == 'Command'){
+                        } else if(name.includes('Controller.java')){
                             me.setCommandTemplate(name,definition)
-                        } else if(definition.type == 'Aggregate'){
-                            me.setAggregateTemplate(name,definition)
-                        } else if(definition.type =='Policy'){
+                        } else if(name.includes('Service.java')){
                             me.setPolicyTemplate(name,definition);
+                        } else if(name.includes('Controller.java')) {
+                            // me.setViewTemplate(name,definition);
+                        }else{
+                            me.setAggregateTemplate(name,definition)
                         }
 
                     })
@@ -111,7 +119,6 @@
 
             },
             setEventTemplate(name,definition) {
-                if(name == definition.header + this.suffix ){
                     this.code = Mustache.render(
                         "package hello;\n" +
                         "\n" +
@@ -119,23 +126,24 @@
                         "import java.util.List;\n" +
                         "\n" +
                         "@Entity\n" +
-                        "@Table(name=\"{{header}}\")\n" +
-                        "public class {{header}} {\n" +
+                        "@Table(name=\"{{inputText}}\")\n" +
+                        "public class {{inputText}} {\n" +
                         "\n" +
                         "    @Id\n" +
                         "    @GeneratedValue\n" +
-                        "    {{#variable}}\n" +
-                        "     {{attribute}} {{type}} {{name}};\n" +
-                        "    {{/variable}}\n" +
+                        "    private Long id;" +
+                        "    {{#entity}}\n" +
+                        "     public {{type}} {{name}};\n" +
+                        "    {{/entity}}\n" +
                         "\n" +
-                        "    {{ #variable }}\n" +
-                        "      public {{type}} get{{upName}}() {\n" +
+                        "    {{ #entity }}\n" +
+                        "      public {{type}} get{{name}}() {\n" +
                         "           return {{name}};\n" +
                         "       }\n" +
-                        "      public void set{{upName}}({{attribute}} {{name}}) {\n" +
+                        "      public void set{{name}}(public {{name}}) {\n" +
                         "           this.{{name}} = {{name}};\n" +
                         "       }\n\n\n" +
-                        "    {{ /variable }}\n" +
+                        "    {{ /entity }}\n" +
                         "\n\n\n\n" +
                         "@PostPersist @PostUpdate\n" +
                         "    private void publishStart() {\n" +
@@ -144,10 +152,10 @@
                         "        ObjectMapper objectMapper = new ObjectMapper();\n" +
                         "        String json = null;\n" +
                         "\n" +
-                        "        {{header}}Changed productChanged = new ProductChanged();\n" +
-                        " {{ #variable }}\n" +
-                        "        {{header}}Changed.setProduct{{upName}}(this.{{name}});\n" +
-                        " {{ /variable }}\n" +
+                        "        {{inputText}} {{inputText}} = new {{inputText}}();\n" +
+                        " {{ #entity }}\n" +
+                        "        {{name}}Changed.setProduct{{name}}(this.{{name}});\n" +
+                        " {{ /entity }}\n" +
                         "        try {\n" +
                         "            json = objectMapper.writeValueAsString(productChanged);\n" +
                         "        } catch (JsonProcessingException e) {\n" +
@@ -163,16 +171,14 @@
                         "    }" +
                         "}\n", definition)
 
-                }
-
             },
             setAggregateTemplate(name,definition){
 
-                if(name == definition.header+'Repository.java'){
+                if(name == definition.name+'Repository.java'){
                     this.code = Mustache.render(
                         "package com.example.template;\n " +
                         "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
-                        "public interface {{ header }}Repository extends PagingAndSortingRepository < {{ header }}, Long > { \n " +
+                        "public interface {{ name }}Repository extends PagingAndSortingRepository < {{ name }}, Long > { \n " +
                         "}\n", definition)
                 }else{
                     this.code = Mustache.render(
@@ -187,55 +193,36 @@
                         "import javax.persistence.*;\n" +
                         "\n" +
                         "@Entity\n" +
-                        "public class Product {\n" +
+                        "public class {{name}} {\n" +
                         "\n" +
                         "    @Id\n" +
-                        "    private Long id;\n" +
-                        "    String name;\n" +
-                        "    int price;\n" +
-                        "    int stock;\n" +
+                        "    @GeneratedValue\n" +
+                        "    private Long id;\n\n" +
+                        "{{#aggregateEntity}}" +
+                        "    {{type}} {{name}};\n" +
+                        "{{/aggregateEntity}}" +
                         "\n" +
-                        "    public Long getId() {\n" +
-                        "        return id;\n" +
+                        " {{#aggregateEntity}} " +
+                        "    public {{type}} getId() {\n" +
+                        "        return {{name}};\n" +
                         "    }\n" +
                         "\n" +
-                        "    public void setId(Long id) {\n" +
-                        "        this.id = id;\n" +
+                        "    public void setId(Long {{name}}) {\n" +
+                        "        this.{{name}} = {{name}};\n" +
                         "    }\n" +
+                        "{{/aggregateEntity}}" +
                         "\n" +
-                        "    public String getName() {\n" +
-                        "        return name;\n" +
-                        "    }\n" +
-                        "\n" +
-                        "    public void setName(String name) {\n" +
-                        "        this.name = name;\n" +
-                        "    }\n" +
-                        "\n" +
-                        "    public int getPrice() {\n" +
-                        "        return price;\n" +
-                        "    }\n" +
-                        "\n" +
-                        "    public void setPrice(int price) {\n" +
-                        "        this.price = price;\n" +
-                        "    }\n" +
-                        "\n" +
-                        "    public int getStock() {\n" +
-                        "        return stock;\n" +
-                        "    }\n" +
-                        "\n" +
-                        "    public void setStock(int stock) {\n" +
-                        "        this.stock = stock;\n" +
-                        "    }\n" +
                         "}", definition)
                 }
 
 
             },
-            setViewTemplate(){
-
+            setViewTemplate(name,definition){
+                this.code='THIS IS VIEW'
             },
             setCommandTemplate(name,definition){
-                if(name = definition.header+'.java'){
+
+                if(name = definition.name+'Controller.java'){
                     this.code = Mustache.render(
                         "package com.example.template;\n" +
                         "\n" +
@@ -250,13 +237,13 @@
                         "import java.util.List;\n" +
                         "\n" +
                         "@RestController\n" +
-                        "public class {{ header }}Controller {\n" +
+                        "public class {{ name }}Controller {\n" +
                         "\n" +
                         "}", definition)
                 }
 
             },
-            setPolicyTemplate(){
+            setPolicyTemplate(name,definition){
                 this.code = Mustache.render("package com.example.template;\n" +
               "\n" +
               "import com.fasterxml.jackson.databind.DeserializationFeature;\n" +
@@ -273,19 +260,19 @@
               "import java.util.Optional;\n" +
               "\n" +
               "@Service\n" +
-              "public class {{ aggregateName }}Service {\n" +
+              "public class {{ connectAggregateName }}Service {\n" +
               "\n" +
               "    @Autowired\n" +
               "    private KafkaTemplate kafkaTemplate;\n" +
               "\n" +
               "    @Autowired\n" +
-              "    private {{ aggregateName }}Repository {{ aggregateName }}Repository;\n" +
+              "    private {{ connectAggregateName }}Repository {{ connectAggregateName }}Repository;\n" +
               "\n" +
               "    /**\n" +
               "     * 상품 변경이 발생할때마다, 상품정보를 저장해 놓음\n" +
               "     */\n" +
               "    @KafkaListener(topics = \"${eventTopic}\")\n" +
-              "    public void {{ header }}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
+              "    public void {{ name }}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
               "        System.out.println(\"##### listener : \" + message);\n" +
               "\n" +
               "       \n" +

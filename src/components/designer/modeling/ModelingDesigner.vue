@@ -13,10 +13,10 @@
                                 class="mb-6"
                                 no-gutters
                         >
-                            <v-col  :lg="3"
-                                    :md="6"
-                                    :sm="2"
-                                    style="margin-right: 15px;"
+                            <v-col :lg="3"
+                                   :md="6"
+                                   :sm="2"
+                                   style="margin-right: 15px;"
                             >
                                 <v-treeview
                                         :open="open"
@@ -36,16 +36,16 @@
                                     </template>
                                 </v-treeview>
                             </v-col>
-                            <v-col  :lg="8"
-                                    :md="8"
-                                    :sm="9"
+                            <v-col :lg="8"
+                                   :md="8"
+                                   :sm="9"
                             >
                                 <!--<highlight-code lang="javascript">-->
                                 <!--let str = 'Hello, World!';-->
                                 <!--console.log(str);-->
                                 <!--</highlight-code>-->
 
-                                <code-viewer v-model="active"></code-viewer>
+                                <code-viewer v-model="definitionSet"></code-viewer>
                             </v-col>
                         </v-row>
                     </v-card-text>
@@ -96,10 +96,12 @@
 
                 <!--<v-btn color="info" v-on:click.native="addNewMember">addNewMember-->
                 <!--</v-btn>-->
-                <v-btn color="info" v-on:click.native="restApiPush" style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD
+                <v-btn color="info" v-on:click.native="restApiPush"
+                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD
                 </v-btn>
-                <v-btn color="info" v-on:click.native="codeModalShow" style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">Generate
-                </v-btn >
+                <v-btn color="info" v-on:click.native="codeModalShow" @inputBuy="inputValue"
+                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">Generate
+                </v-btn>
                 <v-flex xs12 sm6 style="display: inline-block; max-width:400px;">
                     <v-text-field label="Project Name" v-model="projectName" single-line
                                   @click="unselectedAll"></v-text-field>
@@ -181,7 +183,7 @@
                     txt: 'mdi-file-document-outline',
                     xls: 'mdi-file-excel',
                 },
-                code:'',
+                code: '',
                 items: [
                     {
                         name: '.mvn',
@@ -199,31 +201,33 @@
                     },
                     {
                         name: 'src',
-                        children:[
+                        children: [
                             {
-                                name:'main',
+                                name: 'main',
                                 children: [
-                                    { name:'resources',
+                                    {
+                                        name: 'resources',
                                         children: [
                                             {
-                                                name:'application.yml',
-                                                file:'txt'
+                                                name: 'application.yml',
+                                                file: 'txt'
                                             },
                                         ]
                                     },
-                                    { name:'java',
+                                    {
+                                        name: 'java',
                                         children: [
                                             {
-                                                name:'com',
+                                                name: 'com',
                                                 children: [
                                                     {
-                                                        name:'example',
+                                                        name: 'example',
                                                         children: [
                                                             {
-                                                                name:'template',
-                                                                children:[
+                                                                name: 'template',
+                                                                children: [
                                                                     {
-                                                                        name:'config',
+                                                                        name: 'config',
                                                                     },
                                                                 ]
 
@@ -266,7 +270,7 @@
                         file: 'txt',
                     },
                 ],
-                active:['Dockerfile'],
+                active: [],
                 // jsonStr:{"definition":[{"_type":"org.uengine.uml.model.bounded","name":"Bounded Context","elementView":{"_type":"org.uengine.modeling.bounded","id":"d14e70f2-3a6a-2dfd-5900-c9ef9a39b708","x":496,"y":333,"width":482,"height":518,"style":"{}"},"drawer":false,"selected":false,"inputText":"11","dataList":[{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"bf2537a0-0915-874f-6739-3dd276a4df05","x":350,"y":172,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D1","restApi":"GET"}],"command":[{"_type":"org.uengine.uml.model.Command","name":"Command","fieldDescriptors":[],"elementView":{"_type":"org.uengine.modeling.Command","id":"14217b6f-a17e-545d-f019-d01e5ef11031","x":649,"y":171,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"C1","restApi":""}],"view":[]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"9fdd2422-b337-758f-8ad4-4b48fe161dc8","x":485,"y":171,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A1","restApi":""},{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"26614909-b65a-4149-1ac9-30a7bd5c6be7","x":348,"y":406,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D2","restApi":"POST"}],"command":[],"view":[{"_type":"org.uengine.uml.model.View","name":"View","elementView":{"_type":"org.uengine.modeling.View","id":"149c2ed9-9cec-d248-60ca-d326ec5c5398","x":648,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"V1","restApi":""}]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"0a3d8c6d-8a52-8eb1-a998-a95042176395","x":484,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A2","restApi":""},{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"bf2537a0-0915-874f-6739-3dd276a4df05","x":350,"y":172,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D1","restApi":"GET"}],"command":[{"_type":"org.uengine.uml.model.Command","name":"Command","fieldDescriptors":[],"elementView":{"_type":"org.uengine.modeling.Command","id":"14217b6f-a17e-545d-f019-d01e5ef11031","x":649,"y":171,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"C1","restApi":""}],"view":[]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"9fdd2422-b337-758f-8ad4-4b48fe161dc8","x":485,"y":171,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A1","restApi":""},{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"26614909-b65a-4149-1ac9-30a7bd5c6be7","x":348,"y":406,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D2","restApi":"POST"}],"command":[],"view":[{"_type":"org.uengine.uml.model.View","name":"View","elementView":{"_type":"org.uengine.modeling.View","id":"149c2ed9-9cec-d248-60ca-d326ec5c5398","x":648,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"V1","restApi":""}]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"0a3d8c6d-8a52-8eb1-a998-a95042176395","x":484,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A2","restApi":""},{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"26614909-b65a-4149-1ac9-30a7bd5c6be7","x":348,"y":406,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D2","restApi":"POST"}],"command":[],"view":[{"_type":"org.uengine.uml.model.View","name":"View","elementView":{"_type":"org.uengine.modeling.View","id":"149c2ed9-9cec-d248-60ca-d326ec5c5398","x":648,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"V1","restApi":""}]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"0a3d8c6d-8a52-8eb1-a998-a95042176395","x":484,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A2","restApi":""},{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"26614909-b65a-4149-1ac9-30a7bd5c6be7","x":348,"y":406,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D2","restApi":"POST"}],"command":[],"view":[{"_type":"org.uengine.uml.model.View","name":"View","elementView":{"_type":"org.uengine.modeling.View","id":"149c2ed9-9cec-d248-60ca-d326ec5c5398","x":648,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"V1","restApi":""}]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"0a3d8c6d-8a52-8eb1-a998-a95042176395","x":484,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A2","restApi":""},{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"26614909-b65a-4149-1ac9-30a7bd5c6be7","x":348,"y":406,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D2","restApi":"POST"}],"command":[],"view":[{"_type":"org.uengine.uml.model.View","name":"View","elementView":{"_type":"org.uengine.modeling.View","id":"149c2ed9-9cec-d248-60ca-d326ec5c5398","x":648,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"V1","restApi":""}]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"0a3d8c6d-8a52-8eb1-a998-a95042176395","x":484,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A2","restApi":""}]},{"_type":"org.uengine.uml.model.bounded","name":"Bounded Context","elementView":{"_type":"org.uengine.modeling.bounded","id":"2d623660-624b-b053-b5c1-96ff9b4ce5f3","x":1486,"y":333,"width":612,"height":534,"style":"{}"},"drawer":false,"selected":false,"inputText":"22","dataList":[{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"c0383034-8fad-8651-568f-d7b373021f8b","x":1311,"y":164,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D3","restApi":""}],"command":[],"view":[]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"8366a56e-936f-5fb9-f408-d432061de73e","x":1486,"y":165,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A3","restApi":""},{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[],"command":[{"_type":"org.uengine.uml.model.Command","name":"Command","fieldDescriptors":[],"elementView":{"_type":"org.uengine.modeling.Command","id":"3dec2a74-478f-bedc-a588-fe10c9f91db0","x":1309,"y":404,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"C2","restApi":""}],"view":[{"_type":"org.uengine.uml.model.View","name":"View","elementView":{"_type":"org.uengine.modeling.View","id":"ed29de32-7120-79ec-768a-2930a1bab1fe","x":1645,"y":405,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":true,"inputText":"V2","restApi":""}]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"a344ae72-1b0c-2f29-aedb-fb07eb3daf6d","x":1487,"y":405,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A4","restApi":""},{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[],"command":[{"_type":"org.uengine.uml.model.Command","name":"Command","fieldDescriptors":[],"elementView":{"_type":"org.uengine.modeling.Command","id":"3dec2a74-478f-bedc-a588-fe10c9f91db0","x":1309,"y":404,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"C2","restApi":""}],"view":[{"_type":"org.uengine.uml.model.View","name":"View","elementView":{"_type":"org.uengine.modeling.View","id":"ed29de32-7120-79ec-768a-2930a1bab1fe","x":1645,"y":405,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":true,"inputText":"V2","restApi":""}]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"a344ae72-1b0c-2f29-aedb-fb07eb3daf6d","x":1487,"y":405,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A4","restApi":""}]},{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"26614909-b65a-4149-1ac9-30a7bd5c6be7","x":348,"y":406,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D2","restApi":"POST"}],"command":[],"view":[{"_type":"org.uengine.uml.model.View","name":"View","elementView":{"_type":"org.uengine.modeling.View","id":"149c2ed9-9cec-d248-60ca-d326ec5c5398","x":648,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"V1","restApi":""}]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"0a3d8c6d-8a52-8eb1-a998-a95042176395","x":484,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A2","restApi":""},{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"c0383034-8fad-8651-568f-d7b373021f8b","x":1311,"y":164,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D3","restApi":""}],"command":[],"view":[]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"8366a56e-936f-5fb9-f408-d432061de73e","x":1486,"y":165,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A3","restApi":""},{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"bf2537a0-0915-874f-6739-3dd276a4df05","x":350,"y":172,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D1","restApi":"GET"}],"command":[{"_type":"org.uengine.uml.model.Command","name":"Command","fieldDescriptors":[],"elementView":{"_type":"org.uengine.modeling.Command","id":"14217b6f-a17e-545d-f019-d01e5ef11031","x":649,"y":171,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"C1","restApi":""}],"view":[]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"9fdd2422-b337-758f-8ad4-4b48fe161dc8","x":485,"y":171,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A1","restApi":""},{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"bf2537a0-0915-874f-6739-3dd276a4df05","x":350,"y":172,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D1","restApi":"GET"},{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"26614909-b65a-4149-1ac9-30a7bd5c6be7","x":348,"y":406,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D2","restApi":"POST"},{"_type":"org.uengine.uml.model.Domain","name":"Domain","elementView":{"_type":"org.uengine.modeling.Domain","id":"c0383034-8fad-8651-568f-d7b373021f8b","x":1311,"y":164,"width":100,"height":100,"style":"{}","angle":0},"drawer":false,"selected":false,"inputText":"D3","restApi":""},{"_type":"org.uengine.uml.model.Command","name":"Command","fieldDescriptors":[],"elementView":{"_type":"org.uengine.modeling.Command","id":"14217b6f-a17e-545d-f019-d01e5ef11031","x":649,"y":171,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"C1","restApi":""},{"_type":"org.uengine.uml.model.Command","name":"Command","fieldDescriptors":[],"elementView":{"_type":"org.uengine.modeling.Command","id":"3dec2a74-478f-bedc-a588-fe10c9f91db0","x":1309,"y":404,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"C2","restApi":""},{"_type":"org.uengine.uml.model.Aggregate","name":"Aggregate","innerAggregate":{"domain":[],"command":[{"_type":"org.uengine.uml.model.Command","name":"Command","fieldDescriptors":[],"elementView":{"_type":"org.uengine.modeling.Command","id":"3dec2a74-478f-bedc-a588-fe10c9f91db0","x":1309,"y":404,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"C2","restApi":""}],"view":[{"_type":"org.uengine.uml.model.View","name":"View","elementView":{"_type":"org.uengine.modeling.View","id":"ed29de32-7120-79ec-768a-2930a1bab1fe","x":1645,"y":405,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":true,"inputText":"V2","restApi":""}]},"elementView":{"_type":"org.uengine.modeling.Aggregate","id":"a344ae72-1b0c-2f29-aedb-fb07eb3daf6d","x":1487,"y":405,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"A4","restApi":""},{"_type":"org.uengine.uml.model.View","name":"View","elementView":{"_type":"org.uengine.modeling.View","id":"149c2ed9-9cec-d248-60ca-d326ec5c5398","x":648,"y":406,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":false,"inputText":"V1","restApi":""},{"_type":"org.uengine.uml.model.View","name":"View","elementView":{"_type":"org.uengine.modeling.View","id":"ed29de32-7120-79ec-768a-2930a1bab1fe","x":1645,"y":405,"width":100,"height":100,"style":"{}"},"drawer":false,"selected":true,"inputText":"V2","restApi":""}],"relation":[]},
                 canvas: null,
                 dragPageMovable: false,
@@ -305,6 +309,9 @@
             // this.channel.pusher.unsubscribe('presence-event');
         },
         computed: {
+            definitionSet() {
+                    return this.inputValue(this.active)
+            },
             drawer: {
                 get: function () {
                     var me = this
@@ -332,24 +339,24 @@
                     let tmpList = JSON.parse(JSON.stringify(me.items));
                     console.log(me.items)
 
-                    me.value.definition.forEach(function(item){
-                        var event={
-                            name:'',
-                            file:'txt'
+                    me.value.definition.forEach(function (item) {
+                        var event = {
+                            name: '',
+                            file: 'txt'
                         }
                         console.log(item)
-                        if(item._type == 'org.uengine.uml.model.Domain'){
-                            event.name = item.inputText+'.java';
-                        } else if ( item._type == 'org.uengine.uml.model.Command' ){
-                            event.name = item.inputText+'Controller.java';
-                        } else if ( item._type == 'org.uengine.uml.model.Policy' ){
-                            event.name = item.inputText+'Service.java';
-                        } else if ( item._type == 'org.uengine.uml.model.Aggregate') {
-                            event.name = item.inputText+'Repository.java';
+                        if (item._type == 'org.uengine.uml.model.Domain') {
+                            event.name = item.inputText + '.java';
+                        } else if (item._type == 'org.uengine.uml.model.Command') {
+                            event.name = item.inputText + 'Controller.java';
+                        } else if (item._type == 'org.uengine.uml.model.Policy') {
+                            event.name = item.inputText + 'Service.java';
+                        } else if (item._type == 'org.uengine.uml.model.Aggregate') {
+                            event.name = item.inputText + 'Repository.java';
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
-                            event.name = item.inputText+'.java';
+                            event.name = item.inputText + '.java';
                         }
-                        if(event.name != ''){
+                        if (event.name != '') {
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(event)
                         }
                     });
@@ -405,12 +412,11 @@
                                 return;
                             }
                         })
-                        if(used == false) {
+                        if (used == false) {
                             me.value.definition.push(newVal)
                         }
                         // me.value.definition.push(newVal)
-                    }
-                    else {
+                    } else {
                         me.value['relation'].some(function (tmp, index) {
                             console.log(tmp, index)
                             if (tmp._type != 'org.uengine.uml.model.bounded') {
@@ -465,9 +471,16 @@
                 });
             });
         },
-        watch: { },
+        watch: {},
 
         methods: {
+            inputValue(name) {
+                var test = [
+                    {'name': name},
+                    {'value': this.value.definition}
+                ]
+                return test
+            },
             codeModalShow() {
                 this.$modal.show('code-modal');
             },
@@ -909,26 +922,31 @@
             top: 20px;
             padding: 4px;
             overflow: hidden;
+
             .icons {
                 margin-top: 5px;
                 margin-bottom: 5px;
             }
+
             .hands {
                 margin-top: 5px;
                 margin-bottom: 5px;
             }
         }
+
         .zoom {
             position: absolute;
             width: 42px;
             right: 20px;
             bottom: 120px;
+
             .icons {
                 font-size: 25px;
                 margin-left: 10px;
                 margin-top: 5px;
                 margin-bottom: 5px;
             }
+
             .hands {
                 font-size: 25px;
                 margin-left: 10px;
@@ -936,9 +954,11 @@
                 margin-bottom: 5px;
             }
         }
+
         .icons {
             cursor: pointer;
             font-size: 30px;
+
             &:hover {
                 color: #ffc124;
             }
@@ -949,25 +969,30 @@
             font-size: 30px;
             color: #ffc124;
         }
+
         .export,
         .history,
         .import,
         .save {
             position: absolute;
             padding: 8px;
+
             .icons {
                 font-size: 25px;
                 margin-left: 10px;
             }
         }
+
         .import {
             left: 80px;
             bottom: 20px;
         }
+
         .export {
             left: 180px;
             bottom: 20px;
         }
+
         .history {
             left: 280px;
             bottom: 20px;
