@@ -66,6 +66,7 @@
 
 <script>
     import Element from '../../modeling/Element'
+    var Mustache = require('mustache')
 
     export default {
         mixins: [Element],
@@ -105,7 +106,9 @@
                     selected: false,
                     inputText: '',
                     restApi: '',
-                    aggregateEntity: []
+                    aggregateEntity: [],
+                    aggregateCode: '',
+                    repositoryCode: ''
                 }
 
             }
@@ -122,14 +125,79 @@
 
         },
         watch: {
+            "value.inputText": function (newVal) {
+                console.log(this.value)
+                // console.log(this.code)
+                // this.code = this.codeGenerate;
+                this.value.aggregateCode = this.setAggregateTemplate(newVal, this.value)
+                this.value.repositoryCode = this.setRepositoryTemplate(newVal, this.value)
 
+            },
+            "value.aggregateEntity": function () {
+                var me = this
+                console.log(this.value)
+                // console.log(this.code)
+                // this.code = this.codeGenerate;
+                this.value.aggregateCode = me.setAggregateTemplate(me.value.inputText, this.value)
+                this.value.repositoryCode = this.setRepositoryTemplate(me.value.inputText, this.value)
+            }
         },
         mounted: function () {
 
         },
         methods: {
+            setRepositoryTemplate(name, definition) {
+                return Mustache.render(
+                    "package com.example.template;\n " +
+                    "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
+                    "public interface {{ inputText }}Repository extends PagingAndSortingRepository < {{ name }}, Long > { \n " +
+                    "}\n", definition)
+            },
+            setAggregateTemplate(name, definition) {
+                return Mustache.render(
+                    "package com.example.template;\n" +
+                    "\n" +
+                    "import com.fasterxml.jackson.core.JsonProcessingException;\n" +
+                    "import com.fasterxml.jackson.databind.ObjectMapper;\n" +
+                    "import org.apache.kafka.clients.producer.ProducerRecord;\n" +
+                    "import org.springframework.core.env.Environment;\n" +
+                    "import org.springframework.kafka.core.KafkaTemplate;\n" +
+                    "\n" +
+                    "import javax.persistence.*;\n" +
+                    "\n" +
+                    "@Entity\n" +
+                    "public class {{inputText}} {\n" +
+                    "\n" +
+                    "    @Id\n" +
+                    "    @GeneratedValue\n" +
+                    "    private Long id;\n\n" +
 
-        }
+                    "{{#aggregateEntity}}\n" +
+                    "    public {{type}} {{name}};\n" +
+                    "{{/aggregateEntity}}\n" +
+                    "\n" +
+                    "    public Long getId() {\n" +
+                    "        return id;\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    public void setId(Long id) {\n" +
+                    "        this.id = id;\n" +
+                    "    }\n" +
+                    "\n" +
+                    "{{#aggregateEntity}} \n" +
+                    "    public {{type}} get{{upName}}() { \n" +
+                    "        return {{name}};\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    public void set{{upName}}({{type}} {{name}}) { \n" +
+                    "        this.{{name}} = {{name}};\n" +
+                    "    }\n" +
+                    "{{/aggregateEntity}}\n" +
+                    "\n" +
+                    "}", definition)
+            }
+        },
+
     }
 </script>
 

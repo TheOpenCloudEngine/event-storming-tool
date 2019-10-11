@@ -67,6 +67,7 @@
 
 <script>
     import Element from '../../modeling/Element'
+    var Mustache = require('mustache')
 
     export default {
         mixins: [Element],
@@ -102,7 +103,8 @@
                     inputText: '',
                     restApi: '',
                     editing: false,
-                    connectAggregateName: ''
+                    connectAggregateName: '',
+                    code: ''
                 }
             }
         },
@@ -130,13 +132,37 @@
                         temp.innerAggregate[me.type.toLowerCase()].push(me.value.inputText)
                     }
                 })
+            },
+            "value.inputText": function (newVal) {
+                console.log(this.value)
+                // console.log(this.code)
+                // this.code = this.codeGenerate;
+                this.value.code = this.setCommandTemplate(newVal,this.value)
             }
         },
         mounted: function () {
 
         },
         methods: {
-
+            setCommandTemplate(name,definition){
+                    return Mustache.render(
+                        "package com.example.template;\n" +
+                        "\n" +
+                        "import org.springframework.beans.factory.annotation.Autowired;\n" +
+                        "import org.springframework.web.bind.annotation.PathVariable;\n" +
+                        "import org.springframework.web.bind.annotation.RequestMapping;\n" +
+                        "import org.springframework.web.bind.annotation.RequestMethod;\n" +
+                        "import org.springframework.web.bind.annotation.RestController;\n" +
+                        "\n" +
+                        "import javax.servlet.http.HttpServletRequest;\n" +
+                        "import javax.servlet.http.HttpServletResponse;\n" +
+                        "import java.util.List;\n" +
+                        "\n" +
+                        "@RestController\n" +
+                        "public class {{ name }}Controller {\n" +
+                        "\n" +
+                        "}", definition)
+            },
         }
     }
 </script>

@@ -426,10 +426,11 @@
                 console.log(type, name);
                 if (type.length != 0 && name.length != 0) {
 
-                    let tmpObject = {"type": type, "name": name}
+                    let tmpObject = {"type": type, "name": name, "upName": name.charAt(0).toUpperCase() + name.slice(1)}
                     me.entity.push(tmpObject);
                     this.entityType = ""
                     this.entityName = ""
+
                 } else {
                     var designer = this.$parent.getComponent('modeling-designer')
                     designer.text = "TYPE & NAME INPUT REQUEST"

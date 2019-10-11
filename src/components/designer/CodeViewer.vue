@@ -1,6 +1,6 @@
 <template>
     <v-container>
-    <v-card>{{value[0].name[0]}}</v-card>
+    <!--<v-card>{{value[0].name[0]}}</v-card>-->
     <codemirror
                 ref="codemirror"
                 :value="code"
@@ -40,12 +40,19 @@
         },
         watch: {
           value(newVal) {
+              // console.log()
               this.code = ''
-              console.log(newVal)
-              let fileName = newVal[0].name[0];
-              let list=newVal[1].value;
-              this.definitionList=list
-              this.setFormat(fileName);
+                if(newVal[0][0].code.length > 0) {
+                    this.code = newVal[0][0].code
+                } else {
+                    this.setFormat(newVal[0][0].name);
+                }
+
+
+              // console.log(newVal)
+              // let fileName = newVal[0].name[0];
+              // let list=newVal[1].value;
+              // this.definitionList=list
           }
         },
         methods: {
@@ -58,7 +65,6 @@
                 // console.log('the editor is focus!', cm)
             },
             onCmCodeChange(newCode) {
-                console.log(newCode)
                 // console.log('this is new code', newCode)
                 // this.code = newCode
             },
@@ -67,10 +73,7 @@
 
                 if(name.includes('.java')){
 
-                    console.log(name)
                     this.definitionList.some(function(definition){
-                        console.log(name,definition)
-
                         if( name.includes('ed.java') ){
                             me.setEventTemplate(name,definition)
                         } else if(name.includes('Controller.java')){
@@ -89,169 +92,103 @@
                 }
 
             },
-            setEventTemplate(name,definition) {
-                    this.code = Mustache.render(
-                        "package hello;\n" +
-                        "\n" +
-                        "import javax.persistence.*;\n" +
-                        "import java.util.List;\n" +
-                        "\n" +
-                        "@Entity\n" +
-                        "@Table(name=\"{{inputText}}\")\n" +
-                        "public class {{inputText}} {\n" +
-                        "\n" +
-                        "    @Id\n" +
-                        "    @GeneratedValue\n" +
-                        "    private Long id;" +
-                        "    {{#entity}}\n" +
-                        "     public {{type}} {{name}};\n" +
-                        "    {{/entity}}\n" +
-                        "\n" +
-                        "    {{ #entity }}\n" +
-                        "      public {{type}} get{{name}}() {\n" +
-                        "           return {{name}};\n" +
-                        "       }\n" +
-                        "      public void set{{name}}(public {{name}}) {\n" +
-                        "           this.{{name}} = {{name}};\n" +
-                        "       }\n\n\n" +
-                        "    {{ /entity }}\n" +
-                        "\n\n\n\n" +
-                        "@PostPersist @PostUpdate\n" +
-                        "    private void publishStart() {\n" +
-                        "        KafkaTemplate kafkaTemplate = Application.applicationContext.getBean(KafkaTemplate.class);\n" +
-                        "\n" +
-                        "        ObjectMapper objectMapper = new ObjectMapper();\n" +
-                        "        String json = null;\n" +
-                        "\n" +
-                        "        {{inputText}} {{inputText}} = new {{inputText}}();\n" +
-                        " {{ #entity }}\n" +
-                        "        {{name}}Changed.setProduct{{name}}(this.{{name}});\n" +
-                        " {{ /entity }}\n" +
-                        "        try {\n" +
-                        "            json = objectMapper.writeValueAsString(productChanged);\n" +
-                        "        } catch (JsonProcessingException e) {\n" +
-                        "            throw new RuntimeException(\"JSON format exception\", e);\n" +
-                        "        }\n" +
-                        "\n" +
-                        "        if( json != null ){\n" +
-                        "            Environment env = Application.applicationContext.getEnvironment();\n" +
-                        "            String topicName = env.getProperty(\"eventTopic\");\n" +
-                        "            ProducerRecord producerRecord = new ProducerRecord<>(topicName, json);\n" +
-                        "            kafkaTemplate.send(producerRecord);\n" +
-                        "        }\n" +
-                        "    }" +
-                        "}\n", definition)
+            // setEventTemplate(name,definition) {
+            //         this.code = Mustache.render(
+            //             "package hello;\n" +
+            //             "\n" +
+            //             "import javax.persistence.*;\n" +
+            //             "import java.util.List;\n" +
+            //             "\n" +
+            //             "@Entity\n" +
+            //             "@Table(name=\"{{inputText}}\")\n" +
+            //             "public class {{inputText}} {\n" +
+            //             "\n" +
+            //             "    @Id\n" +
+            //             "    @GeneratedValue\n" +
+            //             "    private Long id;" +
+            //             "    {{#entity}}\n" +
+            //             "     public {{type}} {{name}};\n" +
+            //             "    {{/entity}}\n" +
+            //             "\n" +
+            //             "    {{ #entity }}\n" +
+            //             "      public {{type}} get{{name}}() {\n" +
+            //             "           return {{name}};\n" +
+            //             "       }\n" +
+            //             "      public void set{{name}}(public {{name}}) {\n" +
+            //             "           this.{{name}} = {{name}};\n" +
+            //             "       }\n\n\n" +
+            //             "    {{ /entity }}\n" +
+            //             "\n\n\n\n" +
+            //             "@PostPersist @PostUpdate\n" +
+            //             "    private void publishStart() {\n" +
+            //             "        KafkaTemplate kafkaTemplate = Application.applicationContext.getBean(KafkaTemplate.class);\n" +
+            //             "\n" +
+            //             "        ObjectMapper objectMapper = new ObjectMapper();\n" +
+            //             "        String json = null;\n" +
+            //             "\n" +
+            //             "        {{inputText}} {{inputText}} = new {{inputText}}();\n" +
+            //             " {{ #entity }}\n" +
+            //             "        {{name}}Changed.setProduct{{name}}(this.{{name}});\n" +
+            //             " {{ /entity }}\n" +
+            //             "        try {\n" +
+            //             "            json = objectMapper.writeValueAsString(productChanged);\n" +
+            //             "        } catch (JsonProcessingException e) {\n" +
+            //             "            throw new RuntimeException(\"JSON format exception\", e);\n" +
+            //             "        }\n" +
+            //             "\n" +
+            //             "        if( json != null ){\n" +
+            //             "            Environment env = Application.applicationContext.getEnvironment();\n" +
+            //             "            String topicName = env.getProperty(\"eventTopic\");\n" +
+            //             "            ProducerRecord producerRecord = new ProducerRecord<>(topicName, json);\n" +
+            //             "            kafkaTemplate.send(producerRecord);\n" +
+            //             "        }\n" +
+            //             "    }" +
+            //             "}\n", definition)
+            //
+            // },
 
-            },
-            setAggregateTemplate(name,definition){
+            // setViewTemplate(name,definition){
+            //     this.code='THIS IS VIEW'
+            // },
 
-                if(name == definition.name+'Repository.java'){
-                    this.code = Mustache.render(
-                        "package com.example.template;\n " +
-                        "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
-                        "public interface {{ name }}Repository extends PagingAndSortingRepository < {{ name }}, Long > { \n " +
-                        "}\n", definition)
-                }else{
-                    this.code = Mustache.render(
-                        "package com.example.template;\n" +
-                        "\n" +
-                        "import com.fasterxml.jackson.core.JsonProcessingException;\n" +
-                        "import com.fasterxml.jackson.databind.ObjectMapper;\n" +
-                        "import org.apache.kafka.clients.producer.ProducerRecord;\n" +
-                        "import org.springframework.core.env.Environment;\n" +
-                        "import org.springframework.kafka.core.KafkaTemplate;\n" +
-                        "\n" +
-                        "import javax.persistence.*;\n" +
-                        "\n" +
-                        "@Entity\n" +
-                        "public class {{name}} {\n" +
-                        "\n" +
-                        "    @Id\n" +
-                        "    @GeneratedValue\n" +
-                        "    private Long id;\n\n" +
-                        "{{#aggregateEntity}}" +
-                        "    {{type}} {{name}};\n" +
-                        "{{/aggregateEntity}}" +
-                        "\n" +
-                        " {{#aggregateEntity}} " +
-                        "    public {{type}} getId() {\n" +
-                        "        return {{name}};\n" +
-                        "    }\n" +
-                        "\n" +
-                        "    public void setId(Long {{name}}) {\n" +
-                        "        this.{{name}} = {{name}};\n" +
-                        "    }\n" +
-                        "{{/aggregateEntity}}" +
-                        "\n" +
-                        "}", definition)
-                }
-
-
-            },
-            setViewTemplate(name,definition){
-                this.code='THIS IS VIEW'
-            },
-            setCommandTemplate(name,definition){
-
-                if(name = definition.name+'Controller.java'){
-                    this.code = Mustache.render(
-                        "package com.example.template;\n" +
-                        "\n" +
-                        "import org.springframework.beans.factory.annotation.Autowired;\n" +
-                        "import org.springframework.web.bind.annotation.PathVariable;\n" +
-                        "import org.springframework.web.bind.annotation.RequestMapping;\n" +
-                        "import org.springframework.web.bind.annotation.RequestMethod;\n" +
-                        "import org.springframework.web.bind.annotation.RestController;\n" +
-                        "\n" +
-                        "import javax.servlet.http.HttpServletRequest;\n" +
-                        "import javax.servlet.http.HttpServletResponse;\n" +
-                        "import java.util.List;\n" +
-                        "\n" +
-                        "@RestController\n" +
-                        "public class {{ name }}Controller {\n" +
-                        "\n" +
-                        "}", definition)
-                }
-
-            },
-            setPolicyTemplate(name,definition){
-                this.code = Mustache.render("package com.example.template;\n" +
-              "\n" +
-              "import com.fasterxml.jackson.databind.DeserializationFeature;\n" +
-              "import com.fasterxml.jackson.databind.ObjectMapper;\n" +
-              "import org.apache.kafka.clients.consumer.ConsumerRecord;\n" +
-              "import org.apache.kafka.clients.producer.ProducerRecord;\n" +
-              "import org.springframework.beans.factory.annotation.Autowired;\n" +
-              "import org.springframework.kafka.annotation.KafkaListener;\n" +
-              "import org.springframework.kafka.core.KafkaTemplate;\n" +
-              "import org.springframework.messaging.handler.annotation.Payload;\n" +
-              "import org.springframework.stereotype.Service;\n" +
-              "\n" +
-              "import java.io.IOException;\n" +
-              "import java.util.Optional;\n" +
-              "\n" +
-              "@Service\n" +
-              "public class {{ connectAggregateName }}Service {\n" +
-              "\n" +
-              "    @Autowired\n" +
-              "    private KafkaTemplate kafkaTemplate;\n" +
-              "\n" +
-              "    @Autowired\n" +
-              "    private {{ connectAggregateName }}Repository {{ connectAggregateName }}Repository;\n" +
-              "\n" +
-              "    /**\n" +
-              "     * 상품 변경이 발생할때마다, 상품정보를 저장해 놓음\n" +
-              "     */\n" +
-              "    @KafkaListener(topics = \"${eventTopic}\")\n" +
-              "    public void {{ name }}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
-              "        System.out.println(\"##### listener : \" + message);\n" +
-              "\n" +
-              "       \n" +
-              "    }\n" +
-              "}", definition)
-
-
-            },
+            // setPolicyTemplate(name,definition){
+            //     this.code = Mustache.render("package com.example.template;\n" +
+            //   "\n" +
+            //   "import com.fasterxml.jackson.databind.DeserializationFeature;\n" +
+            //   "import com.fasterxml.jackson.databind.ObjectMapper;\n" +
+            //   "import org.apache.kafka.clients.consumer.ConsumerRecord;\n" +
+            //   "import org.apache.kafka.clients.producer.ProducerRecord;\n" +
+            //   "import org.springframework.beans.factory.annotation.Autowired;\n" +
+            //   "import org.springframework.kafka.annotation.KafkaListener;\n" +
+            //   "import org.springframework.kafka.core.KafkaTemplate;\n" +
+            //   "import org.springframework.messaging.handler.annotation.Payload;\n" +
+            //   "import org.springframework.stereotype.Service;\n" +
+            //   "\n" +
+            //   "import java.io.IOException;\n" +
+            //   "import java.util.Optional;\n" +
+            //   "\n" +
+            //   "@Service\n" +
+            //   "public class {{ connectAggregateName }}Service {\n" +
+            //   "\n" +
+            //   "    @Autowired\n" +
+            //   "    private KafkaTemplate kafkaTemplate;\n" +
+            //   "\n" +
+            //   "    @Autowired\n" +
+            //   "    private {{ connectAggregateName }}Repository {{ connectAggregateName }}Repository;\n" +
+            //   "\n" +
+            //   "    /**\n" +
+            //   "     * 상품 변경이 발생할때마다, 상품정보를 저장해 놓음\n" +
+            //   "     */\n" +
+            //   "    @KafkaListener(topics = \"${eventTopic}\")\n" +
+            //   "    public void {{ name }}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
+            //   "        System.out.println(\"##### listener : \" + message);\n" +
+            //   "\n" +
+            //   "       \n" +
+            //   "    }\n" +
+            //   "}", definition)
+            //
+            //
+            // },
             setDefaultTemplate(name){
              if('.gitignore'== name){
                     this.code="/target/\n" +

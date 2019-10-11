@@ -3,7 +3,6 @@
 </template>
 
 <script>
-
     export default {
         name: 'modeling-element-base',
         props: {
@@ -26,7 +25,9 @@
             type() {
                 return ''
             },
-
+            code() {
+                return ''
+            },
             style: {
                 get: function () {
                     var style;
@@ -116,6 +117,7 @@
 
         },
         methods: {
+
             difference: function (object, base) {
                 function changes(object, base) {
                     return _.transform(object, function (result, value, key) {

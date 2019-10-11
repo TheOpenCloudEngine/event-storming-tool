@@ -70,6 +70,8 @@
 <script>
     import Element from '../../modeling/Element'
 
+    var Mustache = require('mustache')
+
     export default {
         mixins: [Element],
         name: 'domain-event-definition',
@@ -97,7 +99,6 @@
                         'height': 100,
                         'style': JSON.stringify({}),
                         'angle': 0,
-                        'z-index': 999
                     },
                     drawer: false,
                     selected: false,
@@ -105,7 +106,8 @@
                     restApi: '',
                     editing: false,
                     connectAggregateName: '',
-                    entity: []
+                    entity: [],
+                    code: ''
                 }
             }
         },
@@ -135,12 +137,47 @@
                         temp.innerAggregate[me.type.toLowerCase()].push(me.value.inputText)
                     }
                 })
+            },
+            "value.inputText": function (newVal) {
+                console.log(this.value)
+                // console.log(this.code)
+                // this.code = this.codeGenerate;
+                this.value.code = this.setEventTemplate(newVal, this.value)
+            },
+            "value.entity": function () {
+                var me = this
+                console.log(this.value)
+                // console.log(this.code)
+                // this.code = this.codeGenerate;
+                this.value.code = this.setEventTemplate(me.value.inputText, this.value)
             }
         },
         mounted: function () {
         },
         methods: {
-
+            setEventTemplate(name, definition) {
+                return Mustache.render(
+                    "package com.example.template;\n" +
+                    "\n" +
+                    "import java.io.Serializable;\n" +
+                    "\n" +
+                    "public class {{inputText}} extends AbstractEvent {\n" +
+                    "\n" +
+                    "{{#entity}}" +
+                    "    public {{type}} {{name}};\n" +
+                    "{{/entity}}" +
+                    "\n" +
+                    "{{#entity}}" +
+                    "    public {{type}} get{{upName}}() {\n" +
+                    "        return {{name}};\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    public void set{{upName}}(Long {{name}}) {\n" +
+                    "        this.{{name}} = {{name}};\n" +
+                    "    }\n" +
+                    "{{/entity}}" +
+                    "}", definition)
+            },
         }
     }
 </script>

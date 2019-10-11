@@ -12,9 +12,10 @@ import textReader from './components/yaml.vue'
 import Opengraph from './components/opengraph'
 import ClassModeling from './components/designer/class-modeling'
 import Modeling from './components/designer/modeling'
-
+import Mustache from 'mustache'
 import CodeMirror from 'vue-codemirror'
 
+Vue.use(Mustache)
 Vue.use(CodeMirror)
 Vue.use(Opengraph);
 Vue.use(ClassModeling);

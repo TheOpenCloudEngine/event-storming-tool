@@ -19,13 +19,13 @@
                                    style="margin-right: 15px;"
                             >
                                 <v-treeview
-                                        :open="open"
                                         :items="codeList"
                                         :active.sync="active"
                                         activatable
                                         item-key="name"
                                         open-on-click
                                         return-object
+                                        open-all
                                 >
                                     <template v-slot:prepend="{ item, open }">
                                         <v-icon v-if="!item.file">
@@ -173,7 +173,6 @@
         },
         data() {
             return {
-                open: ['Product.java'],
                 files: {
                     html: 'mdi-language-html5',
                     js: 'mdi-nodejs',
@@ -344,26 +343,34 @@
                         var event={
                             name:'',
                             file:'txt',
-                            type: ''
+                            type: '',
+                            code: ''
                         }
                         console.log(item)
                         if(item._type == 'org.uengine.uml.model.Domain'){
                             event.name = item.inputText+'.java';
                             event.type = item._type;
+                            event.code = item.code;
                         } else if ( item._type == 'org.uengine.uml.model.Command' ){
                             event.name = item.inputText+'Controller.java';
                             event.type = item._type;
+                            event.code = item.code;
 
                         } else if ( item._type == 'org.uengine.uml.model.Policy' ){
                             event.name = item.inputText+'Service.java';
                             event.type = item._type;
+                            event.code = item.code;
 
                         } else if ( item._type == 'org.uengine.uml.model.Aggregate') {
                             event.type = item._type;
                             event.name = item.inputText+'Repository.java';
+                            event.code = item.repositoryCode;
+
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
                             event.type = item._type;
                             event.name = item.inputText+'.java';
+                            event.code = item.aggregateCode;
+
                         }
                         if (event.name != '') {
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(event)
@@ -480,13 +487,20 @@
                 });
             });
         },
-        watch: {},
+        watch: {
+            open(newVal){
+                console.log(newVal)
+
+            }
+        },
 
         methods: {
             inputValue(name) {
+                console.log(name)
                 var test = [
-                    {'name': name},
-                    {'value': this.value.definition}
+                    name
+                    // {'value': this.value.definition},
+                    // {'type': this.value.type}
                 ]
                 return test
             },
