@@ -335,18 +335,26 @@
                     me.value.definition.forEach(function(item){
                         var event={
                             name:'',
-                            file:'txt'
+                            file:'txt',
+                            type: ''
                         }
                         console.log(item)
                         if(item._type == 'org.uengine.uml.model.Domain'){
                             event.name = item.inputText+'.java';
+                            event.type = item._type;
                         } else if ( item._type == 'org.uengine.uml.model.Command' ){
                             event.name = item.inputText+'Controller.java';
+                            event.type = item._type;
+
                         } else if ( item._type == 'org.uengine.uml.model.Policy' ){
                             event.name = item.inputText+'Service.java';
+                            event.type = item._type;
+
                         } else if ( item._type == 'org.uengine.uml.model.Aggregate') {
+                            event.type = item._type;
                             event.name = item.inputText+'Repository.java';
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
+                            event.type = item._type;
                             event.name = item.inputText+'.java';
                         }
                         if(event.name != ''){

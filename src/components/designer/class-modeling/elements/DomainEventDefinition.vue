@@ -97,6 +97,7 @@
                         'height': 100,
                         'style': JSON.stringify({}),
                         'angle': 0,
+                        'z-index': 999
                     },
                     drawer: false,
                     selected: false,
