@@ -97,9 +97,9 @@
 
                 <!--<v-btn color="info" v-on:click.native="addNewMember">addNewMember-->
                 <!--</v-btn>-->
-                <v-btn color="info" v-on:click.native="restApiPush"
-                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD
-                </v-btn>
+<!--                <v-btn color="info" v-on:click.native="restApiPush"-->
+<!--                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD-->
+<!--                </v-btn>-->
                 <v-btn color="info" v-on:click.native="codeModalShow" @inputBuy="inputValue"
                        style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">Generate
                 </v-btn>
