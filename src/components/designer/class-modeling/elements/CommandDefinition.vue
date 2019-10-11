@@ -56,7 +56,7 @@
                 :aggregate.sync="value.aggregate"
                 :aggregateList.sync="aggregateList"
                 :aggregateText.sync="value.aggregateText"
-                :connectAggregateName.sync="connectAggregateName"
+                :connectAggregateName.sync="value.connectAggregateName"
                 :restApi.sync="value.restApi"
                 v-model="value"
         >
@@ -100,7 +100,8 @@
                     selected: false,
                     inputText: '',
                     restApi: '',
-                    editing: false
+                    editing: false,
+                    connectAggregateName: ''
                 }
             }
         },
@@ -117,18 +118,18 @@
 
         },
         watch: {
-          // 'value.drawer': function (newValue, oldValue) {
-          //     var designer = this.getComponent('modeling-designer')
-          //
-          //     var me = this
-          //
-          //     if (newValue == true) {
-          //         designer.value.definition.forEach(function(temp) {
-          //           if(temp._type == "org.uengine.uml.model.Aggregate" )
-          //           me.aggregateList.push(temp.inputText);
-          //         })
-          //     }
-          //   },
+            "value.connectAggregateName": function (newVal) {
+                console.log(newVal)
+                var me = this
+                var designer = this.getComponent('modeling-designer')
+                console.log(me.value.inputText)
+                designer.value.definition.forEach(function (temp) {
+                    console.log(temp.inputText, newVal)
+                    if (temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == newVal) {
+                        temp.innerAggregate[me.type.toLowerCase()].push(me.value.inputText)
+                    }
+                })
+            }
         },
         mounted: function () {
 

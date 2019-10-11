@@ -19,7 +19,6 @@
                 rotateMove: false,
                 tmpWidth: 0,
                 tmpHeight: 0,
-                connectAggregateName: '',
                 loopcheck: true,
             }
         },
@@ -112,18 +111,6 @@
                     }
                 }
             },
-            connectAggregateName: function (newVal) {
-                console.log(newVal)
-                var me = this
-                var designer = this.getComponent('modeling-designer')
-                console.log(me.value.inputText)
-                designer.value.definition.forEach(function (temp) {
-                    console.log(temp.inputText, newVal)
-                    if (temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == newVal) {
-                        temp.innerAggregate[me.type.toLowerCase()].push(me.value.inputText)
-                    }
-                })
-            }
         },
         mounted: function () {
 
