@@ -41,6 +41,7 @@
         watch: {
           value(newVal) {
               this.code = ''
+              console.log(newVal)
               let fileName = newVal[0].name[0];
               let list=newVal[1].value;
               this.definitionList=list
@@ -63,36 +64,6 @@
             },
             setFormat(name){
                 var me = this
-                // let Definition=
-                //     [
-                //         {
-                //             type:"Aggregate",
-                //             header: "Product",
-                //             variable:[
-                //                 { attribute:"private", type : "Long", name:"id" , upName:"Id" },
-                //                 { attribute:"private", type : "Long", name:"id" , upName:"Id" },
-                //             ],
-                //         },
-                //         {
-                //             type:"Event",
-                //             header: "ProductChanged",
-                //             variable:[
-                //                 { attribute:"private", type : "Long", name:"id" , upName:"Id" },
-                //                 { attribute:"public", type : "String", name:"stock" ,upName:"Stock"},
-                //                 { attribute:"public", type : "int", name:"price",upName:"Price"}
-                //             ]
-                //         },
-                //         {
-                //             type: "Command",
-                //             header: "ProductController",
-                //             aggregateName : "Product",
-                //         },
-                //         {
-                //             type : "Policy",
-                //             header : "onDeliveryCompleted",
-                //             aggregateName : "Product",
-                //         }
-                //     ];
 
                 if(name.includes('.java')){
 

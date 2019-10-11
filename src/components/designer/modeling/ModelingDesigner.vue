@@ -25,6 +25,7 @@
                                         activatable
                                         item-key="name"
                                         open-on-click
+                                        return-object
                                 >
                                     <template v-slot:prepend="{ item, open }">
                                         <v-icon v-if="!item.file">
