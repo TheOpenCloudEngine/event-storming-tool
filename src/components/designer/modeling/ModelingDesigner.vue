@@ -19,12 +19,12 @@
                                    style="margin-right: 15px;"
                             >
                                 <v-treeview
-                                        :open="open"
                                         :items="codeList"
                                         :active.sync="active"
                                         activatable
                                         item-key="name"
                                         open-on-click
+                                        open-all
                                 >
                                     <template v-slot:prepend="{ item, open }">
                                         <v-icon v-if="!item.file">
@@ -172,7 +172,6 @@
         },
         data() {
             return {
-                open: ['Product.java'],
                 files: {
                     html: 'mdi-language-html5',
                     js: 'mdi-nodejs',
@@ -479,13 +478,20 @@
                 });
             });
         },
-        watch: {},
+        watch: {
+            open(newVal){
+                console.log(newVal)
+
+            }
+        },
 
         methods: {
             inputValue(name) {
+                console.log(name)
                 var test = [
                     {'name': name},
-                    {'value': this.value.definition}
+                    {'value': this.value.definition},
+                    // {'type': this.value.type}
                 ]
                 return test
             },

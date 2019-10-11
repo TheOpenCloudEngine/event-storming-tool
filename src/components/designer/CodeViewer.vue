@@ -40,6 +40,7 @@
         },
         watch: {
           value(newVal) {
+              console.log(newVal)
               this.code = ''
               let fileName = newVal[0].name[0];
               let list=newVal[1].value;
@@ -57,7 +58,6 @@
                 // console.log('the editor is focus!', cm)
             },
             onCmCodeChange(newCode) {
-                console.log(newCode)
                 // console.log('this is new code', newCode)
                 // this.code = newCode
             },
@@ -96,9 +96,7 @@
 
                 if(name.includes('.java')){
 
-                    console.log(name)
                     this.definitionList.some(function(definition){
-                        console.log(name,definition)
 
                         if( name.includes('ed.java') ){
                             me.setEventTemplate(name,definition)
@@ -178,7 +176,7 @@
                     this.code = Mustache.render(
                         "package com.example.template;\n " +
                         "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
-                        "public interface {{ name }}Repository extends PagingAndSortingRepository < {{ name }}, Long > { \n " +
+                        "public interface {{ inputText }}Repository extends PagingAndSortingRepository < {{ name }}, Long > { \n " +
                         "}\n", definition)
                 }else{
                     this.code = Mustache.render(
@@ -193,7 +191,7 @@
                         "import javax.persistence.*;\n" +
                         "\n" +
                         "@Entity\n" +
-                        "public class {{name}} {\n" +
+                        "public class {{inputText}} {\n" +
                         "\n" +
                         "    @Id\n" +
                         "    @GeneratedValue\n" +
