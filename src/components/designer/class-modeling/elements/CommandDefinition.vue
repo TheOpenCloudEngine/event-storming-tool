@@ -149,7 +149,7 @@
             setCommandTemplate() {
                 var me = this;
                 return Mustache.render(
-                    "    @RequestMapping(value = \"/{{connectAggregateName}}/{{inputText}}/{userId}\", method = RequestMethod.GET, produces = \"application/json;charset=UTF-8\")\n" +
+                    "    @RequestMapping(value = \"/{{connectAggregateName}}/{{inputText}}/\", method = RequestMethod.GET, produces = \"application/json;charset=UTF-8\")\n" +
                     "    public void \<Map\> {{inputText}}(HttpServletRequest request, HttpServletResponse response \n " +
                     "    ) throws Exception { \n" +
                     "    \n"+
