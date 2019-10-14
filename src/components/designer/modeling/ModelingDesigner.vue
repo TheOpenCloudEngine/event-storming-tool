@@ -137,16 +137,6 @@
                     <span>{{item.label}}</span>
                 </v-tooltip>
             </v-card>
-            <v-card>
-                <v-slider
-                        v-model="screenSize"
-                        append-icon="volume_up"
-                        prepend-icon="volume_down"
-                        :min="0"
-                        :max="400"
-                        :vertical="true"
-                ></v-slider>
-            </v-card>
 
         </v-layout>
 
@@ -189,7 +179,6 @@
         },
         data() {
             return {
-                winSize:100,
                 files: {
                     md: 'mdi-markdown',
                     txt: 'mdi-file-document-outline',
@@ -1031,28 +1020,6 @@
             // this.channel.pusher.unsubscribe('presence-event');
         },
         computed: {
-            screenSize:{
-                    get:function () {
-                        // console.log(this.winSize)
-                        this.maxWidth = window.screen.availWidth
-                        this.maxHeight = window.screen.availHeight
-                        return 100;
-                    },
-                    set:function (newVal) {
-                        console.log(newVal)
-                        console.log((newVal/100))
-                        window.innerWidth=window.innerWidth;
-                        window.innerHeight=window.innerHeight;
-
-                        this.value.definition.forEach(function (item) {
-                            item.elementView.height=item.elementView.height*(newVal/100)
-                            item.elementView.width=item.elementView.width*(newVal/100)
-                        })
-                        console.log("Width: ",window.innerWidth)
-                        console.log("Height: ",window.innerHeight)
-                        window.resizeTo( window.innerWidth*(newVal/100), window.innerHeight*(newVal/100) );
-                    }
-            },
             definitionSet() {
                 return this.inputValue(this.active)
             },

@@ -59,7 +59,7 @@
                             lineWrapping: true,
                             matchBrackets: true,
                             scroll: true,
-                            readOnly: true
+                            readOnly: 'nocursor'
                         }
                     } else if (this.value[0][0].name.includes('.yml') || this.value[0][0].name.includes('.yaml')) {
                         var type = {
@@ -72,7 +72,7 @@
                             lineWrapping: true,
                             matchBrackets: true,
                             scroll: true,
-                            readOnly: true
+                            readOnly: 'nocursor'
                         }
                     } else if (this.value[0][0].name.includes('.md')) {
                         var type = {
@@ -85,7 +85,7 @@
                             lineWrapping: true,
                             matchBrackets: true,
                             scroll: true,
-                            readOnly: true
+                            readOnly: 'nocursor'
                         }
                     } else if (this.value[0][0].name.includes('.properties')) {
                         var type = {
@@ -98,7 +98,7 @@
                             lineWrapping: true,
                             matchBrackets: true,
                             scroll: true,
-                            readOnly: true
+                            readOnly: 'nocursor'
                         }
                     } else if (this.value[0][0].name.includes('mvnw')) {
                         var type = {
@@ -111,7 +111,7 @@
                             lineWrapping: true,
                             matchBrackets: true,
                             scroll: true,
-                            readOnly: true
+                            readOnly: 'nocursor'
                         }
                     } else if (this.value[0][0].name.includes('.xml')) {
                         var type = {
@@ -124,7 +124,7 @@
                             lineWrapping: true,
                             matchBrackets: true,
                             scroll: true,
-                            readOnly: true
+                            readOnly: 'nocursor'
                         }
                     }
                     return type
