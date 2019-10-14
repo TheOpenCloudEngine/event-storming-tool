@@ -66,7 +66,7 @@
                 var designer = this.getComponent('modeling-designer')
 
                 var me = this
-                designer.syncOthers(this.value);
+                // designer.syncOthers(this.value);
 
                 this.aggregateList = []
                 if (newValue == true) {

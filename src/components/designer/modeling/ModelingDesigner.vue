@@ -1075,25 +1075,34 @@
                             event.name = item.inputText + '.java';
                             event.type = item._type;
                             event.code = item.code;
+                            event.file = 'Java'
                         } else if (item._type == 'org.uengine.uml.model.Aggregate') {
                             event.type = item._type;
                             event.name = item.inputText + 'Repository.java';
                             event.code = item.repositoryCode;
+                            event.file = 'Java'
+
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
 
                             event.type = item._type;
                             event.name = item.inputText + '.java';
                             event.code = item.aggregateCode;
+                            event.file = 'Java'
+
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
 
                             event.name = item.inputText + 'EventListener.java';
                             event.type = item._type;
                             event.code = item.eventListenerCode;
+                            event.file = 'Java'
+
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
 
                             event.name = item.inputText + 'Controller.java';
                             event.type = item._type;
                             event.code = item.controllerCode;
+                            event.file = 'Java'
+
                         }
                         if (event.name != '') {
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(event)
