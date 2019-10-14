@@ -150,10 +150,10 @@
                 var me = this;
                 return Mustache.render(
                     "    @RequestMapping(value = \"/{{connectAggregateName}}/{{inputText}}/{userId}\", method = RequestMethod.GET, produces = \"application/json;charset=UTF-8\")\n" +
-                    "    public List \<Map\> {{inputText}}(HttpServletRequest request, HttpServletResponse response, \n " +
+                    "    public List \<Map\> {{inputText}}(HttpServletRequest request, HttpServletResponse response \n " +
                     "    ) throws Exception { \n" +
-                    "    return ;\n" +
-                    "}\n\n", me.value)
+                    "        return ;\n" +
+                    "    }\n\n", me.value)
             },
         }
     }
