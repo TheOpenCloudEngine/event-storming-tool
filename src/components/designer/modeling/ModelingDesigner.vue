@@ -189,7 +189,7 @@
         },
         data() {
             return {
-                screenSize:100,
+                winSize:100,
                 files: {
                     md: 'mdi-markdown',
                     txt: 'mdi-file-document-outline',
@@ -1029,10 +1029,26 @@
             // this.channel.pusher.unsubscribe('presence-event');
         },
         computed: {
-                get:function () {
-                    console.log(this.screenSize())
-                },
+            screenSize:{
+                    get:function () {
+                        // console.log(this.winSize)
+                        console.log("MAXwidth",window.screen.availWidth)
+                        console.log("MAXHeight",window.screen.availHeight)
 
+                        console.log("Width: ",window.innerWidth)
+                        console.log("Height: ",window.innerHeight)
+
+                    },
+                    set:function (newVal) {
+                        this.winSize=newVal
+                        console.log(newVal)
+                        window.innerWidth=window.innerWidth+newVal;
+                        window.innerHeight=window.innerHeight+newVal;
+
+                        console.log("Width: ",window.innerWidth)
+                        console.log("Height: ",window.innerHeight)
+                    }
+            },
             definitionSet() {
                 return this.inputValue(this.active)
             },
