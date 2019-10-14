@@ -1137,7 +1137,7 @@
                         console.log(tmp)
                         if (tmp.selected == true) {
                             console.log(tmp)
-                            me.syncOthers(tmp);
+                            // me.syncOthers(tmp);
                         }
                     })
                 })
@@ -1409,7 +1409,7 @@
                             me.tempValue.push(tmp)
                         }
                     })
-                    this.syncOthers(tmp);
+                    // this.syncOthers(tmp);
                 }
             },
             b64toBlob: function (b64Data, contentType, sliceSize) {
@@ -1449,7 +1449,7 @@
                             me.value.definition.push(tmp);
                             me.redoArray.push(tmp);
                         })
-                        this.syncOthers(tmp);
+                        // this.syncOthers(tmp);
                         //초기화
                     } else {
                     }
@@ -1498,7 +1498,7 @@
 
                     me.value.definition = definitionArray
                     me.value.relation = relationArray
-                    this.syncOthers();
+                    // this.syncOthers();
                 }
             },
             toggleGrip: function () {
@@ -1610,7 +1610,7 @@
                         //기존 컴포넌트가 없는 경우 신규 생성
                         this.addElement(componentInfo);
                     }
-                    this.syncOthers();
+                    // this.syncOthers();
                 }
             },
             redo: function () {
@@ -1626,7 +1626,7 @@
                             })
                         }
                         me.undoArray.push(JSON.parse(JSON.stringify(tmpData)));
-                        this.syncOthers(JSON.parse(JSON.stringify(tmpData)));
+                        // this.syncOthers(JSON.parse(JSON.stringify(tmpData)));
                     } else {
                     }
                 }
@@ -1642,7 +1642,7 @@
                         me.undoArray.pop();
                         // console.log("undo length 0")
                         me.undoArray.push(JSON.parse(JSON.stringify(me.value)))
-                        this.syncOthers(JSON.parse(JSON.stringify(me.value)));
+                        // this.syncOthers(JSON.parse(JSON.stringify(me.value)));
                     } else {
                     }
                 }
@@ -1703,7 +1703,7 @@
                 }
                 me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                 me.redoArray = [];
-                this.syncOthers(element);
+                // this.syncOthers(element);
             },
 
             getComponentByName: function (name) {

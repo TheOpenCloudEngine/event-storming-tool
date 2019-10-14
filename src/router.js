@@ -15,7 +15,6 @@ Vue.component('process-designer', ProcessDesigner);
 Vue.component('class-modeler', ClassModeler)
 
 export default new Router({
-    mode: 'history',
     base: process.env.BASE_URL,
     routes: [
         {
