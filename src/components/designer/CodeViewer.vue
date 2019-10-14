@@ -58,7 +58,8 @@
                             theme: 'darcula',
                             lineWrapping: true,
                             matchBrackets: true,
-                            scroll: true
+                            scroll: true,
+                            readOnly: true
                         }
                     } else if (this.value[0][0].name.includes('.yml') || this.value[0][0].name.includes('.yaml')) {
                         var type = {
@@ -70,7 +71,8 @@
                             theme: 'darcula',
                             lineWrapping: true,
                             matchBrackets: true,
-                            scroll: true
+                            scroll: true,
+                            readOnly: true
                         }
                     } else if (this.value[0][0].name.includes('.md')) {
                         var type = {
@@ -82,7 +84,8 @@
                             theme: 'darcula',
                             lineWrapping: true,
                             matchBrackets: true,
-                            scroll: true
+                            scroll: true,
+                            readOnly: true
                         }
                     } else if (this.value[0][0].name.includes('.properties')) {
                         var type = {
@@ -94,7 +97,8 @@
                             theme: 'darcula',
                             lineWrapping: true,
                             matchBrackets: true,
-                            scroll: true
+                            scroll: true,
+                            readOnly: true
                         }
                     } else if (this.value[0][0].name.includes('mvnw')) {
                         var type = {
@@ -106,7 +110,8 @@
                             theme: 'darcula',
                             lineWrapping: true,
                             matchBrackets: true,
-                            scroll: true
+                            scroll: true,
+                            readOnly: true
                         }
                     } else if (this.value[0][0].name.includes('.xml')) {
                         var type = {
@@ -118,7 +123,8 @@
                             theme: 'darcula',
                             lineWrapping: true,
                             matchBrackets: true,
-                            scroll: true
+                            scroll: true,
+                            readOnly: true
                         }
                     }
                     return type
