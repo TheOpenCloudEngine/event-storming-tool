@@ -165,9 +165,6 @@
                 "    @Autowired\n" +
                 "    private {{ connectAggregateName }}Repository {{ connectAggregateName }}Repository;\n" +
                 "\n" +
-                "    /**\n" +
-                "     * 상품 변경이 발생할때마다, 상품정보를 저장해 놓음\n" +
-                "     */\n" +
                 "    @KafkaListener(topics = \"${eventTopic}\")\n" +
                 "    public void {{ name }}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
                 "        System.out.println(\"##### listener : \" + message);\n" +

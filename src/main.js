@@ -20,10 +20,10 @@ Vue.use(CodeMirror)
 Vue.use(Opengraph);
 Vue.use(ClassModeling);
 Vue.use(Modeling);
-import Metaworks4 from '../node_modules/metaworks4'
+// import Metaworks4 from '../node_modules/metaworks4'
 import vuetify from './plugins/vuetify';
-
-Vue.use(Metaworks4);
+//
+// Vue.use(Metaworks4);
 
 Vue.use(VModal)
 Vue.component('EditYaml', EditYaml)

@@ -113,30 +113,41 @@
                 <text-reader :importType="'json'" @load="value = $event" style="display: inline-block;"
                              :fileName.sync="projectName"></text-reader>
                 <v-btn color="info" v-on:click.native="download"
-                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">save
+                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">SAVE
                 </v-btn>
             </v-layout>
 
 
             <v-card class="tools" style="top:100px; text-align: center;">
-      <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }" _width="30"
-            _height="30" v-on:click="toggleGrip">
-        <v-tooltip md-direction="right">Hands</v-tooltip>
-      </span>
+                <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }" _width="30"
+                   _height="30" v-on:click="toggleGrip">
+                     <v-tooltip md-direction="right">Hands</v-tooltip>
+                </span>
                 <v-tooltip right v-for="(item, key) in elementTypes" :key="key">
                     <template v-slot:activator="{ on }">
-          <span
-                  class="icons draggable"
-                  align="center"
-                  :_component="item.component"
-                  :_width="item.width"
-                  :_height="item.height">
-          <img height="30px" width="30px" :src="item.src" v-on="on">
-          </span>
+                        <span
+                          class="icons draggable"
+                          align="center"
+                          :_component="item.component"
+                          :_width="item.width"
+                          :_height="item.height">
+                        <img height="30px" width="30px" :src="item.src" v-on="on">
+                        </span>
                     </template>
                     <span>{{item.label}}</span>
                 </v-tooltip>
             </v-card>
+            <v-card>
+                <v-slider
+                        v-model="screenSize"
+                        append-icon="volume_up"
+                        prepend-icon="volume_down"
+                        :min="0"
+                        :max="400"
+                        :vertical="true"
+                ></v-slider>
+            </v-card>
+
         </v-layout>
 
         <v-snackbar v-model="snackbar" :color="color" :multi-line="mode === 'multi-line'" :timeout="timeout"
@@ -178,6 +189,7 @@
         },
         data() {
             return {
+                screenSize:100,
                 files: {
                     md: 'mdi-markdown',
                     txt: 'mdi-file-document-outline',
@@ -1010,14 +1022,17 @@
                 channel: {},
                 members: [],
                 valueTmp: {},
-                pathTmp: []
-
+                pathTmp: [],
             }
         },
         beforeDestroy: function () {
             // this.channel.pusher.unsubscribe('presence-event');
         },
         computed: {
+                get:function () {
+                    console.log(this.screenSize())
+                },
+
             definitionSet() {
                 return this.inputValue(this.active)
             },
@@ -1195,6 +1210,11 @@
                     }
                 });
             });
+
+            // $(window).resize(function (va) {
+            //     console.log("Height",va.target.innerHeight)
+            //     console.log("WIDTH",va.target.innerWidth)
+            // })
         },
         watch: {
             open(newVal) {
@@ -1208,8 +1228,6 @@
                 console.log(name)
                 var test = [
                     name
-                    // {'value': this.value.definition},
-                    // {'type': this.value.type}
                 ]
                 return test
             },
