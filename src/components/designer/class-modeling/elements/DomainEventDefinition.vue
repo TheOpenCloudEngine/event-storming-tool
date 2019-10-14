@@ -172,7 +172,7 @@
                     "        return {{name}};\n" +
                     "    }\n" +
                     "\n" +
-                    "    public void set{{upName}}(Long {{name}}) {\n" +
+                    "    public void set{{upName}}({{type}} {{name}}) {\n" +
                     "        this.{{name}} = {{name}};\n" +
                     "    }\n" +
                     "{{/entity}}" +
