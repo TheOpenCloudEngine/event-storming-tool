@@ -125,7 +125,7 @@
             designer.value.definition.forEach(function (temp) {
                 console.log(temp.inputText, newVal)
                 if (temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == newVal) {
-                    temp.innerAggregate[me.type.toLowerCase()].push(me.value.inputText)
+                    temp.innerAggregate[me.type.toLowerCase()].push(me.value)
                 }
             })
         },

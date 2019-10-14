@@ -139,18 +139,59 @@
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
                 this.value.aggregateCode = me.setAggregateTemplate(me.value.inputText, this.value)
-                this.value.repositoryCode = this.setRepositoryTemplate(me.value.inputText, this.value)
+                // this.value.repositoryCode = this.setRepositoryTemplate(me.value.inputText, this.value)
             }
         },
         mounted: function () {
 
         },
         methods: {
+            setControllerTemplate(name, definition) {
+                return Mustache.render(
+                    "package com.example.template;\n " +
+                    "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
+                    "public interface  {{ inputText }}Repository extends PagingAndSortingRepository < {{ inputText }}, Long > { \n " +
+                    "}\n", definition)
+            },
+            setEventListserTemplate(name, definition) {
+                return Mustache.render(
+                    "package com.example.template;\n" +
+                    "\n" +
+                    "import com.fasterxml.jackson.databind.DeserializationFeature;\n" +
+                    "import com.fasterxml.jackson.databind.ObjectMapper;\n" +
+                    "import org.apache.kafka.clients.consumer.ConsumerRecord;\n" +
+                    "import org.apache.kafka.clients.producer.ProducerRecord;\n" +
+                    "import org.springframework.beans.factory.annotation.Autowired;\n" +
+                    "import org.springframework.kafka.annotation.KafkaListener;\n" +
+                    "import org.springframework.kafka.core.KafkaTemplate;\n" +
+                    "import org.springframework.messaging.handler.annotation.Payload;\n" +
+                    "import org.springframework.stereotype.Service;\n" +
+                    "\n" +
+                    "import java.io.IOException;\n" +
+                    "import java.util.Optional;\n" +
+                    "\n" +
+                    "@Service\n" +
+                    "public class OrderService {\n" +
+                    "\n" +
+                    "    @Autowired\n" +
+                    "    private KafkaTemplate kafkaTemplate;\n" +
+                    "\n" +
+                    "    @Autowired\n" +
+                    "    private ProductRepository productRepository;\n" +
+                    "\n" +
+                    "\n" +
+                    " @KafkaListener(topics = \"${eventTopic}\", groupId = \"{{policy}}\")\n" +
+                    "    public void {{ policy }}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
+                    "        System.out.println(\"##### listener : \" + message);\n" +
+                    "\n" +
+                    "    }   \n" +
+                    "}", definition)
+            },
             setRepositoryTemplate(name, definition) {
                 return Mustache.render(
                     "package com.example.template;\n " +
                     "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
-                    "public interface {{ inputText }}Repository extends PagingAndSortingRepository < {{ inputText }}, Long > { \n " +
+                    "public interface \" {{ inputText }}Repository extends PagingAndSortingRepository < {{ inputText }}, Long > { \n " +
                     "}\n", definition)
             },
             setAggregateTemplate(name, definition) {

@@ -1023,6 +1023,8 @@
                 members: [],
                 valueTmp: {},
                 pathTmp: [],
+                maxWidth:0,
+                maxHeight:0,
             }
         },
         beforeDestroy: function () {
@@ -1032,21 +1034,23 @@
             screenSize:{
                     get:function () {
                         // console.log(this.winSize)
-                        console.log("MAXwidth",window.screen.availWidth)
-                        console.log("MAXHeight",window.screen.availHeight)
-
-                        console.log("Width: ",window.innerWidth)
-                        console.log("Height: ",window.innerHeight)
-
+                        this.maxWidth = window.screen.availWidth
+                        this.maxHeight = window.screen.availHeight
+                        return 100;
                     },
                     set:function (newVal) {
-                        this.winSize=newVal
                         console.log(newVal)
-                        window.innerWidth=window.innerWidth+newVal;
-                        window.innerHeight=window.innerHeight+newVal;
+                        console.log((newVal/100))
+                        window.innerWidth=window.innerWidth;
+                        window.innerHeight=window.innerHeight;
 
+                        this.value.definition.forEach(function (item) {
+                            item.elementView.height=item.elementView.height*(newVal/100)
+                            item.elementView.width=item.elementView.width*(newVal/100)
+                        })
                         console.log("Width: ",window.innerWidth)
                         console.log("Height: ",window.innerHeight)
+                        window.resizeTo( window.innerWidth*(newVal/100), window.innerHeight*(newVal/100) );
                     }
             },
             definitionSet() {
@@ -1091,20 +1095,21 @@
                             event.name = item.inputText + '.java';
                             event.type = item._type;
                             event.code = item.code;
-                        } else if (item._type == 'org.uengine.uml.model.Command') {
-                            event.name = item.inputText + 'Controller.java';
-                            event.type = item._type;
-                            event.code = item.code;
-
-                        } else if (item._type == 'org.uengine.uml.model.Policy') {
-                            event.name = item.inputText + 'Service.java';
-                            event.type = item._type;
-                            event.code = item.code;
-
-                        } else if (item._type == 'org.uengine.uml.model.Aggregate') {
+                        }
+                        // else if (item._type == 'org.uengine.uml.model.Command') {
+                        //     event.name = item.inputText + 'Controller.java';
+                        //     event.type = item._type;
+                        //     event.code = item.code;
+                        // } else if (item._type == 'org.uengine.uml.model.Policy') {
+                        //     event.name = item.inputText + 'Service.java';
+                        //     event.type = item._type;
+                        //     event.code = item.code;
+                        // }
+                        else if (item._type == 'org.uengine.uml.model.Aggregate') {
                             event.type = item._type;
                             event.name = item.inputText + 'Repository.java';
                             event.code = item.repositoryCode;
+
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
 
                             event.type = item._type;
@@ -1112,6 +1117,7 @@
                             event.code = item.aggregateCode;
 
                         }
+
                         if (event.name != '') {
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(event)
                         }
