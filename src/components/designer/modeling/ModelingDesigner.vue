@@ -1088,7 +1088,7 @@
 
                             event.name = item.inputText + 'EventListner.java';
                             event.type = item._type;
-                            event.code = item.eventListnerCode;
+                            event.code = item.eventListenerCode;
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
 
                             event.name = item.inputText + 'Controller.java';

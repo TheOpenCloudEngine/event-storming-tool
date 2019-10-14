@@ -109,7 +109,7 @@
                     aggregateEntity: [{type: "Long", name: "id", upName: "Id", id: true}],
                     aggregateCode: '',
                     repositoryCode: '',
-                    eventListnerCode: '',
+                    eventListenerCode: '',
                     controllerCode: ''
                 }
 
@@ -134,7 +134,7 @@
                 this.value.aggregateCode = this.setAggregateTemplate()
                 this.value.repositoryCode = this.setRepositoryTemplate()
                 this.value.controllerCode = this.setControllerTemplate()
-                this.value.eventListnerCode = this.setEventListnerTemplate()
+                this.value.eventListenerCode = this.setEventListenerTemplate()
 
             },
             "value.aggregateEntity": function () {
@@ -149,7 +149,7 @@
                     this.value.aggregateCode = this.setAggregateTemplate()
                     this.value.repositoryCode = this.setRepositoryTemplate()
                     this.value.controllerCode = this.setControllerTemplate()
-                    this.value.eventListnerCode = this.setEventListnerTemplate()
+                    this.value.eventListenerCode = this.setEventListenerTemplate()
                 },
                 deep: true
             }
@@ -191,7 +191,7 @@
                     "{{/innerAggregate}}" +
                     "}", me.value)
             },
-            setEventListnerTemplate(){
+            setEventListenerTemplate(){
                 var me = this
                 return Mustache.render("package com.example.template;\n" +
                     "\n" +
@@ -209,7 +209,7 @@
                     "import java.util.Optional;\n" +
                     "\n" +
                     "@Service\n" +
-                    "public class {{ inputText }}Service {\n" +
+                    "public class {{ inputText }}EventListener {\n" +
                     "\n" +
                     "    @Autowired\n" +
                     "    private KafkaTemplate kafkaTemplate;\n" +
