@@ -150,7 +150,7 @@
                 return Mustache.render(
                     "package com.example.template;\n " +
                     "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
-                    "public interface {{ inputText }}Repository extends PagingAndSortingRepository < {{ name }}, Long > { \n " +
+                    "public interface {{ inputText }}Repository extends PagingAndSortingRepository < {{ inputText }}, Long > { \n " +
                     "}\n", definition)
             },
             setAggregateTemplate(name, definition) {
