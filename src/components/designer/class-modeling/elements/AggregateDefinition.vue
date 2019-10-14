@@ -106,7 +106,7 @@
                     selected: false,
                     inputText: '',
                     restApi: '',
-                    aggregateEntity: [],
+                    aggregateEntity: [{type: "Long", name: "id", upName: "Id", id: true}],
                     aggregateCode: '',
                     repositoryCode: ''
                 }
@@ -168,22 +168,17 @@
                     "@Entity\n" +
                     "public class {{inputText}} {\n" +
                     "\n" +
+                    "{{#aggregateEntity}}\n" +
+                        "{{#id}}"+
                     "    @Id\n" +
                     "    @GeneratedValue\n" +
-                    "    private Long id;\n\n" +
-
-                    "{{#aggregateEntity}}\n" +
-                    "    public {{type}} {{name}};\n" +
+                    "    private {{type}} {{name}};\n\n" +
+                    "{{/id}}"+
+                    "{{^id}}"+
+                    "    public {{type}} {{name}};\n\n" +
+                    "{{/id}}"+
                     "{{/aggregateEntity}}\n" +
-                    "\n" +
-                    "    public Long getId() {\n" +
-                    "        return id;\n" +
-                    "    }\n" +
-                    "\n" +
-                    "    public void setId(Long id) {\n" +
-                    "        this.id = id;\n" +
-                    "    }\n" +
-                    "\n" +
+
                     "{{#aggregateEntity}} \n" +
                     "    public {{type}} get{{upName}}() { \n" +
                     "        return {{name}};\n" +
