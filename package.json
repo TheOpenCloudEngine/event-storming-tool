@@ -2,7 +2,7 @@
   "name": "service-ui",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://eventstorming2code.io",
+  "homepage": "http://theopencloudengine.github.io/event-storming-tool",
   "scripts": {
     "serve": "vue-cli-service serve --host 0.0.0.0 --disableHostCheck true",
     "build": "vue-cli-service build",

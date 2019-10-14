@@ -67,6 +67,7 @@
 
 <script>
     import Element from '../../modeling/Element'
+
     var Mustache = require('mustache')
 
     export default {
@@ -121,8 +122,8 @@
 
         },
         watch: {
-            "value.connectAggregateName": function (newVal) {
-                console.log(newVal)
+            "value.connectAggregateName": function (newVal, oldVal) {
+                console.log(newVal,oldVal)
                 var me = this
                 var designer = this.getComponent('modeling-designer')
                 console.log(me.value.inputText)
@@ -132,37 +133,28 @@
                         temp.innerAggregate[me.type.toLowerCase()].push(me.value)
                     }
                 })
+
+                this.value.code = me.setCommandTemplate()
             },
-            "value.inputText": function (newVal) {
-                console.log(this.value)
+            "value.inputText": function () {
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
-                this.value.code = this.setCommandTemplate(newVal,this.value)
+                this.value.code = this.setCommandTemplate()
             }
         },
         mounted: function () {
 
         },
         methods: {
-            setCommandTemplate(name,definition){
 
-                    return Mustache.render(
-                        "package com.example.template;\n" +
-                        "\n" +
-                        "import org.springframework.beans.factory.annotation.Autowired;\n" +
-                        "import org.springframework.web.bind.annotation.PathVariable;\n" +
-                        "import org.springframework.web.bind.annotation.RequestMapping;\n" +
-                        "import org.springframework.web.bind.annotation.RequestMethod;\n" +
-                        "import org.springframework.web.bind.annotation.RestController;\n" +
-                        "\n" +
-                        "import javax.servlet.http.HttpServletRequest;\n" +
-                        "import javax.servlet.http.HttpServletResponse;\n" +
-                        "import java.util.List;\n" +
-                        "\n" +
-                        "@RestController\n" +
-                        "public class {{ inputText }}Controller {\n" +
-                        "\n" +
-                        "}", definition)
+            setCommandTemplate() {
+                var me = this;
+                return Mustache.render(
+                    "    @RequestMapping(value = \"/{{connectAggregateName}}/{{inputText}}/{userId}\", method = RequestMethod.GET, produces = \"application/json;charset=UTF-8\")\n" +
+                    "    public List \<Map\> {{inputText}}(HttpServletRequest request, HttpServletResponse response \n " +
+                    "    ) throws Exception { \n" +
+                    "        return ;\n" +
+                    "    }\n\n", me.value)
             },
         }
     }

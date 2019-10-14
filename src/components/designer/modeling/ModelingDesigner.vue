@@ -1095,17 +1095,7 @@
                             event.name = item.inputText + '.java';
                             event.type = item._type;
                             event.code = item.code;
-                        }
-                        // else if (item._type == 'org.uengine.uml.model.Command') {
-                        //     event.name = item.inputText + 'Controller.java';
-                        //     event.type = item._type;
-                        //     event.code = item.code;
-                        // } else if (item._type == 'org.uengine.uml.model.Policy') {
-                        //     event.name = item.inputText + 'Service.java';
-                        //     event.type = item._type;
-                        //     event.code = item.code;
-                        // }
-                        else if (item._type == 'org.uengine.uml.model.Aggregate') {
+                        } else if (item._type == 'org.uengine.uml.model.Aggregate') {
                             event.type = item._type;
                             event.name = item.inputText + 'Repository.java';
                             event.code = item.repositoryCode;
@@ -1115,7 +1105,16 @@
                             event.type = item._type;
                             event.name = item.inputText + '.java';
                             event.code = item.aggregateCode;
+                            tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
 
+                            event.name = item.inputText + 'EventListener.java';
+                            event.type = item._type;
+                            event.code = item.eventListenerCode;
+                            tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
+
+                            event.name = item.inputText + 'Controller.java';
+                            event.type = item._type;
+                            event.code = item.controllerCode;
                         }
 
                         if (event.name != '') {

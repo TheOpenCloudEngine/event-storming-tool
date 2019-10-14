@@ -108,7 +108,9 @@
                     restApi: '',
                     aggregateEntity: [{type: "Long", name: "id", upName: "Id", id: true}],
                     aggregateCode: '',
-                    repositoryCode: ''
+                    repositoryCode: '',
+                    eventListenerCode: '',
+                    controllerCode: ''
                 }
 
             }
@@ -129,8 +131,10 @@
                 console.log(this.value)
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
-                this.value.aggregateCode = this.setAggregateTemplate(newVal, this.value)
-                this.value.repositoryCode = this.setRepositoryTemplate(newVal, this.value)
+                this.value.aggregateCode = this.setAggregateTemplate()
+                this.value.repositoryCode = this.setRepositoryTemplate()
+                this.value.controllerCode = this.setControllerTemplate()
+                this.value.eventListenerCode = this.setEventListenerTemplate()
 
             },
             "value.aggregateEntity": function () {
@@ -138,24 +142,59 @@
                 console.log(this.value)
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
-                this.value.aggregateCode = me.setAggregateTemplate(me.value.inputText, this.value)
-                // this.value.repositoryCode = this.setRepositoryTemplate(me.value.inputText, this.value)
+
+                this.value.aggregateCode = me.setAggregateTemplate()
+            },
+            "value.innerAggregate": {
+                handler () {
+                    this.value.aggregateCode = this.setAggregateTemplate()
+                    this.value.repositoryCode = this.setRepositoryTemplate()
+                    this.value.controllerCode = this.setControllerTemplate()
+                    this.value.eventListenerCode = this.setEventListenerTemplate()
+                },
+                deep: true
             }
         },
         mounted: function () {
 
         },
         methods: {
-            setControllerTemplate(name, definition) {
+            setRepositoryTemplate() {
+                var me = this
                 return Mustache.render(
                     "package com.example.template;\n " +
                     "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
-                    "public interface  {{ inputText }}Repository extends PagingAndSortingRepository < {{ inputText }}, Long > { \n " +
-                    "}\n", definition)
+                    "public interface {{ inputText }}Repository extends PagingAndSortingRepository < {{ inputText }}, Long > { \n " +
+                    "}\n", me.value)
             },
-            setEventListserTemplate(name, definition) {
+            setControllerTemplate(){
+                var me = this
                 return Mustache.render(
                     "package com.example.template;\n" +
+                    "\n" +
+                    "import org.springframework.beans.factory.annotation.Autowired;\n" +
+                    "import org.springframework.web.bind.annotation.PathVariable;\n" +
+                    "import org.springframework.web.bind.annotation.RequestMapping;\n" +
+                    "import org.springframework.web.bind.annotation.RequestMethod;\n" +
+                    "import org.springframework.web.bind.annotation.RestController;\n" +
+                    "\n" +
+                    "import javax.servlet.http.HttpServletRequest;\n" +
+                    "import javax.servlet.http.HttpServletResponse;\n" +
+                    "import java.util.List;\n" +
+                    "\n" +
+                    "@RestController\n" +
+                    "public class {{ inputText }}Controller {\n" +
+                    "\n" +
+                    "{{#innerAggregate}}" +
+                    "{{#command}}" +
+                    "{{{code}}}" +
+                    "{{/command}}" +
+                    "{{/innerAggregate}}" +
+                    "}", me.value)
+            },
+            setEventListenerTemplate(){
+                var me = this
+                return Mustache.render("package com.example.template;\n" +
                     "\n" +
                     "import com.fasterxml.jackson.databind.DeserializationFeature;\n" +
                     "import com.fasterxml.jackson.databind.ObjectMapper;\n" +
@@ -171,30 +210,28 @@
                     "import java.util.Optional;\n" +
                     "\n" +
                     "@Service\n" +
-                    "public class OrderService {\n" +
+                    "public class {{ inputText }}EventListener {\n" +
                     "\n" +
                     "    @Autowired\n" +
                     "    private KafkaTemplate kafkaTemplate;\n" +
                     "\n" +
                     "    @Autowired\n" +
-                    "    private ProductRepository productRepository;\n" +
+                    "    private {{ inputText }}Repository {{ inputText }}Repository;\n" +
                     "\n" +
-                    "\n" +
-                    " @KafkaListener(topics = \"${eventTopic}\", groupId = \"{{policy}}\")\n" +
-                    "    public void {{ policy }}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
-                    "        System.out.println(\"##### listener : \" + message);\n" +
-                    "\n" +
-                    "    }   \n" +
-                    "}", definition)
+                    "{{#innerAggregate}}" +
+                    "{{#policy}}" +
+                    "{{{code}}}" +
+                    "{{/policy}}" +
+                    "{{/innerAggregate}}" +
+                    // "    @KafkaListener(topics = \"${eventTopic}\")\n" +
+                    // "    public void {{ name }}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
+                    // "        System.out.println(\"##### listener : \" + message);\n" +
+                    // "\n" +
+                    // "       \n" +
+                    "}", me.value)
             },
-            setRepositoryTemplate(name, definition) {
-                return Mustache.render(
-                    "package com.example.template;\n " +
-                    "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
-                    "public interface \" {{ inputText }}Repository extends PagingAndSortingRepository < {{ inputText }}, Long > { \n " +
-                    "}\n", definition)
-            },
-            setAggregateTemplate(name, definition) {
+            setAggregateTemplate() {
+                var me = this
                 return Mustache.render(
                     "package com.example.template;\n" +
                     "\n" +
@@ -230,7 +267,7 @@
                     "    }\n" +
                     "{{/aggregateEntity}}\n" +
                     "\n" +
-                    "}", definition)
+                    "}", me.value)
             }
         },
 
