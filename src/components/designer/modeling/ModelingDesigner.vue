@@ -1194,7 +1194,13 @@
                 //  so make any DOM changes here
 
                 this.canvas._CONFIG.FAST_LOADING = false;
-                this.canvas.updateSlider();
+                this.canvas.addSlider({
+                    slider: $("#canvas_slider"),
+                    width: 200,
+                    height: 300,
+                    appendTo: "body"
+                });
+                // this.canvas.updateSlider();
                 //timer end
                 me.undoArray.push({
                     'definition': [],
