@@ -159,7 +159,7 @@
                         "import java.util.List;\n" +
                         "\n" +
                         "@RestController\n" +
-                        "public class {{ name }}Controller {\n" +
+                        "public class {{ inputText }}Controller {\n" +
                         "\n" +
                         "}", definition)
             },

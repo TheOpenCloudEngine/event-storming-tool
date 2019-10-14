@@ -270,7 +270,7 @@
                                                                         name: 'config',
                                                                     },
                                                                     {
-                                                                        name: 'application.java',
+                                                                        name: 'Application.java',
                                                                         file: 'java',
                                                                         code: 'package com.example.template;\n' +
                                                                             '\n' +
