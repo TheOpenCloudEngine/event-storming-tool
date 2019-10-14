@@ -108,7 +108,9 @@
                     restApi: '',
                     aggregateEntity: [{type: "Long", name: "id", upName: "Id", id: true}],
                     aggregateCode: '',
-                    repositoryCode: ''
+                    repositoryCode: '',
+                    eventListnerCode: '',
+                    controllerCode: ''
                 }
 
             }
@@ -129,8 +131,10 @@
                 console.log(this.value)
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
-                this.value.aggregateCode = this.setAggregateTemplate(newVal, this.value)
-                this.value.repositoryCode = this.setRepositoryTemplate(newVal, this.value)
+                this.value.aggregateCode = this.setAggregateTemplate()
+                this.value.repositoryCode = this.setRepositoryTemplate()
+                this.value.controllerCode = this.setControllerTemplate()
+                this.value.eventListnerCode = this.setEventListnerTemplate()
 
             },
             "value.aggregateEntity": function () {
@@ -138,22 +142,95 @@
                 console.log(this.value)
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
-                this.value.aggregateCode = me.setAggregateTemplate(me.value.inputText, this.value)
-                this.value.repositoryCode = this.setRepositoryTemplate(me.value.inputText, this.value)
+                this.value.aggregateCode = me.setAggregateTemplate()
+            },
+            "value.innerAggregate": {
+                handler () {
+                    this.value.aggregateCode = this.setAggregateTemplate()
+                    this.value.repositoryCode = this.setRepositoryTemplate()
+                    this.value.controllerCode = this.setControllerTemplate()
+                    this.value.eventListnerCode = this.setEventListnerTemplate()
+                },
+                deep: true
             }
         },
         mounted: function () {
 
         },
         methods: {
-            setRepositoryTemplate(name, definition) {
+            setRepositoryTemplate() {
+                var me = this
                 return Mustache.render(
                     "package com.example.template;\n " +
                     "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
                     "public interface {{ inputText }}Repository extends PagingAndSortingRepository < {{ inputText }}, Long > { \n " +
-                    "}\n", definition)
+                    "}\n", me.value)
             },
-            setAggregateTemplate(name, definition) {
+            setControllerTemplate(){
+                var me = this
+                return Mustache.render(
+                    "package com.example.template;\n" +
+                    "\n" +
+                    "import org.springframework.beans.factory.annotation.Autowired;\n" +
+                    "import org.springframework.web.bind.annotation.PathVariable;\n" +
+                    "import org.springframework.web.bind.annotation.RequestMapping;\n" +
+                    "import org.springframework.web.bind.annotation.RequestMethod;\n" +
+                    "import org.springframework.web.bind.annotation.RestController;\n" +
+                    "\n" +
+                    "import javax.servlet.http.HttpServletRequest;\n" +
+                    "import javax.servlet.http.HttpServletResponse;\n" +
+                    "import java.util.List;\n" +
+                    "\n" +
+                    "@RestController\n" +
+                    "public class {{ inputText }}Controller {\n" +
+                    "\n" +
+                    "{{#innerAggregate}}" +
+                    "{{#command}}" +
+                    "{{{code}}}" +
+                    "{{/command}}" +
+                    "{{/innerAggregate}}" +
+                    "}", me.value)
+            },
+            setEventListnerTemplate(){
+                var me = this
+                return Mustache.render("package com.example.template;\n" +
+                    "\n" +
+                    "import com.fasterxml.jackson.databind.DeserializationFeature;\n" +
+                    "import com.fasterxml.jackson.databind.ObjectMapper;\n" +
+                    "import org.apache.kafka.clients.consumer.ConsumerRecord;\n" +
+                    "import org.apache.kafka.clients.producer.ProducerRecord;\n" +
+                    "import org.springframework.beans.factory.annotation.Autowired;\n" +
+                    "import org.springframework.kafka.annotation.KafkaListener;\n" +
+                    "import org.springframework.kafka.core.KafkaTemplate;\n" +
+                    "import org.springframework.messaging.handler.annotation.Payload;\n" +
+                    "import org.springframework.stereotype.Service;\n" +
+                    "\n" +
+                    "import java.io.IOException;\n" +
+                    "import java.util.Optional;\n" +
+                    "\n" +
+                    "@Service\n" +
+                    "public class {{ inputText }}Service {\n" +
+                    "\n" +
+                    "    @Autowired\n" +
+                    "    private KafkaTemplate kafkaTemplate;\n" +
+                    "\n" +
+                    "    @Autowired\n" +
+                    "    private {{ inputText }}Repository {{ inputText }}Repository;\n" +
+                    "\n" +
+                    "{{#innerAggregate}}" +
+                    "{{#policy}}" +
+                    "{{{code}}}" +
+                    "{{/policy}}" +
+                    "{{/innerAggregate}}" +
+                    // "    @KafkaListener(topics = \"${eventTopic}\")\n" +
+                    // "    public void {{ name }}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
+                    // "        System.out.println(\"##### listener : \" + message);\n" +
+                    // "\n" +
+                    // "       \n" +
+                    "}", me.value)
+            },
+            setAggregateTemplate() {
+                var me = this
                 return Mustache.render(
                     "package com.example.template;\n" +
                     "\n" +
@@ -189,7 +266,7 @@
                     "    }\n" +
                     "{{/aggregateEntity}}\n" +
                     "\n" +
-                    "}", definition)
+                    "}", me.value)
             }
         },
 
