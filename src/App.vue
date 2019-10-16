@@ -140,8 +140,8 @@
             kubeHost: '',
             kubeToken: '',
             items: [
-                {icon: 'home', text: 'Home', route: '/'},
-                {icon: 'fa-sticky-note', text: 'Event', route: '/event'},
+                {icon: 'fa-book', text: 'Home', route: '/'},
+                {icon: 'fa-sticky-note', text: 'EventStorming', route: '/event'},
             ],
             api: [],
             snackbar: false
