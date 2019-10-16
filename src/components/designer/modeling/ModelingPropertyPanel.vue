@@ -155,9 +155,18 @@
                 </v-card>
 
                 <v-card outlined v-else>
-                    <v-card-text >
+                    <v-card-text>
                         <v-textarea name="input-7-1" outline :label="'Name'" auto-grow v-model="input"></v-textarea>
                         <v-card outlined v-if="value.name == 'event' && usedTranslate">
+
+                            <v-card-text @click="changeTranslate()">
+                                추천 단어 : {{ translateText }}
+                            </v-card-text>
+                            <v-card-text>
+                                선택시 변경 됩니다.
+                            </v-card-text>
+                        </v-card>
+                        <v-card outlined v-else-if="usedTranslate">
 
                             <v-card-text @click="changeTranslate()">
                                 추천 단어 : {{ translateText }}
@@ -331,17 +340,27 @@
             input: function (newVal) {
                 var me = this
 
-                me.translateText='';
-                if(this.value.name == 'event') {
-                    googleTranslate.detectLanguage(newVal, function(err, detection) {
-                        if(detection.language == 'ko') {
-                            googleTranslate.translate(newVal, 'en', function(err, translation) {
+                me.translateText = '';
+                if (this.value.name == 'event') {
+                    googleTranslate.detectLanguage(newVal, function (err, detection) {
+                        if (detection.language == 'ko') {
+                            googleTranslate.translate(newVal, 'en', function (err, translation) {
                                 me.usedTranslate = true
                                 me.translateText = _.camelCase(tensify(translation.translatedText).past_participle);
                             });
                         }
                     });
+                } else {
+                    googleTranslate.detectLanguage(newVal, function (err, detection) {
+                        if (detection.language == 'ko') {
+                            googleTranslate.translate(newVal, 'en', function (err, translation) {
+                                me.usedTranslate = true
+                                me.translateText = translation.translatedText;
+                            });
+                        }
+                    });
                 }
+
 
                 if (this.titleName == "Aggregate") {
                     this.$emit('update:inputText', newVal)
@@ -454,8 +473,8 @@
 
         },
         methods: {
-            changeTranslate () {
-                this.input =  this.translateText
+            changeTranslate() {
+                this.input = this.translateText
                 this.usedTranslate = false
             },
             entityADD: function (type, name) {
