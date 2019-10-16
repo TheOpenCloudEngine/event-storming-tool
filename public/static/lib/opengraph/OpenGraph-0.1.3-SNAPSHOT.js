@@ -36134,6 +36134,7 @@ OG.graph.Canvas.prototype = {
             left: '0px'
         });
         sliderImage.attr("width", "100%");
+        console.log(container.id)
         sliderImage.attr('id', container.id + 'sliderImage');
 
 

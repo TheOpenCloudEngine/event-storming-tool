@@ -56,8 +56,8 @@
                        :dragPageMovable="dragPageMovable" :enableContextmenu="false" :enableRootContextmenu="false"
                        :enableHotkeyCtrlC="false" :enableHotkeyCtrlV="false"
                        :enableHotkeyDelete="false" :enableHotkeyCtrlZ="false" :enableHotkeyCtrlD="false"
-                       :enableHotkeyCtrlG="false" :slider="false" :movable="true" :resizable="true" :selectable="true"
-                       :connectable="true" v-if="value" v-on:canvasReady="bindEvents"
+                       :enableHotkeyCtrlG="false" :slider="true" :movable="true" :resizable="true" :selectable="true"
+                       :connectable="true" v-if="value" v-on:canvasReady="bindEvents" :autoSliderUpdate="true"
                        v-on:connectShape="onConnectShape" :imageBase="imageBase">
                 <!--엘리먼트-->
                 <div v-for="(element, index) in value.definition">
@@ -1026,6 +1026,8 @@
             }
         },
         beforeDestroy: function () {
+            console.log("aa")
+            this.canvas.removeSlider()
             // this.channel.pusher.unsubscribe('presence-event');
         },
         computed: {
@@ -1061,7 +1063,7 @@
                 get: function () {
                     var me = this
                     let tmpList = JSON.parse(JSON.stringify(me.items));
-                    console.log(me.items)
+                    // console.log(me.items)
 
                     me.value.definition.forEach(function (item) {
                         var event = {
@@ -1070,7 +1072,7 @@
                             type: '',
                             code: ''
                         }
-                        console.log(item)
+                        // console.log(item)
                         if (item._type == 'org.uengine.uml.model.Domain') {
                             event.name = item.inputText + '.java';
                             event.type = item._type;
@@ -1192,14 +1194,15 @@
                 //$nextTick delays the callback function until Vue has updated the DOM
                 // (which usually happens as a result of us changing the data
                 //  so make any DOM changes here
-
-                this.canvas._CONFIG.FAST_LOADING = false;
                 this.canvas.addSlider({
                     slider: $("#canvas_slider"),
                     width: 200,
                     height: 300,
                     appendTo: "body"
                 });
+
+                this.canvas._CONFIG.FAST_LOADING = false;
+
                 // this.canvas.updateSlider();
                 //timer end
                 me.undoArray.push({

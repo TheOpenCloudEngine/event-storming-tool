@@ -44,6 +44,9 @@ if( process.env.NODE_ENV == "development" ){
     window.API_HOST = process.env.VUE_APP_API_HOST
 }
 
+// const TRANSLATE_KEY =`${process.env.VUE_APP_TRANSLATE_KEY}`
+// console.log(TRANSLATE_KEY)
+
 Vue.config.productionTip = false
 
 new Vue({

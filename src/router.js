@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from './views/dashboardpage.vue'
+import EventStormingListPage from './components/EventStormingList/EventStormingListPage.vue'
+
 
 Vue.use(Router)
 
@@ -24,7 +26,12 @@ export default new Router({
         },
         {
             path: '/event',
-            name: 'Event',
+            name: 'EventStorming',
+            component: EventStormingListPage
+        },
+        {
+            path: '/event/:id',
+            name: 'EventStorming',
             component: ClassModeler
         },
         // {
