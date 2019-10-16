@@ -28,6 +28,14 @@
 
                     <v-card-text>
                         <v-textarea name="input-7-1" outline :label="'Name'" auto-grow v-model="input"></v-textarea>
+                        <v-card outlined v-if="usedTranslate">
+                            <v-card-text @click="changeTranslate()">
+                                추천 단어 : {{ translateText }}
+                            </v-card-text>
+                            <v-card-text>
+                                선택시 변경 됩니다.
+                            </v-card-text>
+                        </v-card>
                     </v-card-text>
 
                     <!-- <v-card-text>
@@ -39,6 +47,14 @@
                 <v-card v-else-if="value.name == 'Aggregate'">
                     <v-card-text>
                         <v-textarea name="input-7-1" outline :label="'Name'" auto-grow v-model="input"></v-textarea>
+                        <v-card outlined v-if="usedTranslate">
+                            <v-card-text @click="changeTranslate()">
+                                추천 단어 : {{ translateText }}
+                            </v-card-text>
+                            <v-card-text>
+                                선택시 변경 됩니다.
+                            </v-card-text>
+                        </v-card>
                     </v-card-text>
 
                     <v-data-table
@@ -400,8 +416,6 @@
             },
             drawer: function (val) {
                 this.navigationDrawer = val;
-                console.log(this.input)
-                console.log(this.inputText)
                 if (this.inputText != this.input) {
                     this.input = this.inputText
                 }

@@ -1671,24 +1671,23 @@
                 if (element._type == 'org.uengine.uml.model.relation') {
                     me.value['relation'].push(element);
                 } else {
-                    if (element._type == 'org.uengine.uml.model.bounded' && me.value['definition'].length != 0) {
-                        me.value['definition'].some(function (tmp, index) {
-                            console.log(tmp, index)
-                            if (tmp._type != 'org.uengine.uml.model.bounded') {
-                                me.value['definition'] = [
-                                    ...me.value['definition'].slice(0, index),
-                                    element,
-                                    ...me.value['definition'].slice(index)
-                                ]
-                                return;
-                            }
-                            if (me.value['definition'].length - 1 == index) {
-                                me.value['definition'].push(element);
-                            }
-                        })
-                    } else {
+                    // if (element._type == 'org.uengine.uml.model.bounded' && me.value['definition'].length != 0) {
+                    //     me.value['definition'].some(function (tmp, index) {
+                    //         console.log(tmp, index)
+                    //         if (tmp._type != 'org.uengine.uml.model.bounded') {
+                    //             me.value['definition'] = [
+                    //                 ...me.value['definition'].slice(0, index),
+                    //                 element,
+                    //                 ...me.value['definition'].slice(index)
+                    //             ]
+                    //             return;
+                    //         }
+                    //         if (me.value['definition'].length - 1 == index) {
+                    //             me.value['definition'].push(element);
+                    //         }
+                    //     })
+                    // } else {
                         me.value['definition'].push(element);
-                    }
                 }
                 me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                 me.redoArray = [];
