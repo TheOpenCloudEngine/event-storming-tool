@@ -137,16 +137,6 @@
                     <span>{{item.label}}</span>
                 </v-tooltip>
             </v-card>
-            <v-card>
-                <v-slider
-                        v-model="screenSize"
-                        append-icon="volume_up"
-                        prepend-icon="volume_down"
-                        :min="0"
-                        :max="400"
-                        :vertical="true"
-                ></v-slider>
-            </v-card>
 
         </v-layout>
 
@@ -189,7 +179,6 @@
         },
         data() {
             return {
-                screenSize:100,
                 files: {
                     md: 'mdi-markdown',
                     txt: 'mdi-file-document-outline',
@@ -1023,6 +1012,8 @@
                 members: [],
                 valueTmp: {},
                 pathTmp: [],
+                maxWidth:0,
+                maxHeight:0,
             }
         },
         beforeDestroy: function () {
@@ -1031,10 +1022,6 @@
             // this.channel.pusher.unsubscribe('presence-event');
         },
         computed: {
-                get:function () {
-                    console.log(this.screenSize())
-                },
-
             definitionSet() {
                 return this.inputValue(this.active)
             },
@@ -1106,6 +1093,7 @@
                             event.file = 'Java'
 
                         }
+
                         if (event.name != '') {
                             tmpList[1].children[0].children[1].children[0].children[0].children[0].children.push(event)
                         }

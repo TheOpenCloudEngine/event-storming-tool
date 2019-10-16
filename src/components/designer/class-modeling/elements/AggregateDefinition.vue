@@ -142,6 +142,7 @@
                 console.log(this.value)
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
+
                 this.value.aggregateCode = me.setAggregateTemplate()
             },
             "value.innerAggregate": {
