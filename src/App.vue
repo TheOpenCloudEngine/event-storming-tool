@@ -41,7 +41,7 @@
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <span class="hidden-sm-and-down">uEngine</span>
+        <span class="hidden-sm-and-down">EventStorming2Code</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn text color="white" @click="logout()" v-if="authorized">
