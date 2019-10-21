@@ -56,7 +56,7 @@
                        :dragPageMovable="dragPageMovable" :enableContextmenu="false" :enableRootContextmenu="false"
                        :enableHotkeyCtrlC="false" :enableHotkeyCtrlV="false"
                        :enableHotkeyDelete="false" :enableHotkeyCtrlZ="false" :enableHotkeyCtrlD="false"
-                       :enableHotkeyCtrlG="false" :slider="false" :movable="true" :resizable="true" :selectable="true"
+                       :enableHotkeyCtrlG="false" :slider="true"  :movable="true" :resizable="true" :selectable="true"
                        :connectable="true" v-if="value" v-on:canvasReady="bindEvents"
                        v-on:connectShape="onConnectShape" :imageBase="imageBase">
                 <!--엘리먼트-->
