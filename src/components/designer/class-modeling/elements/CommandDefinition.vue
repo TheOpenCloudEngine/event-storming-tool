@@ -89,7 +89,7 @@
                     name: 'Command',
                     fieldDescriptors: [],
                     elementView: {
-                        '_type': 'org.uengine.modeling.Command',
+                        '_type': 'org.uengine.uml.model.Command',
                         'id': elementId,
                         'x': x,
                         'y': y,

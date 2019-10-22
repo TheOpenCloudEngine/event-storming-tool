@@ -72,10 +72,10 @@
         name: 'aggregate-definition',
         props: {},
         computed: {
-            upName() {
-                var me= this
-                return me.inputText.charAt(0).toUpperCase() + me.inputText.slice(1)
-            },
+            // upName() {
+            //     var me= this
+            //     return me.inputText.charAt(0).toUpperCase() + me.inputText.slice(1)
+            // },
             defaultStyle() {
                 return {}
             },
@@ -87,6 +87,7 @@
             },
             createNew(elementId, x, y, width, height) {
                 return {
+                    upName: '',
                     _type: this.className(),
                     name: 'Aggregate',
                     innerAggregate: {
@@ -97,7 +98,7 @@
                         'external': []
                     },
                     elementView: {
-                        '_type': 'org.uengine.modeling.Aggregate',
+                        '_type': 'org.uengine.uml.model.Aggregate',
                         'id': elementId,
                         'x': x,
                         'y': y,
@@ -139,6 +140,9 @@
                 this.value.repositoryCode = this.setRepositoryTemplate()
                 this.value.controllerCode = this.setControllerTemplate()
                 this.value.eventListenerCode = this.setEventListenerTemplate()
+
+                this.value.upName = newVal.charAt(0).toUpperCase() + newVal.slice(1)
+
 
             },
             "value.aggregateEntity": function () {

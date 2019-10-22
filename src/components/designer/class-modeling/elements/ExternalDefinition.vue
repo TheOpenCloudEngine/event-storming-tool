@@ -84,7 +84,7 @@
                     _type: this.className(),
                     name: 'External',
                     elementView: {
-                        '_type': 'org.uengine.modeling.External',
+                        '_type': 'org.uengine.uml.model.External',
                         'id': elementId,
                         'x': x,
                         'y': y,
