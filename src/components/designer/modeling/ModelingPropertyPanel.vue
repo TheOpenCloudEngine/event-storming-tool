@@ -27,7 +27,15 @@
                     </v-card-title>
 
                     <v-card-text>
-                        <v-textarea name="input-7-1" outline :label="titleName" auto-grow v-model="input"></v-textarea>
+                        <v-textarea name="input-7-1" outline :label="'Name'" auto-grow v-model="input"></v-textarea>
+                        <v-card outlined v-if="usedTranslate">
+                            <v-card-text @click="changeTranslate()">
+                                추천 단어 : {{ translateText }}
+                            </v-card-text>
+                            <v-card-text>
+                                선택시 변경 됩니다.
+                            </v-card-text>
+                        </v-card>
                     </v-card-text>
 
                     <!-- <v-card-text>
@@ -38,7 +46,15 @@
 
                 <v-card v-else-if="value.name == 'Aggregate'">
                     <v-card-text>
-                        <v-textarea name="input-7-1" outline :label="titleName" auto-grow v-model="input"></v-textarea>
+                        <v-textarea name="input-7-1" outline :label="'Name'" auto-grow v-model="input"></v-textarea>
+                        <v-card outlined v-if="usedTranslate">
+                            <v-card-text @click="changeTranslate()">
+                                추천 단어 : {{ translateText }}
+                            </v-card-text>
+                            <v-card-text>
+                                선택시 변경 됩니다.
+                            </v-card-text>
+                        </v-card>
                     </v-card-text>
 
                     <v-data-table
@@ -61,7 +77,8 @@
                     </v-layout>
 
                     <v-layout justify-end row wrap>
-                        <v-btn rounded color="primary" @click="entityADD(entityType,entityName);" dark>Entity ADD</v-btn>
+                        <v-btn rounded color="primary" @click="entityADD(entityType,entityName)" dark>Entity ADD
+                        </v-btn>
                     </v-layout>
 
                     <!-- <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
@@ -150,12 +167,59 @@
                             </v-expansion-panel>
                         </div>
                     </template>
-
                 </v-card>
 
-                <v-card v-else>
+                <v-card flat v-else-if="value.name == 'Relation'">
+
+                    <v-switch
+                            v-model="value.relationBoolean"
+                    ></v-switch>
+                    <div> 현재: {{value.relationType}}</div>
+                    <v-card-text v-if="value.relationBoolean">
+                        <v-col>
+                            <v-row justify="center"
+                                   class="mb-6"
+                                   no-gutters>
+                                <v-btn flat class="pa-2" block :disabled="value.relationType == 'Pub'" @click="restApiTypeSet(value,'Pub')" > PUB </v-btn>
+                                <v-btn flat class="pa-2" block :disabled="value.relationType == 'Sub'" @click="restApiTypeSet(value,'Sub')" > SUB </v-btn>
+                            </v-row>
+                        </v-col>
+                    </v-card-text>
+
+                    <v-card-text v-else>
+                        <v-col>
+                            <v-row justify="center">
+                             <v-autocomplete v-model="restApiType" :items="restApiList"
+                                            label="REST API TYPE" persistent-hint
+                                            prepend-icon="mdi-city">
+                            </v-autocomplete>
+                                <v-btn @click="restApiTypeSet(value,restApiType)"> 확인 </v-btn>
+                            </v-row>
+                        </v-col>
+                    </v-card-text>
+                </v-card>
+
+                <v-card outlined v-else>
                     <v-card-text>
-                        <v-textarea name="input-7-1" outline :label="titleName" auto-grow v-model="input"></v-textarea>
+                        <v-textarea name="input-7-1" outline :label="'Name'" auto-grow v-model="input"></v-textarea>
+                        <v-card outlined v-if="value.name == 'event' && usedTranslate">
+
+                            <v-card-text @click="changeTranslate()">
+                                추천 단어 : {{ translateText }}
+                            </v-card-text>
+                            <v-card-text>
+                                선택시 변경 됩니다.
+                            </v-card-text>
+                        </v-card>
+                        <v-card outlined v-else-if="usedTranslate">
+
+                            <v-card-text @click="changeTranslate()">
+                                추천 단어 : {{ translateText }}
+                            </v-card-text>
+                            <v-card-text>
+                                선택시 변경 됩니다.
+                            </v-card-text>
+                        </v-card>
                     </v-card-text>
 
                     <v-data-table
@@ -175,28 +239,32 @@
                             <v-text-field v-model="entityName" :counter="10" label="Name" required></v-text-field>
                         </v-flex>
                     </v-layout>
-                    <v-layout  v-if="value.name == 'event'"  justify-end row wrap>
-                        <v-btn rounded color="primary" @click="entityADD(entityType,entityName);" dark>Entity ADD</v-btn>
+                    <v-layout v-if="value.name == 'event'" justify-end row wrap>
+                        <v-btn rounded color="primary" @click="entityADD(entityType,entityName);" dark>Entity ADD
+                        </v-btn>
                     </v-layout>
 
-                    <v-autocomplete v-if="value.name == 'Command'" v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
+                    <v-autocomplete v-if="value.name == 'Command'" v-model="restApiType" :items="restApiList"
+                                    label="REST API TYPE" persistent-hint
                                     prepend-icon="mdi-city">
                     </v-autocomplete>
 
                     <v-card-title>
                         <span class="headline" v-if="titleName">Aggregate 선택</span>
                     </v-card-title>
-                    <v-autocomplete style="margin-left: 20px; margin-right: 20px;" v-model="aggregate" :items="aggregateList" label="Select Aggregate" persistent-hint>
+                    <v-autocomplete style="margin-left: 20px; margin-right: 20px;" v-model="aggregate"
+                                    :items="aggregateList" label="Select Aggregate" persistent-hint>
                     </v-autocomplete>
-
                 </v-card>
-
             </v-list>
         </v-navigation-drawer>
     </v-layout>
 </template>
 
 <script>
+    var googleTranslate = require('google-translate')(process.env.VUE_APP_TRANSLATE_KEY);
+    var tensify = require('tensify');
+
     export default {
         name: 'modeling-property-panel',
         props: {
@@ -296,8 +364,9 @@
                 entityType: '',
                 entityName: '',
                 aggregate: '',
-                headers: [{value: 'type'}, {value: 'name'}]
-
+                headers: [{value: 'type'}, {value: 'name'}],
+                translateText: '',
+                usedTranslate: false,
             }
         },
         created: function () {
@@ -309,21 +378,54 @@
         watch: {
             inputText: function (newVal) {
                 console.log(newVal)
-                if(this.input != newVal) {
+                if (this.input != newVal) {
                     this.input = newVal
                 }
             },
             input: function (newVal) {
+                var me = this
+
+                me.translateText = '';
+                if (this.value.name == 'event') {
+                    googleTranslate.detectLanguage(newVal, function (err, detection) {
+                        if (detection.language == 'ko') {
+                            googleTranslate.translate(newVal, 'en', function (err, translation) {
+                                me.usedTranslate = true
+                                me.translateText = _.camelCase(tensify(translation.translatedText).past_participle);
+                            });
+                        }
+                    });
+                } else {
+                    googleTranslate.detectLanguage(newVal, function (err, detection) {
+                        if (detection.language == 'ko') {
+                            googleTranslate.translate(newVal, 'en', function (err, translation) {
+                                me.usedTranslate = true
+                                me.translateText = translation.translatedText;
+                            });
+                        }
+                    });
+                }
+
+
                 if (this.titleName == "Aggregate") {
                     this.$emit('update:inputText', newVal)
                 } else if (this.titleName == "Boundary Context") {
                     this.$emit('update:inputText', newVal)
                 } else {
-                    if (this.selectAggregate.length > 0) {
-                        this.$emit('update:inputText', newVal)
-                        this.$emit('update:aggregateText', '\n \n \n Aggregate:\n' + this.selectAggregate)
+                    if (this.value.name == 'event') {
+                        if (this.selectAggregate.length > 0) {
+                            this.$emit('update:inputText', newVal)
+                            this.$emit('update:aggregateText', '\n \n \n Aggregate:\n' + this.selectAggregate)
+                        } else {
+                            this.$emit('update:inputText', newVal)
+                        }
                     } else {
-                        this.$emit('update:inputText', newVal)
+                        if (this.selectAggregate.length > 0) {
+                            this.$emit('update:inputText', newVal)
+                            this.$emit('update:aggregateText', '\n \n \n Aggregate:\n' + this.selectAggregate)
+                        } else {
+                            this.$emit('update:inputText', newVal)
+                        }
                     }
                 }
             },
@@ -343,16 +445,9 @@
             },
             drawer: function (val) {
                 this.navigationDrawer = val;
-                console.log(this.input)
-                console.log(this.inputText)
-                if(this.inputText != this.input) {
+                if (this.inputText != this.input) {
                     this.input = this.inputText
                 }
-                // if(this.value._type=="org.uengine.uml.model.Aggregate" && val){
-                //   // this.domainNameList;
-                //   // this.commandNameList;
-                //   console.log(this.domainNameList);
-                // }
             },
             //프로퍼티 창이 오픈되었을 때 모델값을 새로 반영한다.
             navigationDrawer: {
@@ -421,6 +516,20 @@
 
         },
         methods: {
+            restApiTypeSet(val,set){
+                if( val.sourceElement._type == "org.uengine.uml.model.Domain" && val.targetElement._type == "org.uengine.uml.model.Policy" ){
+                    val.sourceElement.relationInfo=set;
+                    val.targetElement.relationInfo=set;
+                } else if( val.sourceElement._type == "org.uengine.uml.model.Policy" && val.targetElement._type == "org.uengine.uml.model.Domain" ){
+                    val.sourceElement.relationInfo=set;
+                    val.targetElement.relationInfo=set;
+                }
+                val.relationType=set;
+            },
+            changeTranslate() {
+                this.input = this.translateText
+                this.usedTranslate = false
+            },
             entityADD: function (type, name) {
                 var me = this
                 console.log(type, name);
@@ -437,7 +546,6 @@
                     designer.snackbar = true
                 }
             },
-
             entitySub: function (idx) {
                 var me = this
                 me.entity[idx] = null

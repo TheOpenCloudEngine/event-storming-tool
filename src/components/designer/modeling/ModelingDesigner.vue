@@ -5,6 +5,7 @@
                 <v-card>
                     <v-card-title>
                         <span class="headline">Code View</span>
+                        <v-btn text> <v-icon middle>info</v-icon></v-btn>
                     </v-card-title>
                     <v-card-text>
                         <!-- 형태:
@@ -52,12 +53,13 @@
                     </v-card-text>
                 </v-card>
             </modal>
+
             <opengraph ref="opengraph" focus-canvas-on-select wheelScalable :labelEditable="true"
                        :dragPageMovable="dragPageMovable" :enableContextmenu="false" :enableRootContextmenu="false"
                        :enableHotkeyCtrlC="false" :enableHotkeyCtrlV="false"
                        :enableHotkeyDelete="false" :enableHotkeyCtrlZ="false" :enableHotkeyCtrlD="false"
-                       :enableHotkeyCtrlG="false" :slider="true"  :movable="true" :resizable="true" :selectable="true"
-                       :connectable="true" v-if="value" v-on:canvasReady="bindEvents"
+                       :enableHotkeyCtrlG="false" :slider="true" :movable="true" :resizable="true" :selectable="true"
+                       :connectable="true" v-if="value" v-on:canvasReady="bindEvents" :autoSliderUpdate="true"
                        v-on:connectShape="onConnectShape" :imageBase="imageBase">
                 <!--엘리먼트-->
                 <div v-for="(element, index) in value.definition">
@@ -1017,6 +1019,8 @@
             }
         },
         beforeDestroy: function () {
+            console.log("aa")
+            this.canvas.removeSlider()
             // this.channel.pusher.unsubscribe('presence-event');
         },
         computed: {
@@ -1048,7 +1052,7 @@
                 get: function () {
                     var me = this
                     let tmpList = JSON.parse(JSON.stringify(me.items));
-                    console.log(me.items)
+                    // console.log(me.items)
 
                     me.value.definition.forEach(function (item) {
                         var event = {
@@ -1057,7 +1061,7 @@
                             type: '',
                             code: ''
                         }
-                        console.log(item)
+                        // console.log(item)
                         if (item._type == 'org.uengine.uml.model.Domain') {
                             event.name = item.inputText + '.java';
                             event.type = item._type;
@@ -1089,7 +1093,6 @@
                             event.type = item._type;
                             event.code = item.controllerCode;
                             event.file = 'Java'
-
                         }
 
                         if (event.name != '') {
@@ -1180,14 +1183,15 @@
                 //$nextTick delays the callback function until Vue has updated the DOM
                 // (which usually happens as a result of us changing the data
                 //  so make any DOM changes here
-
-                this.canvas._CONFIG.FAST_LOADING = false;
                 this.canvas.addSlider({
                     slider: $("#canvas_slider"),
                     width: 200,
                     height: 300,
                     appendTo: "body"
                 });
+
+                this.canvas._CONFIG.FAST_LOADING = false;
+
                 // this.canvas.updateSlider();
                 //timer end
                 me.undoArray.push({
@@ -1668,24 +1672,7 @@
                 if (element._type == 'org.uengine.uml.model.relation') {
                     me.value['relation'].push(element);
                 } else {
-                    if (element._type == 'org.uengine.uml.model.bounded' && me.value['definition'].length != 0) {
-                        me.value['definition'].some(function (tmp, index) {
-                            console.log(tmp, index)
-                            if (tmp._type != 'org.uengine.uml.model.bounded') {
-                                me.value['definition'] = [
-                                    ...me.value['definition'].slice(0, index),
-                                    element,
-                                    ...me.value['definition'].slice(index)
-                                ]
-                                return;
-                            }
-                            if (me.value['definition'].length - 1 == index) {
-                                me.value['definition'].push(element);
-                            }
-                        })
-                    } else {
-                        me.value['definition'].push(element);
-                    }
+                    me.value['definition'].push(element);
                 }
                 me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                 me.redoArray = [];

@@ -107,7 +107,8 @@
                     editing: false,
                     connectAggregateName: '',
                     entity: [],
-                    code: ''
+                    code: '',
+                    relationInfo:'',
                 }
             }
         },
@@ -126,6 +127,9 @@
 
         },
         watch: {
+            "value.relationInfo": function (newVal) {
+                console.log(newVal)
+            },
             "value.connectAggregateName": function (newVal) {
                 console.log(newVal)
                 var me = this

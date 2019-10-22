@@ -36059,10 +36059,11 @@ OG.graph.Canvas.prototype = {
         slider.css({
             width: option.width + 'px'
         });
+
         slider.dialog({
-                title: option.title ? option.title : "Zoom",
+                title: option.title ? option.title : "확대/축소",
                 position: option.position ? option.position : {my: "right top", at: "right top", of: container},
-                height: option.height ? option.height : 300,
+                height: option.height ? option.height : 500,
                 width: option.width ? option.width : 250,
                 dialogClass: "no-close",
                 appendTo: option.appendTo ? option.appendTo : '#' + container.id,
@@ -36115,17 +36116,17 @@ OG.graph.Canvas.prototype = {
             'height': '8px'
         });
 
-        sliderImageWrapper = $('<div class="sliderImageWrapper"></div>');
-        sliderImageWrapper.css({
-            position: 'absolute',
-            top: '50px',
-            bottom: '5px',
-            left: '5px',
-            right: '5px',
-            'overflow-x': 'hidden',
-            'overflow-y': 'auto',
-            'background': 'white'
-        });
+        // sliderImageWrapper = $('<div class="sliderImageWrapper"></div>');
+        // sliderImageWrapper.css({
+        //     position: 'absolute',
+        //     top: '50px',
+        //     bottom: '5px',
+        //     left: '5px',
+        //     right: '5px',
+        //     'overflow-x': 'hidden',
+        //     'overflow-y': 'auto',
+        //     'background': 'white'
+        // });
 
         sliderImage = $('<canvas class="sliderImage"></canvas>');
         sliderImage.css({
@@ -36134,6 +36135,7 @@ OG.graph.Canvas.prototype = {
             left: '0px'
         });
         sliderImage.attr("width", "100%");
+        console.log(container.id)
         sliderImage.attr('id', container.id + 'sliderImage');
 
 
@@ -36231,9 +36233,9 @@ OG.graph.Canvas.prototype = {
         sliderBarWrapper.append(sliderText);
         sliderBarWrapper.append(sliderBar);
 
-        slider.append(sliderImageWrapper);
-        sliderImageWrapper.append(sliderImage);
-        sliderImageWrapper.append(sliderNavigator);
+        // slider.append(sliderImageWrapper);
+        // sliderImageWrapper.append(sliderImage);
+        // sliderImageWrapper.append(sliderNavigator);
 
         //캔버스 삭제시 슬라이더도 삭제
         $(container).on("remove", function () {
@@ -36310,7 +36312,7 @@ OG.graph.Canvas.prototype = {
             var sliderBar = slider.find('.scaleSlider');
             var sliderImage = slider.find('.sliderImage');
             var sliderNavigator = slider.find('.sliderNavigator');
-            var sliderImageWrapper = slider.find('.sliderImageWrapper');
+            // var sliderImageWrapper = slider.find('.sliderImageWrapper');
 
 
             //여기서부터는 캔버스의 내용을 슬라이더에 투영시킨다.
@@ -36336,8 +36338,8 @@ OG.graph.Canvas.prototype = {
                 image.src = 'data:image/svg+xml;base64,' + encoded;
                 image.onload = function () {
                     var canvas = document.getElementById(sliderImage.attr('id'));
-                    canvas.width = sliderImageWrapper.width();
-                    canvas.height = sliderImageWrapper.width() * image.height / image.width;
+                    // canvas.width = sliderImageWrapper.width();
+                    // canvas.height = sliderImageWrapper.width() * image.height / image.width;
                     var context = canvas.getContext('2d');
                     try {
                         context.drawImage(image, 0, 0, sliderImageWrapper.width(), sliderImageWrapper.width() * image.height / image.width);
@@ -36352,11 +36354,11 @@ OG.graph.Canvas.prototype = {
                 image.src = 'data:image/svg+xml;utf-8,' + svgData;
                 image.onload = function () {
                     var canvas = document.getElementById(sliderImage.attr('id'));
-                    canvas.width = sliderImageWrapper.width();
-                    canvas.height = sliderImageWrapper.width() * image.height / image.width;
+                    // canvas.width = sliderImageWrapper.width();
+                    // canvas.height = sliderImageWrapper.width() * image.height / image.width;
                     var context = canvas.getContext('2d');
                     try {
-                        context.drawImage(image, 0, 0, sliderImageWrapper.width(), sliderImageWrapper.width() * image.height / image.width);
+                        // context.drawImage(image, 0, 0, sliderImageWrapper.width(), sliderImageWrapper.width() * image.height / image.width);
                         $(image).remove();
                         me.updateNavigatior();
                     } catch (e) {
@@ -36372,10 +36374,10 @@ OG.graph.Canvas.prototype = {
                 var width = me._CONFIG.BACKDOOR.width;
                 var height = me._CONFIG.BACKDOOR.height;
                 var canvasScale = me.getScale();
-                var contextWidth = sliderImageWrapper.width();
+                // var contextWidth = sliderImageWrapper.width();
                 var fixedWidth = (width * (scale / 100) / canvasSize[0] * canvasScale) * contextWidth;
                 var fixedHeight = fixedWidth * height / width;
-                var sliderBackDoorWrapper = sliderImageWrapper.find('.sliderBackDoorWrapper');
+                // var sliderBackDoorWrapper = sliderImageWrapper.find('.sliderBackDoorWrapper');
 
                 if (!sliderBackDoorWrapper || sliderBackDoorWrapper.length < 1) {
                     sliderBackDoorWrapper = $('<div class="sliderBackDoorWrapper"></div>');
@@ -36387,7 +36389,7 @@ OG.graph.Canvas.prototype = {
                         height: '100%'
                     });
 
-                    sliderImageWrapper.data('backdoor', true);
+                    // sliderImageWrapper.data('backdoor', true);
                     sliderBackDoorWrapper.css({
                         'background-image': 'url(' + me._CONFIG.BACKDOOR.url + ')',
                         'background-repeat': 'no-repeat',

@@ -99,15 +99,17 @@
                 return {
                     _type: this.type(),
                     name: 'Relation',
-                    sourceClassName: from.name,
-                    targetClassName: to.name,
+                    relationType:'',
+                    relationBoolean:true,
+                    sourceElement: from,
+                    targetElement: to,
                     from: from.elementView.id,
                     to: to.elementView.id,
                     selected: false,
                     relationView: {
                         style: JSON.stringify({
                             "arrow-start": "none",
-                            "arrow-end": "none"
+                            "arrow-end": "none",
                         }),
                         value: vertices,
                         from: from.elementView.id,
@@ -144,9 +146,7 @@
         },
         mounted: function () {
         },
-        methods: {
-
-        }
+        methods: { }
     }
 </script>
 

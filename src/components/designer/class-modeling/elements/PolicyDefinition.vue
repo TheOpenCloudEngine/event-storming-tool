@@ -101,7 +101,8 @@
             inputText: '',
             restApi: '',
             editing: false,
-            connectAggregateName: ''
+            connectAggregateName: '',
+            relationInfo:'',
         }
       }
     },
@@ -117,13 +118,20 @@
 
     },
     watch: {
+      "value.relationInfo": function (newVal) {
+        console.log(newVal)
+        if(newVal == 'Pub' || newVal == 'Sub' ){
+          this.value.code = this.setPolicyKafkaTemplate(this.value)
+        }else{
+          this.value.code = this.setPolicyRestTemplate(this.value)
+        }
+      },
         "value.connectAggregateName": function (newVal) {
             console.log(newVal)
             var me = this
             var designer = this.getComponent('modeling-designer')
             console.log(me.value.inputText)
             designer.value.definition.forEach(function (temp) {
-                console.log(temp.inputText, newVal)
                 if (temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == newVal) {
                     temp.innerAggregate[me.type.toLowerCase()].push(me.value)
                 }
@@ -133,20 +141,24 @@
             console.log(this.value)
             // console.log(this.code)
             // this.code = this.codeGenerate;
-            this.value.code = this.setPolicyTemplate(newVal,this.value)
+            this.value.code = this.setPolicyKafkaTemplate(this.value)
         }
     },
     mounted: function () {
 
     },
     methods: {
-        setPolicyTemplate(name,definition){
+        setPolicyKafkaTemplate(definition){
           return Mustache.render(
             "    @KafkaListener(topics = \"${eventTopic}\", groupId = \"{{inputText}}\") \n " +
             "    public void {{inputText}}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
             "        System.out.println(\"##### listener : \" + message); \n" +
             "    }\n\n", definition)
         },
+        setPolicyRestTemplate(name,definition){
+          return Mustache.render(
+                  " ", definition)
+        }
     }
   }
 </script>
