@@ -88,7 +88,7 @@
           _type: this.className(),
           name: 'Policy',
           elementView: {
-            '_type': 'org.uengine.modeling.Policy',
+            '_type': 'org.uengine.uml.model.Policy',
             'id': elementId,
             'x': x,
             'y': y,

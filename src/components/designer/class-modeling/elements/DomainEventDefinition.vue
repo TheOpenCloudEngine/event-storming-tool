@@ -93,7 +93,7 @@
                     _type: this.className(),
                     name: 'event',
                     elementView: {
-                        '_type': 'org.uengine.modeling.Domain',
+                        '_type': 'org.uengine.uml.model.Domain',
                         'id': elementId,
                         'x': x,
                         'y': y,

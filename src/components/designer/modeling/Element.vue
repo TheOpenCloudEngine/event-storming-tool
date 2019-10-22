@@ -163,7 +163,16 @@
             onAddToGroup: function (groupElement, elements, eventOffset ) {
                 console.log(groupElement, elements, eventOffset)
                 elements.forEach(function (element) {
-                    groupElement.$parent.value.dataList.push(element.$parent.value)
+                    var inner = false
+                    groupElement.$parent.value.dataList.some(function (tmp) {
+                        if(tmp.elementView.id == element.$parent.value.elementView.id) {
+                            return inner = true;
+                        }
+                    })
+
+                    if(inner == false) {
+                        groupElement.$parent.value.dataList.push(element.$parent.value)
+                    }
 
                 })
             },
@@ -186,6 +195,20 @@
                 //
                 if(groupOpengraphComponent.tagName) {
                     // Canvas로 나가는 경우
+
+                    designer.value.definition.forEach(function (tmp) {
+                        if(tmp._type == 'org.uengine.uml.model.bounded' && tmp.inputText == opengraphComponent.$parent.value.boundedContext) {
+                            tmp.dataList.some(function (boundedTmp, idx) {
+                                if(boundedTmp.elementView.id == opengraphComponent.$parent.value.elementView.id) {
+                                    tmp.dataList = [
+                                            ...tmp.dataList.slice(0, idx),
+                                            ...tmp.dataList.slice(idx +1)
+                                    ]
+                                }
+                            })
+                        }
+                    })
+
                     opengraphComponent.$parent.value.boundedContext = ""
 
                 } else {

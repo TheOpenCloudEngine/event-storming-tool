@@ -65,7 +65,7 @@
                     _type: this.className(),
                     name: 'Bounded Context',
                     elementView: {
-                        '_type': 'org.uengine.modeling.bounded',
+                        '_type': 'org.uengine.uml.model.bounded',
                         'id': elementId,
                         'x': x,
                         'y': y,

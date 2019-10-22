@@ -86,7 +86,7 @@
                     _type: this.className(),
                     name: 'View',
                     elementView: {
-                        '_type': 'org.uengine.modeling.View',
+                        '_type': 'org.uengine.uml.model.View',
                         'id': elementId,
                         'x': x,
                         'y': y,
