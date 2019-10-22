@@ -45,8 +45,7 @@
         type: Number
       },
       _style: {
-        default: function (val) {
-            console.log(val)
+        default: function () {
           return {};
         },
         type: Object

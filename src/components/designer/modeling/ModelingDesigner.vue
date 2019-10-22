@@ -1071,14 +1071,15 @@
                                 name: item.inputText,
                                 children: boundedItems
                             }
-                            tmpList.push(boundedFolder)
 
+                            tmpList.push(boundedFolder)
+                            console.log(item)
                             item.dataList.forEach(function (tmpItem) {
-                                if (tmpItem._type == 'org.uengine.uml.model.Domain') {
+                                if (tmpItem._type == 'org.uengine.uml.model.Domain' && tmpItem.inputText.length > 0) {
                                     event.name = tmpItem.inputText + '.java';
                                     event.type = tmpItem._type;
                                     event.code = tmpItem.code;
-                                    event.file = 'Java'
+                                    event.file = 'java'
 
                                     tmpList.some(function (tmp,index) {
                                         if (tmp.name == tmpItem.boundedContext) {
@@ -1086,38 +1087,38 @@
                                         }
                                     })
                                     // [1].children[0].children[1].children[0].children[0].children[0].children.push(event)
-                                } else if (item._type == 'org.uengine.uml.model.Aggregate') {
+                                } else if (tmpItem._type == 'org.uengine.uml.model.Aggregate' && tmpItem.inputText.length > 0) {
                                     tmpList.some(function (tmp,index) {
                                         if (tmp.name == tmpItem.boundedContext) {
-                                            event.type = tmpItem._type;
-                                            event.name = tmpItem.inputText + 'Repository.java';
-                                            event.code = tmpItem.repositoryCode;
-                                            event.file = 'Java'
-                                            console.log(tmp)
-                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
+                                            var repositoryTmp = JSON.parse(JSON.stringify(event));
+                                            repositoryTmp.name = _.camelCase(tmpItem.inputText) + 'Repository.java';
+                                            repositoryTmp.type = tmpItem._type;
+                                            repositoryTmp.code = tmpItem.repositoryCode;
+                                            repositoryTmp.file = 'java'
+                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(repositoryTmp);
 
-                                            event.type = tmpItem._type;
-                                            event.name = tmpItem.inputText + '.java';
-                                            event.code = tmpItem.aggregateCode;
-                                            event.file = 'Java'
+                                            var aggregateTmp = JSON.parse(JSON.stringify(event));
+                                            aggregateTmp.name = _.camelCase(tmpItem.inputText) + '.java';
+                                            aggregateTmp.type = tmpItem._type;
+                                            aggregateTmp.code = tmpItem.aggregateCode;
+                                            aggregateTmp.file = 'java'
+                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(aggregateTmp);
 
-                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
+                                            var eventLisnterTmp = JSON.parse(JSON.stringify(event));
+                                            eventLisnterTmp.name = _.camelCase(tmpItem.inputText) + 'EventListener.java';
+                                            eventLisnterTmp.type = tmpItem._type;
+                                            eventLisnterTmp.code = tmpItem.eventListenerCode;
+                                            eventLisnterTmp.file = 'java'
+                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(eventLisnterTmp);
 
-                                            event.name = tmpItem.inputText + 'EventListener.java';
-                                            event.type = tmpItem._type;
-                                            event.code = tmpItem.eventListenerCode;
-                                            event.file = 'Java'
-
-                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
-
-                                            event.name = tmpItem.inputText + 'Controller.java';
-                                            event.type = tmpItem._type;
-                                            event.code = tmpItem.controllerCode;
-                                            event.file = 'Java'
-                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)));
+                                            var controllerTmp = JSON.parse(JSON.stringify(event));
+                                            controllerTmp.name = _.camelCase(tmpItem.inputText) + 'Controller.java';
+                                            controllerTmp.type = tmpItem._type;
+                                            controllerTmp.code = tmpItem.controllerCode;
+                                            controllerTmp.file = 'java'
+                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(controllerTmp);
                                         }
                                     })
-
                                 }
                             })
                         }

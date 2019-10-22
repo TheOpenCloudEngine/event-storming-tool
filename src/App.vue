@@ -39,10 +39,11 @@
                 app
                 fixed
         >
-            <v-toolbar-title style="width: 340px" class="ml-0 pl-3">
+            <v-toolbar-title style="width: 700px" class="ml-0 pl-3">
                 <v-layout>
                     <v-app-bar-nav-icon style="margin-right: 20px;" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                     <v-img max-height=45 max-width=220 src="../public/static/image/Logo_black_stroke7.png"></v-img>
+                    <div class="font-weight-bold" style="font-size: 16px; margin-top: 24px">  by uEngine</div>
                 </v-layout>
             </v-toolbar-title>
             <v-spacer></v-spacer>

@@ -89,6 +89,7 @@
             },
             createNew(elementId, x, y, width, height, angle) {
                 return {
+                    upName: '',
                     _type: this.className(),
                     name: 'event',
                     elementView: {
@@ -143,7 +144,11 @@
                         temp.innerAggregate[me.type.toLowerCase()].splice(temp.innerAggregate[me.type.toLowerCase()].indexOf(oldVal),1);
                     }
                     if (temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == newVal) {
-                        temp.innerAggregate[me.type.toLowerCase()].push(me.value.inputText)
+                        let data={
+                            'inputText': me.value.inputText,
+                            'entity': me.value.entity
+                        }
+                        temp.innerAggregate[me.type.toLowerCase()].push(data)
                     }
                 })
             },
@@ -151,26 +156,30 @@
                 console.log(this.value)
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
+                console.log(newVal.charAt(0).toUpperCase(),newVal.slice(1))
+                this.value.upName = newVal.charAt(0).toUpperCase() + newVal.slice(1)
                 this.value.code = this.setEventTemplate(newVal, this.value)
+
             },
             "value.entity": function () {
                 var me = this
                 console.log(this.value)
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
-                this.value.code = this.setEventTemplate(me.value.inputText, this.value)
+                this.value.code = this.setEventTemplate()
             }
         },
         mounted: function () {
         },
         methods: {
-            setEventTemplate(name, definition) {
+            setEventTemplate() {
+                var me = this
                 return Mustache.render(
                     "package com.example.template;\n" +
                     "\n" +
                     "import java.io.Serializable;\n" +
                     "\n" +
-                    "public class {{inputText}} extends AbstractEvent {\n" +
+                    "public class {{upName}} extends AbstractEvent {\n" +
                     "\n" +
                     "{{#entity}}" +
                     "    public {{type}} {{name}};\n" +
@@ -185,7 +194,7 @@
                     "        this.{{name}} = {{name}};\n" +
                     "    }\n" +
                     "{{/entity}}" +
-                    "}", definition)
+                    "}", me.value)
             },
         }
     }

@@ -63,7 +63,13 @@
                             hide-default-header
                             hide-default-footer
                             class="elevation-1"
-                    ></v-data-table>
+                    >
+                        <template slot="items" slot-scope="props">
+                            <div>{{props.item.type}}</div>
+                            <div>{{props.item.name}}</div>
+                            <v-btn>info</v-btn>
+                        </template>
+                    </v-data-table>
 
 
                     <v-layout justify-center row style="align: center;">
@@ -177,11 +183,11 @@
                             <v-row justify="center"
                                    class="mb-6"
                                    no-gutters>
-                                <v-btn text class="pa-2" block  @click="restApiTypeSet(value,'Publish')" v-if="value.sourceElement._type == 'org.uengine.uml.model.Domain'" > PUBLISH </v-btn>
-                                <v-btn text class="pa-2" block  @click="restApiTypeSet(value,'Get')" > GET </v-btn>
-                                <v-btn text class="pa-2" block  @click="restApiTypeSet(value,'Post')" > POST </v-btn>
-                                <v-btn text class="pa-2" block  @click="restApiTypeSet(value,'Put')" > PUT </v-btn>
-                                <v-btn text class="pa-2" block  @click="restApiTypeSet(value,'Delete')" > DELETE </v-btn>
+                                <v-btn class="pa-2" block  @click="restApiTypeSet(value,'Pub')" v-if="value.sourceElement._type == 'org.uengine.uml.model.Domain'" > PUB </v-btn>
+                                <v-btn class="pa-2" block  @click="restApiTypeSet(value,'Get')" > GET </v-btn>
+                                <v-btn class="pa-2" block  @click="restApiTypeSet(value,'Post')" > POST </v-btn>
+                                <v-btn class="pa-2" block  @click="restApiTypeSet(value,'Put')" > PUT </v-btn>
+                                <v-btn class="pa-2" block  @click="restApiTypeSet(value,'Delete')" > DELETE </v-btn>
                             </v-row>
                         </v-col>
                     </v-card-text>
@@ -352,7 +358,7 @@
                 entityType: '',
                 entityName: '',
                 aggregate: '',
-                headers: [{value: 'type'}, {value: 'name'}],
+                headers: [{value: 'type'}, {value: 'name'},{value:'delete'}],
                 translateText: '',
                 usedTranslate: false,
             }
