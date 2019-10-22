@@ -78,17 +78,6 @@
         name: 'domain-event-definition',
         props: {},
         computed: {
-            upNamed() {
-                var me = this
-                if(me.inputText == undefined) {
-                    return '';
-                } else {
-                    return me.inputText.charAt(0).toUpperCase() + me.inputText.slice(1)
-
-                }
-
-
-            },
             defaultStyle() {
                 return {}
             },
@@ -100,7 +89,7 @@
             },
             createNew(elementId, x, y, width, height, angle) {
                 return {
-                    upName: this.upNamed(),
+                    upName: '',
                     _type: this.className(),
                     name: 'event',
                     elementView: {
@@ -163,7 +152,10 @@
                 console.log(this.value)
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
+                console.log(newVal.charAt(0).toUpperCase(),newVal.slice(1))
+                this.value.upName = newVal.charAt(0).toUpperCase() + newVal.slice(1)
                 this.value.code = this.setEventTemplate(newVal, this.value)
+
             },
             "value.entity": function () {
                 var me = this
@@ -183,7 +175,7 @@
                     "\n" +
                     "import java.io.Serializable;\n" +
                     "\n" +
-                    "public class {{upNamed}} extends AbstractEvent {\n" +
+                    "public class {{upName}} extends AbstractEvent {\n" +
                     "\n" +
                     "{{#entity}}" +
                     "    public {{type}} {{name}};\n" +
