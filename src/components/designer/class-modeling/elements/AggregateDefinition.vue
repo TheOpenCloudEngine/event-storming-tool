@@ -87,7 +87,7 @@
                     _type: this.className(),
                     name: 'Aggregate',
                     innerAggregate: {
-                        'domain': [],
+                        'event': [],
                         'command': [],
                         'view': [],
                         'policy': [],
@@ -110,7 +110,8 @@
                     aggregateCode: '',
                     repositoryCode: '',
                     eventListenerCode: '',
-                    controllerCode: ''
+                    controllerCode: '',
+                    boundedContext: ''
                 }
 
             }

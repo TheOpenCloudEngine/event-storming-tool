@@ -117,7 +117,6 @@
 
         },
         methods: {
-
             difference: function (object, base) {
                 function changes(object, base) {
                     return _.transform(object, function (result, value, key) {
@@ -161,6 +160,13 @@
                 }
 
             },
+            onAddToGroup: function (groupElement, elements, eventOffset ) {
+                console.log(groupElement, elements, eventOffset)
+                elements.forEach(function (element) {
+                    groupElement.$parent.value.dataList.push(element.$parent.value)
+
+                })
+            },
             uuid: function () {
                 function s4() {
                     return Math.floor((1 + Math.random()) * 0x10000)
@@ -177,59 +183,19 @@
                 var designer = this.getComponent('modeling-designer')
 
                 // console.log("groupOpengraphComponent: " , groupOpengraphComponent)
+                //
+                if(groupOpengraphComponent.tagName) {
+                    // Canvas로 나가는 경우
+                    opengraphComponent.$parent.value.boundedContext = ""
 
-                if (groupOpengraphComponent.tagName) {
-                    //바운더리 삭제
-                    designer.value.definition.some(function (definitionTmp, definitionIndex) {
-                        if (definitionTmp.name == 'Bounded Context') {
-
-                            definitionTmp.dataList.some(function (deleteTmp, index) {
-                                // console.log(deleteTmp.elementView.id)
-                                // console.log(opengraphComponent)
-                                if (deleteTmp.elementView.id == opengraphComponent.id) {
-
-                                    definitionTmp.dataList[index] = null
-                                    definitionTmp.dataList = definitionTmp.dataList.filter(n => n)
-                                    return;
-                                }
-
-                            })
-                        }
-                    })
                 } else {
-                    //바운더리 추가
-                    designer.value.definition.some(function (definitionTmp, definitionIndex) {
+                    // Bounded Context로 들어가는 경우
+                    // 초기화 하고 새로운 값으로 변경
+                    opengraphComponent.$parent.value.boundedContext = ""
+                    opengraphComponent.$parent.value.boundedContext = groupOpengraphComponent.$parent.value.inputText
 
-                        var copyTmp = definitionTmp;
-                        if (definitionTmp.elementView) {
-                            if (definitionTmp.elementView.id == opengraphComponent.id) {
-                                designer.value.definition.some(function (boundedTmp, boundedIndex) {
-                                    if (boundedTmp.elementView) {
-                                        if (boundedTmp.elementView.id == groupOpengraphComponent.id) {
-
-                                            if (designer.value.definition[boundedIndex].dataList.length > 0) {
-                                                designer.value.definition[boundedIndex].dataList.some(function (innerTmp, innerIndex) {
-                                                    if (innerTmp.elementView.id == copyTmp.elementView.id) {
-                                                        return;
-                                                    }
-                                                    designer.value.definition[boundedIndex].dataList.push(copyTmp)
-                                                    designer.value.definition = designer.value.definition.filter(n => n)
-                                                    return;
-                                                })
-                                            }
-
-                                            else {
-                                                designer.value.definition[boundedIndex].dataList.push(copyTmp)
-                                                designer.value.definition = designer.value.definition.filter(n => n)
-                                                return;
-                                            }
-                                        }
-                                    }
-                                })
-                            }
-                        }
-                    })
                 }
+                console.log(eventOffset)
 
             },
             getComponent(componentName) {
