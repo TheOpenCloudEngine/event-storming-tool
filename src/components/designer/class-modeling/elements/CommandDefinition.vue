@@ -104,7 +104,8 @@
                     restApi: '',
                     editing: false,
                     connectAggregateName: '',
-                    code: ''
+                    code: '',
+                    codeInputText: ''
                 }
             }
         },
@@ -135,9 +136,10 @@
 
                 this.value.code = me.setCommandTemplate()
             },
-            "value.inputText": function () {
+            "value.inputText": function (newVal) {
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
+                this.codeInputText = _.camelCase(newVal)
                 this.value.code = this.setCommandTemplate()
             }
         },
@@ -149,8 +151,8 @@
             setCommandTemplate() {
                 var me = this;
                 return Mustache.render(
-                    "    @RequestMapping(value = \"/{{connectAggregateName}}/{{inputText}}/\", method = RequestMethod.{{restApi}}, produces = \"application/json;charset=UTF-8\")\n" +
-                    "    public void {{inputText}}(HttpServletRequest request, HttpServletResponse response \n " +
+                    "    @RequestMapping(value = \"/{{connectAggregateName}}/{{codeInputText}}/\", method = RequestMethod.{{restApi}}, produces = \"application/json;charset=UTF-8\")\n" +
+                    "    public void {{codeInputText}}(HttpServletRequest request, HttpServletResponse response \n " +
                     "    ) throws Exception { \n" +
                     "    \n"+
                     "    }\n\n", me.value)

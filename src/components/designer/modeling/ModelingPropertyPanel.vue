@@ -247,7 +247,7 @@
                         <span class="headline" v-if="titleName">Aggregate 선택</span>
                     </v-card-title>
                     <v-autocomplete style="margin-left: 20px; margin-right: 20px;" v-model="aggregate"
-                                    :items="aggregateList" :item-text="'name'" :item-value="'entity'" label="Select Aggregate" persistent-hint>
+                                    :items="aggregateList" label="Select Aggregate" persistent-hint>
                     </v-autocomplete>
                 </v-card>
             </v-list>
@@ -281,7 +281,7 @@
                 var tmp = []
                 designer.value.definition.forEach(function (tmpData) {
                     if (tmpData._type == 'org.uengine.uml.model.Aggregate')
-                        tmp.push({name: tmpData.inputText, entity: tmpData.aggregateEntity})
+                        tmp.push(tmpData.inputText)
                 })
                 return tmp
             },
@@ -522,8 +522,8 @@
             },
             aggregate: function (val) {
                 console.log(val)
-                this.$emit('update:connectAggregateEntity',val.entity );
-                this.$emit('update:connectAggregateName', val.name);
+
+                this.$emit('update:connectAggregateName', val);
             }
         },
         mounted: function () {

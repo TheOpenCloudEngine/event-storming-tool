@@ -146,6 +146,7 @@
                         temp.innerAggregate[me.type.toLowerCase()].splice(temp.innerAggregate[me.type.toLowerCase()].indexOf(oldVal),1);
                     }
                     if (temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == newVal) {
+                        me.value.entity = temp.aggregateEntity
                         temp.innerAggregate[me.type.toLowerCase()].push(me.value.inputText)
                     }
                 })
