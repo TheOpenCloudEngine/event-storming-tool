@@ -171,29 +171,17 @@
 
                 <v-card flat v-else-if="value.name == 'Relation'">
 
-                    <v-switch
-                            v-model="value.relationBoolean"
-                    ></v-switch>
                     <div> 현재: {{value.relationType}}</div>
-                    <v-card-text v-if="value.relationBoolean">
+                    <v-card-text>
                         <v-col>
                             <v-row justify="center"
                                    class="mb-6"
                                    no-gutters>
-                                <v-btn flat class="pa-2" block :disabled="value.relationType == 'Pub'" @click="restApiTypeSet(value,'Pub')" > PUB </v-btn>
-                                <v-btn flat class="pa-2" block :disabled="value.relationType == 'Sub'" @click="restApiTypeSet(value,'Sub')" > SUB </v-btn>
-                            </v-row>
-                        </v-col>
-                    </v-card-text>
-
-                    <v-card-text v-else>
-                        <v-col>
-                            <v-row justify="center">
-                             <v-autocomplete v-model="restApiType" :items="restApiList"
-                                            label="REST API TYPE" persistent-hint
-                                            prepend-icon="mdi-city">
-                            </v-autocomplete>
-                                <v-btn @click="restApiTypeSet(value,restApiType)"> 확인 </v-btn>
+                                <v-btn flat class="pa-2" block  @click="restApiTypeSet(value,'Pub')" v-if="value._type == 'org.uengine.uml.model.Domain'" > PUB </v-btn>
+                                <v-btn flat class="pa-2" block  @click="restApiTypeSet(value,'Get')" > GET </v-btn>
+                                <v-btn flat class="pa-2" block  @click="restApiTypeSet(value,'Post')" > POST </v-btn>
+                                <v-btn flat class="pa-2" block  @click="restApiTypeSet(value,'Put')" > PUT </v-btn>
+                                <v-btn flat class="pa-2" block  @click="restApiTypeSet(value,'Delete')" > DELETE </v-btn>
                             </v-row>
                         </v-col>
                     </v-card-text>

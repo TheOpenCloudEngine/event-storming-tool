@@ -4,7 +4,6 @@
                 selectable
                 :movable="!value.editing"
                 :resizable="!value.editing"
-                connectable
                 deletable
                 :angle.sync="value.elementView.angle"
                 :id.sync="value.elementView.id"

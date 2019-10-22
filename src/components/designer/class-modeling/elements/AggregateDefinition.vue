@@ -4,7 +4,6 @@
                 selectable
                 movable
                 resizable
-                connectable
                 deletable
                 :id.sync="value.elementView.id"
                 :x.sync="value.elementView.x"
