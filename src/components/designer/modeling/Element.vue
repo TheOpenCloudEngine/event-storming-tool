@@ -71,8 +71,10 @@
                 this.aggregateList = []
                 if (newValue == true) {
                     designer.value.definition.forEach(function (temp) {
-                        if (temp._type == "org.uengine.uml.model.Aggregate")
-                            me.aggregateList.push(temp.inputText);
+                        if (temp._type == "org.uengine.uml.model.Aggregate") {
+                            console.log(temp)
+                            me.aggregateList.push({name: temp.inputText, entity: {name: temp.inputText, entity: temp.aggregateEntity}});
+                        }
                     })
                 }
             },

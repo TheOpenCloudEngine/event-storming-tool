@@ -1181,7 +1181,7 @@
                         // me.value.definition.push(newVal)
                     } else {
                         me.value['relation'].some(function (tmp, index) {
-                            console.log(tmp, index)
+                            // console.log(tmp, index)
                             if (tmp._type != 'org.uengine.uml.model.bounded') {
                                 me.value['relation'] = [
                                     ...me.value['relation'].slice(0, index),
@@ -1248,14 +1248,14 @@
         },
         watch: {
             open(newVal) {
-                console.log(newVal)
+                // console.log(newVal)
 
             }
         },
 
         methods: {
             inputValue(name) {
-                console.log(name)
+                // console.log(name)
                 var test = [
                     name
                 ]

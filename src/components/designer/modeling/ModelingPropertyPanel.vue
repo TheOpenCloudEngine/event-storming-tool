@@ -247,7 +247,7 @@
                         <span class="headline" v-if="titleName">Aggregate 선택</span>
                     </v-card-title>
                     <v-autocomplete style="margin-left: 20px; margin-right: 20px;" v-model="aggregate"
-                                    :items="aggregateList" label="Select Aggregate" persistent-hint>
+                                    :items="aggregateList" :item-text="'name'" :item-value="'entity'" label="Select Aggregate" persistent-hint>
                     </v-autocomplete>
                 </v-card>
             </v-list>
@@ -267,6 +267,7 @@
             titleName: String,
             inputText: String,
             connectAggregateName: String,
+            connectAggregateEntity: Array,
             otherList: Array,
             img: String,
             restApi: String,
@@ -280,10 +281,18 @@
                 var tmp = []
                 designer.value.definition.forEach(function (tmpData) {
                     if (tmpData._type == 'org.uengine.uml.model.Aggregate')
-                        tmp.push(tmpData.inputText)
+                        tmp.push({name: tmpData.inputText, entity: tmpData.aggregateEntity})
                 })
                 return tmp
             },
+            // aggregateListName:function(){
+            //   var me = this
+            //     var tmp= []
+            //   me.aggregateList.forEach(function (agg) {
+            //       tmp.push(agg.inputText)
+            //   })
+            //     return tmp
+            // },
             commandNameList: function () {
                 var designer = this.$parent.getComponent('modeling-designer')
 
@@ -351,6 +360,7 @@
                 selectEvent: '',
                 selectCommand: '',
                 connectedList: [],
+                connectedListName:{},
                 componentKey: 0,
                 restApiList: ['GET', 'POST', 'PUT', 'DELETE'],
                 restApiType: '',
@@ -511,8 +521,9 @@
                 deep: true
             },
             aggregate: function (val) {
-                // console.log(val)
-                this.$emit('update:connectAggregateName', val);
+                console.log(val)
+                this.$emit('update:connectAggregateEntity',val.entity );
+                this.$emit('update:connectAggregateName', val.name);
             }
         },
         mounted: function () {

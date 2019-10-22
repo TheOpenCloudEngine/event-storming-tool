@@ -61,6 +61,7 @@
                 :entity.sync="value.entity"
                 :aggregateList.sync="aggregateList"
                 :connectAggregateName.sync="value.connectAggregateName"
+                :connectAggregateEntity.sync="value.connectAggregateEntity"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -108,6 +109,7 @@
                     restApi: '',
                     editing: false,
                     connectAggregateName: '',
+                    connectAggregateEntity:[],
                     entity: [],
                     code: '',
                     relationInfo:'',
@@ -144,11 +146,7 @@
                         temp.innerAggregate[me.type.toLowerCase()].splice(temp.innerAggregate[me.type.toLowerCase()].indexOf(oldVal),1);
                     }
                     if (temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == newVal) {
-                        let data={
-                            'inputText': me.value.inputText,
-                            'entity': me.value.entity
-                        }
-                        temp.innerAggregate[me.type.toLowerCase()].push(data)
+                        temp.innerAggregate[me.type.toLowerCase()].push(me.value.inputText)
                     }
                 })
             },

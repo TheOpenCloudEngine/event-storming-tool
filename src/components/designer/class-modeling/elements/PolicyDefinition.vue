@@ -130,7 +130,7 @@
             console.log(newVal)
             var me = this
             var designer = this.getComponent('modeling-designer')
-            console.log(me.value.inputText)
+            // console.log(me.value.inputText)
             designer.value.definition.forEach(function (temp) {
                 if (temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == newVal) {
                     temp.innerAggregate[me.type.toLowerCase()].push(me.value)
@@ -138,7 +138,7 @@
             })
         },
         "value.inputText": function (newVal) {
-            console.log(this.value)
+            // console.log(this.value)
             // console.log(this.code)
             // this.code = this.codeGenerate;
             this.value.code = this.setPolicyKafkaTemplate(this.value)
