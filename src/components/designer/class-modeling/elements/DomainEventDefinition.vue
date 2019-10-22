@@ -17,6 +17,7 @@
                 v-on:dblclick="showProperty"
                 v-on:rotateShape="onRotateShape"
                 v-on:labelChanged="onLabelChanged"
+                v-on:addedToGroup="onAddedToGroup"
                 :label.sync="value.inputText"
                 :_style="{
                 'label-angle':value.elementView.angle,
@@ -109,6 +110,7 @@
                     entity: [],
                     code: '',
                     relationInfo:'',
+                    boundedContext: ''
                 }
             }
         },
@@ -130,13 +132,16 @@
             "value.relationInfo": function (newVal) {
                 console.log(newVal)
             },
-            "value.connectAggregateName": function (newVal) {
-                console.log(newVal)
+            "value.connectAggregateName": function (newVal, oldVal) {
+                console.log(newVal,oldVal)
                 var me = this
                 var designer = this.getComponent('modeling-designer')
                 console.log(me.value.inputText)
                 designer.value.definition.forEach(function (temp) {
                     console.log(temp.inputText, newVal)
+                    if(temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == oldVal) {
+                        temp.innerAggregate[me.type.toLowerCase()].splice(temp.innerAggregate[me.type.toLowerCase()].indexOf(oldVal),1);
+                    }
                     if (temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == newVal) {
                         temp.innerAggregate[me.type.toLowerCase()].push(me.value.inputText)
                     }

@@ -186,7 +186,8 @@
                 {icon: 'fa-sticky-note', text: 'EventStorming', route: '/event'},
             ],
             api: [],
-            snackbar: false
+            snackbar: false,
+            fab:false
         }),
         props: {
             source: String
@@ -199,6 +200,14 @@
             window.localStorage.removeItem("accessToken");
         },
         computed: {
+            activeFab () {
+                switch (this.tabs) {
+                    case 'one': return { class: 'purple', icon: 'account_circle' }
+                    case 'two': return { class: 'red', icon: 'edit' }
+                    case 'three': return { class: 'green', icon: 'keyboard_arrow_up' }
+                    default: return {}
+                }
+            },
             authorized() {
                 if (window.localStorage.getItem("accessToken") == null) {
                     window.authorized = false;

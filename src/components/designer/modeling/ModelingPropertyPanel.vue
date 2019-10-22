@@ -318,7 +318,7 @@
                 var tmp = []
                 var inner = false
                 // console.log(designer.value.relation);
-                this.innerAggregate.domain.forEach(function (domain) {
+                this.innerAggregate.event.forEach(function (domain) {
                     if (designer.value.relation.length == 0) {
                         //연결
                         tmp.push(domain.inputText)
@@ -377,7 +377,7 @@
         },
         watch: {
             inputText: function (newVal) {
-                console.log(newVal)
+                // console.log(newVal)
                 if (this.input != newVal) {
                     this.input = newVal
                 }
@@ -392,6 +392,15 @@
                             googleTranslate.translate(newVal, 'en', function (err, translation) {
                                 me.usedTranslate = true
                                 me.translateText = _.camelCase(tensify(translation.translatedText).past_participle);
+                            });
+                        }
+                    });
+                } else if (this.value.name == 'policy') {
+                    googleTranslate.detectLanguage(newVal, function (err, detection) {
+                        if (detection.language == 'ko') {
+                            googleTranslate.translate(newVal, 'en', function (err, translation) {
+                                me.usedTranslate = true
+                                me.translateText = _.camelCase(translation.translatedText);
                             });
                         }
                     });
@@ -508,7 +517,7 @@
                 deep: true
             },
             aggregate: function (val) {
-                console.log(val)
+                // console.log(val)
                 this.$emit('update:connectAggregateName', val);
             }
         },
@@ -532,7 +541,7 @@
             },
             entityADD: function (type, name) {
                 var me = this
-                console.log(type, name);
+                // console.log(type, name);
                 if (type.length != 0 && name.length != 0) {
 
                     let tmpObject = {"type": type, "name": name, "upName": name.charAt(0).toUpperCase() + name.slice(1)}
@@ -566,7 +575,7 @@
                     }
                 })
 
-                me.innerAggregate.domain.forEach(function (eventTmp) {
+                me.innerAggregate.event.forEach(function (eventTmp) {
                     if (eventTmp.inputText == eventInputText) {
                         eventId = eventTmp.elementView.id
                     }
