@@ -169,7 +169,7 @@
                     </template>
                 </v-card>
 
-                <v-card flat v-else-if="value.name == 'Relation'">
+                <v-card flat v-else-if=" value.name == 'Relation' && value.sourceElement._type == 'org.uengine.uml.model.Domain' ">
 
                     <div> 현재: {{value.relationType}}</div>
                     <v-card-text>
@@ -177,11 +177,11 @@
                             <v-row justify="center"
                                    class="mb-6"
                                    no-gutters>
-                                <v-btn flat class="pa-2" block  @click="restApiTypeSet(value,'Pub')" v-if="value._type == 'org.uengine.uml.model.Domain'" > PUB </v-btn>
-                                <v-btn flat class="pa-2" block  @click="restApiTypeSet(value,'Get')" > GET </v-btn>
-                                <v-btn flat class="pa-2" block  @click="restApiTypeSet(value,'Post')" > POST </v-btn>
-                                <v-btn flat class="pa-2" block  @click="restApiTypeSet(value,'Put')" > PUT </v-btn>
-                                <v-btn flat class="pa-2" block  @click="restApiTypeSet(value,'Delete')" > DELETE </v-btn>
+                                <v-btn text class="pa-2" block  @click="restApiTypeSet(value,'Publish')" v-if="value.sourceElement._type == 'org.uengine.uml.model.Domain'" > PUBLISH </v-btn>
+                                <v-btn text class="pa-2" block  @click="restApiTypeSet(value,'Get')" > GET </v-btn>
+                                <v-btn text class="pa-2" block  @click="restApiTypeSet(value,'Post')" > POST </v-btn>
+                                <v-btn text class="pa-2" block  @click="restApiTypeSet(value,'Put')" > PUT </v-btn>
+                                <v-btn text class="pa-2" block  @click="restApiTypeSet(value,'Delete')" > DELETE </v-btn>
                             </v-row>
                         </v-col>
                     </v-card-text>
@@ -514,12 +514,12 @@
         },
         methods: {
             restApiTypeSet(val,set){
-                if( val.sourceElement._type == "org.uengine.uml.model.Domain" && val.targetElement._type == "org.uengine.uml.model.Policy" ){
+                if( val.sourceElement._type == 'org.uengine.uml.model.Domain' && set=='Publish' ){
+                    val.sourceElement.relationInfo='Publish'
+                    val.targetElement.relationInfo='Subscribe'
+                }else{
                     val.sourceElement.relationInfo=set;
-                    val.targetElement.relationInfo=set;
-                } else if( val.sourceElement._type == "org.uengine.uml.model.Policy" && val.targetElement._type == "org.uengine.uml.model.Domain" ){
-                    val.sourceElement.relationInfo=set;
-                    val.targetElement.relationInfo=set;
+                    // val.targetElement.relationInfo=set;
                 }
                 val.relationType=set;
             },

@@ -36060,40 +36060,41 @@ OG.graph.Canvas.prototype = {
             width: option.width + 'px'
         });
 
-        slider.dialog({
-                title: option.title ? option.title : "확대/축소",
-                position: option.position ? option.position : {my: "right top", at: "right top", of: container},
-                height: option.height ? option.height : 500,
-                width: option.width ? option.width : 250,
-                dialogClass: "no-close",
-                appendTo: option.appendTo ? option.appendTo : '#' + container.id,
-                resize: function (event, ui) {
-                    me.updateNavigatior();
-                }
-            }
-        );
+
+        // slider.dialog({
+        //         title: option.title ? option.title : "확대/축소",
+        //         position: option.position ? option.position : {my: "right top", at: "right top", of: container},
+        //         height: option.height ? option.height : 500,
+        //         width: option.width ? option.width : 250,
+        //         dialogClass: "no-close",
+        //         appendTo: option.appendTo ? option.appendTo : '#' + container.id,
+        //         resize: function (event, ui) {
+        //             me.updateNavigatior();
+        //         }
+        //     }
+        // );
 
         //클로즈버튼 이벤트를 collape,expand 이벤트로..
-        sliderParent = slider.parent();
-        expandBtn = sliderParent.find('.ui-dialog-titlebar-close');
-        expandBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-circle-minus"></span>');
-        expandBtn.append();
-        expandBtn.unbind('click');
-        expandBtn.bind('click', function () {
-            //접혀있는 상태라면
-            if ($(this).data('collape')) {
-                var height = $(this).data('collape');
-                sliderParent.height(height);
-                slider.show();
-                $(this).data('collape', false);
-            }
-            //접혀있지 않은 상태라면
-            else {
-                $(this).data('collape', sliderParent.height());
-                slider.hide();
-                sliderParent.height(40);
-            }
-        });
+        // sliderParent = slider.parent();
+        // expandBtn = sliderParent.find('.ui-dialog-titlebar-close');
+        // expandBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-circle-minus"></span>');
+        // expandBtn.append();
+        // expandBtn.unbind('click');
+        // expandBtn.bind('click', function () {
+        //     //접혀있는 상태라면
+        //     if ($(this).data('collape')) {
+        //         var height = $(this).data('collape');
+        //         sliderParent.height(height);
+        //         slider.show();
+        //         $(this).data('collape', false);
+        //     }
+        //     //접혀있지 않은 상태라면
+        //     else {
+        //         $(this).data('collape', sliderParent.height());
+        //         slider.hide();
+        //         sliderParent.height(40);
+        //     }
+        // });
 
         sliderBarWrapper = $('<div class="scaleSliderWrapper"></div>');
         sliderBarWrapper.css({
@@ -36125,7 +36126,7 @@ OG.graph.Canvas.prototype = {
         //     right: '5px',
         //     'overflow-x': 'hidden',
         //     'overflow-y': 'auto',
-        //     'background': 'white'
+        //     'background': 'black'
         // });
 
         sliderImage = $('<canvas class="sliderImage"></canvas>');
@@ -36189,45 +36190,45 @@ OG.graph.Canvas.prototype = {
             me.updateNavigatior();
         });
 
-        sliderImage.click(function (event) {
-            var eX, eY, nX, nY;
-            eX = event.pageX - sliderImage.offset().left;
-            eY = event.pageY - sliderImage.offset().top;
-            nX = eX - (sliderNavigator.width() / 2);
-            nY = eY - (sliderNavigator.height() / 2);
-            if (nX < 0) {
-                nX = 0;
-            }
-            if (nY < 0) {
-                nY = 0;
-            }
-            if ((nX + sliderNavigator.width()) > sliderImage.width()) {
-                nX = sliderImage.width() - sliderNavigator.width();
-            }
-            if ((nY + sliderNavigator.height()) > sliderImage.height()) {
-                nY = sliderImage.height() - sliderNavigator.height();
-            }
-            sliderNavigator.css({
-                "left": nX + 'px',
-                "top": nY + 'px'
-            });
-            onNavigatorMove();
-        });
+        // sliderImage.click(function (event) {
+        //     var eX, eY, nX, nY;
+        //     eX = event.pageX - sliderImage.offset().left;
+        //     eY = event.pageY - sliderImage.offset().top;
+        //     nX = eX - (sliderNavigator.width() / 2);
+        //     nY = eY - (sliderNavigator.height() / 2);
+        //     if (nX < 0) {
+        //         nX = 0;
+        //     }
+        //     if (nY < 0) {
+        //         nY = 0;
+        //     }
+        //     if ((nX + sliderNavigator.width()) > sliderImage.width()) {
+        //         nX = sliderImage.width() - sliderNavigator.width();
+        //     }
+        //     if ((nY + sliderNavigator.height()) > sliderImage.height()) {
+        //         nY = sliderImage.height() - sliderNavigator.height();
+        //     }
+        //     sliderNavigator.css({
+        //         "left": nX + 'px',
+        //         "top": nY + 'px'
+        //     });
+        //     onNavigatorMove();
+        // });
 
-        sliderNavigator.draggable({
-            containment: "#" + container.id + 'sliderImage',
-            scroll: false,
-            start: function (event) {
-                sliderNavigator.data('drag', true);
-            },
-            drag: function (event) {
-                onNavigatorMove();
-            },
-            stop: function (event) {
-                onNavigatorMove();
-                sliderNavigator.data('drag', false);
-            }
-        });
+        // sliderNavigator.draggable({
+        //     containment: "#" + container.id + 'sliderImage',
+        //     scroll: false,
+        //     start: function (event) {
+        //         sliderNavigator.data('drag', true);
+        //     },
+        //     drag: function (event) {
+        //         onNavigatorMove();
+        //     },
+        //     stop: function (event) {
+        //         onNavigatorMove();
+        //         sliderNavigator.data('drag', false);
+        //     }
+        // });
 
         slider.append(sliderBarWrapper);
         sliderBarWrapper.append(sliderText);

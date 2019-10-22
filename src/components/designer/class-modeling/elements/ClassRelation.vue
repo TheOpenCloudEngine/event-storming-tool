@@ -17,12 +17,12 @@
         </edge-element>
 
         <modeling-property-panel
+                v-if="value.sourceElement._type != 'org.uengine.uml.model.Policy'"
                 :drawer.sync="value.drawer"
                 :titleName="value.name"
                 :inputText.sync="value.inputText"
                 v-model="value"
-        >
-        </modeling-property-panel>
+        ></modeling-property-panel>
     </div>
 </template>
 
@@ -52,9 +52,10 @@
                 return 'org.uengine.uml.model.relation'
             },
             style_() {
-                if (this.value._type == "org.uengine.uml.model.Aggregation") {
+                console.log(this.value)
+                if (this.value._type == "org.uengine.uml.model.Aggregate") {
                     var style = {
-                        "arrow-end": ("01".indexOf(this.value.sourceMultiplicity) > -1 ? "none" : "diamond"),
+                        "arrow-end": ("01".indexOf(this.value.sourceMultiplicity) > -1 ? "none" : "none"),
                         "arrow-start": ("01".indexOf(this.value.targetMultiplicity) > -1 ? "none" : "diamond")
                     };
 
@@ -100,7 +101,6 @@
                     _type: this.type(),
                     name: 'Relation',
                     relationType:'',
-                    relationBoolean:true,
                     sourceElement: from,
                     targetElement: to,
                     from: from.elementView.id,
