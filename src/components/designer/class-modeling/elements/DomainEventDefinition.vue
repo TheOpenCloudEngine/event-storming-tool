@@ -78,6 +78,17 @@
         name: 'domain-event-definition',
         props: {},
         computed: {
+            upNamed() {
+                var me = this
+                if(me.inputText == undefined) {
+                    return '';
+                } else {
+                    return me.inputText.charAt(0).toUpperCase() + me.inputText.slice(1)
+
+                }
+
+
+            },
             defaultStyle() {
                 return {}
             },
@@ -89,6 +100,7 @@
             },
             createNew(elementId, x, y, width, height, angle) {
                 return {
+                    upName: this.upNamed(),
                     _type: this.className(),
                     name: 'event',
                     elementView: {
@@ -158,19 +170,20 @@
                 console.log(this.value)
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
-                this.value.code = this.setEventTemplate(me.value.inputText, this.value)
+                this.value.code = this.setEventTemplate()
             }
         },
         mounted: function () {
         },
         methods: {
-            setEventTemplate(name, definition) {
+            setEventTemplate() {
+                var me = this
                 return Mustache.render(
                     "package com.example.template;\n" +
                     "\n" +
                     "import java.io.Serializable;\n" +
                     "\n" +
-                    "public class {{inputText}} extends AbstractEvent {\n" +
+                    "public class {{upNamed}} extends AbstractEvent {\n" +
                     "\n" +
                     "{{#entity}}" +
                     "    public {{type}} {{name}};\n" +
@@ -185,7 +198,7 @@
                     "        this.{{name}} = {{name}};\n" +
                     "    }\n" +
                     "{{/entity}}" +
-                    "}", definition)
+                    "}", me.value)
             },
         }
     }

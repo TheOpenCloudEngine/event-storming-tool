@@ -72,6 +72,10 @@
         name: 'aggregate-definition',
         props: {},
         computed: {
+            upName() {
+                var me= this
+                return me.inputText.charAt(0).toUpperCase() + me.inputText.slice(1)
+            },
             defaultStyle() {
                 return {}
             },
@@ -164,7 +168,7 @@
                 return Mustache.render(
                     "package com.example.template;\n " +
                     "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
-                    "public interface {{ inputText }}Repository extends PagingAndSortingRepository < {{ inputText }}, Long > { \n " +
+                    "public interface {{ upName }}Repository extends PagingAndSortingRepository < {{ inputText }}, Long > { \n " +
                     "}\n", me.value)
             },
             setControllerTemplate(){
@@ -183,7 +187,7 @@
                     "import java.util.List;\n" +
                     "\n" +
                     "@RestController\n" +
-                    "public class {{ inputText }}Controller {\n" +
+                    "public class {{ upName }}Controller {\n" +
                     "\n" +
                     "{{#innerAggregate}}" +
                     "{{#command}}" +
@@ -210,7 +214,7 @@
                     "import java.util.Optional;\n" +
                     "\n" +
                     "@Service\n" +
-                    "public class {{ inputText }}EventListener {\n" +
+                    "public class {{ upName }}EventListener {\n" +
                     "\n" +
                     "    @Autowired\n" +
                     "    private KafkaTemplate kafkaTemplate;\n" +
@@ -244,7 +248,8 @@
                     "import javax.persistence.*;\n" +
                     "\n" +
                     "@Entity\n" +
-                    "public class {{inputText}} {\n" +
+                    "@Table(name = \"{{inputText}}_table\")\n" +
+                    "public class {{upName}} {\n" +
                     "\n" +
                     "{{#aggregateEntity}}\n" +
                         "{{#id}}"+
