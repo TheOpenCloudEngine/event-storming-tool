@@ -133,10 +133,10 @@
         },
         watch: {
             "value.relationInfo": function (newVal) {
-                console.log(newVal)
+                // console.log(newVal)
             },
             "value.connectAggregateName": function (newVal, oldVal) {
-                console.log(newVal,oldVal)
+                // console.log(newVal,oldVal)
                 var me = this
                 var designer = this.getComponent('modeling-designer')
                 console.log(me.value.inputText)
@@ -151,10 +151,10 @@
                 })
             },
             "value.inputText": function (newVal) {
-                console.log(this.value)
+                // console.log(this.value)
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
-                console.log(newVal.charAt(0).toUpperCase(),newVal.slice(1))
+                // console.log(newVal.charAt(0).toUpperCase(),newVal.slice(1))
                 this.value.upName = newVal.charAt(0).toUpperCase() + newVal.slice(1)
                 this.value.code = this.setEventTemplate(newVal, this.value)
 
