@@ -1207,12 +1207,12 @@
                 //$nextTick delays the callback function until Vue has updated the DOM
                 // (which usually happens as a result of us changing the data
                 //  so make any DOM changes here
-                this.canvas.addSlider({
-                    slider: $("#canvas_slider"),
-                    width: 200,
-                    height: 300,
-                    appendTo: "body"
-                });
+                // this.canvas.addSlider({
+                //     slider: $("#canvas_slider"),
+                //     width: 200,
+                //     height: 300,
+                //     appendTo: "body"
+                // });
 
                 this.canvas._CONFIG.FAST_LOADING = false;
 
@@ -1271,7 +1271,7 @@
                         //Array
                         // console.log(list.children)
                         // console.log(list.name)
-                        me.revers(list.children, list.name)
+                        me.reverse(list.children, list.name)
                     } else {
                         me.pathTmp.push({path: list.name, code: list.code})
                         // var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
@@ -1314,7 +1314,7 @@
                     });
 
             },
-            revers(item, path) {
+            reverse(item, path) {
                 var me = this
                 item.forEach(function (list) {
                     if (list.children) {
@@ -1323,7 +1323,7 @@
                         var tmpPath = path + '/' + list.name
                         console.log(tmpPath)
 
-                        me.revers(list.children, tmpPath);
+                        me.reverse(list.children, tmpPath);
                     } else {
                         //파일생성하
                         console.log(list.name)
@@ -1665,7 +1665,7 @@
                 this.enableHistoryAdd = true;
                 var me = this;
                 var additionalData = {};
-
+                console.log(originalData)
                 var vueComponent = me.getComponentByName(componentInfo.component);
                 // console.log(componentInfo.component , this.relationVueComponentName)
                 var element;

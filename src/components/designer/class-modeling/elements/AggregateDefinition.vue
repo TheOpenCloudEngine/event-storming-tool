@@ -164,6 +164,11 @@
             }
         },
         mounted: function () {
+            var me = this
+            var aggId = this.value.elementView.id
+
+            var $tr = $('#'+aggId);
+            $tr.parent().children().first().before($tr)
 
         },
         methods: {

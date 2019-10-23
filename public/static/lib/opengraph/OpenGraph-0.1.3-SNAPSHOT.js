@@ -36048,7 +36048,7 @@ OG.graph.Canvas.prototype = {
         var sliderParent;
         var expandBtn;
         var container = me._CONTAINER;
-
+        console.log(container)
         if (!option.slider) {
             return;
         }
