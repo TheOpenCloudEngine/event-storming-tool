@@ -1,11 +1,17 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="canvas-panel">
         <v-layout right>
+            <modal name="uml-modal" :height='"80%"' :width="'80%'">
+                <class-modeler></class-modeler>
+            </modal>
+
             <modal name="code-modal" scrollable :height='"auto"' :width="'80%'">
                 <v-card>
                     <v-card-title>
                         <span class="headline">Code View</span>
-                        <v-btn text> <v-icon middle>info</v-icon></v-btn>
+                        <v-btn text>
+                            <v-icon middle>info</v-icon>
+                        </v-btn>
                     </v-card-title>
                     <v-card-text>
                         <!-- 형태:
@@ -99,9 +105,9 @@
 
                 <!--<v-btn color="info" v-on:click.native="addNewMember">addNewMember-->
                 <!--</v-btn>-->
-<!--                <v-btn color="info" v-on:click.native="restApiPush"-->
-<!--                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD-->
-<!--                </v-btn>-->
+                <!--                <v-btn color="info" v-on:click.native="restApiPush"-->
+                <!--                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD-->
+                <!--                </v-btn>-->
                 <v-btn color="info" v-on:click.native="codeModalShow"
                        style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">Generate
                 </v-btn>
@@ -121,18 +127,19 @@
 
 
             <v-card class="tools" style="top:100px; text-align: center;">
-                <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }" _width="30"
-                   _height="30" v-on:click="toggleGrip">
+                <span class="bpmn-icon-hand-tool" v-bind:class="{ icons : !dragPageMovable, hands : dragPageMovable }"
+                      _width="30"
+                      _height="30" v-on:click="toggleGrip">
                      <v-tooltip md-direction="right">Hands</v-tooltip>
                 </span>
                 <v-tooltip right v-for="(item, key) in elementTypes" :key="key">
                     <template v-slot:activator="{ on }">
                         <span
-                          class="icons draggable"
-                          align="center"
-                          :_component="item.component"
-                          :_width="item.width"
-                          :_height="item.height">
+                                class="icons draggable"
+                                align="center"
+                                :_component="item.component"
+                                :_width="item.width"
+                                :_height="item.height">
                         <img height="30px" width="30px" :src="item.src" v-on="on">
                         </span>
                     </template>
@@ -225,8 +232,8 @@
                 members: [],
                 valueTmp: {},
                 pathTmp: [],
-                maxWidth:0,
-                maxHeight:0,
+                maxWidth: 0,
+                maxHeight: 0,
             }
         },
         beforeDestroy: function () {
@@ -1084,14 +1091,14 @@
                                     event.code = tmpItem.code;
                                     event.file = 'java'
 
-                                    tmpList.some(function (tmp,index) {
+                                    tmpList.some(function (tmp, index) {
                                         if (tmp.name == tmpItem.boundedContext) {
                                             tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)))
                                         }
                                     })
                                     // [1].children[0].children[1].children[0].children[0].children[0].children.push(event)
                                 } else if (tmpItem._type == 'org.uengine.uml.model.Aggregate' && tmpItem.inputText.length > 0) {
-                                    tmpList.some(function (tmp,index) {
+                                    tmpList.some(function (tmp, index) {
                                         if (tmp.name == tmpItem.boundedContext) {
                                             var repositoryTmp = JSON.parse(JSON.stringify(event));
                                             repositoryTmp.name = tmpItem.upName + 'Repository.java';
@@ -1140,18 +1147,22 @@
 
             me.$ModelingBus.$on('MoveEvent', function () {
                 me.$nextTick(function () {
-                    // me.connectInfoR("add", 'https://stickershop.line-scdn.net/stickershop/v1/product/718/LINEStorePC/main.png;compress=true', 'Zang')
                     me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                     me.redoArray = [];
                     me.value.definition.forEach(function (tmp) {
-                        // console.log(tmp)
                         if (tmp.selected == true) {
-                            // console.log(tmp)
-                            // me.syncOthers(tmp);
                         }
                     })
                 })
-            })
+            });
+
+            me.$ModelingBus.$on('umlDiagram', function () {
+                me.umlModalShow()
+                console.log("aa")
+                me.$nextTick(function () {
+                })
+            });
+
             this.userId = v4();
             me.pusher = new Pusher('33169ca8c59c1f7f97cd', {
                 cluster: 'ap3',
@@ -1266,6 +1277,10 @@
             },
             codeModalShow() {
                 this.$modal.show('code-modal');
+            },
+            umlModalShow() {
+                console.log("aa")
+                this.$modal.show('uml-modal');
             },
             generateZip() {
                 var me = this
@@ -1483,19 +1498,19 @@
                 });
                 FileSaver.saveAs(file);
             },
-            deleteBoundary(definitionArray,deleteItem){
+            deleteBoundary(definitionArray, deleteItem) {
 
                 //해당 바운더리 찾기
                 definitionArray.forEach(function (definitionTmp, index) {
-                    if(deleteItem.boundedContext == definitionTmp.inputText && definitionTmp._type=='org.uengine.uml.model.bounded'){
+                    if (deleteItem.boundedContext == definitionTmp.inputText && definitionTmp._type == 'org.uengine.uml.model.bounded') {
                         console.log(deleteItem.boundedContext, definitionTmp.inputText)
 
-                        definitionTmp.dataList.forEach(function (item,idx) {
-                            if(item.inputText == deleteItem.inputText && item._type == deleteItem._type ){
+                        definitionTmp.dataList.forEach(function (item, idx) {
+                            if (item.inputText == deleteItem.inputText && item._type == deleteItem._type) {
                                 console.log(definitionTmp.dataList[idx])
-                                definitionTmp.dataList[idx]= null;
+                                definitionTmp.dataList[idx] = null;
 
-                                definitionTmp.dataList = definitionTmp.dataList.filter(n=>n)
+                                definitionTmp.dataList = definitionTmp.dataList.filter(n => n)
                             }
                         })
 
@@ -1513,8 +1528,8 @@
 
                     definitionArray.forEach(function (definitionTmp, index) {
                         if (definitionTmp.selected) {
-                            if(definitionTmp.boundedContext){
-                                me.deleteBoundary(definitionArray,definitionTmp);
+                            if (definitionTmp.boundedContext) {
+                                me.deleteBoundary(definitionArray, definitionTmp);
 
                             }
                             selected.push(definitionTmp.elementView.id)
