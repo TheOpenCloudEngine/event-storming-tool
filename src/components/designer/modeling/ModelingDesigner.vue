@@ -1074,8 +1074,11 @@
 
                             tmpList.push(boundedFolder)
                             console.log(item)
+
                             item.dataList.forEach(function (tmpItem) {
                                 if (tmpItem._type == 'org.uengine.uml.model.Domain' && tmpItem.inputText.length > 0) {
+                                    console.log(tmpItem.upName)
+
                                     event.name = tmpItem.upName + '.java';
                                     event.type = tmpItem._type;
                                     event.code = tmpItem.code;
@@ -1083,7 +1086,7 @@
 
                                     tmpList.some(function (tmp,index) {
                                         if (tmp.name == tmpItem.boundedContext) {
-                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(event)
+                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)))
                                         }
                                     })
                                     // [1].children[0].children[1].children[0].children[0].children[0].children.push(event)
@@ -1091,28 +1094,28 @@
                                     tmpList.some(function (tmp,index) {
                                         if (tmp.name == tmpItem.boundedContext) {
                                             var repositoryTmp = JSON.parse(JSON.stringify(event));
-                                            repositoryTmp.name = _.camelCase(tmpItem.upName) + 'Repository.java';
+                                            repositoryTmp.name = tmpItem.upName + 'Repository.java';
                                             repositoryTmp.type = tmpItem._type;
                                             repositoryTmp.code = tmpItem.repositoryCode;
                                             repositoryTmp.file = 'java'
                                             tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(repositoryTmp);
 
                                             var aggregateTmp = JSON.parse(JSON.stringify(event));
-                                            aggregateTmp.name = _.camelCase(tmpItem.upName) + '.java';
+                                            aggregateTmp.name = tmpItem.upName + '.java';
                                             aggregateTmp.type = tmpItem._type;
                                             aggregateTmp.code = tmpItem.aggregateCode;
                                             aggregateTmp.file = 'java'
                                             tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(aggregateTmp);
 
                                             var eventLisnterTmp = JSON.parse(JSON.stringify(event));
-                                            eventLisnterTmp.name = _.camelCase(tmpItem.upName) + 'EventListener.java';
+                                            eventLisnterTmp.name = tmpItem.upName + 'EventListener.java';
                                             eventLisnterTmp.type = tmpItem._type;
                                             eventLisnterTmp.code = tmpItem.eventListenerCode;
                                             eventLisnterTmp.file = 'java'
                                             tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(eventLisnterTmp);
 
                                             var controllerTmp = JSON.parse(JSON.stringify(event));
-                                            controllerTmp.name = _.camelCase(tmpItem.upName) + 'Controller.java';
+                                            controllerTmp.name = tmpItem.upName + 'Controller.java';
                                             controllerTmp.type = tmpItem._type;
                                             controllerTmp.code = tmpItem.controllerCode;
                                             controllerTmp.file = 'java'
@@ -1480,19 +1483,45 @@
                 });
                 FileSaver.saveAs(file);
             },
+            deleteBoundary(definitionArray,deleteItem){
+
+                //해당 바운더리 찾기
+                definitionArray.forEach(function (definitionTmp, index) {
+                    if(deleteItem.boundedContext == definitionTmp.inputText && definitionTmp._type=='org.uengine.uml.model.bounded'){
+                        console.log(deleteItem.boundedContext, definitionTmp.inputText)
+
+                        definitionTmp.dataList.forEach(function (item,idx) {
+                            if(item.inputText == deleteItem.inputText && item._type == deleteItem._type ){
+                                console.log(definitionTmp.dataList[idx])
+                                definitionTmp.dataList[idx]= null;
+
+                                definitionTmp.dataList = definitionTmp.dataList.filter(n=>n)
+                            }
+                        })
+
+                    }
+                })
+
+            },
             deleteActivity: function () {
                 var me = this
                 if (!me.drawer) {
                     let selected = []
+
                     let definitionArray = JSON.parse(JSON.stringify(me.value.definition));
                     let relationArray = JSON.parse(JSON.stringify(me.value.relation));
-                    console.log(me.value)
+
                     definitionArray.forEach(function (definitionTmp, index) {
                         if (definitionTmp.selected) {
+                            if(definitionTmp.boundedContext){
+                                me.deleteBoundary(definitionArray,definitionTmp);
+
+                            }
                             selected.push(definitionTmp.elementView.id)
                             definitionArray[index] = null
                         }
                     })
+
                     definitionArray = definitionArray.filter(n => n)
                     selected.forEach(function (selectedTmp) {
                         relationArray.forEach(function (relation, index) {
