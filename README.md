@@ -61,19 +61,19 @@ npm run serve
 ### Event
 #### 내용
   1.1 상품 추가, '상품이 추가됨'이라는 Event 로 추가 되었을때 발생 되는 Evnet.   
-  이벤트 명을 작성하고, API을 설정 해야합니다. (*자동적으로 aggregate 연결)
+  이벤트 명을 작성하고, API을 설정 해야합니다.
   <img width="1680" alt="Event" src="https://user-images.githubusercontent.com/54785805/67353053-95dc9a80-f58c-11e9-9c88-95b9f4b90890.png">
    
 ### Policy
 #### 내용
   1.1 서비스 규칙, 각각의 서비스 및 이벤트 사이에서 규칙을 정하기 위한 Policy   
-  규칙을 정의하고, API을 설정 해야합니다. (*자동적으로 aggregate 연결)
+  규칙을 정의하고, API을 설정 해야합니다.
   <img width="1678" alt="Policy" src="https://user-images.githubusercontent.com/54785805/67353056-95dc9a80-f58c-11e9-8789-13fd7002bbd0.png">
 
 ### Command
 #### 내용
   1.1 명령어, '상품이 추가'라는 Command 실행및 명령어 수행 하기 위한 Command   
-  이벤트 명을 작성하고, API을 설정 해야합니다. (*자동적으로 aggregate 연결)
+  이벤트 명을 작성하고, API을 설정 해야합니다.
    
 <img width="1374" alt="스크린샷 2019-10-23 오전 11 28 52" src="https://user-images.githubusercontent.com/54785805/67352119-10f08180-f58a-11e9-88fc-3bfea3c5d12e.png">
 
@@ -87,13 +87,13 @@ npm run serve
 ### Exteranl
 #### 내용
   1.1 외부 서비스, 상품 서비스에서 외부 서비스를 필요 하거나, 정보가 필요 할때 사용 하는 External    
-  외부 서비스 명 작성 (*자동적으로 aggregate 연결)
+  외부 서비스 명 작성
   <img width="1678" alt="Exteranl" src="https://user-images.githubusercontent.com/54785805/67353057-95dc9a80-f58c-11e9-93c9-3613c2639b65.png">
 
 ### View
 #### 내용
   1.1 조회, 상품을 리스트를 조회하거나, Read 를 할 때 필요한 View   
-   View 명을 작성하고, API(GET) 을 설정 해야합니다. (*자동적으로 aggregate 연결)
+   View 명을 작성하고, API(GET) 을 설정 해야합니다.
    
 
 ### Bounded Context
@@ -102,6 +102,7 @@ npm run serve
   Bounded 명을 작성 해야합니다. 
  
 ![image](https://user-images.githubusercontent.com/54785805/67352982-6b8add00-f58c-11e9-8312-1202ded275e9.png)
+
 
 
 ## Eelement Function
@@ -113,6 +114,8 @@ npm run serve
 
 ### Automtion Entity Add when connect Aggregate.
 <img width="1373" alt="스크린샷 2019-10-23 오전 11 51 58" src="https://user-images.githubusercontent.com/54785805/67352672-8e68c180-f58b-11e9-941e-076dbe42621e.png">
+
+
 
 ## Tool Function  
 ### Zoom In& Out
