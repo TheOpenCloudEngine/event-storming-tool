@@ -4,8 +4,7 @@
             <modal name="uml-modal" :height='"80%"' :width="'80%'">
                 <class-modeler></class-modeler>
             </modal>
-
-            <modal name="code-modal" scrollable :height='"auto"' :width="'80%'">
+            <modal name="code-modal" :height='"auto"' :width="'80%'">
                 <v-card>
                     <v-card-title>
                         <span class="headline">Code View</span>
@@ -23,7 +22,9 @@
                             <v-col :lg="3"
                                    :md="6"
                                    :sm="2"
-                                   style="margin-right: 15px; border-right: 1px solid black"
+                                   style="margin-right: 15px; border-right: 1px solid black; max-height: 800px;"
+                                   id="scroll-target"
+                                   class="overflow-y-auto"
                             >
                                 <v-treeview
                                         :items="codeList"
@@ -53,7 +54,7 @@
                                 <!--console.log(str);-->
                                 <!--</highlight-code>-->
 
-                                <code-viewer v-model="definitionSet"></code-viewer>
+                                    <code-viewer v-model="definitionSet" ></code-viewer>
                             </v-col>
                         </v-row>
                     </v-card-text>
