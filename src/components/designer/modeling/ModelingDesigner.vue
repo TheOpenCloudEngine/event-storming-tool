@@ -1076,7 +1076,7 @@
                             console.log(item)
                             item.dataList.forEach(function (tmpItem) {
                                 if (tmpItem._type == 'org.uengine.uml.model.Domain' && tmpItem.inputText.length > 0) {
-                                    event.name = tmpItem.inputText + '.java';
+                                    event.name = tmpItem.upName + '.java';
                                     event.type = tmpItem._type;
                                     event.code = tmpItem.code;
                                     event.file = 'java'
@@ -1091,28 +1091,28 @@
                                     tmpList.some(function (tmp,index) {
                                         if (tmp.name == tmpItem.boundedContext) {
                                             var repositoryTmp = JSON.parse(JSON.stringify(event));
-                                            repositoryTmp.name = _.camelCase(tmpItem.inputText) + 'Repository.java';
+                                            repositoryTmp.name = _.camelCase(tmpItem.upName) + 'Repository.java';
                                             repositoryTmp.type = tmpItem._type;
                                             repositoryTmp.code = tmpItem.repositoryCode;
                                             repositoryTmp.file = 'java'
                                             tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(repositoryTmp);
 
                                             var aggregateTmp = JSON.parse(JSON.stringify(event));
-                                            aggregateTmp.name = _.camelCase(tmpItem.inputText) + '.java';
+                                            aggregateTmp.name = _.camelCase(tmpItem.upName) + '.java';
                                             aggregateTmp.type = tmpItem._type;
                                             aggregateTmp.code = tmpItem.aggregateCode;
                                             aggregateTmp.file = 'java'
                                             tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(aggregateTmp);
 
                                             var eventLisnterTmp = JSON.parse(JSON.stringify(event));
-                                            eventLisnterTmp.name = _.camelCase(tmpItem.inputText) + 'EventListener.java';
+                                            eventLisnterTmp.name = _.camelCase(tmpItem.upName) + 'EventListener.java';
                                             eventLisnterTmp.type = tmpItem._type;
                                             eventLisnterTmp.code = tmpItem.eventListenerCode;
                                             eventLisnterTmp.file = 'java'
                                             tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(eventLisnterTmp);
 
                                             var controllerTmp = JSON.parse(JSON.stringify(event));
-                                            controllerTmp.name = _.camelCase(tmpItem.inputText) + 'Controller.java';
+                                            controllerTmp.name = _.camelCase(tmpItem.upName) + 'Controller.java';
                                             controllerTmp.type = tmpItem._type;
                                             controllerTmp.code = tmpItem.controllerCode;
                                             controllerTmp.file = 'java'
