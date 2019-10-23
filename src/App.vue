@@ -183,7 +183,7 @@
             kubeHost: '',
             kubeToken: '',
             items: [
-                {icon: 'fa-book', text: 'Home', route: '/'},
+                {icon: 'fa-book', text: 'Introduce', route: '/'},
                 {icon: 'fa-sticky-note', text: 'EventStorming', route: '/event'},
             ],
             api: [],

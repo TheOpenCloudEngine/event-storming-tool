@@ -59,24 +59,23 @@
                     </v-card-text>
 
                     <!--  정보 -->
-<!--                    <v-data-table-->
-<!--                            :headers="headers"-->
-<!--                            :items="entity"-->
-<!--                            hide-default-footer-->
-<!--                            class="elevation-1"-->
-<!--                    >-->
-<!--                        <template slot="items" slot-scope="props">-->
-<!--                            <td>123 {{props.type}}</td>-->
-<!--                            <td>{{props.type}}</td>-->
-<!--                            <td>-->
-<!--                                <v-icon-->
-<!--                                    small-->
-<!--                                    @click="" >-->
-<!--                                delete-->
-<!--                            </v-icon>-->
-<!--                            </td>-->
-<!--                        </template>-->
-<!--                    </v-data-table>-->
+                    <v-data-table
+                            :headers="headers"
+                            :items="entity"
+                            hide-default-header
+                            hide-default-footer
+                            class="elevation-1"
+                    >
+                        <template v-slot:item.action="{ item }">
+                            <v-icon
+                                    v-if="item.name !='id'"
+                                    small
+                                    @click="deleteEntity(entity,item)"
+                            >
+                                delete
+                            </v-icon>
+                        </template>
+                    </v-data-table>
 
 
                     <v-layout justify-center row style="align: center;">
@@ -232,10 +231,13 @@
                             class="elevation-1"
                     >
 
-                        <template slot="items" slot-scope="props">
-                            <div>{{props.item.type}}</div>
-                            <div>{{props.item.name}}</div>
-                            <v-btn @click="">info</v-btn>
+                        <template v-slot:item.action="{ item }">
+                            <v-icon
+                                    small
+                                    @click="deleteEntity(entity,item)"
+                            >
+                                delete
+                            </v-icon>
                         </template>
                     </v-data-table>
 
@@ -262,7 +264,7 @@
                         <span class="headline" v-if="titleName">Aggregate 선택</span>
                     </v-card-title>
                     <v-autocomplete style="margin-left: 20px; margin-right: 20px;" v-model="aggregate"
-                                    :items="aggregateList" :item-text="'name'" :item-value="'entity'" label="Select Aggregate" persistent-hint>
+                                    :items="aggregateList" label="Select Aggregate" persistent-hint>
                     </v-autocomplete>
                 </v-card>
             </v-list>
@@ -296,7 +298,7 @@
                 var tmp = []
                 designer.value.definition.forEach(function (tmpData) {
                     if (tmpData._type == 'org.uengine.uml.model.Aggregate')
-                        tmp.push({name: tmpData.inputText, entity: tmpData.aggregateEntity})
+                        tmp.push(tmpData.inputText)
                 })
                 return tmp
             },
@@ -383,7 +385,7 @@
                 entityType: '',
                 entityName: '',
                 aggregate: '',
-                headers: [{text: 'type',value: 'type'}, {text: 'name',value: 'name'},{text: 'Del',value:'delete'}],
+                headers: [{text: 'type',value: 'type'}, {text: 'name',value: 'name'}, { text: 'Actions', value: 'action', sortable: false },],
                 translateText: '',
                 usedTranslate: false,
             }
@@ -536,15 +538,29 @@
                 deep: true
             },
             aggregate: function (val) {
-                console.log(val)
-                this.$emit('update:connectAggregateEntity',val.entity.entity );
-                this.$emit('update:connectAggregateName', val.name);
+                // console.log(val)
+                this.$emit('update:connectAggregateName', val);
             }
         },
         mounted: function () {
 
         },
         methods: {
+            deleteEntity(entity,val){
+                var me = this
+
+                me.entity.forEach(function(element,idx){
+                    if(element.name == val.name && element.type == val.type){
+
+                        if (idx > -1)
+                           me.entity.splice(idx, 1)
+
+                        me.$emit('update:entity',me.entity);
+                    }
+                })
+
+                console.log(val)
+            },
             restApiTypeSet(val,set){
                 if( val.sourceElement._type == 'org.uengine.uml.model.Domain' && set=='Publish' ){
                     val.sourceElement.relationInfo='Publish'
