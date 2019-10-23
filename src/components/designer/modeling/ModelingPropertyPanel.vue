@@ -26,15 +26,18 @@
                     </v-card-title>
 
                     <v-card-text>
-                        <v-textarea name="input-7-1" outline :label="'Name'" auto-grow v-model="input"></v-textarea>
-                        <v-card outlined v-if="usedTranslate">
-                            <v-card-text @click="changeTranslate()">
-                                추천 단어 : {{ translateText }}
-                            </v-card-text>
-                            <v-card-text>
-                                선택시 변경 됩니다.
-                            </v-card-text>
-                        </v-card>
+                        <v-textarea v-if="value.name == 'Class'" name="input-7-1" outline :label="'Class Name'" auto-grow v-model="UMLInput"></v-textarea>
+                        <div v-else>
+                            <v-textarea name="input-7-1" outline :label="'Name'" auto-grow v-model="input"></v-textarea>
+                            <v-card outlined v-if="usedTranslate">
+                                <v-card-text @click="changeTranslate()">
+                                    추천 단어 : {{ translateText }}
+                                </v-card-text>
+                                <v-card-text>
+                                    선택시 변경 됩니다.
+                                </v-card-text>
+                            </v-card>
+                        </div>
                     </v-card-text>
                 </v-card>
 
@@ -92,85 +95,6 @@
                                 </v-autocomplete> -->
                     <v-divider dark style="margin-top: 10px; margin-bottom: 10px;"></v-divider>
                     <v-btn  block color="info" rounded @click="umlDiagramOpen()"> UML Diagram Editor</v-btn>
-                    <!--expand 표시 부분  -->
-<!--                    <template>-->
-<!--                        <div>-->
-<!--                            <v-expansion-panel>-->
-<!--                                <v-expansion-panel-content EventExpand>-->
-<!--                                    <template v-slot:header>연결된 리스트</template>-->
-<!--                                    <v-card>-->
-<!--                                        <v-card-text style="padding-top: 0px">-->
-<!--                                            <v-layout row wrap>-->
-<!--                                                <v-flex xs1>-->
-<!--                                                    <v-card-text class="px-0" align="center">Index</v-card-text>-->
-<!--                                                </v-flex>-->
-<!--                                                <v-flex xs3>-->
-<!--                                                    <v-card-text class="px-0" align="center">To</v-card-text>-->
-<!--                                                </v-flex>-->
-<!--                                                <v-flex xs3>-->
-<!--                                                    <v-img style="margin-top: 13px"-->
-<!--                                                           :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>-->
-<!--                                                </v-flex>-->
-<!--                                                <v-flex xs3>-->
-<!--                                                    <v-card-text class="px-0" align="center">From</v-card-text>-->
-<!--                                                </v-flex>-->
-<!--                                            </v-layout>-->
-<!--                                            <v-layout v-for="(item, index) in connectedList" row wrap>-->
-<!--                                                <v-flex xs1>-->
-<!--                                                    <v-card-text class="px-0" align="center">{{index + 1}}</v-card-text>-->
-<!--                                                </v-flex>-->
-<!--                                                <v-flex xs3>-->
-<!--                                                    <v-card-text class="px-0" align="center">{{item.to.inputText}}-->
-<!--                                                    </v-card-text>-->
-<!--                                                </v-flex>-->
-<!--                                                <v-flex xs3 grow>-->
-<!--                                                    <v-img style="margin-top: 13px"-->
-<!--                                                           :src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>-->
-<!--                                                </v-flex>-->
-<!--                                                <v-flex xs3>-->
-<!--                                                    <v-card-text class="px-0" align="center">{{item.from.inputText}}-->
-<!--                                                    </v-card-text>-->
-<!--                                                </v-flex>-->
-<!--                                            </v-layout>-->
-<!--                                        </v-card-text>-->
-<!--                                    </v-card>-->
-<!--                                </v-expansion-panel-content>-->
-
-<!--                                <v-expansion-panel-content CommandExpand>-->
-<!--                                    <template v-slot:header>연결X 리스트</template>-->
-<!--                                    <v-card>-->
-<!--                                        <v-card-text>-->
-<!--                                            연결 가능 리스트-->
-<!--                                        </v-card-text>-->
-<!--                                        <v-layout row wrap>-->
-<!--                                            <v-flex xs4>-->
-<!--                                                <v-autocomplete v-model="selectCommand" :items="commandNameList"-->
-<!--                                                                label="CommandList" persistent-hint-->
-<!--                                                                prepend-icon="mdi-city"></v-autocomplete>-->
-<!--                                            </v-flex>-->
-
-<!--                                            &lt;!&ndash;<v-flex xs3>&ndash;&gt;-->
-<!--                                            &lt;!&ndash;<v-img style="margin-top: 13px"&ndash;&gt;-->
-<!--                                            &lt;!&ndash;:src="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/right-arrow.png'"></v-img>&ndash;&gt;-->
-<!--                                            &lt;!&ndash;</v-flex>&ndash;&gt;-->
-<!--                                            <v-flex xs4>-->
-<!--                                                <v-autocomplete v-model="selectEvent" :items="domainNameList"-->
-<!--                                                                label="EventList" persistent-hint-->
-<!--                                                                prepend-icon="mdi-city"></v-autocomplete>-->
-<!--                                            </v-flex>-->
-<!--                                            <v-flex xs1>-->
-<!--                                                <v-btn style="margin-top: 17px" small-->
-<!--                                                       @click="addRelation(selectCommand,selectEvent)" color="success">-->
-<!--                                                    추가-->
-<!--                                                </v-btn>-->
-<!--                                            </v-flex>-->
-<!--                                        </v-layout>-->
-<!--                                    </v-card>-->
-<!--                                </v-expansion-panel-content>-->
-
-<!--                            </v-expansion-panel>-->
-<!--                        </div>-->
-<!--                    </template>-->
                 </v-card>
 
                 <v-card flat v-else-if=" value.name == 'Relation' && value.sourceElement._type == 'org.uengine.uml.model.Domain' ">
@@ -252,10 +176,11 @@
                                     prepend-icon="mdi-city">
                     </v-autocomplete>
 
-                    <v-card-title>
+                    <v-card-title v-if="value.name == 'event' || value.name == 'policy' || value.name == 'command' || value.name == 'external'">
                         <span class="headline" v-if="titleName">Aggregate 선택</span>
                     </v-card-title>
-                    <v-autocomplete style="margin-left: 20px; margin-right: 20px;" v-model="aggregate"
+                    <v-autocomplete v-if="value.name == 'event' || value.name == 'policy' || value.name == 'command' || value.name == 'external'"
+                            style="margin-left: 20px; margin-right: 20px;" v-model="aggregate"
                                     :items="aggregateList" label="Select Aggregate" persistent-hint>
                     </v-autocomplete>
                 </v-card>
@@ -380,6 +305,7 @@
                 headers: [{text: 'type',value: 'type'}, {text: 'name',value: 'name'}, { text: 'Actions', value: 'action', sortable: false },],
                 translateText: '',
                 usedTranslate: false,
+                UMLInput: ''
             }
         },
         created: function () {
