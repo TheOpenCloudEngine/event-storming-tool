@@ -124,7 +124,11 @@
             }
         },
         mounted: function () {
+            var me = this
+            var boundedId = this.value.elementView.id
 
+            var $tr = $('#'+boundedId);
+            $tr.parent().children().first().before($tr)
 
         },
         methods: {}

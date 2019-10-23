@@ -140,10 +140,7 @@
                 this.value.repositoryCode = this.setRepositoryTemplate()
                 this.value.controllerCode = this.setControllerTemplate()
                 this.value.eventListenerCode = this.setEventListenerTemplate()
-
                 this.value.upName = newVal.charAt(0).toUpperCase() + newVal.slice(1)
-
-
             },
             "value.aggregateEntity": function () {
                 var me = this

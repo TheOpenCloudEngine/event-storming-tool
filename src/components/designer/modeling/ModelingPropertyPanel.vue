@@ -3,8 +3,7 @@
 -->
 <template>
     <v-layout wrap>
-        <v-navigation-drawer v-model="navigationDrawer" absolute right temporary width="390">
-
+        <v-navigation-drawer v-model="navigationDrawer" absolute right width="390">
             <v-list class="pa-1">
                 <v-list-item>
                     <v-list-item-avatar>
@@ -37,14 +36,9 @@
                             </v-card-text>
                         </v-card>
                     </v-card-text>
-
-                    <!-- <v-card-text>
-                      <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint prepend-icon="mdi-city">
-                      </v-autocomplete>
-                    </v-card-text> -->
                 </v-card>
 
-                <v-card v-else-if="value.name == 'Aggregate'">
+                <v-card flat v-else-if="value.name == 'Aggregate'">
                 <!--입력창-->
                     <v-card-text>
                         <v-textarea name="input-7-1" outline :label="'Name'" auto-grow v-model="input"></v-textarea>
@@ -88,7 +82,7 @@
                         </v-flex>
                     </v-layout>
 
-                    <v-layout justify-end row wrap>
+                    <v-layout justify-end wrap>
                         <v-btn rounded color="primary" @click="entityADD(entityType,entityName)" dark>Entity ADD
                         </v-btn>
                     </v-layout>
@@ -96,10 +90,8 @@
                     <!-- <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
                                                 prepend-icon="mdi-city">
                                 </v-autocomplete> -->
-
-                    <v-card-title>
-                        <span class="headline" v-if="titleName">연결 리스트 </span>
-                    </v-card-title>
+                    <v-divider dark style="margin-top: 10px; margin-bottom: 10px;"></v-divider>
+                    <v-btn  block color="info" rounded @click="umlDiagramOpen()"> UML Diagram Editor</v-btn>
                     <!--expand 표시 부분  -->
 <!--                    <template>-->
 <!--                        <div>-->
@@ -182,10 +174,10 @@
                 </v-card>
 
                 <v-card flat v-else-if=" value.name == 'Relation' && value.sourceElement._type == 'org.uengine.uml.model.Domain' ">
-
-                    <div> 현재: {{value.relationType}}</div>
                     <v-card-text>
                         <v-col>
+                            <div > {{value.relationType}}</div>
+
                             <v-row justify="center"
                                    class="mb-6"
                                    no-gutters>
@@ -546,6 +538,11 @@
 
         },
         methods: {
+            umlDiagramOpen() {
+                var me =this
+                console.log("aa")
+                me.$ModelingBus.$emit('umlDiagram');
+            },
             deleteEntity(entity,val){
                 var me = this
 
@@ -567,7 +564,6 @@
                     val.targetElement.relationInfo='Subscribe'
                 }else{
                     val.sourceElement.relationInfo=set;
-                    // val.targetElement.relationInfo=set;
                 }
                 val.relationType=set;
             },
