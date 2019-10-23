@@ -1076,7 +1076,7 @@
                             console.log(item)
                             item.dataList.forEach(function (tmpItem) {
                                 if (tmpItem._type == 'org.uengine.uml.model.Domain' && tmpItem.inputText.length > 0) {
-                                    event.name = tmpItem.inputText + '.java';
+                                    event.name = tmpItem.upName + '.java';
                                     event.type = tmpItem._type;
                                     event.code = tmpItem.code;
                                     event.file = 'java'
@@ -1091,28 +1091,28 @@
                                     tmpList.some(function (tmp,index) {
                                         if (tmp.name == tmpItem.boundedContext) {
                                             var repositoryTmp = JSON.parse(JSON.stringify(event));
-                                            repositoryTmp.name = _.camelCase(tmpItem.inputText) + 'Repository.java';
+                                            repositoryTmp.name = _.camelCase(tmpItem.upName) + 'Repository.java';
                                             repositoryTmp.type = tmpItem._type;
                                             repositoryTmp.code = tmpItem.repositoryCode;
                                             repositoryTmp.file = 'java'
                                             tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(repositoryTmp);
 
                                             var aggregateTmp = JSON.parse(JSON.stringify(event));
-                                            aggregateTmp.name = _.camelCase(tmpItem.inputText) + '.java';
+                                            aggregateTmp.name = _.camelCase(tmpItem.upName) + '.java';
                                             aggregateTmp.type = tmpItem._type;
                                             aggregateTmp.code = tmpItem.aggregateCode;
                                             aggregateTmp.file = 'java'
                                             tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(aggregateTmp);
 
                                             var eventLisnterTmp = JSON.parse(JSON.stringify(event));
-                                            eventLisnterTmp.name = _.camelCase(tmpItem.inputText) + 'EventListener.java';
+                                            eventLisnterTmp.name = _.camelCase(tmpItem.upName) + 'EventListener.java';
                                             eventLisnterTmp.type = tmpItem._type;
                                             eventLisnterTmp.code = tmpItem.eventListenerCode;
                                             eventLisnterTmp.file = 'java'
                                             tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(eventLisnterTmp);
 
                                             var controllerTmp = JSON.parse(JSON.stringify(event));
-                                            controllerTmp.name = _.camelCase(tmpItem.inputText) + 'Controller.java';
+                                            controllerTmp.name = _.camelCase(tmpItem.upName) + 'Controller.java';
                                             controllerTmp.type = tmpItem._type;
                                             controllerTmp.code = tmpItem.controllerCode;
                                             controllerTmp.file = 'java'
@@ -1207,12 +1207,12 @@
                 //$nextTick delays the callback function until Vue has updated the DOM
                 // (which usually happens as a result of us changing the data
                 //  so make any DOM changes here
-                this.canvas.addSlider({
-                    slider: $("#canvas_slider"),
-                    width: 200,
-                    height: 300,
-                    appendTo: "body"
-                });
+                // this.canvas.addSlider({
+                //     slider: $("#canvas_slider"),
+                //     width: 200,
+                //     height: 300,
+                //     appendTo: "body"
+                // });
 
                 this.canvas._CONFIG.FAST_LOADING = false;
 
@@ -1271,7 +1271,7 @@
                         //Array
                         // console.log(list.children)
                         // console.log(list.name)
-                        me.revers(list.children, list.name)
+                        me.reverse(list.children, list.name)
                     } else {
                         me.pathTmp.push({path: list.name, code: list.code})
                         // var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
@@ -1314,7 +1314,7 @@
                     });
 
             },
-            revers(item, path) {
+            reverse(item, path) {
                 var me = this
                 item.forEach(function (list) {
                     if (list.children) {
@@ -1323,7 +1323,7 @@
                         var tmpPath = path + '/' + list.name
                         console.log(tmpPath)
 
-                        me.revers(list.children, tmpPath);
+                        me.reverse(list.children, tmpPath);
                     } else {
                         //파일생성하
                         console.log(list.name)
@@ -1665,7 +1665,7 @@
                 this.enableHistoryAdd = true;
                 var me = this;
                 var additionalData = {};
-
+                console.log(originalData)
                 var vueComponent = me.getComponentByName(componentInfo.component);
                 // console.log(componentInfo.component , this.relationVueComponentName)
                 var element;
