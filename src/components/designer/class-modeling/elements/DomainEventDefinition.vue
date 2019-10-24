@@ -62,6 +62,7 @@
                 :aggregateList.sync="aggregateList"
                 :connectAggregateName.sync="value.connectAggregateName"
                 :connectAggregateEntity.sync="value.connectAggregateEntity"
+                :publishType.sync="value.publishType"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -112,8 +113,10 @@
                     connectAggregateEntity:[],
                     entity: [],
                     code: '',
+                    publishTypeCode:'',
                     relationInfo:'',
-                    boundedContext: ''
+                    boundedContext: '',
+                    publishType:'',
                 }
             }
         },
@@ -147,7 +150,7 @@
                     }
                     if (temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == newVal) {
                         me.value.entity = JSON.parse(JSON.stringify(temp.aggregateEntity))
-                        temp.innerAggregate[me.type.toLowerCase()].push(me.value.inputText)
+                        temp.innerAggregate[me.type.toLowerCase()].push(me.value)
                     }
                 })
             },
@@ -166,11 +169,44 @@
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
                 this.value.code = this.setEventTemplate()
+            },
+            "value.publishType": function () {
+                this.value.publishTypeCode=this.setPublishTypeTemplate()
             }
         },
         mounted: function () {
         },
         methods: {
+            setPublishTypeTemplate(){
+                var me = this
+                return Mustache.render(
+                    "\n" +
+                    "{{publishType}}\n" +
+                    "    private void publish{{inputText}}() {\n" +
+                    "        KafkaTemplate kafkaTemplate = Application.applicationContext.getBean(KafkaTemplate.class);\n" +
+                    "        RestTemplate restTemplate = Application.applicationContext.getBean(RestTemplate.class);\n" +
+                    "\n" +
+                    "        Environment env = Application.applicationContext.getEnvironment();\n" +
+                    "        ObjectMapper objectMapper = new ObjectMapper();\n" +
+                    "        String json = null;\n" +
+                    "\n" +
+                    "        if( productId == null ){\n" +
+                    "            throw new RuntimeException();\n" +
+                    "        }\n" +
+                    "\n" +
+                    "\n" +
+                    "        {{upName}} {{inputText}} = new {{upName}}();\n" +
+                    "        try {\n" +
+                    "        } catch (JsonProcessingException e) {\n" +
+                    "            throw new RuntimeException(\"JSON format exception\", e);\n" +
+                    "        }\n" +
+                    "\n" +
+                    "        String topicName = env.getProperty(\"eventTopic\");\n" +
+                    "        ProducerRecord producerRecord = new ProducerRecord<>(topicName, json);\n" +
+                    "        kafkaTemplate.send(producerRecord);\n" +
+                    "    }\n\n",me.value)
+
+            },
             setEventTemplate() {
                 var me = this
                 return Mustache.render(
@@ -193,7 +229,7 @@
                     "        this.{{name}} = {{name}};\n" +
                     "    }\n" +
                     "{{/entity}}" +
-                    "}", me.value)
+                    "}\n", me.value)
             },
         }
     }

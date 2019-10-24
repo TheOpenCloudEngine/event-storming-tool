@@ -10,6 +10,7 @@
       :x.sync="value.elementView.x"
       :y.sync="value.elementView.y"
       :width.sync="value.elementView.width"
+      :height.sync="value.elementView.height"
       :height="titleH + (value.fieldDescriptors ? value.fieldDescriptors.length * itemH : 0)"
       v-on:dblclick="showProperty"
     >
@@ -51,22 +52,26 @@
         >
         </edge-element>
 
-        <text-element v-if="value.fieldDescriptors" v-for="(item, index) in value.fieldDescriptors"
+        <text-element v-if="value.UMLEntity"
+                      v-for="(item, index) in value.UMLEntity"
                       :sub-width="'90%'"
-                      :sub-height="itemH"
+                      :sub-height="'30%'"
                       :sub-top="titleH + (index * itemH)"
                       :sub-left="'5%'"
-                      :sub-style="{'text-anchor': 'start'}"
-                      :text="'+'+item.name + ': ' + item.className.substring(item.className.lastIndexOf('.')+1, item.className.length)">
+                      :sub-style="{'text-anchor': 'start', 'font-size': 15 }"
+                      :text="'+'+item.name + ': ' + item.type"
+                      >
         </text-element>
       </sub-elements>
     </geometry-element>
 
 
     <modeling-property-panel
-      :drawer.sync="value.drawer"
-      v-model="value"
-      style="height: 100%"
+            :drawer.sync="value.drawer"
+            :inputText.sync="value.inputText"
+            :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/event.png'"
+            :UMLEntity.sync="value.UMLEntity"
+            v-model="value"
     >
     </modeling-property-panel>
 
@@ -75,6 +80,8 @@
 
 <script>
   import Element from '../../modeling/Element'
+
+  var Mustache = require('mustache')
 
   export default {
     mixins: [Element],
@@ -104,7 +111,15 @@
             'height': height,
             'style': JSON.stringify({})
           },
-            drawer: false
+          drawer: false,
+          selected: false,
+          inputText: '',
+          editing: false,
+          UMLEntity: [],
+          code: '',
+          relationInfo:'',
+          boundedContext: ''
+
         }
       }
     },
@@ -128,7 +143,10 @@
     watch: {
       referenceClassName: function(){
         this.updateClassInfo();
-      }
+      },
+      "value.UMLEntity": function (newVal) {
+        console.log(newVal)
+      },
 
 
     },

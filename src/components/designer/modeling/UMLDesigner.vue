@@ -79,7 +79,7 @@
             CodeViewer
         },
         props: {
-            elementTypes: Array
+            elementTypes: Array,
         },
         data() {
             return {
@@ -128,6 +128,7 @@
                 pathTmp: [],
                 maxWidth: 0,
                 maxHeight: 0,
+
             }
         },
         beforeDestroy: function () {

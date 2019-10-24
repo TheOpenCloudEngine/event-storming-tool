@@ -16,7 +16,7 @@
                     <template v-slot:item.action="{ item }">
                         <v-icon
                                 small
-                                @click="UMLDeleteEntity(UMLEntity,item)"
+                                @click=""
                         >
                             delete
                         </v-icon>
@@ -25,16 +25,16 @@
 
                 <v-layout justify-center row style="align: center;">
                     <v-flex xs4>
-                        <v-select v-model="entityType" :items="['int','string']" label="Standard"
+                        <v-select v-model="entityType" :items="entityTypeList" label="Type"
                                   style="margin-left: 10px; margin-right: 15px;"></v-select>
                     </v-flex>
                     <v-flex xs6>
-                        <v-text-field v-model="entityName" :counter="10" label="Name" required></v-text-field>
+                        <v-text-field v-model="entityName" label="Value" required></v-text-field>
                     </v-flex>
                 </v-layout>
 
                 <v-layout justify-end wrap>
-                    <v-btn rounded color="primary" @click="UMLEntityADD(entityType,entityName)" dark>Entity ADD
+                    <v-btn rounded color="primary" @click="UMLEntityADD(entityType,entityName)" dark>Attribute ADD
                     </v-btn>
                 </v-layout>
             </v-list>
@@ -98,7 +98,19 @@
 
                     <v-layout v-if="value.name == 'event' || value.name == 'Aggregate'" flat>
 
-                        <v-col align="center">
+                        <v-col>
+                            <v-col v-if="value.name == 'event'">
+                                <div>Called Time</div>
+                                <v-radio-group v-model="publishType" cols="3" sm="6" md="6" >
+                                    <v-radio label="pre/Persist" value="@prePersist"></v-radio>
+                                    <v-radio label="Post/Persist" value="@PostPersist"></v-radio>
+                                    <v-radio label="pre/Update" value="@preUpdate"></v-radio>
+                                    <v-radio label="post/Update" value="@postUpdate"></v-radio>
+                                    <v-radio label="pre/Delete" value="@preDelete"></v-radio>
+                                    <v-radio label="post/Delete" value="@postDelete"></v-radio>
+                                </v-radio-group>
+                            </v-col>
+
                             <v-data-table
                                     :headers="headers"
                                     :items="entity"
@@ -109,6 +121,7 @@
 
                                 <template v-slot:item.action="{ item }">
                                     <v-icon
+                                            v-if="item.name != 'id'"
                                             small
                                             @click="deleteEntity(entity,item)"
                                     >
@@ -174,6 +187,7 @@
             value: Object,
             titleName: String,
             inputText: String,
+            publishType: String,
             connectAggregateName: String,
             connectAggregateEntity: Array,
             otherList: Array,
@@ -181,7 +195,7 @@
             restApi: String,
             innerAggregate: Object,
             entity: Array,
-            UMLEntity: Array,
+            UMLEntity:Array,
         },
         computed: {
             aggregateList: function () {
@@ -277,18 +291,15 @@
                 entityType: '',
                 entityName: '',
                 aggregate: '',
-                headers: [{text: 'type', value: 'type'}, {text: 'name', value: 'name'}, {
+                headers: [{text: 'type', value: 'type',align:'center'}, {text: 'name', value: 'name',align:'center'}, {
                     text: 'Actions',
                     value: 'action',
-                    sortable: false
+                    sortable: false,
+                    align:'center'
                 },],
                 translateText: '',
                 usedTranslate: false,
-
                 UMLInput: '',
-                UMLEntityTypeList: ['int', 'String', 'float', 'double', 'long'],
-                entityType: '',
-                entityName: '',
 
             }
         },
@@ -299,6 +310,10 @@
 
         },
         watch: {
+            publishType:function(newVal){
+                console.log(newVal)
+                this.$emit('update:publishType', newVal)
+            },
             inputText: function (newVal) {
                 // console.log(newVal)
                 if (this.input != newVal) {
@@ -365,6 +380,7 @@
                 // console.log(newVal);
                 this.$emit('update:restApi', newVal)
             },
+
             restApi: function (newVal) {
                 if (newVal != this.restApiType) {
                     this.restApiType = newVal

@@ -8,8 +8,8 @@
             <modal name="code-modal" :height='"auto"' :width="'80%'">
                 <v-card>
                     <v-card-title>
-                        <span class="headline">Code View</span>
-                        <v-btn text>
+                        <span class="headline">Code Preview</span>
+                        <v-btn>
                             <v-icon middle>info</v-icon>
                         </v-btn>
                     </v-card-title>
@@ -111,7 +111,7 @@
                 <!--                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD-->
                 <!--                </v-btn>-->
                 <v-btn color="info" v-on:click.native="codeModalShow"
-                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">Generate
+                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">code Preview
                 </v-btn>
                 <v-btn color="info" v-on:click.native="generateZip"
                        style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">Download Archive
@@ -154,7 +154,7 @@
         <v-snackbar v-model="snackbar" :color="color" :multi-line="mode === 'multi-line'" :timeout="timeout"
                     :vertical="mode === 'vertical'">
             {{ text }}
-            <v-btn dark flat @click="snackbar = false">
+            <v-btn dark @click="snackbar = false">
                 Close
             </v-btn>
         </v-snackbar>
@@ -1160,7 +1160,6 @@
 
             me.$ModelingBus.$on('umlDiagram', function () {
                 me.umlModalShow()
-                console.log("aa")
                 me.$nextTick(function () {
                 })
             });
@@ -1281,7 +1280,6 @@
                 this.$modal.show('code-modal');
             },
             umlModalShow() {
-                console.log("aa")
                 this.$modal.show('uml-modal');
             },
             generateZip() {

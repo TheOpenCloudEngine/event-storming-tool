@@ -278,6 +278,12 @@
                     "    }\n" +
                     "{{/aggregateEntity}}\n" +
                     "\n" +
+                    "{{#innerAggregate}}" +
+                    "{{#event}}" +
+                    "{{{publishTypeCode}}}" +
+                    "{{/event}}" +
+                    "{{/innerAggregate}}" +
+                    "\n" +
                     "}", me.value)
             }
         },
