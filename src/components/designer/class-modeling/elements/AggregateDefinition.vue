@@ -174,7 +174,7 @@
                 return Mustache.render(
                     "package com.example.template;\n " +
                     "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
-                    "public interface {{ upName }}Repository extends PagingAndSortingRepository < {{ inputText }}, Long > { \n " +
+                    "public interface {{ upName }}Repository extends PagingAndSortingRepository < {{ upName }}, Long > { \n " +
                     "}\n", me.value)
             },
             setControllerTemplate(){
@@ -226,7 +226,7 @@
                     "    private KafkaTemplate kafkaTemplate;\n" +
                     "\n" +
                     "    @Autowired\n" +
-                    "    private {{ inputText }}Repository {{ inputText }}Repository;\n" +
+                    "    private {{ upName }}Repository {{ upName }}Repository;\n" +
                     "\n" +
                     "{{#innerAggregate}}" +
                     "{{#policy}}" +

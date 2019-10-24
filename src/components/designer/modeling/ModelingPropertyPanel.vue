@@ -2,8 +2,49 @@
        * Todo: Property 작성 하는 부분 *
 -->
 <template>
-    <v-layout wrap>
+    <v-layout wrap v-if="value.name=='Class'">
         <v-navigation-drawer v-model="navigationDrawer" absolute right width="390">
+            <v-list class="pt-0" dense>
+                <v-divider></v-divider>
+                <v-data-table
+                        :headers="headers"
+                        :items="UMLEntity"
+                        hide-default-header
+                        hide-default-footer
+                        class="elevation-1"
+                >
+                    <template v-slot:item.action="{ item }">
+                        <v-icon
+                                small
+                                @click="UMLDeleteEntity(UMLEntity,item)"
+                        >
+                            delete
+                        </v-icon>
+                    </template>
+                </v-data-table>
+
+                <v-layout justify-center row style="align: center;">
+                    <v-flex xs4>
+                        <v-select v-model="entityType" :items="['int','string']" label="Standard"
+                                  style="margin-left: 10px; margin-right: 15px;"></v-select>
+                    </v-flex>
+                    <v-flex xs6>
+                        <v-text-field v-model="entityName" :counter="10" label="Name" required></v-text-field>
+                    </v-flex>
+                </v-layout>
+
+                <v-layout justify-end wrap>
+                    <v-btn rounded color="primary" @click="UMLEntityADD(entityType,entityName)" dark>Entity ADD
+                    </v-btn>
+                </v-layout>
+            </v-list>
+        </v-navigation-drawer>
+    </v-layout>
+
+
+    <v-layout v-else wrap>
+        <v-navigation-drawer v-model="navigationDrawer" absolute right width="390">
+            <!--  상단 이미지 및 선택 타이틀 이름-->
             <v-list class="pa-1">
                 <v-list-item>
                     <v-list-item-avatar>
@@ -13,38 +54,38 @@
                     <v-list-item-content>
                         <v-list-item-title>{{ titleName }}</v-list-item-title>
                     </v-list-item-content>
-
                 </v-list-item>
             </v-list>
 
-            <v-list class="pt-0" dense>
+            <!--  해당 판넬의 내용  -->
+            <v-list class="pt-0" dense flat>
                 <v-divider></v-divider>
 
-                <v-card v-if="value.name == 'Bounded Context'">
-                    <v-card-title>
-                        <span class="headline" v-if="titleName">{{titleName}} 내용 입력 </span>
-                    </v-card-title>
-
+                <!-- 선연결 -->
+                <v-card v-if=" value.name == 'Relation' && value.sourceElement._type == 'org.uengine.uml.model.Domain' " flat>
                     <v-card-text>
-                        <v-textarea v-if="value.name == 'Class'" name="input-7-1" outline :label="'Class Name'" auto-grow v-model="UMLInput"></v-textarea>
-                        <div v-else>
-                            <v-textarea name="input-7-1" outline :label="'Name'" auto-grow v-model="input"></v-textarea>
-                            <v-card outlined v-if="usedTranslate">
-                                <v-card-text @click="changeTranslate()">
-                                    추천 단어 : {{ translateText }}
-                                </v-card-text>
-                                <v-card-text>
-                                    선택시 변경 됩니다.
-                                </v-card-text>
-                            </v-card>
-                        </div>
+                        <v-col>
+                            <div> {{value.relationType}}</div>
+
+                            <v-row justify="center"
+                                   class="mb-6"
+                                   no-gutters>
+                                <v-btn class="pa-2" block @click="restApiTypeSet(value,'Pub')"
+                                       v-if="value.sourceElement._type == 'org.uengine.uml.model.Domain'"> PUB
+                                </v-btn>
+                                <v-btn class="pa-2" block @click="restApiTypeSet(value,'Get')"> GET</v-btn>
+                                <v-btn class="pa-2" block @click="restApiTypeSet(value,'Post')"> POST</v-btn>
+                                <v-btn class="pa-2" block @click="restApiTypeSet(value,'Put')"> PUT</v-btn>
+                                <v-btn class="pa-2" block @click="restApiTypeSet(value,'Delete')"> DELETE</v-btn>
+                            </v-row>
+                        </v-col>
                     </v-card-text>
                 </v-card>
 
-                <v-card flat v-else-if="value.name == 'Aggregate'">
-                <!--입력창-->
+                <v-card outlined v-else>
                     <v-card-text>
-                        <v-textarea name="input-7-1" outline :label="'Name'" auto-grow v-model="input"></v-textarea>
+                        <span class="headline" v-if="titleName">내용 입력 </span>
+                        <v-textarea name="input-7-1" outline :label="'Input Text'" auto-grow v-model="input"></v-textarea>
                         <v-card outlined v-if="usedTranslate">
                             <v-card-text @click="changeTranslate()">
                                 추천 단어 : {{ translateText }}
@@ -55,134 +96,67 @@
                         </v-card>
                     </v-card-text>
 
-                    <!--  정보 -->
-                    <v-data-table
-                            :headers="headers"
-                            :items="entity"
-                            hide-default-header
-                            hide-default-footer
-                            class="elevation-1"
-                    >
-                        <template v-slot:item.action="{ item }">
-                            <v-icon
-                                    v-if="item.name !='id'"
-                                    small
-                                    @click="deleteEntity(entity,item)"
+                    <v-layout v-if="value.name == 'event' || value.name == 'Aggregate'" flat>
+
+                        <v-col align="center">
+                            <v-data-table
+                                    :headers="headers"
+                                    :items="entity"
+                                    hide-default-header
+                                    hide-default-footer
+                                    class="elevation-1"
                             >
-                                delete
-                            </v-icon>
-                        </template>
-                    </v-data-table>
+
+                                <template v-slot:item.action="{ item }">
+                                    <v-icon
+                                            small
+                                            @click="deleteEntity(entity,item)"
+                                    >
+                                        delete
+                                    </v-icon>
+                                </template>
+                            </v-data-table>
 
 
-                    <v-layout justify-center row style="align: center;">
-                        <v-flex xs4>
-                            <v-select v-model="entityType" :items="entityTypeList" label="Standard"
-                                      style="margin-left: 10px; margin-right: 15px;"></v-select>
-                        </v-flex>
-                        <v-flex xs6>
-                            <v-text-field v-model="entityName" :counter="10" label="Name" required></v-text-field>
-                        </v-flex>
-                    </v-layout>
-
-                    <v-layout justify-end wrap>
-                        <v-btn rounded color="primary" @click="entityADD(entityType,entityName)" dark>Entity ADD
-                        </v-btn>
-                    </v-layout>
-
-                    <!-- <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
-                                                prepend-icon="mdi-city">
-                                </v-autocomplete> -->
-                    <v-divider dark style="margin-top: 10px; margin-bottom: 10px;"></v-divider>
-                    <v-btn  block color="info" rounded @click="umlDiagramOpen()"> UML Diagram Editor</v-btn>
-                </v-card>
-
-                <v-card flat v-else-if=" value.name == 'Relation' && value.sourceElement._type == 'org.uengine.uml.model.Domain' ">
-                    <v-card-text>
-                        <v-col>
-                            <div > {{value.relationType}}</div>
-
-                            <v-row justify="center"
-                                   class="mb-6"
-                                   no-gutters>
-                                <v-btn class="pa-2" block  @click="restApiTypeSet(value,'Pub')" v-if="value.sourceElement._type == 'org.uengine.uml.model.Domain'" > PUB </v-btn>
-                                <v-btn class="pa-2" block  @click="restApiTypeSet(value,'Get')" > GET </v-btn>
-                                <v-btn class="pa-2" block  @click="restApiTypeSet(value,'Post')" > POST </v-btn>
-                                <v-btn class="pa-2" block  @click="restApiTypeSet(value,'Put')" > PUT </v-btn>
-                                <v-btn class="pa-2" block  @click="restApiTypeSet(value,'Delete')" > DELETE </v-btn>
+                            <v-row justify="center">
+                                <v-flex xs4>
+                                    <v-select v-model="entityType" :items="entityTypeList" label="Standard"
+                                              style="margin-left: 10px; margin-right: 15px;"></v-select>
+                                </v-flex>
+                                <v-flex xs6>
+                                    <v-text-field v-model="entityName" label="Name"
+                                                  required></v-text-field>
+                                </v-flex>
+                            </v-row>
+                            <v-row justify="end">
+                                <v-btn rounded color="primary" @click="entityADD(entityType,entityName);" dark>Entity
+                                    ADD
+                                </v-btn>
                             </v-row>
                         </v-col>
-                    </v-card-text>
-                </v-card>
-
-                <v-card outlined v-else>
-                    <v-card-text>
-                        <v-textarea name="input-7-1" outline :label="'Name'" auto-grow v-model="input"></v-textarea>
-                        <v-card outlined v-if="value.name == 'event' && usedTranslate">
-
-                            <v-card-text @click="changeTranslate()">
-                                추천 단어 : {{ translateText }}
-                            </v-card-text>
-                            <v-card-text>
-                                선택시 변경 됩니다.
-                            </v-card-text>
-                        </v-card>
-                        <v-card outlined v-else-if="usedTranslate">
-
-                            <v-card-text @click="changeTranslate()">
-                                추천 단어 : {{ translateText }}
-                            </v-card-text>
-                            <v-card-text>
-                                선택시 변경 됩니다.
-                            </v-card-text>
-                        </v-card>
-                    </v-card-text>
-
-                    <v-data-table
-                            v-if="value.name == 'event'"
-                            :headers="headers"
-                            :items="entity"
-                            hide-default-header
-                            hide-default-footer
-                            class="elevation-1"
-                    >
-
-                        <template v-slot:item.action="{ item }">
-                            <v-icon
-                                    small
-                                    @click="deleteEntity(entity,item)"
-                            >
-                                delete
-                            </v-icon>
-                        </template>
-                    </v-data-table>
-
-                    <v-layout v-if="value.name == 'event'" justify-center row style="align: center;">
-                        <v-flex xs4>
-                            <v-select v-model="entityType" :items="entityTypeList" label="Standard"
-                                      style="margin-left: 10px; margin-right: 15px;"></v-select>
-                        </v-flex>
-                        <v-flex xs6>
-                            <v-text-field v-model="entityName" :counter="10" label="Name" required></v-text-field>
-                        </v-flex>
-                    </v-layout>
-                    <v-layout v-if="value.name == 'event'" justify-end row wrap>
-                        <v-btn rounded color="primary" @click="entityADD(entityType,entityName);" dark>Entity ADD
-                        </v-btn>
                     </v-layout>
 
-                    <v-autocomplete v-if="value.name == 'Command'" v-model="restApiType" :items="restApiList"
+                    <v-layout v-if="value.name == 'Command'" >
+                    <v-autocomplete  v-model="restApiType" :items="restApiList"
                                     label="REST API TYPE" persistent-hint
                                     prepend-icon="mdi-city">
                     </v-autocomplete>
+                    </v-layout>
 
-                    <v-card-title v-if="value.name == 'event' || value.name == 'policy' || value.name == 'command' || value.name == 'external'">
-                        <span class="headline" v-if="titleName">Aggregate 선택</span>
-                    </v-card-title>
-                    <v-autocomplete v-if="value.name == 'event' || value.name == 'policy' || value.name == 'command' || value.name == 'external'"
-                            style="margin-left: 20px; margin-right: 20px;" v-model="aggregate"
+                    <v-layout
+                            v-if="value.name == 'event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'" flat>
+                        <v-col>
+                            <span class="headline" v-if="titleName">Aggregate 선택</span>
+                            <v-autocomplete
+                                    style="margin-left: 20px; margin-right: 20px;" v-model="aggregate"
                                     :items="aggregateList" label="Select Aggregate" persistent-hint>
-                    </v-autocomplete>
+                            </v-autocomplete>
+                        </v-col>
+                    </v-layout>
+                    <v-layout v-else-if="value.name == 'Aggregate'">
+                        <v-divider dark style="margin-top: 10px; margin-bottom: 10px;"></v-divider>
+                        <v-btn block color="info" rounded @click="umlDiagramOpen()"> UML Diagram Editor</v-btn>
+                    </v-layout>
                 </v-card>
             </v-list>
         </v-navigation-drawer>
@@ -207,6 +181,7 @@
             restApi: String,
             innerAggregate: Object,
             entity: Array,
+            UMLEntity: Array,
         },
         computed: {
             aggregateList: function () {
@@ -294,7 +269,7 @@
                 selectEvent: '',
                 selectCommand: '',
                 connectedList: [],
-                connectedListName:{},
+                connectedListName: {},
                 componentKey: 0,
                 restApiList: ['GET', 'POST', 'PUT', 'DELETE'],
                 restApiType: '',
@@ -302,10 +277,19 @@
                 entityType: '',
                 entityName: '',
                 aggregate: '',
-                headers: [{text: 'type',value: 'type'}, {text: 'name',value: 'name'}, { text: 'Actions', value: 'action', sortable: false },],
+                headers: [{text: 'type', value: 'type'}, {text: 'name', value: 'name'}, {
+                    text: 'Actions',
+                    value: 'action',
+                    sortable: false
+                },],
                 translateText: '',
                 usedTranslate: false,
-                UMLInput: ''
+
+                UMLInput: '',
+                UMLEntityTypeList: ['int', 'String', 'float', 'double', 'long'],
+                entityType: '',
+                entityName: '',
+
             }
         },
         created: function () {
@@ -465,33 +449,46 @@
         },
         methods: {
             umlDiagramOpen() {
-                var me =this
+                var me = this
                 console.log("aa")
                 me.$ModelingBus.$emit('umlDiagram');
             },
-            deleteEntity(entity,val){
+            deleteEntity(entity, val) {
                 var me = this
 
-                me.entity.forEach(function(element,idx){
-                    if(element.name == val.name && element.type == val.type){
+                me.entity.forEach(function (element, idx) {
+                    if (element.name == val.name && element.type == val.type) {
 
                         if (idx > -1)
-                           me.entity.splice(idx, 1)
+                            me.entity.splice(idx, 1)
 
-                        me.$emit('update:entity',me.entity);
+                        me.$emit('update:entity', me.entity);
                     }
                 })
 
                 console.log(val)
             },
-            restApiTypeSet(val,set){
-                if( val.sourceElement._type == 'org.uengine.uml.model.Domain' && set=='Publish' ){
-                    val.sourceElement.relationInfo='Publish'
-                    val.targetElement.relationInfo='Subscribe'
-                }else{
-                    val.sourceElement.relationInfo=set;
+            UMLDeleteEntity(entity, val) {
+                var me = this
+
+                me.UMLEntity.forEach(function (element, idx) {
+                    if (element.name == val.name && element.type == val.type) {
+
+                        if (idx > -1)
+                            me.UMLEntity.splice(idx, 1)
+
+                        me.$emit('update:UMLEntity', me.UMLEntity);
+                    }
+                })
+            },
+            restApiTypeSet(val, set) {
+                if (val.sourceElement._type == 'org.uengine.uml.model.Domain' && set == 'Publish') {
+                    val.sourceElement.relationInfo = 'Publish'
+                    val.targetElement.relationInfo = 'Subscribe'
+                } else {
+                    val.sourceElement.relationInfo = set;
                 }
-                val.relationType=set;
+                val.relationType = set;
             },
             changeTranslate() {
                 this.input = this.translateText
@@ -513,6 +510,23 @@
                     designer.snackbar = true
                 }
             },
+            UMLEntityADD: function (type, name) {
+                var me = this
+                if (type.length != 0 && name.length != 0) {
+
+                    let tmpObject = {"type": type, "name": name, "upName": name.charAt(0).toUpperCase() + name.slice(1)}
+                    me.UMLEntity.push(tmpObject);
+                    this.entityType = ""
+                    this.entityName = ""
+
+                } else {
+                    var designer = this.$parent.getComponent('modeling-designer')
+                    designer.text = "TYPE & NAME INPUT REQUEST"
+                    designer.snackbar = true
+                }
+            },
+
+
             entitySub: function (idx) {
                 var me = this
                 me.entity[idx] = null

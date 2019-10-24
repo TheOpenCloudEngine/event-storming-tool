@@ -1,9 +1,10 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="canvas-panel">
         <v-layout right>
-            <modal name="uml-modal" :height='"80%"' :width="'80%'">
+            <modal name="uml-modal"  :height='"80%"' :width="'80%'">
                 <class-modeler></class-modeler>
             </modal>
+
             <modal name="code-modal" :height='"auto"' :width="'80%'">
                 <v-card>
                     <v-card-title>

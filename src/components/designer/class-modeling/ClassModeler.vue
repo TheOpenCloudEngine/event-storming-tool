@@ -5,6 +5,8 @@
             relationListBeanPath="relations"
             relationVueComponentName="class-relation"
             ref="designer"
+            :UMLEntity.sync="value.UMLEntity"
+            v-model="value"
     >
     </uml-designer>
 </template>
@@ -17,7 +19,6 @@
         },
         data() {
             return {
-                value: {},
                 elementTypes: [
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
@@ -27,6 +28,7 @@
                         'height': '100'
                     }
                 ],
+                UMLEntity: [],
             }
         },
 
