@@ -182,7 +182,7 @@
                 return Mustache.render(
                     "\n" +
                     "{{publishType}}\n" +
-                    "    private void publish{{inputText}}() {\n" +
+                    "    private void publish{{upName}}() {\n" +
                     "        KafkaTemplate kafkaTemplate = Application.applicationContext.getBean(KafkaTemplate.class);\n" +
                     "        RestTemplate restTemplate = Application.applicationContext.getBean(RestTemplate.class);\n" +
                     "\n" +
@@ -190,13 +190,9 @@
                     "        ObjectMapper objectMapper = new ObjectMapper();\n" +
                     "        String json = null;\n" +
                     "\n" +
-                    "        if( productId == null ){\n" +
-                    "            throw new RuntimeException();\n" +
-                    "        }\n" +
-                    "\n" +
-                    "\n" +
                     "        {{upName}} {{inputText}} = new {{upName}}();\n" +
                     "        try {\n" +
+                    "\n" +
                     "        } catch (JsonProcessingException e) {\n" +
                     "            throw new RuntimeException(\"JSON format exception\", e);\n" +
                     "        }\n" +
