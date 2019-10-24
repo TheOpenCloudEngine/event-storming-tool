@@ -111,7 +111,7 @@
                 <!--                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD-->
                 <!--                </v-btn>-->
                 <v-btn color="info" v-on:click.native="codeModalShow"
-                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">code Preview
+                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px; font-variant-caps: normal " >code Preview
                 </v-btn>
                 <v-btn color="info" v-on:click.native="generateZip"
                        style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">Download Archive

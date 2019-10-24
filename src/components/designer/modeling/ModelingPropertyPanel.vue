@@ -8,7 +8,7 @@
                 <v-divider></v-divider>
                 <v-data-table
                         :headers="headers"
-                        :items="UMLEntity"
+                        :items="fieldDescriptors"
                         hide-default-header
                         hide-default-footer
                         class="elevation-1"
@@ -94,82 +94,91 @@
                                 선택시 변경 됩니다.
                             </v-card-text>
                         </v-card>
+
+                        <v-layout v-if="value.name == 'event' || value.name == 'Aggregate'" flat>
+                            <v-col>
+
+                                <v-col v-if="value.name == 'event'">
+                                    <v-radio-group v-model="publishType">
+                                        <div style="font-size: 17px">Called Time</div>
+                                        <v-row>
+                                            <v-col>
+                                                <v-radio label="Pre/Persist" value="@PrePersist"></v-radio>
+                                                <v-radio label="Pre/Update" value="@PreUpdate"></v-radio>
+                                                <v-radio label="Pre/Delete" value="@PreDelete"></v-radio>
+                                            </v-col>
+                                            <v-col>
+                                                <v-radio label="Post/Persist" value="@PostPersist"></v-radio>
+                                                <v-radio label="Post/Update" value="@PostUpdate"></v-radio>
+                                                <v-radio label="Post/Delete" value="@PostDelete"></v-radio>
+                                            </v-col>
+                                        </v-row>
+                                    </v-radio-group>
+                                </v-col>
+
+                                <v-data-table
+                                        :headers="headers"
+                                        :items="entity"
+                                        hide-default-header
+                                        hide-default-footer
+                                        class="elevation-1"
+                                >
+
+                                    <template v-slot:item.action="{ item }">
+                                        <v-icon
+                                                v-if="item.name != 'id'"
+                                                small
+                                                @click="deleteEntity(entity,item)"
+                                        >
+                                            delete
+                                        </v-icon>
+                                    </template>
+                                </v-data-table>
+
+
+                                <v-row justify="center">
+                                    <v-flex xs4>
+                                        <v-select v-model="entityType" :items="entityTypeList" label="Standard"
+                                                  style="margin-left: 10px; margin-right: 15px;"></v-select>
+                                    </v-flex>
+                                    <v-flex xs6>
+                                        <v-text-field v-model="entityName" label="Name"
+                                                      required></v-text-field>
+                                    </v-flex>
+                                </v-row>
+                                <v-row justify="end">
+                                    <v-btn rounded color="primary" @click="entityADD(entityType,entityName);" dark>Entity
+                                        ADD
+                                    </v-btn>
+                                </v-row>
+                            </v-col>
+                        </v-layout>
+
+                        <v-layout v-if="value.name == 'Command'" >
+                            <v-autocomplete  v-model="restApiType" :items="restApiList"
+                                             label="REST API TYPE" persistent-hint
+                                             prepend-icon="mdi-city">
+                            </v-autocomplete>
+                        </v-layout>
+
+                        <v-layout
+                                v-if="value.name == 'event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'" flat>
+                            <v-col>
+                                <span class="headline" v-if="titleName">Aggregate 선택</span>
+                                <v-autocomplete
+                                        style="margin-left: 20px; margin-right: 20px;" v-model="aggregate"
+                                        :items="aggregateList" label="Select Aggregate" persistent-hint>
+                                </v-autocomplete>
+                            </v-col>
+                        </v-layout>
+                        <v-layout v-else-if="value.name == 'Aggregate'">
+                            <v-divider dark style="margin-top: 10px; margin-bottom: 10px;"></v-divider>
+                            <v-btn block color="info" rounded @click="umlDiagramOpen()"> UML Diagram Editor</v-btn>
+                        </v-layout>
+
                     </v-card-text>
 
-                    <v-layout v-if="value.name == 'event' || value.name == 'Aggregate'" flat>
 
-                        <v-col>
-                            <v-col v-if="value.name == 'event'">
-                                <div>Called Time</div>
-                                <v-radio-group v-model="publishType" cols="3" sm="6" md="6" >
-                                    <v-radio label="pre/Persist" value="@prePersist"></v-radio>
-                                    <v-radio label="Post/Persist" value="@PostPersist"></v-radio>
-                                    <v-radio label="pre/Update" value="@preUpdate"></v-radio>
-                                    <v-radio label="post/Update" value="@postUpdate"></v-radio>
-                                    <v-radio label="pre/Delete" value="@preDelete"></v-radio>
-                                    <v-radio label="post/Delete" value="@postDelete"></v-radio>
-                                </v-radio-group>
-                            </v-col>
-
-                            <v-data-table
-                                    :headers="headers"
-                                    :items="entity"
-                                    hide-default-header
-                                    hide-default-footer
-                                    class="elevation-1"
-                            >
-
-                                <template v-slot:item.action="{ item }">
-                                    <v-icon
-                                            v-if="item.name != 'id'"
-                                            small
-                                            @click="deleteEntity(entity,item)"
-                                    >
-                                        delete
-                                    </v-icon>
-                                </template>
-                            </v-data-table>
-
-
-                            <v-row justify="center">
-                                <v-flex xs4>
-                                    <v-select v-model="entityType" :items="entityTypeList" label="Standard"
-                                              style="margin-left: 10px; margin-right: 15px;"></v-select>
-                                </v-flex>
-                                <v-flex xs6>
-                                    <v-text-field v-model="entityName" label="Name"
-                                                  required></v-text-field>
-                                </v-flex>
-                            </v-row>
-                            <v-row justify="end">
-                                <v-btn rounded color="primary" @click="entityADD(entityType,entityName);" dark>Entity
-                                    ADD
-                                </v-btn>
-                            </v-row>
-                        </v-col>
-                    </v-layout>
-
-                    <v-layout v-if="value.name == 'Command'" >
-                    <v-autocomplete  v-model="restApiType" :items="restApiList"
-                                    label="REST API TYPE" persistent-hint
-                                    prepend-icon="mdi-city">
-                    </v-autocomplete>
-                    </v-layout>
-
-                    <v-layout
-                            v-if="value.name == 'event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'" flat>
-                        <v-col>
-                            <span class="headline" v-if="titleName">Aggregate 선택</span>
-                            <v-autocomplete
-                                    style="margin-left: 20px; margin-right: 20px;" v-model="aggregate"
-                                    :items="aggregateList" label="Select Aggregate" persistent-hint>
-                            </v-autocomplete>
-                        </v-col>
-                    </v-layout>
-                    <v-layout v-else-if="value.name == 'Aggregate'">
-                        <v-divider dark style="margin-top: 10px; margin-bottom: 10px;"></v-divider>
-                        <v-btn block color="info" rounded @click="umlDiagramOpen()"> UML Diagram Editor</v-btn>
-                    </v-layout>
                 </v-card>
             </v-list>
         </v-navigation-drawer>
@@ -195,7 +204,7 @@
             restApi: String,
             innerAggregate: Object,
             entity: Array,
-            UMLEntity:Array,
+            fieldDescriptors:Array,
         },
         computed: {
             aggregateList: function () {
@@ -531,7 +540,7 @@
                 if (type.length != 0 && name.length != 0) {
 
                     let tmpObject = {"type": type, "name": name, "upName": name.charAt(0).toUpperCase() + name.slice(1)}
-                    me.UMLEntity.push(tmpObject);
+                    me.fieldDescriptors.push(tmpObject);
                     this.entityType = ""
                     this.entityName = ""
 

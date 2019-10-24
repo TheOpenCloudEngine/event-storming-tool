@@ -29,13 +29,13 @@
 
       <sub-elements>
         <!--title-->
-        <text-element v-if="value.classReference"
-          :sub-width="'100%'"
-          :sub-height="titleH/2"
-          :sub-top="0"
-          :sub-left="0"
-          text="<<Bounded Context>>">
-        </text-element>
+<!--        <text-element v-if="value.classReference"-->
+<!--          :sub-width="'100%'"-->
+<!--          :sub-height="titleH/2"-->
+<!--          :sub-top="0"-->
+<!--          :sub-left="0"-->
+<!--          text="<<Bounded Context>>">-->
+<!--        </text-element>-->
         <text-element
           :sub-width="'100%'"
           :sub-height="titleH"
@@ -52,12 +52,10 @@
         >
         </edge-element>
 
-        <text-element v-if="value.UMLEntity"
-                      v-for="(item, index) in value.UMLEntity"
+        <text-element v-if="value.fieldDescriptors"
+                      v-for="(item, index) in value.fieldDescriptors"
                       :sub-width="'90%'"
-                      :sub-height="'30%'"
-                      :sub-top="titleH + (index * itemH)"
-                      :sub-left="'5%'"
+                      :sub-height="titleH"
                       :sub-style="{'text-anchor': 'start', 'font-size': 15 }"
                       :text="'+'+item.name + ': ' + item.type"
                       >
@@ -67,10 +65,9 @@
 
 
     <modeling-property-panel
-            :drawer.sync="value.drawer"
-            :inputText.sync="value.inputText"
             :img="'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/event.png'"
-            :UMLEntity.sync="value.UMLEntity"
+            :drawer.sync="value.drawer"
+            :fieldDescriptors.sync="value.fieldDescriptors"
             v-model="value"
     >
     </modeling-property-panel>
@@ -107,15 +104,14 @@
             'id': elementId,
             'x': x,
             'y': y,
-            'width': width,
-            'height': height,
+            'width': 100,
+            'height': 100,
             'style': JSON.stringify({})
           },
           drawer: false,
           selected: false,
           inputText: '',
           editing: false,
-          UMLEntity: [],
           code: '',
           relationInfo:'',
           boundedContext: ''
@@ -144,8 +140,8 @@
       referenceClassName: function(){
         this.updateClassInfo();
       },
-      "value.UMLEntity": function (newVal) {
-        console.log(newVal)
+      "value.fieldDescriptors": function (newVal) {
+        this.value.fieldDescriptors=newVal
       },
 
 
@@ -155,15 +151,15 @@
     },
     methods: {
 
-      addAttribute: function () {
-        this.value.fieldDescriptors.push({
-          name: 'attribute',
-          className: 'java.lang.String',
-          attributes: {},
-          _type: 'org.uengine.uml.model.Attribute'
-
-        });
-      },
+      // addAttribute: function () {
+      //   this.value.fieldDescriptors.push({
+      //     name: 'attribute',
+      //     className: 'java.lang.String',
+      //     attributes: {},
+      //     _type: 'org.uengine.uml.model.Attribute'
+      //
+      //   });
+      // },
       removeAttribute: function (attribute) {
         this.value.fieldDescriptors.splice(this.value.fieldDescriptors.indexOf(attribute), 1);
       },
