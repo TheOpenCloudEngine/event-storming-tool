@@ -158,9 +158,16 @@
                     "{{#relationEventInfo}}" +
                     "     public void on{{upName}}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
                     "        System.out.println(\"##### listener : \" + message); \n" +
+                    "        ObjectMapper objectMapper = new ObjectMapper();\n" +
+                    "        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);\n\n" +
                     "           {{upName}} {{inputText}} = null; \n" +
-                    "           try {       \n\n" +
+                    "           try {\n\n" +
+                    "               {{inputText}} = objectMapper.readValue(message, {{upName}}.class);\n" +
+                    "               System.out.println(\" #### type = \" + {{inputText}}.getEventType());\n\n" +
+                    "\n" +
+                    "                  if( {{inputText}}.getEventType() != null && {{inputText}}.getEventType().equals({{upName}}.class.getSimpleName())){\n\n" +
                     "                   // TO-DO :: Implement your Logic here.  \n\n" +
+                    "               }\n" +
                     "           } catch (Exception e) {\n\n" +
                     "           }\n" +
                     "       }\n" +

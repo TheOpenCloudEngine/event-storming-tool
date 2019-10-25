@@ -9,9 +9,6 @@
                 <v-card>
                     <v-card-title>
                         <span class="headline">Code Preview</span>
-                        <v-btn>
-                            <v-icon middle>info</v-icon>
-                        </v-btn>
                     </v-card-title>
                     <v-card-text>
                         <!-- 형태:
@@ -25,7 +22,7 @@
                                    :sm="2"
                                    style="margin-right: 15px; border-right: 1px solid black; max-height: 800px;"
                                    id="scroll-target"
-                                   class="overflow-y-auto"
+                                   class="overflow-auto"
                             >
                                 <v-treeview
                                         :items="codeList"
@@ -35,6 +32,7 @@
                                         open-on-click
                                         return-object
                                         open-all
+                                        style="font-size:15px; line-height: 15px;"
                                 >
                                     <template v-slot:prepend="{ item, open }">
                                         <v-icon v-if="!item.file">

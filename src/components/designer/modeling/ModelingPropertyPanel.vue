@@ -66,10 +66,10 @@
                         <v-layout>
                             <v-col>
                                 <v-radio-group v-model="radioCheck" style="padding-left: 10px;">
-                                    <v-radio label="Event Driven" value="RestAPI"></v-radio>
-                                    <v-radio label="Restful" value="Restful"></v-radio>
+                                    <v-radio label="RestAPI(Pub/Sub)" value="RestAPI"></v-radio>
+                                    <v-radio label="Request & Response(Restful)" value="Restful"></v-radio>
                                 </v-radio-group>
-                                <v-select :disabled="radioCheck != 'Restful'" v-model="restApiType" :items="restApiList" label="Restful"></v-select>
+                                <v-select :disabled="radioCheck != 'Restful'" v-model="restApiType" :items="restApiList" label="Request & Response(Restful)"></v-select>
                             </v-col>
                         </v-layout>
                     </v-card-text>
@@ -157,7 +157,7 @@
 
 
                         <span class="headline"
-                              v-if="value.name == 'event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'">Aggregate</span>
+                              v-if="value.name == 'event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'">Associated Aggregate</span>
                         <v-layout
                                 v-if="value.name == 'event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'"
                                 flat>
