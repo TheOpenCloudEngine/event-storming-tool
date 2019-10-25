@@ -36048,7 +36048,7 @@ OG.graph.Canvas.prototype = {
         var sliderParent;
         var expandBtn;
         var container = me._CONTAINER;
-
+        console.log(container)
         if (!option.slider) {
             return;
         }
@@ -36059,40 +36059,42 @@ OG.graph.Canvas.prototype = {
         slider.css({
             width: option.width + 'px'
         });
-        slider.dialog({
-                title: option.title ? option.title : "Zoom",
-                position: option.position ? option.position : {my: "right top", at: "right top", of: container},
-                height: option.height ? option.height : 300,
-                width: option.width ? option.width : 250,
-                dialogClass: "no-close",
-                appendTo: option.appendTo ? option.appendTo : '#' + container.id,
-                resize: function (event, ui) {
-                    me.updateNavigatior();
-                }
-            }
-        );
+
+
+        // slider.dialog({
+        //         title: option.title ? option.title : "확대/축소",
+        //         position: option.position ? option.position : {my: "right top", at: "right top", of: container},
+        //         height: option.height ? option.height : 500,
+        //         width: option.width ? option.width : 250,
+        //         dialogClass: "no-close",
+        //         appendTo: option.appendTo ? option.appendTo : '#' + container.id,
+        //         resize: function (event, ui) {
+        //             me.updateNavigatior();
+        //         }
+        //     }
+        // );
 
         //클로즈버튼 이벤트를 collape,expand 이벤트로..
-        sliderParent = slider.parent();
-        expandBtn = sliderParent.find('.ui-dialog-titlebar-close');
-        expandBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-circle-minus"></span>');
-        expandBtn.append();
-        expandBtn.unbind('click');
-        expandBtn.bind('click', function () {
-            //접혀있는 상태라면
-            if ($(this).data('collape')) {
-                var height = $(this).data('collape');
-                sliderParent.height(height);
-                slider.show();
-                $(this).data('collape', false);
-            }
-            //접혀있지 않은 상태라면
-            else {
-                $(this).data('collape', sliderParent.height());
-                slider.hide();
-                sliderParent.height(40);
-            }
-        });
+        // sliderParent = slider.parent();
+        // expandBtn = sliderParent.find('.ui-dialog-titlebar-close');
+        // expandBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-circle-minus"></span>');
+        // expandBtn.append();
+        // expandBtn.unbind('click');
+        // expandBtn.bind('click', function () {
+        //     //접혀있는 상태라면
+        //     if ($(this).data('collape')) {
+        //         var height = $(this).data('collape');
+        //         sliderParent.height(height);
+        //         slider.show();
+        //         $(this).data('collape', false);
+        //     }
+        //     //접혀있지 않은 상태라면
+        //     else {
+        //         $(this).data('collape', sliderParent.height());
+        //         slider.hide();
+        //         sliderParent.height(40);
+        //     }
+        // });
 
         sliderBarWrapper = $('<div class="scaleSliderWrapper"></div>');
         sliderBarWrapper.css({
@@ -36115,17 +36117,17 @@ OG.graph.Canvas.prototype = {
             'height': '8px'
         });
 
-        sliderImageWrapper = $('<div class="sliderImageWrapper"></div>');
-        sliderImageWrapper.css({
-            position: 'absolute',
-            top: '50px',
-            bottom: '5px',
-            left: '5px',
-            right: '5px',
-            'overflow-x': 'hidden',
-            'overflow-y': 'auto',
-            'background': 'white'
-        });
+        // sliderImageWrapper = $('<div class="sliderImageWrapper"></div>');
+        // sliderImageWrapper.css({
+        //     position: 'absolute',
+        //     top: '50px',
+        //     bottom: '5px',
+        //     left: '5px',
+        //     right: '5px',
+        //     'overflow-x': 'hidden',
+        //     'overflow-y': 'auto',
+        //     'background': 'black'
+        // });
 
         sliderImage = $('<canvas class="sliderImage"></canvas>');
         sliderImage.css({
@@ -36188,53 +36190,53 @@ OG.graph.Canvas.prototype = {
             me.updateNavigatior();
         });
 
-        sliderImage.click(function (event) {
-            var eX, eY, nX, nY;
-            eX = event.pageX - sliderImage.offset().left;
-            eY = event.pageY - sliderImage.offset().top;
-            nX = eX - (sliderNavigator.width() / 2);
-            nY = eY - (sliderNavigator.height() / 2);
-            if (nX < 0) {
-                nX = 0;
-            }
-            if (nY < 0) {
-                nY = 0;
-            }
-            if ((nX + sliderNavigator.width()) > sliderImage.width()) {
-                nX = sliderImage.width() - sliderNavigator.width();
-            }
-            if ((nY + sliderNavigator.height()) > sliderImage.height()) {
-                nY = sliderImage.height() - sliderNavigator.height();
-            }
-            sliderNavigator.css({
-                "left": nX + 'px',
-                "top": nY + 'px'
-            });
-            onNavigatorMove();
-        });
+        // sliderImage.click(function (event) {
+        //     var eX, eY, nX, nY;
+        //     eX = event.pageX - sliderImage.offset().left;
+        //     eY = event.pageY - sliderImage.offset().top;
+        //     nX = eX - (sliderNavigator.width() / 2);
+        //     nY = eY - (sliderNavigator.height() / 2);
+        //     if (nX < 0) {
+        //         nX = 0;
+        //     }
+        //     if (nY < 0) {
+        //         nY = 0;
+        //     }
+        //     if ((nX + sliderNavigator.width()) > sliderImage.width()) {
+        //         nX = sliderImage.width() - sliderNavigator.width();
+        //     }
+        //     if ((nY + sliderNavigator.height()) > sliderImage.height()) {
+        //         nY = sliderImage.height() - sliderNavigator.height();
+        //     }
+        //     sliderNavigator.css({
+        //         "left": nX + 'px',
+        //         "top": nY + 'px'
+        //     });
+        //     onNavigatorMove();
+        // });
 
-        sliderNavigator.draggable({
-            containment: "#" + container.id + 'sliderImage',
-            scroll: false,
-            start: function (event) {
-                sliderNavigator.data('drag', true);
-            },
-            drag: function (event) {
-                onNavigatorMove();
-            },
-            stop: function (event) {
-                onNavigatorMove();
-                sliderNavigator.data('drag', false);
-            }
-        });
+        // sliderNavigator.draggable({
+        //     containment: "#" + container.id + 'sliderImage',
+        //     scroll: false,
+        //     start: function (event) {
+        //         sliderNavigator.data('drag', true);
+        //     },
+        //     drag: function (event) {
+        //         onNavigatorMove();
+        //     },
+        //     stop: function (event) {
+        //         onNavigatorMove();
+        //         sliderNavigator.data('drag', false);
+        //     }
+        // });
 
         slider.append(sliderBarWrapper);
         sliderBarWrapper.append(sliderText);
         sliderBarWrapper.append(sliderBar);
 
-        slider.append(sliderImageWrapper);
-        sliderImageWrapper.append(sliderImage);
-        sliderImageWrapper.append(sliderNavigator);
+        // slider.append(sliderImageWrapper);
+        // sliderImageWrapper.append(sliderImage);
+        // sliderImageWrapper.append(sliderNavigator);
 
         //캔버스 삭제시 슬라이더도 삭제
         $(container).on("remove", function () {
@@ -36311,7 +36313,7 @@ OG.graph.Canvas.prototype = {
             var sliderBar = slider.find('.scaleSlider');
             var sliderImage = slider.find('.sliderImage');
             var sliderNavigator = slider.find('.sliderNavigator');
-            var sliderImageWrapper = slider.find('.sliderImageWrapper');
+            // var sliderImageWrapper = slider.find('.sliderImageWrapper');
 
 
             //여기서부터는 캔버스의 내용을 슬라이더에 투영시킨다.
@@ -36337,8 +36339,8 @@ OG.graph.Canvas.prototype = {
                 image.src = 'data:image/svg+xml;base64,' + encoded;
                 image.onload = function () {
                     var canvas = document.getElementById(sliderImage.attr('id'));
-                    canvas.width = sliderImageWrapper.width();
-                    canvas.height = sliderImageWrapper.width() * image.height / image.width;
+                    // canvas.width = sliderImageWrapper.width();
+                    // canvas.height = sliderImageWrapper.width() * image.height / image.width;
                     var context = canvas.getContext('2d');
                     try {
                         context.drawImage(image, 0, 0, sliderImageWrapper.width(), sliderImageWrapper.width() * image.height / image.width);
@@ -36353,11 +36355,11 @@ OG.graph.Canvas.prototype = {
                 image.src = 'data:image/svg+xml;utf-8,' + svgData;
                 image.onload = function () {
                     var canvas = document.getElementById(sliderImage.attr('id'));
-                    canvas.width = sliderImageWrapper.width();
-                    canvas.height = sliderImageWrapper.width() * image.height / image.width;
+                    // canvas.width = sliderImageWrapper.width();
+                    // canvas.height = sliderImageWrapper.width() * image.height / image.width;
                     var context = canvas.getContext('2d');
                     try {
-                        context.drawImage(image, 0, 0, sliderImageWrapper.width(), sliderImageWrapper.width() * image.height / image.width);
+                        // context.drawImage(image, 0, 0, sliderImageWrapper.width(), sliderImageWrapper.width() * image.height / image.width);
                         $(image).remove();
                         me.updateNavigatior();
                     } catch (e) {
@@ -36373,10 +36375,10 @@ OG.graph.Canvas.prototype = {
                 var width = me._CONFIG.BACKDOOR.width;
                 var height = me._CONFIG.BACKDOOR.height;
                 var canvasScale = me.getScale();
-                var contextWidth = sliderImageWrapper.width();
+                // var contextWidth = sliderImageWrapper.width();
                 var fixedWidth = (width * (scale / 100) / canvasSize[0] * canvasScale) * contextWidth;
                 var fixedHeight = fixedWidth * height / width;
-                var sliderBackDoorWrapper = sliderImageWrapper.find('.sliderBackDoorWrapper');
+                // var sliderBackDoorWrapper = sliderImageWrapper.find('.sliderBackDoorWrapper');
 
                 if (!sliderBackDoorWrapper || sliderBackDoorWrapper.length < 1) {
                     sliderBackDoorWrapper = $('<div class="sliderBackDoorWrapper"></div>');
@@ -36388,7 +36390,7 @@ OG.graph.Canvas.prototype = {
                         height: '100%'
                     });
 
-                    sliderImageWrapper.data('backdoor', true);
+                    // sliderImageWrapper.data('backdoor', true);
                     sliderBackDoorWrapper.css({
                         'background-image': 'url(' + me._CONFIG.BACKDOOR.url + ')',
                         'background-repeat': 'no-repeat',
