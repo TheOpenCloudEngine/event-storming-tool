@@ -135,9 +135,6 @@
 
         },
         watch: {
-            "value.relationInfo": function (newVal) {
-                // console.log(newVal)
-            },
             "value.connectAggregateName": function (newVal, oldVal) {
                 // console.log(newVal,oldVal)
                 var me = this

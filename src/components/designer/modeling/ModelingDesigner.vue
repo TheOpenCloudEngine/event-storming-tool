@@ -209,6 +209,7 @@
                     'definition': [],
                     'relation': []
                 },
+                UMLValue:{},
                 items: [],
                 enableHistoryAdd: false,
                 undoing: false,
@@ -1129,6 +1130,17 @@
                                             controllerTmp.code = tmpItem.controllerCode;
                                             controllerTmp.file = 'java'
                                             tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(controllerTmp);
+                                        }
+                                    })
+                                }else if(tmpItem._type == 'org.uengine.uml.model.Policy' && tmpItem.relationInfo== "Pub/Sub" ){
+                                    event.name = tmpItem.relationEventInfo.upName + '.java';
+                                    event.type = tmpItem.relationEventInfo._type;
+                                    event.code = tmpItem.relationEventInfo.code;
+                                    event.file = 'java'
+
+                                    tmpList.some(function (tmp, index) {
+                                        if (tmp.name == tmpItem.boundedContext) {
+                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)))
                                         }
                                     })
                                 }

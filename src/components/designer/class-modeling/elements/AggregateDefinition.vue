@@ -233,11 +233,6 @@
                     "{{{code}}}" +
                     "{{/policy}}" +
                     "{{/innerAggregate}}" +
-                    // "    @KafkaListener(topics = \"${eventTopic}\")\n" +
-                    // "    public void {{ name }}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
-                    // "        System.out.println(\"##### listener : \" + message);\n" +
-                    // "\n" +
-                    // "       \n" +
                     "}", me.value)
             },
             setAggregateTemplate() {

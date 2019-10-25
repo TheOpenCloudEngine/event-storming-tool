@@ -38,7 +38,7 @@
 <!--        </text-element>-->
         <text-element
           :sub-width="'100%'"
-          :sub-height="titleH"
+          :sub-height="titleH/2"
           :sub-top="0"
           :sub-left="0"
           :sub-style="{'font-weight': 'bold'}"
@@ -55,7 +55,8 @@
         <text-element v-if="value.fieldDescriptors"
                       v-for="(item, index) in value.fieldDescriptors"
                       :sub-width="'90%'"
-                      :sub-height="titleH"
+                      :sub-height="'30%'"
+                      :sub-top="titleH + (index * itemH)"
                       :sub-style="{'text-anchor': 'start', 'font-size': 15 }"
                       :text="'+'+item.name + ': ' + item.type"
                       >
@@ -98,7 +99,7 @@
         return {
           _type: this.className(),
           name: 'Class',
-          fieldDescriptors: [],
+          fieldDescriptors: [{type: "Long", name: "id", upName: "Id", id: true}],
           elementView: {
             '_type': 'org.uengine.modeling.ElementView',
             'id': elementId,
@@ -144,7 +145,11 @@
         this.value.fieldDescriptors=newVal
       },
 
-
+    },
+    computed:{
+      "value.fieldDescriptors":function () {
+        
+      }
     },
     mounted: function () {
 

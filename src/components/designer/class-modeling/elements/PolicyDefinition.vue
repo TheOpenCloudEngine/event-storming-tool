@@ -101,9 +101,11 @@
                     selected: false,
                     inputText: '',
                     restApi: '',
+                    code:'',
                     editing: false,
                     connectAggregateName: '',
                     relationInfo: '',
+                    relationEventInfo:[],
                 }
             }
         },
@@ -122,7 +124,7 @@
         watch: {
             "value.relationInfo": function (newVal) {
                 console.log(newVal)
-                if (newVal == 'Pub' || newVal == 'Sub') {
+                if (newVal == 'Pub/Sub') {
                     this.value.code = this.setPolicyKafkaTemplate(this.value)
                 } else {
                     this.value.code = this.setPolicyRestTemplate(this.value)
@@ -152,10 +154,18 @@
         methods: {
             setPolicyKafkaTemplate(definition) {
                 return Mustache.render(
-                    "    @KafkaListener(topics = \"${eventTopic}\", groupId = \"{{inputText}}\") \n " +
-                    "    public void {{inputText}}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
+                    "     @KafkaListener(topics = \"${eventTopic}\", groupId = \"{{inputText}}\") \n " +
+                    "{{#relationEventInfo}}" +
+                    "     public void on{{upName}}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
                     "        System.out.println(\"##### listener : \" + message); \n" +
-                    "    }\n\n", definition)
+                    "           {{upName}} {{inputText}} = null; \n" +
+                    "           try {       \n\n" +
+                    "                   // TO-DO :: Implement your Logic here.  \n\n" +
+                    "           } catch (Exception e) {\n\n" +
+                    "           }\n" +
+                    "       }\n" +
+                    "{{/relationEventInfo}}\n" +
+                    "\n\n", definition)
             },
             setPolicyRestTemplate(name, definition) {
                 return Mustache.render(

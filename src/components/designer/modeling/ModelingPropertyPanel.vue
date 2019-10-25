@@ -52,7 +52,7 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                        <v-list-item-title>{{ titleName }}</v-list-item-title>
+                        <v-list-item-title class="headline">{{ titleName }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
@@ -60,32 +60,27 @@
             <!--  해당 판넬의 내용  -->
             <v-list class="pt-0" dense flat>
                 <v-divider></v-divider>
-
-                <!-- 선연결 -->
-                <v-card v-if=" value.name == 'Relation' && value.sourceElement._type == 'org.uengine.uml.model.Domain' " flat>
+                <v-card v-if="value.name == 'Relation' && value.sourceElement._type == 'org.uengine.uml.model.Domain'">
                     <v-card-text>
-                        <v-col>
-                            <div> {{value.relationType}}</div>
-
-                            <v-row justify="center"
-                                   class="mb-6"
-                                   no-gutters>
-                                <v-btn class="pa-2" block @click="restApiTypeSet(value,'Pub')"
-                                       v-if="value.sourceElement._type == 'org.uengine.uml.model.Domain'"> PUB
-                                </v-btn>
-                                <v-btn class="pa-2" block @click="restApiTypeSet(value,'Get')"> GET</v-btn>
-                                <v-btn class="pa-2" block @click="restApiTypeSet(value,'Post')"> POST</v-btn>
-                                <v-btn class="pa-2" block @click="restApiTypeSet(value,'Put')"> PUT</v-btn>
-                                <v-btn class="pa-2" block @click="restApiTypeSet(value,'Delete')"> DELETE</v-btn>
-                            </v-row>
-                        </v-col>
+                        <span class="headline">Type</span>
+                        <v-layout>
+                            <v-col>
+                                <v-radio-group v-model="radioCheck" style="padding-left: 10px;">
+                                    <v-radio label="Event Driven" value="RestAPI"></v-radio>
+                                    <v-radio label="Restful" value="Restful"></v-radio>
+                                </v-radio-group>
+                                <v-select :disabled="radioCheck != 'Restful'" v-model="restApiType" :items="restApiList" label="Restful"></v-select>
+                            </v-col>
+                        </v-layout>
                     </v-card-text>
                 </v-card>
 
                 <v-card outlined v-else>
                     <v-card-text>
-                        <span class="headline" v-if="titleName">내용 입력 </span>
-                        <v-textarea name="input-7-1" outline :label="'Input Text'" auto-grow v-model="input"></v-textarea>
+                        <span class="headline" v-if="titleName">{{titleName}} Name</span>
+                        <v-textarea name="input-7-1" outline :label="'Input Text'" auto-grow
+                                    v-model="input"></v-textarea>
+
                         <v-card outlined v-if="usedTranslate">
                             <v-card-text @click="changeTranslate()">
                                 추천 단어 : {{ translateText }}
@@ -95,27 +90,27 @@
                             </v-card-text>
                         </v-card>
 
+                        <span class="headline" v-if="value.name == 'event'">Called Time</span>
+                        <v-layout v-if="value.name == 'event'" flat>
+                            <v-radio-group v-model="publishType" style="padding-left: 10px;">
+                                <v-row>
+                                    <v-col>
+                                        <v-radio label="Pre/Persist" value="@PrePersist"></v-radio>
+                                        <v-radio label="Pre/Update" value="@PreUpdate"></v-radio>
+                                        <v-radio label="Pre/Delete" value="@PreDelete"></v-radio>
+                                    </v-col>
+                                    <v-col>
+                                        <v-radio label="Post/Persist" value="@PostPersist"></v-radio>
+                                        <v-radio label="Post/Update" value="@PostUpdate"></v-radio>
+                                        <v-radio label="Post/Delete" value="@PostDelete"></v-radio>
+                                    </v-col>
+                                </v-row>
+                            </v-radio-group>
+                        </v-layout>
+
+                        <span class="headline" v-if="value.name == 'event' || value.name == 'Aggregate'">Attribute Definition</span>
                         <v-layout v-if="value.name == 'event' || value.name == 'Aggregate'" flat>
                             <v-col>
-
-                                <v-col v-if="value.name == 'event'">
-                                    <v-radio-group v-model="publishType">
-                                        <div style="font-size: 17px">Called Time</div>
-                                        <v-row>
-                                            <v-col>
-                                                <v-radio label="Pre/Persist" value="@PrePersist"></v-radio>
-                                                <v-radio label="Pre/Update" value="@PreUpdate"></v-radio>
-                                                <v-radio label="Pre/Delete" value="@PreDelete"></v-radio>
-                                            </v-col>
-                                            <v-col>
-                                                <v-radio label="Post/Persist" value="@PostPersist"></v-radio>
-                                                <v-radio label="Post/Update" value="@PostUpdate"></v-radio>
-                                                <v-radio label="Post/Delete" value="@PostDelete"></v-radio>
-                                            </v-col>
-                                        </v-row>
-                                    </v-radio-group>
-                                </v-col>
-
                                 <v-data-table
                                         :headers="headers"
                                         :items="entity"
@@ -139,7 +134,7 @@
                                 <v-row justify="center">
                                     <v-flex xs4>
                                         <v-select v-model="entityType" :items="entityTypeList" label="Standard"
-                                                  style="margin-left: 10px; margin-right: 15px;"></v-select>
+                                                  style="margin-right: 15px;"></v-select>
                                     </v-flex>
                                     <v-flex xs6>
                                         <v-text-field v-model="entityName" label="Name"
@@ -147,24 +142,26 @@
                                     </v-flex>
                                 </v-row>
                                 <v-row justify="end">
-                                    <v-btn rounded color="primary" @click="entityADD(entityType,entityName);" dark>Entity
-                                        ADD
+                                    <v-btn rounded color="primary" @click="entityADD(entityType,entityName);" dark>
+                                        Entity ADD
                                     </v-btn>
                                 </v-row>
                             </v-col>
                         </v-layout>
 
-                        <v-layout v-if="value.name == 'Command'" >
-                            <v-autocomplete  v-model="restApiType" :items="restApiList"
-                                             label="REST API TYPE" persistent-hint
-                                             prepend-icon="mdi-city">
+                        <v-layout v-if="value.name == 'Command'">
+                            <v-autocomplete v-model="restApiType" :items="restApiList"
+                                            label="REST API TYPE" persistent-hint>
                             </v-autocomplete>
                         </v-layout>
 
+
+                        <span class="headline"
+                              v-if="value.name == 'event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'">Aggregate</span>
                         <v-layout
-                                v-if="value.name == 'event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'" flat>
+                                v-if="value.name == 'event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'"
+                                flat>
                             <v-col>
-                                <span class="headline" v-if="titleName">Aggregate 선택</span>
                                 <v-autocomplete
                                         style="margin-left: 20px; margin-right: 20px;" v-model="aggregate"
                                         :items="aggregateList" label="Select Aggregate" persistent-hint>
@@ -204,7 +201,7 @@
             restApi: String,
             innerAggregate: Object,
             entity: Array,
-            fieldDescriptors:Array,
+            fieldDescriptors: Array,
         },
         computed: {
             aggregateList: function () {
@@ -276,6 +273,7 @@
         },
         data: function () {
             return {
+                radioCheck: '',
                 navigationDrawer: false,
                 _item: this.value,
                 preventWatch: false,
@@ -300,11 +298,15 @@
                 entityType: '',
                 entityName: '',
                 aggregate: '',
-                headers: [{text: 'type', value: 'type',align:'center'}, {text: 'name', value: 'name',align:'center'}, {
+                headers: [{text: 'type', value: 'type', align: 'center'}, {
+                    text: 'name',
+                    value: 'name',
+                    align: 'center'
+                }, {
                     text: 'Actions',
                     value: 'action',
                     sortable: false,
-                    align:'center'
+                    align: 'center'
                 },],
                 translateText: '',
                 usedTranslate: false,
@@ -316,10 +318,16 @@
 
         },
         mounted: function () {
-
         },
         watch: {
-            publishType:function(newVal){
+            radioCheck: function (newVal) {
+                var me = this;
+                 if(newVal == 'RestAPI'){
+                    me.restApiTypeSet(me.value,'Pub/Sub')
+                }
+            },
+
+            publishType: function (newVal) {
                 console.log(newVal)
                 this.$emit('update:publishType', newVal)
             },
@@ -386,7 +394,8 @@
                 }
             },
             restApiType: function (newVal) {
-                // console.log(newVal);
+                var me = this
+                me.restApiTypeSet(me.value,newVal)
                 this.$emit('update:restApi', newVal)
             },
 
@@ -507,11 +516,14 @@
                 })
             },
             restApiTypeSet(val, set) {
-                if (val.sourceElement._type == 'org.uengine.uml.model.Domain' && set == 'Publish') {
-                    val.sourceElement.relationInfo = 'Publish'
-                    val.targetElement.relationInfo = 'Subscribe'
+                if (val.sourceElement._type == 'org.uengine.uml.model.Domain' && set == 'Pub/Sub') {
+                    val.sourceElement.relationInfo = set
+                    val.targetElement.relationInfo = set
+                    val.targetElement.relationEventInfo = val.sourceElement;
                 } else {
                     val.sourceElement.relationInfo = set;
+                    val.targetElement.relationInfo = set
+                    val.targetElement.relationEventInfo = val.sourceElement;
                 }
                 val.relationType = set;
             },
