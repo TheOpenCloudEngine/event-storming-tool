@@ -56,7 +56,6 @@
                 :aggregateList.sync="aggregateList"
                 :aggregateText.sync="value.aggregateText"
                 :connectAggregateName.sync="value.connectAggregateName"
-                :restApi.sync="value.restApi"
                 v-model="value"
         >
         </modeling-property-panel>

@@ -144,10 +144,6 @@
             },
             "value.aggregateEntity": function () {
                 var me = this
-                console.log(this.value)
-                // console.log(this.code)
-                // this.code = this.codeGenerate;
-
                 this.value.aggregateCode = me.setAggregateTemplate()
             },
             "value.innerAggregate": {
@@ -245,6 +241,8 @@
                     "import org.apache.kafka.clients.producer.ProducerRecord;\n" +
                     "import org.springframework.core.env.Environment;\n" +
                     "import org.springframework.kafka.core.KafkaTemplate;\n" +
+                    "import org.springframework.web.client.RestTemplate;\n" +
+                    "import org.springframework.beans.BeanUtils;\n" +
                     "\n" +
                     "import javax.persistence.*;\n" +
                     "\n" +

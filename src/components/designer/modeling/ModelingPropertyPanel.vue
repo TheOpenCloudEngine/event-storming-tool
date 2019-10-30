@@ -34,7 +34,7 @@
                 </v-layout>
 
                 <v-layout justify-end wrap>
-                    <v-btn rounded color="primary" @click="UMLEntityADD(entityType,entityName)" dark>Attribute ADD
+                    <v-btn rounded color="primary" @click="UMLEntityADD(entityType,entityName)" dark>ADD Attribute
                     </v-btn>
                 </v-layout>
             </v-list>
@@ -66,10 +66,11 @@
                         <v-layout>
                             <v-col>
                                 <v-radio-group v-model="radioCheck" style="padding-left: 10px;">
-                                    <v-radio label="RestAPI(Pub/Sub)" value="RestAPI"></v-radio>
+                                    <v-radio label="Event-Driven(Pub/Sub)" value="RestAPI"></v-radio>
                                     <v-radio label="Request & Response(Restful)" value="Restful"></v-radio>
                                 </v-radio-group>
-                                <v-select :disabled="radioCheck != 'Restful'" v-model="restApiType" :items="restApiList" label="Request & Response(Restful)"></v-select>
+                                <v-select :disabled="radioCheck != 'Restful'" v-model="restApiType" :items="restApiList"
+                                          label="Request & Response(Restful)"></v-select>
                             </v-col>
                         </v-layout>
                     </v-card-text>
@@ -90,8 +91,8 @@
                             </v-card-text>
                         </v-card>
 
-                        <span class="headline" v-if="value.name == 'event'">Called Time</span>
-                        <v-layout v-if="value.name == 'event'" flat>
+                        <span class="headline" v-if="value.name == 'Event'">Called Time</span>
+                        <v-layout v-if="value.name == 'Event'" flat>
                             <v-radio-group v-model="publishType" style="padding-left: 10px;">
                                 <v-row>
                                     <v-col>
@@ -108,8 +109,8 @@
                             </v-radio-group>
                         </v-layout>
 
-                        <span class="headline" v-if="value.name == 'event' || value.name == 'Aggregate'">Attribute Definition</span>
-                        <v-layout v-if="value.name == 'event' || value.name == 'Aggregate'" flat>
+                        <span class="headline" v-if="value.name == 'Event' || value.name == 'Aggregate'">Attribute Definition</span>
+                        <v-layout v-if="value.name == 'Event' || value.name == 'Aggregate'" flat>
                             <v-col>
                                 <v-data-table
                                         :headers="headers"
@@ -133,7 +134,7 @@
 
                                 <v-row justify="center">
                                     <v-flex xs4>
-                                        <v-select v-model="entityType" :items="entityTypeList" label="Standard"
+                                        <v-select v-model="entityType" :items="entityTypeList" label="Type"
                                                   style="margin-right: 15px;"></v-select>
                                     </v-flex>
                                     <v-flex xs6>
@@ -143,7 +144,7 @@
                                 </v-row>
                                 <v-row justify="end">
                                     <v-btn rounded color="primary" @click="entityADD(entityType,entityName);" dark>
-                                        Entity ADD
+                                        ADD ATTRIBUTE
                                     </v-btn>
                                 </v-row>
                             </v-col>
@@ -157,9 +158,9 @@
 
 
                         <span class="headline"
-                              v-if="value.name == 'event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'">Associated Aggregate</span>
+                              v-if="value.name == 'Event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'">Associated Aggregate</span>
                         <v-layout
-                                v-if="value.name == 'event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'"
+                                v-if="value.name == 'Event' || value.name == 'Policy' || value.name == 'Command' || value.name == 'external'"
                                 flat>
                             <v-col>
                                 <v-autocomplete
@@ -198,7 +199,6 @@
             connectAggregateEntity: Array,
             otherList: Array,
             img: String,
-            restApi: String,
             innerAggregate: Object,
             entity: Array,
             fieldDescriptors: Array,
@@ -292,7 +292,7 @@
                 connectedList: [],
                 connectedListName: {},
                 componentKey: 0,
-                restApiList: ['GET', 'POST', 'PUT', 'DELETE'],
+                restApiList: ['GET', 'POST', 'PATCH', 'DELETE'],
                 restApiType: '',
                 entityTypeList: ['int', 'String', 'float', 'double', 'long'],
                 entityType: '',
@@ -320,11 +320,25 @@
         mounted: function () {
         },
         watch: {
-            radioCheck: function (newVal) {
-                var me = this;
-                 if(newVal == 'RestAPI'){
-                    me.restApiTypeSet(me.value,'Pub/Sub')
+            radioCheck:function(newVal){
+                var me = this
+                if(newVal == 'RestAPI'){
+                    me.restApiTypeSet(me.value, 'Pub/Sub')
                 }
+            },
+            restApiType: function (newVal) {
+                var me = this
+                console.log(me.value, newVal)
+                if (me.value._type == 'org.uengine.uml.model.Command') {
+                    me.value.restApi = newVal
+                } else if (me.value._type == 'org.uengine.uml.model.relation') {
+                    me.restApiTypeSet(me.value,newVal)
+                    // if(me.radioCheck == 'RestAPI'){
+                    //     me.restApiTypeSet(me.value, 'Pub/Sub')
+                    // }
+                }
+                // me.restApiTypeSet(me.value,newVal)
+                // this.$emit('update:restApi', newVal)
             },
 
             publishType: function (newVal) {
@@ -341,7 +355,7 @@
                 var me = this
 
                 me.translateText = '';
-                if (this.value.name == 'event') {
+                if (this.value.name == 'Event') {
                     googleTranslate.detectLanguage(newVal, function (err, detection) {
                         if (detection.language == 'ko') {
                             googleTranslate.translate(newVal, 'en', function (err, translation) {
@@ -376,7 +390,7 @@
                 } else if (this.titleName == "Boundary Context") {
                     this.$emit('update:inputText', newVal)
                 } else {
-                    if (this.value.name == 'event') {
+                    if (this.value.name == 'Event') {
                         if (this.selectAggregate.length > 0) {
                             this.$emit('update:inputText', newVal)
                             this.$emit('update:aggregateText', '\n \n \n Aggregate:\n' + this.selectAggregate)
@@ -391,17 +405,6 @@
                             this.$emit('update:inputText', newVal)
                         }
                     }
-                }
-            },
-            restApiType: function (newVal) {
-                var me = this
-                me.restApiTypeSet(me.value,newVal)
-                this.$emit('update:restApi', newVal)
-            },
-
-            restApi: function (newVal) {
-                if (newVal != this.restApiType) {
-                    this.restApiType = newVal
                 }
             },
             selectAggregate: function (newVal) {
@@ -516,15 +519,10 @@
                 })
             },
             restApiTypeSet(val, set) {
-                if (val.sourceElement._type == 'org.uengine.uml.model.Domain' && set == 'Pub/Sub') {
-                    val.sourceElement.relationInfo = set
-                    val.targetElement.relationInfo = set
-                    val.targetElement.relationEventInfo = val.sourceElement;
-                } else {
-                    val.sourceElement.relationInfo = set;
-                    val.targetElement.relationInfo = set
-                    val.targetElement.relationEventInfo = val.sourceElement;
-                }
+                val.sourceElement.relationInfo = set
+                val.targetElement.relationInfo = set
+                val.targetElement.relationEventInfo = val.sourceElement;
+
                 val.relationType = set;
             },
             changeTranslate() {

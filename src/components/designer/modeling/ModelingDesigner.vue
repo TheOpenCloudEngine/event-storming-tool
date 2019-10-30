@@ -1,7 +1,7 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="canvas-panel">
         <v-layout right>
-            <modal name="uml-modal"  :height='"80%"' :width="'80%'">
+            <modal name="uml-modal" :height='"80%"' :width="'80%'">
                 <class-modeler></class-modeler>
             </modal>
 
@@ -53,7 +53,7 @@
                                 <!--console.log(str);-->
                                 <!--</highlight-code>-->
 
-                                    <code-viewer v-model="definitionSet" ></code-viewer>
+                                <code-viewer v-model="definitionSet"></code-viewer>
                             </v-col>
                         </v-row>
                     </v-card-text>
@@ -109,7 +109,8 @@
                 <!--                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">BUILD-->
                 <!--                </v-btn>-->
                 <v-btn color="info" v-on:click.native="codeModalShow"
-                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px; font-variant-caps: normal " >code Preview
+                       style="margin-top: 16px; margin-left: 5px; margin-right: 10px; font-variant-caps: normal ">code
+                    Preview
                 </v-btn>
                 <v-btn color="info" v-on:click.native="generateZip"
                        style="margin-top: 16px; margin-left: 5px; margin-right: 10px;">Download Archive
@@ -207,7 +208,7 @@
                     'definition': [],
                     'relation': []
                 },
-                UMLValue:{},
+                UMLValue: {},
                 items: [],
                 enableHistoryAdd: false,
                 undoing: false,
@@ -218,13 +219,18 @@
                 noPushUndo: false,
                 redoArray: [],
                 undoArray: [],
+                undoRedoArray: [],
+                undoRedoIndex: 0,
+                currentIndex: 0,
                 imageBase: 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/symbol/',
                 userId: '',
+                //스낵바 옵션
                 snackbar: false,
                 color: 'error',
                 mode: 'multi-line',
                 timeout: 6000,
                 text: '수정중입니다.',
+                //
                 pusher: {},
                 connectCount: 0,
                 connectInfo: [],
@@ -271,7 +277,7 @@
                 get: function () {
                     var me = this
                     let tmpList = JSON.parse(JSON.stringify(me.items));
-                    // console.log(me.items)
+                    console.log(me.items)
 
                     me.value.definition.forEach(function (item) {
                         var event = {
@@ -280,26 +286,9 @@
                             type: '',
                             code: ''
                         }
-                        // console.log(item)
-                        if (item._type == 'org.uengine.uml.model.bounded') {
-                            // console.log(item)
 
+                        if (item._type == 'org.uengine.uml.model.bounded') {
                             var boundedItems = [
-                                {
-                                    name: '.mvn',
-                                    children: [
-                                        {
-                                            name: 'wrapper',
-                                            children: [
-                                                {
-                                                    name: 'maven-wrapper.properties',
-                                                    file: 'txt',
-                                                    code: "distributionUrl=https://repo1.maven.org/maven2/org/apache/maven/apache-maven/3.3.9/apache-maven-3.3.9-bin.zip"
-                                                }
-                                            ],
-                                        },
-                                    ],
-                                },
                                 {
                                     name: 'src',
                                     children: [
@@ -1073,19 +1062,19 @@
                                         "\t</build>\n" +
                                         "\n" +
                                         "</project>"
-                                },
+                                }
                             ]
+
+
                             var boundedFolder = {
                                 name: item.inputText,
                                 children: boundedItems
                             }
 
                             tmpList.push(boundedFolder)
-                            console.log(item)
 
                             item.dataList.forEach(function (tmpItem) {
                                 if (tmpItem._type == 'org.uengine.uml.model.Domain' && tmpItem.inputText.length > 0) {
-                                    console.log(tmpItem.upName)
 
                                     event.name = tmpItem.upName + '.java';
                                     event.type = tmpItem._type;
@@ -1094,7 +1083,7 @@
 
                                     tmpList.some(function (tmp, index) {
                                         if (tmp.name == tmpItem.boundedContext) {
-                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)))
+                                            tmp.children[0].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)))
                                         }
                                     })
                                     // [1].children[0].children[1].children[0].children[0].children[0].children.push(event)
@@ -1106,39 +1095,42 @@
                                             repositoryTmp.type = tmpItem._type;
                                             repositoryTmp.code = tmpItem.repositoryCode;
                                             repositoryTmp.file = 'java'
-                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(repositoryTmp);
+                                            tmp.children[0].children[0].children[1].children[0].children[0].children[0].children.push(repositoryTmp);
 
                                             var aggregateTmp = JSON.parse(JSON.stringify(event));
                                             aggregateTmp.name = tmpItem.upName + '.java';
                                             aggregateTmp.type = tmpItem._type;
                                             aggregateTmp.code = tmpItem.aggregateCode;
                                             aggregateTmp.file = 'java'
-                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(aggregateTmp);
+                                            tmp.children[0].children[0].children[1].children[0].children[0].children[0].children.push(aggregateTmp);
 
                                             var eventLisnterTmp = JSON.parse(JSON.stringify(event));
                                             eventLisnterTmp.name = tmpItem.upName + 'EventListener.java';
                                             eventLisnterTmp.type = tmpItem._type;
                                             eventLisnterTmp.code = tmpItem.eventListenerCode;
                                             eventLisnterTmp.file = 'java'
-                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(eventLisnterTmp);
+                                            tmp.children[0].children[0].children[1].children[0].children[0].children[0].children.push(eventLisnterTmp);
 
                                             var controllerTmp = JSON.parse(JSON.stringify(event));
                                             controllerTmp.name = tmpItem.upName + 'Controller.java';
                                             controllerTmp.type = tmpItem._type;
                                             controllerTmp.code = tmpItem.controllerCode;
                                             controllerTmp.file = 'java'
-                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(controllerTmp);
+                                            tmp.children[0].children[0].children[1].children[0].children[0].children[0].children.push(controllerTmp);
                                         }
                                     })
-                                }else if(tmpItem._type == 'org.uengine.uml.model.Policy' && tmpItem.relationInfo== "Pub/Sub" ){
+                                } else if (tmpItem._type == 'org.uengine.uml.model.Policy' && tmpItem.relationInfo == 'Pub/Sub') {
                                     event.name = tmpItem.relationEventInfo.upName + '.java';
                                     event.type = tmpItem.relationEventInfo._type;
                                     event.code = tmpItem.relationEventInfo.code;
                                     event.file = 'java'
 
+
+                                    console.log(tmpList)
+                                    console.log(tmpItem)
                                     tmpList.some(function (tmp, index) {
                                         if (tmp.name == tmpItem.boundedContext) {
-                                            tmp.children[1].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)))
+                                            tmp.children[0].children[0].children[1].children[0].children[0].children[0].children.push(JSON.parse(JSON.stringify(event)))
                                         }
                                     })
                                 }
@@ -1161,6 +1153,11 @@
                 me.$nextTick(function () {
                     me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                     me.redoArray = [];
+
+                    // me.undoRedoArray.push(JSON.parse(JSON.stringify(me.value)));
+                    // me.undoRedoIndex = me.undoRedoIndex + 1
+                    // me.currentIndex = me.undoRedoIndex
+
                     me.value.definition.forEach(function (tmp) {
                         if (tmp.selected == true) {
                         }
@@ -1243,10 +1240,17 @@
 
                 // this.canvas.updateSlider();
                 //timer end
+
                 me.undoArray.push({
                     'definition': [],
                     'relation': []
                 })
+
+                // me.undoRedoArray.push({
+                //     'definition': [],
+                //     'relation': []
+                // })
+
                 this.$refs.opengraph.printTimer(startTime, new Date().getTime());
 
                 $(document).keydown((evt) => {
@@ -1258,9 +1262,11 @@
                         this.deleteActivity();
                     } else if (evt.keyCode == 90 && (evt.metaKey || evt.ctrlKey)) {
                         if (evt.shiftKey) {
-                            me.redo()
+                            me.redo();
+                            // me.undoRedo('redo');
                         } else {
                             me.undo();
+                            // me.undoRedo('undo');
                         }
                     }
                 });
@@ -1271,13 +1277,7 @@
             //     console.log("WIDTH",va.target.innerWidth)
             // })
         },
-        watch: {
-            open(newVal) {
-                // console.log(newVal)
-
-            }
-        },
-
+        watch: {},
         methods: {
             inputValue(name) {
                 // console.log(name)
@@ -1365,10 +1365,6 @@
                     }
                 })
             },
-            // makeFiles(List){
-            //
-            //
-            // },
             codeModalhide() {
                 this.$modal.hide('code-modal');
             },
@@ -1637,6 +1633,9 @@
                     s4() + '-' + s4() + s4() + s4();
             },
             onConnectShape: function (edge, from, to) {
+                console.log(edge)
+                console.log(from)
+                console.log(to)
                 var me = this;
                 // console.log(edge)
                 //존재하는 릴레이션인 경우 (뷰 컴포넌트), 데이터 매핑에 의해 자동으로 from, to 가 변경되어있기 때문에 따로 로직은 필요없음.
@@ -1681,6 +1680,33 @@
                     // this.syncOthers();
                 }
             },
+            undoRedo: function (cmd) {
+                var me = this
+                if (!me.drawer) {
+                    if (cmd == 'redo') {
+                        console.log('redo')
+                        if (me.currentIndex < me.undoRedoArray.length - 1) {
+                            me.currentIndex = me.currentIndex + 1
+                            me.value = JSON.parse(JSON.stringify(me.undoRedoArray[me.currentIndex]));
+                        } else {
+                            me.text = "Last element"
+                            me.snackbar = true
+                            me.timeout = 500
+                        }
+                    } else if (cmd == 'undo') {
+                        console.log('undo')
+                        if (me.currentIndex > 0) {
+                            me.currentIndex = me.currentIndex - 1
+                            me.value = JSON.parse(JSON.stringify(me.undoRedoArray[me.currentIndex]));
+                        } else {
+                            me.text = "Last Element"
+                            me.snackbar = true
+                            me.timeout = 500
+                        }
+                    }
+                }
+
+            },
             redo: function () {
                 var me = this
                 if (!me.drawer) {
@@ -1719,7 +1745,6 @@
                 this.enableHistoryAdd = true;
                 var me = this;
                 var additionalData = {};
-                console.log(originalData)
                 var vueComponent = me.getComponentByName(componentInfo.component);
                 // console.log(componentInfo.component , this.relationVueComponentName)
                 var element;
@@ -1747,13 +1772,22 @@
                         'relation': []
                     }
                 }
+
                 if (element._type == 'org.uengine.uml.model.relation') {
                     me.value['relation'].push(element);
                 } else {
                     me.value['definition'].push(element);
                 }
+
                 me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
                 me.redoArray = [];
+
+
+                // me.undoRedoArray.push(JSON.parse(JSON.stringify(me.value)));
+                // me.undoRedoIndex = me.undoRedoIndex + 1
+                // me.currentIndex = me.undoRedoIndex
+
+                //pusher
                 // this.syncOthers(element);
             },
 

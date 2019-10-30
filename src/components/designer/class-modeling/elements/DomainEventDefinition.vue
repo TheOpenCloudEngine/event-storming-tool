@@ -93,7 +93,7 @@
                 return {
                     upName: '',
                     _type: this.className(),
-                    name: 'event',
+                    name: 'Event',
                     elementView: {
                         '_type': 'org.uengine.uml.model.Domain',
                         'id': elementId,
@@ -136,10 +136,11 @@
         },
         watch: {
             "value.connectAggregateName": function (newVal, oldVal) {
+                console.log('connect Aggregate')
                 // console.log(newVal,oldVal)
                 var me = this
                 var designer = this.getComponent('modeling-designer')
-                console.log(me.value.inputText)
+
                 designer.value.definition.forEach(function (temp) {
                     console.log(temp.inputText, newVal)
                     if(temp._type == "org.uengine.uml.model.Aggregate" && temp.inputText == oldVal) {
@@ -162,7 +163,6 @@
             },
             "value.entity": function () {
                 var me = this
-                console.log(this.value)
                 // console.log(this.code)
                 // this.code = this.codeGenerate;
                 this.value.code = this.setEventTemplate()
@@ -189,6 +189,8 @@
                     "\n" +
                     "        {{upName}} {{inputText}} = new {{upName}}();\n" +
                     "        try {\n" +
+                    "                BeanUtils.copyProperties(this, {{inputText}});\n" +
+                    "                json = objectMapper.writeValueAsString({{inputText}});" +
                     "\n" +
                     "        } catch (JsonProcessingException e) {\n" +
                     "            throw new RuntimeException(\"JSON format exception\", e);\n" +

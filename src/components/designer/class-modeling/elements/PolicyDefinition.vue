@@ -106,6 +106,7 @@
                     connectAggregateName: '',
                     relationInfo: '',
                     relationEventInfo:[],
+                    boundedContext: '',
                 }
             }
         },
@@ -123,7 +124,6 @@
         },
         watch: {
             "value.relationInfo": function (newVal) {
-                console.log(newVal)
                 if (newVal == 'Pub/Sub') {
                     this.value.code = this.setPolicyKafkaTemplate(this.value)
                 } else {
