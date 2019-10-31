@@ -154,7 +154,7 @@
                         </v-layout>
                         <v-layout v-else-if="value.name == 'Aggregate'">
                             <v-divider dark style="margin-top: 10px; margin-bottom: 10px;"></v-divider>
-                            <v-btn block color="info" rounded @click="umlDiagramOpen()"> UML Diagram Editor</v-btn>
+                            <v-btn block color="info" rounded @click="umlDiagramOpen()"> Edit Domain Model by UML</v-btn>
                         </v-layout>
 
                         <span class="headline" v-if="value.name == 'Event'">Trigger</span>
@@ -162,14 +162,14 @@
                             <v-radio-group v-model="publishType" style="padding-left: 10px;">
                                 <v-row>
                                     <v-col>
-                                        <v-radio label="Pre/Persist" value="@PrePersist"></v-radio>
-                                        <v-radio label="Pre/Update" value="@PreUpdate"></v-radio>
-                                        <v-radio label="Pre/Delete" value="@PreDelete"></v-radio>
+                                        <v-radio label="Pre Persist" value="@PrePersist"></v-radio>
+                                        <v-radio label="Pre Update" value="@PreUpdate"></v-radio>
+                                        <v-radio label="Pre Delete" value="@PreDelete"></v-radio>
                                     </v-col>
                                     <v-col>
-                                        <v-radio label="Post/Persist" value="@PostPersist"></v-radio>
-                                        <v-radio label="Post/Update" value="@PostUpdate"></v-radio>
-                                        <v-radio label="Post/Delete" value="@PostDelete"></v-radio>
+                                        <v-radio label="Post Persist" value="@PostPersist"></v-radio>
+                                        <v-radio label="Post Update" value="@PostUpdate"></v-radio>
+                                        <v-radio label="Post Delete" value="@PostDelete"></v-radio>
                                     </v-col>
                                 </v-row>
                             </v-radio-group>
