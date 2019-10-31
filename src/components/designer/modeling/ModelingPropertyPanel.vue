@@ -91,25 +91,8 @@
                             </v-card-text>
                         </v-card>
 
-                        <span class="headline" v-if="value.name == 'Event'">Called Time</span>
-                        <v-layout v-if="value.name == 'Event'" flat>
-                            <v-radio-group v-model="publishType" style="padding-left: 10px;">
-                                <v-row>
-                                    <v-col>
-                                        <v-radio label="Pre/Persist" value="@PrePersist"></v-radio>
-                                        <v-radio label="Pre/Update" value="@PreUpdate"></v-radio>
-                                        <v-radio label="Pre/Delete" value="@PreDelete"></v-radio>
-                                    </v-col>
-                                    <v-col>
-                                        <v-radio label="Post/Persist" value="@PostPersist"></v-radio>
-                                        <v-radio label="Post/Update" value="@PostUpdate"></v-radio>
-                                        <v-radio label="Post/Delete" value="@PostDelete"></v-radio>
-                                    </v-col>
-                                </v-row>
-                            </v-radio-group>
-                        </v-layout>
 
-                        <span class="headline" v-if="value.name == 'Event' || value.name == 'Aggregate'">Attribute Definition</span>
+                        <span class="headline" v-if="value.name == 'Event' || value.name == 'Aggregate'">Attributes</span>
                         <v-layout v-if="value.name == 'Event' || value.name == 'Aggregate'" flat>
                             <v-col>
                                 <v-data-table
@@ -173,6 +156,25 @@
                             <v-divider dark style="margin-top: 10px; margin-bottom: 10px;"></v-divider>
                             <v-btn block color="info" rounded @click="umlDiagramOpen()"> UML Diagram Editor</v-btn>
                         </v-layout>
+
+                        <span class="headline" v-if="value.name == 'Event'">Trigger</span>
+                        <v-layout v-if="value.name == 'Event'" flat>
+                            <v-radio-group v-model="publishType" style="padding-left: 10px;">
+                                <v-row>
+                                    <v-col>
+                                        <v-radio label="Pre/Persist" value="@PrePersist"></v-radio>
+                                        <v-radio label="Pre/Update" value="@PreUpdate"></v-radio>
+                                        <v-radio label="Pre/Delete" value="@PreDelete"></v-radio>
+                                    </v-col>
+                                    <v-col>
+                                        <v-radio label="Post/Persist" value="@PostPersist"></v-radio>
+                                        <v-radio label="Post/Update" value="@PostUpdate"></v-radio>
+                                        <v-radio label="Post/Delete" value="@PostDelete"></v-radio>
+                                    </v-col>
+                                </v-row>
+                            </v-radio-group>
+                        </v-layout>
+
 
                     </v-card-text>
 
@@ -360,7 +362,7 @@
                         if (detection.language == 'ko') {
                             googleTranslate.translate(newVal, 'en', function (err, translation) {
                                 me.usedTranslate = true
-                                me.translateText = _.camelCase(tensify(translation.translatedText).past_participle);
+                                me.translateText = _.camelCase(tensify(translation.translatedText).past_participle, {pascalCase: true});
                             });
                         }
                     });
@@ -369,7 +371,7 @@
                         if (detection.language == 'ko') {
                             googleTranslate.translate(newVal, 'en', function (err, translation) {
                                 me.usedTranslate = true
-                                me.translateText = _.camelCase(translation.translatedText);
+                                me.translateText = _.camelCase(translation.translatedText, {pascalCase: true});
                             });
                         }
                     });
