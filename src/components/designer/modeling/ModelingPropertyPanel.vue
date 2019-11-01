@@ -60,15 +60,7 @@
             <!--  해당 판넬의 내용  -->
             <v-list class="pt-0" dense flat>
                 <v-divider></v-divider>
-<<<<<<< HEAD
-                <v-card v-if="value.name == 'Bounded Context'">
-                    <v-card-title>
-                        <span class="headline" v-if="titleName">{{titleName}} 내용 입력 </span>
-                    </v-card-title>
-
-=======
                 <v-card v-if="value.name == 'Relation' && value.sourceElement._type == 'org.uengine.uml.model.Domain'">
->>>>>>> 4056681e6a9cbbee92b948454711cde92f03d3e3
                     <v-card-text>
                         <span class="headline">Type</span>
                         <v-layout>
@@ -98,52 +90,6 @@
                                 선택시 변경 됩니다.
                             </v-card-text>
                         </v-card>
-
-<<<<<<< HEAD
-                    <!--  정보 -->
-                    <v-data-table
-                            :headers="headers"
-                            :items="entity"
-                            hide-default-header
-                            hide-default-footer
-                            class="elevation-1"
-                    >
-                        <template v-slot:item.action="{ item }">
-                            <v-icon
-                                    v-if="item.name !='id'"
-                                    small
-                                    @click="deleteEntity(entity,item)"
-                            >
-                                delete
-                            </v-icon>
-                        </template>
-                    </v-data-table>
-
-
-                    <v-layout justify-center row style="align: center;">
-                        <v-flex xs4>
-                            <v-select v-model="entityType" :items="entityTypeList" label="Standard"
-                                      style="margin-left: 10px; margin-right: 15px;"></v-select>
-                        </v-flex>
-                        <v-flex xs6>
-                            <v-text-field v-on:keydown.enter="entityADD(entityType,entityName)" v-model="entityName" :counter="10" label="Name" required></v-text-field>
-                        </v-flex>
-                    </v-layout>
-
-                    <v-layout justify-end wrap>
-                        <v-btn rounded color="primary" @click="entityADD(entityType,entityName)" dark>Entity ADD
-                        </v-btn>
-                    </v-layout>
-
-                    <!-- <v-autocomplete v-model="restApiType" :items="restApiList" label="REST API TYPE" persistent-hint
-                                                prepend-icon="mdi-city">
-                                </v-autocomplete> -->
-                    <v-divider dark style="margin-top: 10px; margin-bottom: 10px;"></v-divider>
-                    <v-btn  block color="info" rounded @click="umlDiagramOpen()"> UML Diagram Editor</v-btn>
-                </v-card>
-=======
->>>>>>> 4056681e6a9cbbee92b948454711cde92f03d3e3
-
                         <span class="headline" v-if="value.name == 'Event' || value.name == 'Aggregate'">Attributes</span>
                         <v-layout v-if="value.name == 'Event' || value.name == 'Aggregate'" flat>
                             <v-col>
@@ -226,11 +172,7 @@
                                 </v-row>
                             </v-radio-group>
                         </v-layout>
-
-
                     </v-card-text>
-
-
                 </v-card>
             </v-list>
         </v-navigation-drawer>
@@ -374,9 +316,6 @@
         mounted: function () {
         },
         watch: {
-<<<<<<< HEAD
-
-=======
             radioCheck:function(newVal){
                 var me = this
                 if(newVal == 'RestAPI'){
@@ -402,7 +341,6 @@
                 console.log(newVal)
                 this.$emit('update:publishType', newVal)
             },
->>>>>>> 4056681e6a9cbbee92b948454711cde92f03d3e3
             inputText: function (newVal) {
                 // console.log(newVal)
                 if (this.input != newVal) {
