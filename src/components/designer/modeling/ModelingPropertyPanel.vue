@@ -19,7 +19,6 @@
 
             <v-list class="pt-0" dense>
                 <v-divider></v-divider>
-
                 <v-card v-if="value.name == 'Bounded Context'">
                     <v-card-title>
                         <span class="headline" v-if="titleName">{{titleName}} 내용 입력 </span>
@@ -81,7 +80,7 @@
                                       style="margin-left: 10px; margin-right: 15px;"></v-select>
                         </v-flex>
                         <v-flex xs6>
-                            <v-text-field v-model="entityName" :counter="10" label="Name" required></v-text-field>
+                            <v-text-field v-on:keydown.enter="entityADD(entityType,entityName)" v-model="entityName" :counter="10" label="Name" required></v-text-field>
                         </v-flex>
                     </v-layout>
 
@@ -315,6 +314,7 @@
 
         },
         watch: {
+
             inputText: function (newVal) {
                 // console.log(newVal)
                 if (this.input != newVal) {
