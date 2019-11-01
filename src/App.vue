@@ -74,9 +74,15 @@
                 </v-layout>
             </v-container>
         </v-content>
+<<<<<<< HEAD
         <v-overlay :value="overlay"
                    align="end"
                    on:keyup.esc="closeOverlay"
+=======
+        <v-overlay
+                :value="overlay"
+                align="end"
+>>>>>>> 30502b93b64cce4918c9208ba91b7a7c48a35b56
         >
             <v-btn
                     icon
@@ -292,7 +298,11 @@
                     }
                 })
             }
-
+            $(document).keydown((evt) => {
+                if (evt.keyCode == 27 ) {
+                    this.overlay =false
+                }
+            });
         },
         methods: {
             saveSetting() {
