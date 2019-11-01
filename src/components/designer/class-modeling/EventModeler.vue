@@ -18,6 +18,7 @@
         data() {
             return {
                 value: {},
+                url: '',
                 elementTypes: [
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
@@ -25,15 +26,7 @@
                         'label': 'Event',
                         'width': '100',
                         'height': '100',
-                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/event.png'
-                    },
-                    {
-                        'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
-                        'component': 'policy-definition',
-                        'label': 'Policy',
-                        'width': '100',
-                        'height': '100',
-                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/policy.png'
+                        'src': `${ window.location.protocol + "//" + window.location.host}/static/image/event/event.png`
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
@@ -41,8 +34,15 @@
                         'label': 'Command',
                         'width': '100',
                         'height': '100',
-                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/command.png'
-
+                        'src': `${ window.location.protocol + "//" + window.location.host}/static/image/event/command.png`
+                    },
+                    {
+                        'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
+                        'component': 'policy-definition',
+                        'label': 'Policy',
+                        'width': '100',
+                        'height': '100',
+                        'src': `${ window.location.protocol + "//" + window.location.host}/static/image/event/policy.png`
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
@@ -50,8 +50,7 @@
                         'label': 'Aggregate',
                         'width': '100',
                         'height': '100',
-                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/aggregate.png'
-
+                        'src': `${ window.location.protocol + "//" + window.location.host}/static/image/event/aggregate.png`
                     },
                     {
                         'icon': 'bpmn-icon-start-event-none',//'OG.shape.essencia.Alpha',
@@ -59,7 +58,7 @@
                         'label': 'External',
                         'width': '100',
                         'height': '100',
-                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/external.png'
+                        'src': `${ window.location.protocol + "//" + window.location.host}/static/image/event/external.png`
 
                     },
                     {
@@ -68,7 +67,7 @@
                         'label': 'View',
                         'width': '100',
                         'height': '100',
-                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/view.png'
+                        'src': `${ window.location.protocol + "//" + window.location.host}/static/image/event/view.png`
 
                     },
                     {
@@ -77,15 +76,22 @@
                         'label': 'Bounded Context',
                         'width': '100',
                         'height': '100',
-                        'src': 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/image/event/bounded2.png'
+                        'src': `${ window.location.protocol + "//" + window.location.host}/static/image/event/bounded2.png`
 
+                    },
+                    {
+                        'icon': 'bpmn-icon-start-actor-none',//'OG.shape.essencia.Alpha',
+                        'component': 'actor-definition',
+                        'label': 'Actor',
+                        'width': '100',
+                        'height': '100',
+                        'src': `${ window.location.protocol + "//" + window.location.host}/static/image/event/actor.png`
                     },
                 ],
             }
         },
 
         created: function () {
-
         },
         mounted: function () {
 

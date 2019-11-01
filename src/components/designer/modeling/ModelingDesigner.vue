@@ -5,7 +5,7 @@
                 <class-modeler></class-modeler>
             </modal>
 
-            <modal name="code-modal" :width="'80%'" :height='"80%"'  >
+            <modal name="code-modal" :width="'80%'" :height='"80%"'>
                 <v-card>
                     <v-card-title>
                         <span class="headline">Code Preview</span>

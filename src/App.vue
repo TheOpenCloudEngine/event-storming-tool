@@ -1,5 +1,7 @@
 <template>
-    <v-app id="inspire">
+    <v-app id="inspire"
+           @keydown.esc="overlay = false"
+    >
         <v-navigation-drawer
                 v-model="drawer"
                 :clipped="$vuetify.breakpoint.lgAndUp"
@@ -74,13 +76,14 @@
         </v-content>
         <v-overlay :value="overlay"
                    align="end"
+                   on:keyup.esc="closeOverlay"
         >
-        <v-btn
-                icon
-                @click="overlay = false"
-        >
-            <v-icon>mdi-close</v-icon>
-        </v-btn>
+            <v-btn
+                    icon
+                    @click="overlay = false"
+            >
+                <v-icon>mdi-close</v-icon>
+            </v-btn>
             <youtube-media :video-id="'K99_Q0qn0Oc'"
                            player-width="1206"
                            player-height="658"
@@ -269,6 +272,7 @@
         watch: {},
         mounted() {
             var me = this
+
             if (me.authorized == true) {
                 // console.log(me.userInfo)
                 this.$http.get(`${API_HOST}/kube/user/getUserDetail?username=` + me.userInfo.user_name).then((result) => {
@@ -288,6 +292,7 @@
                     }
                 })
             }
+
         },
         methods: {
             saveSetting() {
@@ -304,6 +309,9 @@
 
 
             },
+            // closeOverlay() {
+            //   this.overlay = false
+            // },
             googleLogin() {
                 var me = this;
                 if (localStorage.accessToken) {
@@ -321,7 +329,8 @@
                 window.location.href = newURL;
                 this.$store.commit('LOGOUT')
 
-            }
+            },
+
         }
     }
 </script>
