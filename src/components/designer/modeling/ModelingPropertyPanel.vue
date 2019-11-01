@@ -75,7 +75,6 @@
                         </v-layout>
                     </v-card-text>
                 </v-card>
-
                 <v-card outlined v-else>
                     <v-card-text>
                         <span class="headline" v-if="titleName">{{titleName}} Name</span>
@@ -90,6 +89,8 @@
                                 선택시 변경 됩니다.
                             </v-card-text>
                         </v-card>
+
+
                         <span class="headline" v-if="value.name == 'Event' || value.name == 'Aggregate'">Attributes</span>
                         <v-layout v-if="value.name == 'Event' || value.name == 'Aggregate'" flat>
                             <v-col>
@@ -172,6 +173,8 @@
                                 </v-row>
                             </v-radio-group>
                         </v-layout>
+
+
                     </v-card-text>
                 </v-card>
             </v-list>
