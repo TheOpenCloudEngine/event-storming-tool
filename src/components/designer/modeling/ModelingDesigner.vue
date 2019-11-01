@@ -278,6 +278,97 @@
                     var me = this
                     let tmpList = JSON.parse(JSON.stringify(me.items));
 
+
+
+
+
+                    var model = {
+
+                        _type: "org.uengine.model.DomainModel",
+                        boundedContexts:[
+                            {
+                                _type: "org.uengine.model.BoundedContext",
+                                name: "주문",
+                                aggregates: [
+                                    {
+                                        _type: "org.uengine.model.Aggregate",
+                                        name: "Order",
+                                        boundedContext: "주문",
+                                        aggregateRoot: {
+                                            _type: "org.uengine.model.ClassDefinition",
+                                            fieldDescriptors: [
+                                                {
+                                                    _type: "org.uengine.model.FieldDescriptor",
+                                                    name: "id",
+                                                    className: "java.lang.Long",
+                                                    isKey: true
+                                                },
+                                                {
+                                                    _type: "org.uengine.model.FieldDescriptor",
+                                                    name: "name",
+                                                    className: "java.lang.String"
+                                                },
+                                            ]
+                                        },
+
+                                        outBoundPorts: [
+                                            {
+                                                _type: "org.uengine.model.Event",
+                                                name: "OrderPlaced",
+                                                boundedContext: "주문",
+                                                boundType: "out-bound"
+                                            },
+                                        ]
+                                    },
+
+                                ]
+                            }
+                        ]
+                    }
+
+
+//
+//                                 "templateSpecificData": {
+//                                    "name": "Person",
+//                                    "fieldDescriptors":[
+//                                        {"name":"age", "nameCamel":"Age", "className":"String"},
+//                                        {"name":"name", "nameCamel":"Name", "className":"String"}
+//                                    ]
+//
+//                               }
+//                               };
+
+
+                    $.ajax({
+                      url: "/static/templates/spring-boot/Entity.java",
+
+                    }).done(function(template) {
+
+
+                        for(var i in model.boundedContexts){
+                            var boundedContext = model.boundedContexts[i];
+
+                            for(var ii in boundedContext.aggregates){
+                                var aggregate = boundedContext.aggregates[ii];
+
+                                // 전처리
+                                aggregate.aggregateRoot.fieldDescriptors.forEach(function(fd){fd.nameCamel = _.camelCase(fd.name, {pascalcase: true})})
+
+                                var output = window.$Mustache.render(template, aggregate.aggregateRoot);
+                                console.log(output);
+
+                                //생성된 소스를 모델에 넣지는 말것 code view 가 벌어질때만 code 를 한번만 생성.
+alert(output)
+                            }
+
+                        }
+
+                    });
+
+
+
+
+
                     me.value.definition.forEach(function (item) {
                         var event = {
                             name: '',
