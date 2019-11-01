@@ -1151,12 +1151,13 @@
 
             me.$ModelingBus.$on('MoveEvent', function () {
                 me.$nextTick(function () {
-                    me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
-                    me.redoArray = [];
+                    // me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
+                    // me.redoArray = [];
 
-                    // me.undoRedoArray.push(JSON.parse(JSON.stringify(me.value)));
-                    // me.undoRedoIndex = me.undoRedoIndex + 1
-                    // me.currentIndex = me.undoRedoIndex
+                    //new UndoReo
+                    me.undoRedoArray.push(JSON.parse(JSON.stringify(me.value)));
+                    me.currentIndex = me.currentIndex + 1
+                    me.undoRedoIndex = me.currentIndex;
 
                     me.value.definition.forEach(function (tmp) {
                         if (tmp.selected == true) {
@@ -1241,11 +1242,7 @@
                 // this.canvas.updateSlider();
                 //timer end
 
-                // me.undoArray.push({
-                //     'definition': [],
-                //     'relation': []
-                // })
-
+                //new UndoReo
                 me.undoRedoArray.push({
                     'definition': [],
                     'relation': []
@@ -1685,9 +1682,9 @@
                 if (!me.drawer) {
                     if (cmd == 'redo') {
                         console.log('redo')
-                        if (me.currentIndex < me.undoRedoArray.length - 1) {
-                            me.currentIndex = me.currentIndex + 1
-                            me.value = JSON.parse(JSON.stringify(me.undoRedoArray[me.currentIndex]));
+                        if (me.undoRedoIndex < me.undoRedoArray.length - 1) {
+                            me.undoRedoIndex = me.undoRedoIndex + 1
+                            me.value = JSON.parse(JSON.stringify(me.undoRedoArray[me.undoRedoIndex]));
                         } else {
                             me.text = "Last element"
                             me.snackbar = true
@@ -1695,9 +1692,9 @@
                         }
                     } else if (cmd == 'undo') {
                         console.log('undo')
-                        if (me.currentIndex > 0) {
-                            me.currentIndex = me.currentIndex - 1
-                            me.value = JSON.parse(JSON.stringify(me.undoRedoArray[me.currentIndex]));
+                        if (me.undoRedoIndex > 0) {
+                            me.undoRedoIndex = me.undoRedoIndex - 1
+                            me.value = JSON.parse(JSON.stringify(me.undoRedoArray[me.undoRedoIndex]));
                         } else {
                             me.text = "Last Element"
                             me.snackbar = true
@@ -1707,40 +1704,6 @@
                 }
 
             },
-            // redo: function () {
-            //     var me = this
-            //     if (!me.drawer) {
-            //         if (me.redoArray.length > 0) {
-            //             var tmpData = me.redoArray.pop();
-            //             me.value = JSON.parse(JSON.stringify(tmpData));
-            //             if (me.undoArray.length == 0 && me.value.length == 0) {
-            //                 me.undoArray.push({
-            //                     'definition': [],
-            //                     'relation': []
-            //                 })
-            //             }
-            //             me.undoArray.push(JSON.parse(JSON.stringify(tmpData)));
-            //             // this.syncOthers(JSON.parse(JSON.stringify(tmpData)));
-            //         } else {
-            //         }
-            //     }
-            // },
-            // undo: function () {
-            //     var me = this;
-            //     if (!me.drawer) {
-            //         if (me.undoArray.length > 1) {
-            //             me.redoArray.push(me.undoArray[me.undoArray.length - 1])
-            //             me.undoArray.pop()
-            //             me.value = JSON.parse(JSON.stringify(me.undoArray[me.undoArray.length - 1]))
-            //         } else if (me.undoArray.length == 1) {
-            //             me.undoArray.pop();
-            //             // console.log("undo length 0")
-            //             me.undoArray.push(JSON.parse(JSON.stringify(me.value)))
-            //             // this.syncOthers(JSON.parse(JSON.stringify(me.value)));
-            //         } else {
-            //         }
-            //     }
-            // },
             addElement: function (componentInfo, newTracingTag, originalData) {
                 this.enableHistoryAdd = true;
                 var me = this;
@@ -1779,14 +1742,18 @@
                     me.value['definition'].push(element);
                 }
 
-                me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
-                // me.redoArray = [];
-
-
                 //new UndoRedo
+                if(me.undoRedoIndex != me.currentIndex){
+                    //undoRedo 했을때
+                    //삭제후
+                    me.undoRedoArray.splice(me.undoRedoIndex+1, me.currentIndex - me.undoRedoIndex);
+                    me.undoRedoIndex = me.undoRedoIndex +1
+                    me.currentIndex = me.undoRedoIndex
+                }else {
+                    me.undoRedoIndex = me.undoRedoIndex + 1
+                }
                 me.undoRedoArray.push(JSON.parse(JSON.stringify(me.value)));
-                me.undoRedoIndex = me.undoRedoIndex + 1
-                me.currentIndex = me.undoRedoIndex
+                me.currentIndex = me.undoRedoArray.length - 1
 
                 //pusher
                 // this.syncOthers(element);
