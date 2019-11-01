@@ -75,7 +75,6 @@
                         </v-layout>
                     </v-card-text>
                 </v-card>
-
                 <v-card outlined v-else>
                     <v-card-text>
                         <span class="headline" v-if="titleName">{{titleName}} Name</span>
@@ -177,8 +176,6 @@
 
 
                     </v-card-text>
-
-
                 </v-card>
             </v-list>
         </v-navigation-drawer>

@@ -5,7 +5,7 @@
                 <class-modeler></class-modeler>
             </modal>
 
-            <modal name="code-modal" :height='"auto"' :width="'80%'">
+            <modal name="code-modal" :width="'80%'" :height='"80%"'  >
                 <v-card>
                     <v-card-title>
                         <span class="headline">Code Preview</span>
@@ -32,7 +32,7 @@
                                         open-on-click
                                         return-object
                                         open-all
-                                        style="font-size:15px; line-height: 15px;"
+                                        dense
                                 >
                                     <template v-slot:prepend="{ item, open }">
                                         <v-icon v-if="!item.file">
@@ -278,6 +278,97 @@
                     var me = this
                     let tmpList = JSON.parse(JSON.stringify(me.items));
                     console.log(me.items)
+
+
+
+
+
+                    var model = {
+
+                        _type: "org.uengine.model.DomainModel",
+                        boundedContexts:[
+                            {
+                                _type: "org.uengine.model.BoundedContext",
+                                name: "주문",
+                                aggregates: [
+                                    {
+                                        _type: "org.uengine.model.Aggregate",
+                                        name: "Order",
+                                        boundedContext: "주문",
+                                        aggregateRoot: {
+                                            _type: "org.uengine.model.ClassDefinition",
+                                            fieldDescriptors: [
+                                                {
+                                                    _type: "org.uengine.model.FieldDescriptor",
+                                                    name: "id",
+                                                    className: "java.lang.Long",
+                                                    isKey: true
+                                                },
+                                                {
+                                                    _type: "org.uengine.model.FieldDescriptor",
+                                                    name: "name",
+                                                    className: "java.lang.String"
+                                                },
+                                            ]
+                                        },
+
+                                        outBoundPorts: [
+                                            {
+                                                _type: "org.uengine.model.Event",
+                                                name: "OrderPlaced",
+                                                boundedContext: "주문",
+                                                boundType: "out-bound"
+                                            },
+                                        ]
+                                    },
+
+                                ]
+                            }
+                        ]
+                    }
+
+
+//
+//                                 "templateSpecificData": {
+//                                    "name": "Person",
+//                                    "fieldDescriptors":[
+//                                        {"name":"age", "nameCamel":"Age", "className":"String"},
+//                                        {"name":"name", "nameCamel":"Name", "className":"String"}
+//                                    ]
+//
+//                               }
+//                               };
+
+
+                    $.ajax({
+                      url: "/static/templates/spring-boot/Entity.java",
+
+                    }).done(function(template) {
+
+
+                        for(var i in model.boundedContexts){
+                            var boundedContext = model.boundedContexts[i];
+
+                            for(var ii in boundedContext.aggregates){
+                                var aggregate = boundedContext.aggregates[ii];
+
+                                // 전처리
+                                aggregate.aggregateRoot.fieldDescriptors.forEach(function(fd){fd.nameCamel = _.camelCase(fd.name, {pascalcase: true})})
+
+                                var output = window.$Mustache.render(template, aggregate.aggregateRoot);
+                                console.log(output);
+
+                                //생성된 소스를 모델에 넣지는 말것 code view 가 벌어질때만 code 를 한번만 생성.
+alert(output)
+                            }
+
+                        }
+
+                    });
+
+
+
+
 
                     me.value.definition.forEach(function (item) {
                         var event = {
@@ -1151,12 +1242,13 @@
 
             me.$ModelingBus.$on('MoveEvent', function () {
                 me.$nextTick(function () {
-                    me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
-                    me.redoArray = [];
+                    // me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
+                    // me.redoArray = [];
 
-                    // me.undoRedoArray.push(JSON.parse(JSON.stringify(me.value)));
-                    // me.undoRedoIndex = me.undoRedoIndex + 1
-                    // me.currentIndex = me.undoRedoIndex
+                    //new UndoReo
+                    me.undoRedoArray.push(JSON.parse(JSON.stringify(me.value)));
+                    me.currentIndex = me.currentIndex + 1
+                    me.undoRedoIndex = me.currentIndex;
 
                     me.value.definition.forEach(function (tmp) {
                         if (tmp.selected == true) {
@@ -1241,15 +1333,11 @@
                 // this.canvas.updateSlider();
                 //timer end
 
-                me.undoArray.push({
+                //new UndoReo
+                me.undoRedoArray.push({
                     'definition': [],
                     'relation': []
                 })
-
-                // me.undoRedoArray.push({
-                //     'definition': [],
-                //     'relation': []
-                // })
 
                 this.$refs.opengraph.printTimer(startTime, new Date().getTime());
 
@@ -1262,11 +1350,11 @@
                         this.deleteActivity();
                     } else if (evt.keyCode == 90 && (evt.metaKey || evt.ctrlKey)) {
                         if (evt.shiftKey) {
-                            me.redo();
-                            // me.undoRedo('redo');
+                            // me.redo();
+                            me.undoRedo('redo');
                         } else {
-                            me.undo();
-                            // me.undoRedo('undo');
+                            // me.undo();
+                            me.undoRedo('undo');
                         }
                     }
                 });
@@ -1685,9 +1773,9 @@
                 if (!me.drawer) {
                     if (cmd == 'redo') {
                         console.log('redo')
-                        if (me.currentIndex < me.undoRedoArray.length - 1) {
-                            me.currentIndex = me.currentIndex + 1
-                            me.value = JSON.parse(JSON.stringify(me.undoRedoArray[me.currentIndex]));
+                        if (me.undoRedoIndex < me.undoRedoArray.length - 1) {
+                            me.undoRedoIndex = me.undoRedoIndex + 1
+                            me.value = JSON.parse(JSON.stringify(me.undoRedoArray[me.undoRedoIndex]));
                         } else {
                             me.text = "Last element"
                             me.snackbar = true
@@ -1695,9 +1783,9 @@
                         }
                     } else if (cmd == 'undo') {
                         console.log('undo')
-                        if (me.currentIndex > 0) {
-                            me.currentIndex = me.currentIndex - 1
-                            me.value = JSON.parse(JSON.stringify(me.undoRedoArray[me.currentIndex]));
+                        if (me.undoRedoIndex > 0) {
+                            me.undoRedoIndex = me.undoRedoIndex - 1
+                            me.value = JSON.parse(JSON.stringify(me.undoRedoArray[me.undoRedoIndex]));
                         } else {
                             me.text = "Last Element"
                             me.snackbar = true
@@ -1706,40 +1794,6 @@
                     }
                 }
 
-            },
-            redo: function () {
-                var me = this
-                if (!me.drawer) {
-                    if (me.redoArray.length > 0) {
-                        var tmpData = me.redoArray.pop();
-                        me.value = JSON.parse(JSON.stringify(tmpData));
-                        if (me.undoArray.length == 0 && me.value.length == 0) {
-                            me.undoArray.push({
-                                'definition': [],
-                                'relation': []
-                            })
-                        }
-                        me.undoArray.push(JSON.parse(JSON.stringify(tmpData)));
-                        // this.syncOthers(JSON.parse(JSON.stringify(tmpData)));
-                    } else {
-                    }
-                }
-            },
-            undo: function () {
-                var me = this;
-                if (!me.drawer) {
-                    if (me.undoArray.length > 1) {
-                        me.redoArray.push(me.undoArray[me.undoArray.length - 1])
-                        me.undoArray.pop()
-                        me.value = JSON.parse(JSON.stringify(me.undoArray[me.undoArray.length - 1]))
-                    } else if (me.undoArray.length == 1) {
-                        me.undoArray.pop();
-                        // console.log("undo length 0")
-                        me.undoArray.push(JSON.parse(JSON.stringify(me.value)))
-                        // this.syncOthers(JSON.parse(JSON.stringify(me.value)));
-                    } else {
-                    }
-                }
             },
             addElement: function (componentInfo, newTracingTag, originalData) {
                 this.enableHistoryAdd = true;
@@ -1779,13 +1833,18 @@
                     me.value['definition'].push(element);
                 }
 
-                me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
-                me.redoArray = [];
-
-
-                // me.undoRedoArray.push(JSON.parse(JSON.stringify(me.value)));
-                // me.undoRedoIndex = me.undoRedoIndex + 1
-                // me.currentIndex = me.undoRedoIndex
+                //new UndoRedo
+                if(me.undoRedoIndex != me.currentIndex){
+                    //undoRedo 했을때
+                    //삭제후
+                    me.undoRedoArray.splice(me.undoRedoIndex+1, me.currentIndex - me.undoRedoIndex);
+                    me.undoRedoIndex = me.undoRedoIndex +1
+                    me.currentIndex = me.undoRedoIndex
+                }else {
+                    me.undoRedoIndex = me.undoRedoIndex + 1
+                }
+                me.undoRedoArray.push(JSON.parse(JSON.stringify(me.value)));
+                me.currentIndex = me.undoRedoArray.length - 1
 
                 //pusher
                 // this.syncOthers(element);
