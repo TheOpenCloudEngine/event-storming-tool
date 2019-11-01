@@ -38,6 +38,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 Vue.prototype.$EventBus = new Vue()
 Vue.prototype.$ModelingBus = new Vue()
+window.$Mustache = Mustache
 
 if( process.env.NODE_ENV == "development" ){
     window.API_HOST = "localhost:8080";
