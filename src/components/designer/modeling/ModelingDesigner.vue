@@ -277,7 +277,6 @@
                 get: function () {
                     var me = this
                     let tmpList = JSON.parse(JSON.stringify(me.items));
-                    console.log(me.items)
 
                     me.value.definition.forEach(function (item) {
                         var event = {

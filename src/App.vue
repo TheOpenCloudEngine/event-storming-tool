@@ -72,8 +72,9 @@
                 </v-layout>
             </v-container>
         </v-content>
-        <v-overlay :value="overlay"
-                   align="end"
+        <v-overlay
+                :value="overlay"
+                align="end"
         >
         <v-btn
                 icon
@@ -288,6 +289,15 @@
                     }
                 })
             }
+
+
+            $(document).keydown((evt) => {
+                if (evt.keyCode == 27 ) {
+                    this.overlay =false
+                }
+            });
+
+
         },
         methods: {
             saveSetting() {
