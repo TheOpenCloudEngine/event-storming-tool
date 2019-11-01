@@ -5,7 +5,7 @@
                 <class-modeler></class-modeler>
             </modal>
 
-            <modal name="code-modal" :height='"auto"' :width="'80%'">
+            <modal name="code-modal" :width="'80%'" :height='"80%"'  >
                 <v-card>
                     <v-card-title>
                         <span class="headline">Code Preview</span>
@@ -32,7 +32,7 @@
                                         open-on-click
                                         return-object
                                         open-all
-                                        style="font-size:15px; line-height: 15px;"
+                                        dense
                                 >
                                     <template v-slot:prepend="{ item, open }">
                                         <v-icon v-if="!item.file">
@@ -1241,15 +1241,15 @@
                 // this.canvas.updateSlider();
                 //timer end
 
-                me.undoArray.push({
-                    'definition': [],
-                    'relation': []
-                })
-
-                // me.undoRedoArray.push({
+                // me.undoArray.push({
                 //     'definition': [],
                 //     'relation': []
                 // })
+
+                me.undoRedoArray.push({
+                    'definition': [],
+                    'relation': []
+                })
 
                 this.$refs.opengraph.printTimer(startTime, new Date().getTime());
 
@@ -1262,11 +1262,11 @@
                         this.deleteActivity();
                     } else if (evt.keyCode == 90 && (evt.metaKey || evt.ctrlKey)) {
                         if (evt.shiftKey) {
-                            me.redo();
-                            // me.undoRedo('redo');
+                            // me.redo();
+                            me.undoRedo('redo');
                         } else {
-                            me.undo();
-                            // me.undoRedo('undo');
+                            // me.undo();
+                            me.undoRedo('undo');
                         }
                     }
                 });
@@ -1707,40 +1707,40 @@
                 }
 
             },
-            redo: function () {
-                var me = this
-                if (!me.drawer) {
-                    if (me.redoArray.length > 0) {
-                        var tmpData = me.redoArray.pop();
-                        me.value = JSON.parse(JSON.stringify(tmpData));
-                        if (me.undoArray.length == 0 && me.value.length == 0) {
-                            me.undoArray.push({
-                                'definition': [],
-                                'relation': []
-                            })
-                        }
-                        me.undoArray.push(JSON.parse(JSON.stringify(tmpData)));
-                        // this.syncOthers(JSON.parse(JSON.stringify(tmpData)));
-                    } else {
-                    }
-                }
-            },
-            undo: function () {
-                var me = this;
-                if (!me.drawer) {
-                    if (me.undoArray.length > 1) {
-                        me.redoArray.push(me.undoArray[me.undoArray.length - 1])
-                        me.undoArray.pop()
-                        me.value = JSON.parse(JSON.stringify(me.undoArray[me.undoArray.length - 1]))
-                    } else if (me.undoArray.length == 1) {
-                        me.undoArray.pop();
-                        // console.log("undo length 0")
-                        me.undoArray.push(JSON.parse(JSON.stringify(me.value)))
-                        // this.syncOthers(JSON.parse(JSON.stringify(me.value)));
-                    } else {
-                    }
-                }
-            },
+            // redo: function () {
+            //     var me = this
+            //     if (!me.drawer) {
+            //         if (me.redoArray.length > 0) {
+            //             var tmpData = me.redoArray.pop();
+            //             me.value = JSON.parse(JSON.stringify(tmpData));
+            //             if (me.undoArray.length == 0 && me.value.length == 0) {
+            //                 me.undoArray.push({
+            //                     'definition': [],
+            //                     'relation': []
+            //                 })
+            //             }
+            //             me.undoArray.push(JSON.parse(JSON.stringify(tmpData)));
+            //             // this.syncOthers(JSON.parse(JSON.stringify(tmpData)));
+            //         } else {
+            //         }
+            //     }
+            // },
+            // undo: function () {
+            //     var me = this;
+            //     if (!me.drawer) {
+            //         if (me.undoArray.length > 1) {
+            //             me.redoArray.push(me.undoArray[me.undoArray.length - 1])
+            //             me.undoArray.pop()
+            //             me.value = JSON.parse(JSON.stringify(me.undoArray[me.undoArray.length - 1]))
+            //         } else if (me.undoArray.length == 1) {
+            //             me.undoArray.pop();
+            //             // console.log("undo length 0")
+            //             me.undoArray.push(JSON.parse(JSON.stringify(me.value)))
+            //             // this.syncOthers(JSON.parse(JSON.stringify(me.value)));
+            //         } else {
+            //         }
+            //     }
+            // },
             addElement: function (componentInfo, newTracingTag, originalData) {
                 this.enableHistoryAdd = true;
                 var me = this;
@@ -1780,12 +1780,13 @@
                 }
 
                 me.undoArray.push(JSON.parse(JSON.stringify(me.value)));
-                me.redoArray = [];
+                // me.redoArray = [];
 
 
-                // me.undoRedoArray.push(JSON.parse(JSON.stringify(me.value)));
-                // me.undoRedoIndex = me.undoRedoIndex + 1
-                // me.currentIndex = me.undoRedoIndex
+                //new UndoRedo
+                me.undoRedoArray.push(JSON.parse(JSON.stringify(me.value)));
+                me.undoRedoIndex = me.undoRedoIndex + 1
+                me.currentIndex = me.undoRedoIndex
 
                 //pusher
                 // this.syncOthers(element);
