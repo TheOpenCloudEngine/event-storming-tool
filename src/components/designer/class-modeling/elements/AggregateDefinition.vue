@@ -144,10 +144,6 @@
             },
             "value.aggregateEntity": function () {
                 var me = this
-                console.log(this.value)
-                // console.log(this.code)
-                // this.code = this.codeGenerate;
-
                 this.value.aggregateCode = me.setAggregateTemplate()
             },
             "value.innerAggregate": {
@@ -174,7 +170,7 @@
                 return Mustache.render(
                     "package com.example.template;\n " +
                     "import org.springframework.data.repository.PagingAndSortingRepository; \n " +
-                    "public interface {{ upName }}Repository extends PagingAndSortingRepository < {{ inputText }}, Long > { \n " +
+                    "public interface {{ upName }}Repository extends PagingAndSortingRepository < {{ upName }}, Long > { \n " +
                     "}\n", me.value)
             },
             setControllerTemplate(){
@@ -226,18 +222,13 @@
                     "    private KafkaTemplate kafkaTemplate;\n" +
                     "\n" +
                     "    @Autowired\n" +
-                    "    private {{ inputText }}Repository {{ inputText }}Repository;\n" +
+                    "    private {{ upName }}Repository {{ upName }}Repository;\n" +
                     "\n" +
                     "{{#innerAggregate}}" +
                     "{{#policy}}" +
                     "{{{code}}}" +
                     "{{/policy}}" +
                     "{{/innerAggregate}}" +
-                    // "    @KafkaListener(topics = \"${eventTopic}\")\n" +
-                    // "    public void {{ name }}(@Payload String message, ConsumerRecord<?, ?> consumerRecord) {\n" +
-                    // "        System.out.println(\"##### listener : \" + message);\n" +
-                    // "\n" +
-                    // "       \n" +
                     "}", me.value)
             },
             setAggregateTemplate() {
@@ -250,6 +241,8 @@
                     "import org.apache.kafka.clients.producer.ProducerRecord;\n" +
                     "import org.springframework.core.env.Environment;\n" +
                     "import org.springframework.kafka.core.KafkaTemplate;\n" +
+                    "import org.springframework.web.client.RestTemplate;\n" +
+                    "import org.springframework.beans.BeanUtils;\n" +
                     "\n" +
                     "import javax.persistence.*;\n" +
                     "\n" +
@@ -277,6 +270,12 @@
                     "        this.{{name}} = {{name}};\n" +
                     "    }\n" +
                     "{{/aggregateEntity}}\n" +
+                    "\n" +
+                    "{{#innerAggregate}}" +
+                    "{{#event}}" +
+                    "{{{publishTypeCode}}}" +
+                    "{{/event}}" +
+                    "{{/innerAggregate}}" +
                     "\n" +
                     "}", me.value)
             }

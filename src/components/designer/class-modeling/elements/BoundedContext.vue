@@ -75,7 +75,7 @@
                     },
                     drawer: false,
                     selected: false,
-                    inputText: 'Bounded Context',
+                    inputText: 'Bounded Context'+x,
                     dataList: [],
                     restApi: String,
                 }
@@ -109,6 +109,14 @@
             //         })
             //     }
             // },
+            'value.dataList': function () {
+                var me = this
+                if(me.value.dataList.length > 1) {
+                    me.value.dataList.forEach(function (tmp) {
+                        tmp.boundedContext = me.value.inputText
+                    })
+                }
+            },
             'value.inputText': function (newVal) {
                 var me = this
                 this.value.elementView.x = this.value.elementView.x + 1

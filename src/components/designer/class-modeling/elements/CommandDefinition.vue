@@ -56,7 +56,6 @@
                 :aggregateList.sync="aggregateList"
                 :aggregateText.sync="value.aggregateText"
                 :connectAggregateName.sync="value.connectAggregateName"
-                :restApi.sync="value.restApi"
                 v-model="value"
         >
         </modeling-property-panel>
@@ -150,7 +149,7 @@
             setCommandTemplate() {
                 var me = this;
                 return Mustache.render(
-                    "    @RequestMapping(value = \"/{{connectAggregateName}}/{{InputText}}/\", method = RequestMethod.{{restApi}}, produces = \"application/json;charset=UTF-8\")\n" +
+                    "    @RequestMapping(value = \"/{{connectAggregateName}}/{{inputText}}/\", method = RequestMethod.{{restApi}}, produces = \"application/json;charset=UTF-8\")\n" +
                     "    public void {{codeInputText}}(HttpServletRequest request, HttpServletResponse response \n " +
                     "    ) throws Exception { \n" +
                     "    \n"+

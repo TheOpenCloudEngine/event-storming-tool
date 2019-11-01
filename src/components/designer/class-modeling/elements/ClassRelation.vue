@@ -53,8 +53,7 @@
                 return 'org.uengine.uml.model.relation'
             },
             style_() {
-                console.log(this.value)
-                if (this.value._type == "org.uengine.uml.model.relation" && this.value.relationType == 'Pub') {
+                if (this.value._type == "org.uengine.uml.model.relation" && this.value.relationType == 'Pub/Sub') {
                     var style = {
                         "arrow-end": "block",
                         'stroke-width': '1.3',
