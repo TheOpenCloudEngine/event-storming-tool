@@ -36424,7 +36424,7 @@ OG.graph.Canvas.prototype = {
      */
     removeSlider: function () {
         if (this._CONFIG.SLIDER) {
-            this._CONFIG.SLIDER.dialog("destroy");
+            // this._CONFIG.SLIDER.dialog("destroy");
             this._CONFIG.SLIDER.remove();
         }
     }
