@@ -7,30 +7,12 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: product
-          uri: http://localhost:8085
+        {{#boundedContexts}}
+        - id: {{name}}
+          uri: http://localhost:{{portGenerated}}
           predicates:
-            - Path=/product/**,,/products/**,/goods/**
-        - id: order
-          uri: http://localhost:8081
-          predicates:
-            - Path=/orders/**
-        - id: delivery
-          uri: http://localhost:8082
-          predicates:
-            - Path=/deliveries/**
-        - id: servicecenter
-          uri: http://localhost:8084
-          predicates:
-            - Path=/surveys/**
-        - id: mypage
-          uri: http://localhost:8086
-          predicates:
-            - Path=/users/**,/mypage/**
-        - id: oauth
-          uri: http://localhost:8090
-          predicates:
-            - Path=/oauth/**
+            - Path= {{#aggregates}} /{{name}}s/** {{/aggregates}}
+        {{/boundedContexts}}
       globalcors:
         corsConfigurations:
           '[/**]':
