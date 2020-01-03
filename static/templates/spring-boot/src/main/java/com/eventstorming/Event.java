@@ -19,10 +19,6 @@ public class {{namePascalCase}} extends AbstractEvent {
         this.timestamp = defaultSimpleDateFormat.format(new Date());
     }
 
-    public {{namePascalCase}}({{aggregate.namePascalCase}} {{aggregate.name}}){
-        this();
-        // TODO set properties
-    }
     {{#fieldDescriptors}}
     public {{className}} get{{namePascalCase}}() {
         return {{nameCamelCase}};

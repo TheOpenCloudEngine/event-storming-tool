@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="{{namePascalCase}}table")
+@Table(name="{{namePascalCase}}_table")
 public class {{namePascalCase}} {
 
     {{#aggregateRoot.fieldDescriptors}}
@@ -34,7 +34,7 @@ public class {{namePascalCase}} {
     {{trigger}}
     public void publish{{namePascalCase}}(){
 
-        {{namePascalCase}} {{name}} = new {{namePascalCase}}(this);
+        {{namePascalCase}} {{name}} = new {{namePascalCase}}();
         {{name}}.sendMessage({{name}}.toJson());
 
     }

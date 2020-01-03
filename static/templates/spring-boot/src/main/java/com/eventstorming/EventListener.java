@@ -15,27 +15,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class {{namePascalCase}}EventListener{
 
-    @StreamListener(KafkaProcessor.INPUT)
-    public void onListener(@Payload String message){
-        //event emmit code
-        System.out.println("##### listener : "+message);
-
-        ObjectMapper objectMapper=new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-
-        try{
-            AbstractEvent abstractEvent = objectMapper.readValue(message, AbstractEvent.class);
     {{#policies}}
         {{#relationEventInfo}}
-            if(abstractEvent.getEventType().equals({{relationEventInfo.namePascalCase}}.class.getSimpleName())){
-                {{relationEventInfo.namePascalCase}} {{relationEventInfo.name}}=objectMapper.readValue(message,{{relationEventInfo.namePascalCase}}.class);
-            }
-        {{/relationEventInfo}}
-    {{/policies}}
+    @StreamListener(KafkaProcessor.INPUT)
+    public void on{{relationEventInfo.namePascalCase}}Listener(@Payload {{relationEventInfo.namePascalCase}} {{relationEventInfo.name}}){
 
-        }catch(Exception e){
-
+        if({{relationEventInfo.name}}.isMe()){
+            System.out.println("##### listener {{relationEventInfo.name}} : " + {{relationEventInfo.name}}.toJson());
         }
     }
+        {{/relationEventInfo}}
+    {{/policies}}
 
 }

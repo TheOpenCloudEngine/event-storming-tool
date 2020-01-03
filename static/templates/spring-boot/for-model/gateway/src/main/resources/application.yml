@@ -11,7 +11,7 @@ spring:
         - id: {{name}}
           uri: http://localhost:{{portGenerated}}
           predicates:
-            - Path= {{#aggregates}} /{{name}}s/** {{/aggregates}}
+            - Path={{#aggregates}}/{{name}}s/**{{/aggregates}}
         {{/boundedContexts}}
       globalcors:
         corsConfigurations:
