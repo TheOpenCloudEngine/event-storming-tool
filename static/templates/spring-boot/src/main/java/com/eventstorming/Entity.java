@@ -19,16 +19,6 @@ public class {{namePascalCase}} {
     private {{className}} {{nameCamelCase}};
     {{/aggregateRoot.fieldDescriptors}}
 
-    {{#aggregateRoot.fieldDescriptors}}
-    public {{className}} get{{namePascalCase}}() {
-        return {{nameCamelCase}};
-    }
-
-    public void set{{namePascalCase}}({{className}} {{nameCamelCase}}) {
-        this.{{nameCamelCase}} = {{nameCamelCase}};
-    }
-    {{/aggregateRoot.fieldDescriptors}}
-
 
 {{#events}}
     {{trigger}}
@@ -39,5 +29,15 @@ public class {{namePascalCase}} {
 
     }
 {{/events}}
+
+{{#aggregateRoot.fieldDescriptors}}
+    public {{className}} get{{namePascalCase}}() {
+        return {{nameCamelCase}};
+    }
+
+    public void set{{namePascalCase}}({{className}} {{nameCamelCase}}) {
+        this.{{nameCamelCase}} = {{nameCamelCase}};
+    }
+{{/aggregateRoot.fieldDescriptors}}
 
 }
