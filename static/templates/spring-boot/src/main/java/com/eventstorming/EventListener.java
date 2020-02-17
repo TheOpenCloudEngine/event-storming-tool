@@ -1,6 +1,6 @@
 forEach: Aggregate
 fileName: {{namePascalCase}}EventListener.java
-path: {{boundedContext}}/{{{options.packagePath}}}
+path: {{boundedContext.name}}/{{{options.packagePath}}}
 ---
 package {{options.package}};
 
@@ -18,10 +18,10 @@ public class {{namePascalCase}}EventListener{
     {{#policies}}
         {{#relationEventInfo}}
     @StreamListener(KafkaProcessor.INPUT)
-    public void on{{relationEventInfo.namePascalCase}}Listener(@Payload {{relationEventInfo.namePascalCase}} {{relationEventInfo.name}}){
+    public void on{{eventValue.namePascalCase}}Listener(@Payload {{eventValue.namePascalCase}} {{eventValue.name}}){
 
-        if({{relationEventInfo.name}}.isMe()){
-            System.out.println("##### listener {{relationEventInfo.name}} : " + {{relationEventInfo.name}}.toJson());
+        if({{eventValue.name}}.isMe()){
+            System.out.println("##### listener {{name}} : " + {{eventValue.name}}.toJson());
         }
     }
         {{/relationEventInfo}}
