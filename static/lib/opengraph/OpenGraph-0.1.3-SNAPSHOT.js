@@ -1,4 +1,3 @@
-
 // ┌────────────────────────────────────────────────────────────────────┐ \\
 // │ Raphaël 2.1.0 - JavaScript Vector Library                          │ \\
 // ├────────────────────────────────────────────────────────────────────┤ \\
@@ -776,7 +775,7 @@
         H = (C == 0 ? null :
                 V == r ? (g - b) / C :
                     V == g ? (b - r) / C + 2 :
-                    (r - g) / C + 4
+                        (r - g) / C + 4
         );
         H = ((H + 360) % 6) * 60 / 360;
         S = C == 0 ? 0 : C / V;
@@ -796,17 +795,18 @@
         H = (C == 0 ? null :
             M == r ? (g - b) / C :
                 M == g ? (b - r) / C + 2 :
-                (r - g) / C + 4);
+                    (r - g) / C + 4);
         H = ((H + 360) % 6) * 60 / 360;
         L = (M + m) / 2;
         S = (C == 0 ? 0 :
             L < .5 ? C / (2 * L) :
-            C / (2 - 2 * L));
+                C / (2 - 2 * L));
         return {h: H, s: S, l: L, toString: hsltoString};
     };
     R._path2string = function () {
         return this.join(",").replace(p2s, "$1");
     };
+
     function repush(array, item) {
         for (var i = 0, ii = array.length; i < ii; i++) if (array[i] === item) {
             return array.push(array.splice(i, 1)[0]);
@@ -1134,6 +1134,7 @@
             || (bbox1.x < bbox2.x2 && bbox1.x > bbox2.x || bbox2.x < bbox1.x2 && bbox2.x > bbox1.x)
             && (bbox1.y < bbox2.y2 && bbox1.y > bbox2.y || bbox2.y < bbox1.y2 && bbox2.y > bbox1.y);
     };
+
     function base3(t, p1, p2, p3, p4) {
         var t1 = -3 * p1 + 9 * p2 - 9 * p3 + 3 * p4,
             t2 = t * t1 + 6 * p1 - 12 * p2 + 6 * p3;
@@ -1283,6 +1284,7 @@
     R.pathIntersectionNumber = function (path1, path2) {
         return interPathHelper(path1, path2, 1);
     };
+
     function interPathHelper(path1, path2, justCount) {
         path1 = R._path2curve(path1);
         path2 = R._path2curve(path2);
@@ -2106,6 +2108,7 @@
     R.matrix = function (a, b, c, d, e, f) {
         return new Matrix(a, b, c, d, e, f);
     };
+
     function Matrix(a, b, c, d, e, f) {
         if (a != null) {
             this.a = +a;
@@ -2196,7 +2199,7 @@
         };
         matrixproto.toString = function () {
             return R.svg ?
-            "matrix(" + [this.get(0), this.get(1), this.get(2), this.get(3), this.get(4), this.get(5)].join() + ")" :
+                "matrix(" + [this.get(0), this.get(1), this.get(2), this.get(3), this.get(4), this.get(5)].join() + ")" :
                 [this.get(0), this.get(2), this.get(1), this.get(3), 0, 0].join();
         };
         matrixproto.toFilter = function () {
@@ -2207,6 +2210,7 @@
         matrixproto.offset = function () {
             return [this.e.toFixed(4), this.f.toFixed(4)];
         };
+
         function norm(a) {
             return a[0] * a[0] + a[1] * a[1];
         }
@@ -2589,8 +2593,9 @@
             doc = elem.ownerDocument,
             body = doc.body,
             docElem = doc.documentElement,
-            clientTop = docElem.clientTop || body.clientTop || 0, clientLeft = docElem.clientLeft || body.clientLeft || 0,
-            top = box.top + (g.win.pageYOffset || docElem.scrollTop || body.scrollTop ) - clientTop,
+            clientTop = docElem.clientTop || body.clientTop || 0,
+            clientLeft = docElem.clientLeft || body.clientLeft || 0,
+            top = box.top + (g.win.pageYOffset || docElem.scrollTop || body.scrollTop) - clientTop,
             left = box.left + (g.win.pageXOffset || docElem.scrollLeft || body.scrollLeft) - clientLeft;
         return {
             y: top,
@@ -2655,6 +2660,7 @@
         });
         return set;
     };
+
     function x_y() {
         return this.x + S + this.y;
     }
@@ -2939,10 +2945,10 @@
                                 break;
                             case "colour":
                                 now = "rgb(" + [
-                                        upto255(round(from[attr].r + pos * ms * diff[attr].r)),
-                                        upto255(round(from[attr].g + pos * ms * diff[attr].g)),
-                                        upto255(round(from[attr].b + pos * ms * diff[attr].b))
-                                    ].join(",") + ")";
+                                    upto255(round(from[attr].r + pos * ms * diff[attr].r)),
+                                    upto255(round(from[attr].g + pos * ms * diff[attr].g)),
+                                    upto255(round(from[attr].b + pos * ms * diff[attr].b))
+                                ].join(",") + ")";
                                 break;
                             case "path":
                                 now = [];
@@ -3049,6 +3055,7 @@
         //     status = element.status(anim);
         // return this.animate(a).status(a, status * anim.ms / a.ms);
     };
+
     function CubicBezierAtTime(t, p1x, p1y, p2x, p2y, duration) {
         var cx = 3 * p1x,
             bx = 3 * (p2x - p1x) - cx,
@@ -3110,6 +3117,7 @@
         f ? eve.on("raphael.anim.frame." + this.id, f) : eve.unbind("raphael.anim.frame." + this.id);
         return this;
     };
+
     function Animation(anim, ms) {
         var percents = [],
             newAnim = {};
@@ -3140,6 +3148,7 @@
         a.times = math.floor(mmax(times, 0)) || 1;
         return a;
     };
+
     function runAnimation(anim, element, percent, status, totalOrigin, times) {
         percent = toFloat(percent);
         var params,
@@ -3449,6 +3458,7 @@
         }
         return this;
     };
+
     function stopAnimation(paper) {
         for (var i = 0; i < animationElements.length; i++) if (animationElements[i].el.paper == paper) {
             animationElements.splice(i--, 1);
@@ -3803,6 +3813,7 @@
             }, false);
             doc.readyState = "loading";
         }
+
         function isLoaded() {
             (/in/).test(doc.readyState) ? setTimeout(isLoaded, 9) : R.eve("raphael.DOMload");
         }
@@ -4076,7 +4087,7 @@ window.Raphael.svg && function (R) {
                 }
                 if (type != "none") {
                     var pathId = "raphael-marker-" + type,
-                        markerId = "raphael-marker-" + se + type + w + h + p.id + "_"+(Math.floor(Math.random() * 100000) + 1);
+                        markerId = "raphael-marker-" + se + type + w + h + p.id + "_" + (Math.floor(Math.random() * 100000) + 1);
                     if (!p.canvas.getElementById(pathId)) {
                         p.defs.appendChild($($("path"), {
                             "stroke-linecap": "round",
@@ -4171,10 +4182,10 @@ window.Raphael.svg && function (R) {
             if (value) {
                 var width = o.attrs["stroke-width"] || "1",
                     butt = {
-                            round: width,
-                            square: width,
-                            butt: 0
-                        }[o.attrs["stroke-linecap"] || params["stroke-linecap"]] || 0,
+                        round: width,
+                        square: width,
+                        butt: 0
+                    }[o.attrs["stroke-linecap"] || params["stroke-linecap"]] || 0,
                     dashes = [],
                     i = value.length;
                 while (i--) {
@@ -4487,7 +4498,7 @@ window.Raphael.svg && function (R) {
                                 done = true;
                             } else {
                                 // maxWidth 1인경우 처리
-                                if(maxWidth == 1) {
+                                if (maxWidth == 1) {
                                     lines.push(text);
                                     done = true;
                                     break;
@@ -4618,6 +4629,7 @@ window.Raphael.svg && function (R) {
     };
 
     elproto.rotate = function (deg, cx, cy) {
+
         if (this.removed) {
             return this;
         }
@@ -4981,12 +4993,12 @@ window.Raphael.svg && function (R) {
             // TODO : 개선필요
             var el = $("div");
             el.style.cssText = [
-                    "position:absolute",
-                    "left:" + (x - w / 2) + "px",
-                    "top:" + (y - h / 2) + "px",
-                    "width:" + w + "px",
-                    "height:" + h + "px"
-                ].join(";") + ";";
+                "position:absolute",
+                "left:" + (x - w / 2) + "px",
+                "top:" + (y - h / 2) + "px",
+                "width:" + w + "px",
+                "height:" + h + "px"
+            ].join(";") + ";";
 
             svg.canvas && svg.canvas.appendChild(el);
             res = new Element(el, svg);
@@ -5443,9 +5455,9 @@ window.Raphael.vml && function (R) {
                         fill.src = E;
                         fill.type = "solid";
                         if (R.getRGB(params.fill).error && (res.type in {
-                                circle: 1,
-                                ellipse: 1
-                            } || Str(params.fill).charAt() != "r") && addGradientFill(res, params.fill, fill)) {
+                            circle: 1,
+                            ellipse: 1
+                        } || Str(params.fill).charAt() != "r") && addGradientFill(res, params.fill, fill)) {
                             a.fill = "none";
                             a.gradient = params.fill;
                             fill.rotate = false;
@@ -6065,12 +6077,12 @@ window.Raphael.vml && function (R) {
         }
         var g = createNode("group");
         g.style.cssText = [
-                "position:absolute",
-                "left:" + (x - w / 2) + "px",
-                "top:" + (y - h / 2) + "px",
-                "width:" + w + "px",
-                "height:" + h + "px"
-            ].join(";") + ";";
+            "position:absolute",
+            "left:" + (x - w / 2) + "px",
+            "top:" + (y - h / 2) + "px",
+            "width:" + w + "px",
+            "height:" + h + "px"
+        ].join(";") + ";";
         g.coordsize = zoom + S + zoom;
         g.coordorigin = "0 0";
 
@@ -6399,6 +6411,7 @@ OG.common.Constants = {
         RECT_CONNECT_MODE: "RECT_CONNECT_MODE",
         RECT_CONNECT_TO_DRAW: "RECT_CONNECT_TO_DRAW",
         TRASH: "_GUIDE_TRASH",
+        ROTATE: "_GUIDE_ROTATE",
         CONTROLLER: "_GUIDE_CONT",
         RECT: "_GUIDE_RECT",
         QUARTER_UPPER: "QUARTER_UPPER",
@@ -7013,11 +7026,11 @@ OG.common.Util = {
                     } else {
                         obj[nodeName] = p;
                     }
-                    for (var j = 0,lenj = node.childNodes.length; j < lenj; j++) {
+                    for (var j = 0, lenj = node.childNodes.length; j < lenj; j++) {
                         process(node.childNodes[j], p, cloneNS(ns));
                     }
                 } else if (node.nodeType === 9) {
-                    for (var k = 0,lenk = node.childNodes.length; k < lenk; k++) {
+                    for (var k = 0, lenk = node.childNodes.length; k < lenk; k++) {
                         process(node.childNodes[k], obj, cloneNS(ns));
                     }
                 }
@@ -7041,7 +7054,7 @@ OG.common.Util = {
         var processLeaf = function (lname, child, ns) {
             var body = "";
             if (child instanceof Array) {
-                for (var i = 0,leni = child.length; i < leni; i++) {
+                for (var i = 0, leni = child.length; i < leni; i++) {
                     body += processLeaf(lname, child[i], cloneNS(ns));
                 }
                 return body;
@@ -7112,249 +7125,249 @@ OG.Util = OG.common.Util;
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.common.CurveUtil = {
-	/**
-	 * 주어진 좌표 Array 에 대해 Cubic Catmull-Rom spline Curve 좌표를 계산하는 함수를 반환한다.
-	 * 모든 좌표를 지나는 커브를 계산한다.
-	 *
-	 * @example
-	 * var points = [[2, 2], [2, -2], [-2, 2], [-2, -2]],
-	 *     cmRomSpline = OG.CurveUtil.CatmullRomSpline(points), t, curve = [];
-	 *
-	 * // t 는 0 ~ maxT 의 값으로, t 값의 증분값이 작을수록 세밀한 Curve 를 그린다.
-	 * for(t = 0; t <= cmRomSpline.maxT; t += 0.1) {
-	 *     curve.push([cmRomSpline.getX(t), cmRomSpline.getY(t)]);
-	 * }
-	 *
-	 * @param {Array} points 좌표 Array (예, [[x1,y1], [x2,y2], [x3,y3], [x4,y4]])
-	 * @return {Object} t 값에 의해 X, Y 좌표를 구하는 함수와 maxT 값을 반환
-	 * @static
-	 */
-	CatmullRomSpline: function (points) {
-		var coeffs = [], p,
-			first = {},
-			last = {}, // control point at the beginning and at the end
+    /**
+     * 주어진 좌표 Array 에 대해 Cubic Catmull-Rom spline Curve 좌표를 계산하는 함수를 반환한다.
+     * 모든 좌표를 지나는 커브를 계산한다.
+     *
+     * @example
+     * var points = [[2, 2], [2, -2], [-2, 2], [-2, -2]],
+     *     cmRomSpline = OG.CurveUtil.CatmullRomSpline(points), t, curve = [];
+     *
+     * // t 는 0 ~ maxT 의 값으로, t 값의 증분값이 작을수록 세밀한 Curve 를 그린다.
+     * for(t = 0; t <= cmRomSpline.maxT; t += 0.1) {
+     *     curve.push([cmRomSpline.getX(t), cmRomSpline.getY(t)]);
+     * }
+     *
+     * @param {Array} points 좌표 Array (예, [[x1,y1], [x2,y2], [x3,y3], [x4,y4]])
+     * @return {Object} t 값에 의해 X, Y 좌표를 구하는 함수와 maxT 값을 반환
+     * @static
+     */
+    CatmullRomSpline: function (points) {
+        var coeffs = [], p,
+            first = {},
+            last = {}, // control point at the beginning and at the end
 
-			makeFct = function (which) {
+            makeFct = function (which) {
 
-				return function (t, suspendedUpdate) {
+                return function (t, suspendedUpdate) {
 
-					var len = points.length, s, c;
+                    var len = points.length, s, c;
 
-					if (len < 2) {
-						return NaN;
-					}
+                    if (len < 2) {
+                        return NaN;
+                    }
 
-					t = t - 1;
+                    t = t - 1;
 
-					if (!suspendedUpdate && coeffs[which]) {
-						suspendedUpdate = true;
-					}
+                    if (!suspendedUpdate && coeffs[which]) {
+                        suspendedUpdate = true;
+                    }
 
-					if (!suspendedUpdate) {
-						first[which] = 2 * points[0][which] - points[1][which];
-						last[which] = 2 * points[len - 1][which] - points[len - 2][which];
-						p = [first].concat(points, [last]);
+                    if (!suspendedUpdate) {
+                        first[which] = 2 * points[0][which] - points[1][which];
+                        last[which] = 2 * points[len - 1][which] - points[len - 2][which];
+                        p = [first].concat(points, [last]);
 
-						coeffs[which] = [];
-						for (s = 0; s < len - 1; s++) {
-							coeffs[which][s] = [
-								2 * p[s + 1][which],
-								-p[s][which] + p[s + 2][which],
-								2 * p[s][which] - 5 * p[s + 1][which] + 4 * p[s + 2][which] - p[s + 3][which],
-								-p[s][which] + 3 * p[s + 1][which] - 3 * p[s + 2][which] + p[s + 3][which]
-							];
-						}
-					}
-					len += 2;  // add the two control points
-					if (isNaN(t)) {
-						return NaN;
-					}
-					// This is necessay for our advanced plotting algorithm:
-					if (t < 0) {
-						return p[1][which];
-					} else if (t >= len - 3) {
-						return p[len - 2][which];
-					}
+                        coeffs[which] = [];
+                        for (s = 0; s < len - 1; s++) {
+                            coeffs[which][s] = [
+                                2 * p[s + 1][which],
+                                -p[s][which] + p[s + 2][which],
+                                2 * p[s][which] - 5 * p[s + 1][which] + 4 * p[s + 2][which] - p[s + 3][which],
+                                -p[s][which] + 3 * p[s + 1][which] - 3 * p[s + 2][which] + p[s + 3][which]
+                            ];
+                        }
+                    }
+                    len += 2;  // add the two control points
+                    if (isNaN(t)) {
+                        return NaN;
+                    }
+                    // This is necessay for our advanced plotting algorithm:
+                    if (t < 0) {
+                        return p[1][which];
+                    } else if (t >= len - 3) {
+                        return p[len - 2][which];
+                    }
 
-					s = Math.floor(t);
-					if (s === t) {
-						return p[s][which];
-					}
-					t -= s;
-					c = coeffs[which][s];
-					return 0.5 * (((c[3] * t + c[2]) * t + c[1]) * t + c[0]);
-				};
-			};
+                    s = Math.floor(t);
+                    if (s === t) {
+                        return p[s][which];
+                    }
+                    t -= s;
+                    c = coeffs[which][s];
+                    return 0.5 * (((c[3] * t + c[2]) * t + c[1]) * t + c[0]);
+                };
+            };
 
-		return {
-			getX: makeFct(0),
-			getY: makeFct(1),
-			maxT: points.length + 1
-		};
-	},
+        return {
+            getX: makeFct(0),
+            getY: makeFct(1),
+            maxT: points.length + 1
+        };
+    },
 
-	/**
-	 * 주어진 좌표 Array (좌표1, 콘트롤포인트1, 콘트롤포인트2, 좌표2 ...) 에 대해 Cubic Bezier Curve 좌표를 계산하는 함수를 반환한다.
-	 * Array 갯수는 3 * K + 1 이어야 한다.
-	 * 예) 좌표1, 콘트롤포인트1, 콘트롤포인트2, 좌표2, 콘트롤포인트1, 콘트롤포인트2, 좌표3 ...
-	 *
-	 * @example
-	 * var points = [[2, 1], [1, 3], [-1, -1], [-2, 1]],
-	 *     bezier = OG.CurveUtil.Bezier(points), t, curve = [];
-	 *
-	 * // t 는 0 ~ maxT 의 값으로, t 값의 증분값이 작을수록 세밀한 Curve 를 그린다.
-	 * for(t = 0; t <= bezier.maxT; t += 0.1) {
-	 *     curve.push([bezier.getX(t), bezier.getY(t)]);
-	 * }
-	 *
-	 * @param {Array} points 좌표 Array (예, [[x1,y1], [cp_x1,cp_y1], [cp_x2,cp_y2], [x2,y4]])
-	 * @return {Object} t 값에 의해 X, Y 좌표를 구하는 함수와 maxT 값을 반환
-	 * @static
-	 */
-	Bezier: function (points) {
-		var len,
-			makeFct = function (which) {
-				return function (t, suspendedUpdate) {
-					var z = Math.floor(t) * 3,
-						t0 = t,
-						t1 = 1 - t0;
+    /**
+     * 주어진 좌표 Array (좌표1, 콘트롤포인트1, 콘트롤포인트2, 좌표2 ...) 에 대해 Cubic Bezier Curve 좌표를 계산하는 함수를 반환한다.
+     * Array 갯수는 3 * K + 1 이어야 한다.
+     * 예) 좌표1, 콘트롤포인트1, 콘트롤포인트2, 좌표2, 콘트롤포인트1, 콘트롤포인트2, 좌표3 ...
+     *
+     * @example
+     * var points = [[2, 1], [1, 3], [-1, -1], [-2, 1]],
+     *     bezier = OG.CurveUtil.Bezier(points), t, curve = [];
+     *
+     * // t 는 0 ~ maxT 의 값으로, t 값의 증분값이 작을수록 세밀한 Curve 를 그린다.
+     * for(t = 0; t <= bezier.maxT; t += 0.1) {
+     *     curve.push([bezier.getX(t), bezier.getY(t)]);
+     * }
+     *
+     * @param {Array} points 좌표 Array (예, [[x1,y1], [cp_x1,cp_y1], [cp_x2,cp_y2], [x2,y4]])
+     * @return {Object} t 값에 의해 X, Y 좌표를 구하는 함수와 maxT 값을 반환
+     * @static
+     */
+    Bezier: function (points) {
+        var len,
+            makeFct = function (which) {
+                return function (t, suspendedUpdate) {
+                    var z = Math.floor(t) * 3,
+                        t0 = t,
+                        t1 = 1 - t0;
 
-					if (!suspendedUpdate && len) {
-						suspendedUpdate = true;
-					}
+                    if (!suspendedUpdate && len) {
+                        suspendedUpdate = true;
+                    }
 
-					if (!suspendedUpdate) {
-						len = Math.floor(points.length / 3);
-					}
+                    if (!suspendedUpdate) {
+                        len = Math.floor(points.length / 3);
+                    }
 
-					if (t < 0) {
-						return points[0][which];
-					}
-					if (t >= len) {
-						return points[points.length - 1][which];
-					}
-					if (isNaN(t)) {
-						return NaN;
-					}
-					return t1 * t1 * (t1 * points[z][which] + 3 * t0 * points[z + 1][which]) +
-						(3 * t1 * points[z + 2][which] + t0 * points[z + 3][which]) * t0 * t0;
-				};
-			};
+                    if (t < 0) {
+                        return points[0][which];
+                    }
+                    if (t >= len) {
+                        return points[points.length - 1][which];
+                    }
+                    if (isNaN(t)) {
+                        return NaN;
+                    }
+                    return t1 * t1 * (t1 * points[z][which] + 3 * t0 * points[z + 1][which]) +
+                        (3 * t1 * points[z + 2][which] + t0 * points[z + 3][which]) * t0 * t0;
+                };
+            };
 
-		return {
-			getX: makeFct(0),
-			getY: makeFct(1),
-			maxT: Math.floor(points.length / 3) + 0.01
-		};
-	},
+        return {
+            getX: makeFct(0),
+            getY: makeFct(1),
+            maxT: Math.floor(points.length / 3) + 0.01
+        };
+    },
 
-	/**
-	 * 주어진 좌표 Array (시작좌표, 콘트롤포인트1, 콘트롤포인트2, ..., 끝좌표) 에 대해 B-Spline Curve 좌표를 계산하는 함수를 반환한다.
-	 *
-	 * @example
-	 * var points = [[2, 1], [1, 3], [-1, -1], [-2, 1]],
-	 *     bspline = OG.CurveUtil.BSpline(points), t, curve = [];
-	 *
-	 * // t 는 0 ~ maxT 의 값으로, t 값의 증분값이 작을수록 세밀한 Curve 를 그린다.
-	 * for(t = 0; t <= bspline.maxT; t += 0.1) {
-	 *     curve.push([bspline.getX(t), bspline.getY(t)]);
-	 * }
-	 *
-	 * @param {Array} points 좌표 Array (예, [[x1,y1], [x2,y2], [x3,y3], [x4,y4]])
-	 * @param {Number} order Order of the B-spline curve.
-	 * @return {Object} t 값에 의해 X, Y 좌표를 구하는 함수와 maxT 값을 반환
-	 * @static
-	 */
-	BSpline: function (points, order) {
-		var knots, N = [],
-			_knotVector = function (n, k) {
-				var j, kn = [];
-				for (j = 0; j < n + k + 1; j++) {
-					if (j < k) {
-						kn[j] = 0.0;
-					} else if (j <= n) {
-						kn[j] = j - k + 1;
-					} else {
-						kn[j] = n - k + 2;
-					}
-				}
-				return kn;
-			},
+    /**
+     * 주어진 좌표 Array (시작좌표, 콘트롤포인트1, 콘트롤포인트2, ..., 끝좌표) 에 대해 B-Spline Curve 좌표를 계산하는 함수를 반환한다.
+     *
+     * @example
+     * var points = [[2, 1], [1, 3], [-1, -1], [-2, 1]],
+     *     bspline = OG.CurveUtil.BSpline(points), t, curve = [];
+     *
+     * // t 는 0 ~ maxT 의 값으로, t 값의 증분값이 작을수록 세밀한 Curve 를 그린다.
+     * for(t = 0; t <= bspline.maxT; t += 0.1) {
+     *     curve.push([bspline.getX(t), bspline.getY(t)]);
+     * }
+     *
+     * @param {Array} points 좌표 Array (예, [[x1,y1], [x2,y2], [x3,y3], [x4,y4]])
+     * @param {Number} order Order of the B-spline curve.
+     * @return {Object} t 값에 의해 X, Y 좌표를 구하는 함수와 maxT 값을 반환
+     * @static
+     */
+    BSpline: function (points, order) {
+        var knots, N = [],
+            _knotVector = function (n, k) {
+                var j, kn = [];
+                for (j = 0; j < n + k + 1; j++) {
+                    if (j < k) {
+                        kn[j] = 0.0;
+                    } else if (j <= n) {
+                        kn[j] = j - k + 1;
+                    } else {
+                        kn[j] = n - k + 2;
+                    }
+                }
+                return kn;
+            },
 
-			_evalBasisFuncs = function (t, kn, n, k, s) {
-				var i, j, a, b, den,
-					N = [];
+            _evalBasisFuncs = function (t, kn, n, k, s) {
+                var i, j, a, b, den,
+                    N = [];
 
-				if (kn[s] <= t && t < kn[s + 1]) {
-					N[s] = 1;
-				} else {
-					N[s] = 0;
-				}
-				for (i = 2; i <= k; i++) {
-					for (j = s - i + 1; j <= s; j++) {
-						if (j <= s - i + 1 || j < 0) {
-							a = 0.0;
-						} else {
-							a = N[j];
-						}
-						if (j >= s) {
-							b = 0.0;
-						} else {
-							b = N[j + 1];
-						}
-						den = kn[j + i - 1] - kn[j];
-						if (den === 0) {
-							N[j] = 0;
-						} else {
-							N[j] = (t - kn[j]) / den * a;
-						}
-						den = kn[j + i] - kn[j + 1];
-						if (den !== 0) {
-							N[j] += (kn[j + i] - t) / den * b;
-						}
-					}
-				}
-				return N;
-			},
-			makeFct = function (which) {
-				return function (t, suspendedUpdate) {
-					var len = points.length, y, j, s,
-						n = len - 1,
-						k = order;
+                if (kn[s] <= t && t < kn[s + 1]) {
+                    N[s] = 1;
+                } else {
+                    N[s] = 0;
+                }
+                for (i = 2; i <= k; i++) {
+                    for (j = s - i + 1; j <= s; j++) {
+                        if (j <= s - i + 1 || j < 0) {
+                            a = 0.0;
+                        } else {
+                            a = N[j];
+                        }
+                        if (j >= s) {
+                            b = 0.0;
+                        } else {
+                            b = N[j + 1];
+                        }
+                        den = kn[j + i - 1] - kn[j];
+                        if (den === 0) {
+                            N[j] = 0;
+                        } else {
+                            N[j] = (t - kn[j]) / den * a;
+                        }
+                        den = kn[j + i] - kn[j + 1];
+                        if (den !== 0) {
+                            N[j] += (kn[j + i] - t) / den * b;
+                        }
+                    }
+                }
+                return N;
+            },
+            makeFct = function (which) {
+                return function (t, suspendedUpdate) {
+                    var len = points.length, y, j, s,
+                        n = len - 1,
+                        k = order;
 
-					if (n <= 0) {
-						return NaN;
-					}
-					if (n + 2 <= k) {
-						k = n + 1;
-					}
-					if (t <= 0) {
-						return points[0][which];
-					}
-					if (t >= n - k + 2) {
-						return points[n][which];
-					}
+                    if (n <= 0) {
+                        return NaN;
+                    }
+                    if (n + 2 <= k) {
+                        k = n + 1;
+                    }
+                    if (t <= 0) {
+                        return points[0][which];
+                    }
+                    if (t >= n - k + 2) {
+                        return points[n][which];
+                    }
 
-					knots = _knotVector(n, k);
-					s = Math.floor(t) + k - 1;
-					N = _evalBasisFuncs(t, knots, n, k, s);
+                    knots = _knotVector(n, k);
+                    s = Math.floor(t) + k - 1;
+                    N = _evalBasisFuncs(t, knots, n, k, s);
 
-					y = 0.0;
-					for (j = s - k + 1; j <= s; j++) {
-						if (j < len && j >= 0) {
-							y += points[j][which] * N[j];
-						}
-					}
-					return y;
-				};
-			};
+                    y = 0.0;
+                    for (j = s - k + 1; j <= s; j++) {
+                        if (j < len && j >= 0) {
+                            y += points[j][which] * N[j];
+                        }
+                    }
+                    return y;
+                };
+            };
 
-		return {
-			getX: makeFct(0),
-			getY: makeFct(1),
-			maxT: points.length - 2
-		};
-	}
+        return {
+            getX: makeFct(0),
+            getY: makeFct(1),
+            maxT: points.length - 2
+        };
+    }
 };
 OG.CurveUtil = OG.common.CurveUtil;
 /**
@@ -7367,17 +7380,17 @@ OG.CurveUtil = OG.common.CurveUtil;
  * @private
  */
 OG.common.NotSupportedException = function (message) {
-	/**
-	 * 예외명
-	 * @type String
-	 */
-	this.name = "OG.NotSupportedException";
+    /**
+     * 예외명
+     * @type String
+     */
+    this.name = "OG.NotSupportedException";
 
-	/**
-	 * 메시지
-	 * @type String
-	 */
-	this.message = message || "Not Supported!";
+    /**
+     * 메시지
+     * @type String
+     */
+    this.message = message || "Not Supported!";
 };
 OG.NotSupportedException = OG.common.NotSupportedException;
 
@@ -7391,17 +7404,17 @@ OG.NotSupportedException = OG.common.NotSupportedException;
  * @private
  */
 OG.common.NotImplementedException = function (message) {
-	/**
-	 * 예외명
-	 * @type String
-	 */
-	this.name = "OG.NotImplementedException";
+    /**
+     * 예외명
+     * @type String
+     */
+    this.name = "OG.NotImplementedException";
 
-	/**
-	 * 메시지
-	 * @type String
-	 */
-	this.message = message || "Not Implemented!";
+    /**
+     * 메시지
+     * @type String
+     */
+    this.message = message || "Not Implemented!";
 };
 OG.NotImplementedException = OG.common.NotImplementedException;
 
@@ -7415,17 +7428,17 @@ OG.NotImplementedException = OG.common.NotImplementedException;
  * @private
  */
 OG.common.ParamError = function (message) {
-	/**
-	 * 예외명
-	 * @type String
-	 */
-	this.name = "OG.ParamError";
+    /**
+     * 예외명
+     * @type String
+     */
+    this.name = "OG.ParamError";
 
-	/**
-	 * 메시지
-	 * @type String
-	 */
-	this.message = message || "Invalid Parameter Error!";
+    /**
+     * 메시지
+     * @type String
+     */
+    this.message = message || "Invalid Parameter Error!";
 };
 OG.ParamError = OG.common.ParamError;
 /**
@@ -7451,142 +7464,142 @@ OG.ParamError = OG.common.ParamError;
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.common.HashMap = function (jsonObject) {
-	/**
-	 * key:value 매핑 JSON 오브젝트
-	 * @type Object
-	 */
-	this.map = jsonObject || {};
+    /**
+     * key:value 매핑 JSON 오브젝트
+     * @type Object
+     */
+    this.map = jsonObject || {};
 };
 OG.common.HashMap.prototype = {
-	/**
-	 * key : value 를 매핑한다.
-	 *
-	 * @param {String} key 키
-	 * @param {Object} value 값
-	 */
-	put: function (key, value) {
-		this.map[key] = value;
-	},
+    /**
+     * key : value 를 매핑한다.
+     *
+     * @param {String} key 키
+     * @param {Object} value 값
+     */
+    put: function (key, value) {
+        this.map[key] = value;
+    },
 
-	/**
-	 * key 에 대한 value 를 반환한다.
-	 *
-	 * @param {String} key 키
-	 * @return {Object} 값
-	 */
-	get: function (key) {
-		return this.map[key];
-	},
+    /**
+     * key 에 대한 value 를 반환한다.
+     *
+     * @param {String} key 키
+     * @return {Object} 값
+     */
+    get: function (key) {
+        return this.map[key];
+    },
 
-	/**
-	 * 주어진 key 를 포함하는지 여부를 반환한다.
-	 *
-	 * @param {String} key 키
-	 * @return {Boolean}
-	 */
-	containsKey: function (key) {
-		return this.map.hasOwnProperty(key);
-	},
+    /**
+     * 주어진 key 를 포함하는지 여부를 반환한다.
+     *
+     * @param {String} key 키
+     * @return {Boolean}
+     */
+    containsKey: function (key) {
+        return this.map.hasOwnProperty(key);
+    },
 
-	/**
-	 * 주어진 value 를 포함하는지 여부를 반환한다.
-	 *
-	 * @param {Object} value 값
-	 * @return {Boolean}
-	 */
-	containsValue: function (value) {
-		var prop;
-		for (prop in this.map) {
-			if (this.map[prop] === value) {
-				return true;
-			}
-		}
-		return false;
-	},
+    /**
+     * 주어진 value 를 포함하는지 여부를 반환한다.
+     *
+     * @param {Object} value 값
+     * @return {Boolean}
+     */
+    containsValue: function (value) {
+        var prop;
+        for (prop in this.map) {
+            if (this.map[prop] === value) {
+                return true;
+            }
+        }
+        return false;
+    },
 
-	/**
-	 * Empty 여부를 반환한다.
-	 *
-	 * @return {Boolean}
-	 */
-	isEmpty: function () {
-		return this.size() === 0;
-	},
+    /**
+     * Empty 여부를 반환한다.
+     *
+     * @return {Boolean}
+     */
+    isEmpty: function () {
+        return this.size() === 0;
+    },
 
-	/**
-	 * 매핑정보를 클리어한다.
-	 */
-	clear: function () {
-		var prop;
-		for (prop in this.map) {
-			delete this.map[prop];
-		}
-	},
+    /**
+     * 매핑정보를 클리어한다.
+     */
+    clear: function () {
+        var prop;
+        for (prop in this.map) {
+            delete this.map[prop];
+        }
+    },
 
-	/**
-	 * 주어진 key 의 매핑정보를 삭제한다.
-	 *
-	 * @param {String} key 키
-	 */
-	remove: function (key) {
-		if (this.map[key]) {
-			delete this.map[key];
-		}
-	},
+    /**
+     * 주어진 key 의 매핑정보를 삭제한다.
+     *
+     * @param {String} key 키
+     */
+    remove: function (key) {
+        if (this.map[key]) {
+            delete this.map[key];
+        }
+    },
 
-	/**
-	 * key 목록을 반환한다.
-	 *
-	 * @return {String[]} 키목록
-	 */
-	keys: function () {
-		var keys = [], prop;
-		for (prop in this.map) {
-			keys.push(prop);
-		}
-		return keys;
-	},
+    /**
+     * key 목록을 반환한다.
+     *
+     * @return {String[]} 키목록
+     */
+    keys: function () {
+        var keys = [], prop;
+        for (prop in this.map) {
+            keys.push(prop);
+        }
+        return keys;
+    },
 
-	/**
-	 * value 목록을 반환한다.
-	 *
-	 * @return {Object[]} 값목록
-	 */
-	values: function () {
-		var values = [], prop;
-		for (prop in this.map) {
-			values.push(this.map[prop]);
-		}
-		return values;
-	},
+    /**
+     * value 목록을 반환한다.
+     *
+     * @return {Object[]} 값목록
+     */
+    values: function () {
+        var values = [], prop;
+        for (prop in this.map) {
+            values.push(this.map[prop]);
+        }
+        return values;
+    },
 
-	/**
-	 * 매핑된 key:value 갯수를 반환한다.
-	 *
-	 * @return {Number}
-	 */
-	size: function () {
-		var count = 0, prop;
-		for (prop in this.map) {
-			count++;
-		}
-		return count;
-	},
+    /**
+     * 매핑된 key:value 갯수를 반환한다.
+     *
+     * @return {Number}
+     */
+    size: function () {
+        var count = 0, prop;
+        for (prop in this.map) {
+            count++;
+        }
+        return count;
+    },
 
-	/**
-	 * 객체 프라퍼티 정보를 JSON 스트링으로 반환한다.
-	 *
-	 * @return {String} 프라퍼티 정보
-	 * @override
-	 */
-	toString: function () {
-		var s = [], prop;
-		for (prop in this.map) {
-			s.push("'" + prop + "':'" + this.map[prop] + "'");
-		}
+    /**
+     * 객체 프라퍼티 정보를 JSON 스트링으로 반환한다.
+     *
+     * @return {String} 프라퍼티 정보
+     * @override
+     */
+    toString: function () {
+        var s = [], prop;
+        for (prop in this.map) {
+            s.push("'" + prop + "':'" + this.map[prop] + "'");
+        }
 
-		return "{" + s.join() + "}";
-	}
+        return "{" + s.join() + "}";
+    }
 };
 OG.common.HashMap.prototype.constructor = OG.common.HashMap;
 OG.HashMap = OG.common.HashMap;
@@ -7600,164 +7613,164 @@ OG.HashMap = OG.common.HashMap;
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.common.JSON = new (function () {
-	var useHasOwn = !!{}.hasOwnProperty,
-		USE_NATIVE_JSON = false,
-		isNative = (function () {
-			var useNative = null;
+    var useHasOwn = !!{}.hasOwnProperty,
+        USE_NATIVE_JSON = false,
+        isNative = (function () {
+            var useNative = null;
 
-			return function () {
-				if (useNative === null) {
-					useNative = USE_NATIVE_JSON && window.JSON && JSON.toString() === '[object JSON]';
-				}
+            return function () {
+                if (useNative === null) {
+                    useNative = USE_NATIVE_JSON && window.JSON && JSON.toString() === '[object JSON]';
+                }
 
-				return useNative;
-			};
-		}()),
-		m = {
-			"\b": '\\b',
-			"\t": '\\t',
-			"\n": '\\n',
-			"\f": '\\f',
-			"\r": '\\r',
-			'"' : '\\"',
-			"\\": '\\\\'
-		},
-		pad = function (n) {
-			return n < 10 ? "0" + n : n;
-		},
-		doDecode = function (json) {
-			return eval("(" + json + ')');
-		},
-		encodeString = function (s) {
-			if (/["\\\x00-\x1f]/.test(s)) {
-				return '"' + s.replace(/([\x00-\x1f\\"])/g, function (a, b) {
-					var c = m[b];
-					if (c) {
-						return c;
-					}
-					c = b.charCodeAt();
-					return "\\u00" +
-						Math.floor(c / 16).toString(16) +
-						(c % 16).toString(16);
-				}) + '"';
-			}
-			return '"' + s + '"';
-		},
-		encodeArray = function (o) {
-			var a = ["["], b, i, l = o.length, v;
-			for (i = 0; i < l; i += 1) {
-				v = o[i];
-				switch (typeof v) {
-				case "undefined":
-				case "function":
-				case "unknown":
-					break;
-				default:
-					if (b) {
-						a.push(',');
-					}
-					a.push(v === null ? "null" : OG.common.JSON.encode(v));
-					b = true;
-				}
-			}
-			a.push("]");
-			return a.join("");
-		},
-		doEncode = function (o) {
-			if (!OG.Util.isDefined(o) || o === null) {
-				return "null";
-			} else if (OG.Util.isArray(o)) {
-				return encodeArray(o);
-			} else if (OG.Util.isDate(o)) {
-				return OG.common.JSON.encodeDate(o);
-			} else if (OG.Util.isString(o)) {
-				return encodeString(o);
-			} else if (typeof o === "number") {
-				//don't use isNumber here, since finite checks happen inside isNumber
-				return isFinite(o) ? String(o) : "null";
-			} else if (OG.Util.isBoolean(o)) {
-				return String(o);
-			} else {
-				var a = ["{"], b, i, v;
-				for (i in o) {
-					// don't encode DOM objects
-					if (!o.getElementsByTagName) {
-						if (!useHasOwn || o.hasOwnProperty(i)) {
-							v = o[i];
-							switch (typeof v) {
-							case "undefined":
-							case "function":
-							case "unknown":
-								break;
-							default:
-								if (b) {
-									a.push(',');
-								}
-								a.push(doEncode(i), ":",
-									v === null ? "null" : doEncode(v));
-								b = true;
-							}
-						}
-					}
-				}
-				a.push("}");
-				return a.join("");
-			}
-		};
+                return useNative;
+            };
+        }()),
+        m = {
+            "\b": '\\b',
+            "\t": '\\t',
+            "\n": '\\n',
+            "\f": '\\f',
+            "\r": '\\r',
+            '"': '\\"',
+            "\\": '\\\\'
+        },
+        pad = function (n) {
+            return n < 10 ? "0" + n : n;
+        },
+        doDecode = function (json) {
+            return eval("(" + json + ')');
+        },
+        encodeString = function (s) {
+            if (/["\\\x00-\x1f]/.test(s)) {
+                return '"' + s.replace(/([\x00-\x1f\\"])/g, function (a, b) {
+                    var c = m[b];
+                    if (c) {
+                        return c;
+                    }
+                    c = b.charCodeAt();
+                    return "\\u00" +
+                        Math.floor(c / 16).toString(16) +
+                        (c % 16).toString(16);
+                }) + '"';
+            }
+            return '"' + s + '"';
+        },
+        encodeArray = function (o) {
+            var a = ["["], b, i, l = o.length, v;
+            for (i = 0; i < l; i += 1) {
+                v = o[i];
+                switch (typeof v) {
+                    case "undefined":
+                    case "function":
+                    case "unknown":
+                        break;
+                    default:
+                        if (b) {
+                            a.push(',');
+                        }
+                        a.push(v === null ? "null" : OG.common.JSON.encode(v));
+                        b = true;
+                }
+            }
+            a.push("]");
+            return a.join("");
+        },
+        doEncode = function (o) {
+            if (!OG.Util.isDefined(o) || o === null) {
+                return "null";
+            } else if (OG.Util.isArray(o)) {
+                return encodeArray(o);
+            } else if (OG.Util.isDate(o)) {
+                return OG.common.JSON.encodeDate(o);
+            } else if (OG.Util.isString(o)) {
+                return encodeString(o);
+            } else if (typeof o === "number") {
+                //don't use isNumber here, since finite checks happen inside isNumber
+                return isFinite(o) ? String(o) : "null";
+            } else if (OG.Util.isBoolean(o)) {
+                return String(o);
+            } else {
+                var a = ["{"], b, i, v;
+                for (i in o) {
+                    // don't encode DOM objects
+                    if (!o.getElementsByTagName) {
+                        if (!useHasOwn || o.hasOwnProperty(i)) {
+                            v = o[i];
+                            switch (typeof v) {
+                                case "undefined":
+                                case "function":
+                                case "unknown":
+                                    break;
+                                default:
+                                    if (b) {
+                                        a.push(',');
+                                    }
+                                    a.push(doEncode(i), ":",
+                                        v === null ? "null" : doEncode(v));
+                                    b = true;
+                            }
+                        }
+                    }
+                }
+                a.push("}");
+                return a.join("");
+            }
+        };
 
-	/**
-	 * <p>Encodes a Date. This returns the actual string which is inserted into the JSON string as the literal expression.
-	 * <b>The returned value includes enclosing double quotation marks.</b></p>
-	 * <p>The default return format is "yyyy-mm-ddThh:mm:ss".</p>
-	 * <p>To override this:</p><pre><code>
-	 OG.common.JSON.encodeDate = function(d) {
+    /**
+     * <p>Encodes a Date. This returns the actual string which is inserted into the JSON string as the literal expression.
+     * <b>The returned value includes enclosing double quotation marks.</b></p>
+     * <p>The default return format is "yyyy-mm-ddThh:mm:ss".</p>
+     * <p>To override this:</p><pre><code>
+     OG.common.JSON.encodeDate = function(d) {
 	 return d.format('"Y-m-d"');
 	 };
-	 </code></pre>
-	 * @param {Date} d The Date to encode
-	 * @return {String} The string literal to use in a JSON string.
-	 */
-	this.encodeDate = function (o) {
-		return '"' + o.getFullYear() + "-" +
-			pad(o.getMonth() + 1) + "-" +
-			pad(o.getDate()) + "T" +
-			pad(o.getHours()) + ":" +
-			pad(o.getMinutes()) + ":" +
-			pad(o.getSeconds()) + '"';
-	};
+     </code></pre>
+     * @param {Date} d The Date to encode
+     * @return {String} The string literal to use in a JSON string.
+     */
+    this.encodeDate = function (o) {
+        return '"' + o.getFullYear() + "-" +
+            pad(o.getMonth() + 1) + "-" +
+            pad(o.getDate()) + "T" +
+            pad(o.getHours()) + ":" +
+            pad(o.getMinutes()) + ":" +
+            pad(o.getSeconds()) + '"';
+    };
 
-	/**
-	 * Encodes an Object, Array or other value
-	 * @param {Mixed} o The variable to encode
-	 * @return {String} The JSON string
-	 */
-	this.encode = (function () {
-		var ec;
-		return function (o) {
-			if (!ec) {
-				// setup encoding function on first access
-				ec = isNative() ? JSON.stringify : doEncode;
-			}
-			return ec(o);
-		};
-	}());
+    /**
+     * Encodes an Object, Array or other value
+     * @param {Mixed} o The variable to encode
+     * @return {String} The JSON string
+     */
+    this.encode = (function () {
+        var ec;
+        return function (o) {
+            if (!ec) {
+                // setup encoding function on first access
+                ec = isNative() ? JSON.stringify : doEncode;
+            }
+            return ec(o);
+        };
+    }());
 
 
-	/**
-	 * Decodes (parses) a JSON string to an object. If the JSON is invalid, this function throws a SyntaxError unless the safe option is set.
-	 * @param {String} json The JSON string
-	 * @return {Object} The resulting object
-	 */
-	this.decode = (function () {
-		var dc;
-		return function (json) {
-			if (!dc) {
-				// setup decoding function on first access
-				dc = isNative() ? JSON.parse : doDecode;
-			}
-			return dc(json);
-		};
-	}());
+    /**
+     * Decodes (parses) a JSON string to an object. If the JSON is invalid, this function throws a SyntaxError unless the safe option is set.
+     * @param {String} json The JSON string
+     * @return {Object} The resulting object
+     */
+    this.decode = (function () {
+        var dc;
+        return function (json) {
+            if (!dc) {
+                // setup decoding function on first access
+                dc = isNative() ? JSON.parse : doDecode;
+            }
+            return dc(json);
+        };
+    }());
 
 })();
 OG.JSON = OG.common.JSON;
@@ -7778,11 +7791,11 @@ OG.JSON = OG.common.JSON;
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.geometry.Style = function (style) {
-	var DEFAULT_STYLE = {}, _style = {};
+    var DEFAULT_STYLE = {}, _style = {};
 
-	OG.Util.apply(_style, style, DEFAULT_STYLE);
+    OG.Util.apply(_style, style, DEFAULT_STYLE);
 
-	OG.geometry.Style.superclass.call(this, _style);
+    OG.geometry.Style.superclass.call(this, _style);
 };
 OG.geometry.Style.prototype = new OG.common.HashMap();
 OG.geometry.Style.superclass = OG.common.HashMap;
@@ -7947,445 +7960,445 @@ OG.Coordinate = OG.geometry.Coordinate;
  */
 OG.geometry.Envelope = function (upperLeft, width, height) {
 
-	/**
-	 * @type OG.geometry.Coordinate
-	 * @private
-	 */
-	this._upperLeft = null;
+    /**
+     * @type OG.geometry.Coordinate
+     * @private
+     */
+    this._upperLeft = null;
 
-	/**
-	 * @type Number
-	 * @private
-	 */
-	this._width = width;
+    /**
+     * @type Number
+     * @private
+     */
+    this._width = width;
 
-	/**
-	 * @type Number
-	 * @private
-	 */
-	this._height = height;
+    /**
+     * @type Number
+     * @private
+     */
+    this._height = height;
 
-	/**
-	 * @type OG.geometry.Coordinate
-	 * @private
-	 */
-	this._upperRight = null;
+    /**
+     * @type OG.geometry.Coordinate
+     * @private
+     */
+    this._upperRight = null;
 
-	/**
-	 * @type OG.geometry.Coordinate
-	 * @private
-	 */
-	this._lowerLeft = null;
+    /**
+     * @type OG.geometry.Coordinate
+     * @private
+     */
+    this._lowerLeft = null;
 
-	/**
-	 * @type OG.geometry.Coordinate
-	 * @private
-	 */
-	this._lowerRight = null;
+    /**
+     * @type OG.geometry.Coordinate
+     * @private
+     */
+    this._lowerRight = null;
 
-	/**
-	 * @type OG.geometry.Coordinate
-	 * @private
-	 */
-	this._leftCenter = null;
+    /**
+     * @type OG.geometry.Coordinate
+     * @private
+     */
+    this._leftCenter = null;
 
-	/**
-	 * @type OG.geometry.Coordinate
-	 * @private
-	 */
-	this._leftCenter = null;
+    /**
+     * @type OG.geometry.Coordinate
+     * @private
+     */
+    this._leftCenter = null;
 
-	/**
-	 * @type OG.geometry.Coordinate
-	 * @private
-	 */
-	this._upperCenter = null;
+    /**
+     * @type OG.geometry.Coordinate
+     * @private
+     */
+    this._upperCenter = null;
 
-	/**
-	 * @type OG.geometry.Coordinate
-	 * @private
-	 */
-	this._rightCenter = null;
+    /**
+     * @type OG.geometry.Coordinate
+     * @private
+     */
+    this._rightCenter = null;
 
-	/**
-	 * @type OG.geometry.Coordinate
-	 * @private
-	 */
-	this._lowerCenter = null;
+    /**
+     * @type OG.geometry.Coordinate
+     * @private
+     */
+    this._lowerCenter = null;
 
-	/**
-	 * @type OG.geometry.Coordinate
-	 * @private
-	 */
-	this._centroid = null;
+    /**
+     * @type OG.geometry.Coordinate
+     * @private
+     */
+    this._centroid = null;
 
-	// Array 좌표를 OG.geometry.Coordinate 로 변환
-	if (upperLeft) {
-		if (upperLeft.constructor === Array) {
-			this._upperLeft = new OG.geometry.Coordinate(upperLeft);
-		} else {
-			this._upperLeft = new OG.geometry.Coordinate(upperLeft.x, upperLeft.y);
-		}
-	}
+    // Array 좌표를 OG.geometry.Coordinate 로 변환
+    if (upperLeft) {
+        if (upperLeft.constructor === Array) {
+            this._upperLeft = new OG.geometry.Coordinate(upperLeft);
+        } else {
+            this._upperLeft = new OG.geometry.Coordinate(upperLeft.x, upperLeft.y);
+        }
+    }
 };
 OG.geometry.Envelope.prototype = {
-	/**
-	 * 기준 좌상단 좌표를 반환한다.
-	 *
-	 * @return {OG.geometry.Coordinate} 좌상단 좌표
-	 */
-	getUpperLeft: function () {
-		return this._upperLeft;
-	},
+    /**
+     * 기준 좌상단 좌표를 반환한다.
+     *
+     * @return {OG.geometry.Coordinate} 좌상단 좌표
+     */
+    getUpperLeft: function () {
+        return this._upperLeft;
+    },
 
-	/**
-	 * 주어진 좌표로 기준 좌상단 좌표를 설정한다. 새로 설정된 값으로 이동된다.
-	 *
-	 * @param {OG.geometry.Coordinate|Number[]} upperLeft 좌상단 좌표
-	 */
-	setUpperLeft: function (upperLeft) {
-		if (upperLeft.constructor === Array) {
-			upperLeft = new OG.geometry.Coordinate(upperLeft[0], upperLeft[1]);
-		}
+    /**
+     * 주어진 좌표로 기준 좌상단 좌표를 설정한다. 새로 설정된 값으로 이동된다.
+     *
+     * @param {OG.geometry.Coordinate|Number[]} upperLeft 좌상단 좌표
+     */
+    setUpperLeft: function (upperLeft) {
+        if (upperLeft.constructor === Array) {
+            upperLeft = new OG.geometry.Coordinate(upperLeft[0], upperLeft[1]);
+        }
 
-		this._upperLeft = upperLeft;
-		this._reset();
-	},
+        this._upperLeft = upperLeft;
+        this._reset();
+    },
 
-	/**
-	 * 우상단 좌표를 반환한다.
-	 *
-	 * @return {OG.geometry.Coordinate} 우상단 좌표
-	 */
-	getUpperRight: function () {
-		if (!this._upperRight) {
-			this._upperRight = new OG.geometry.Coordinate(this._upperLeft.x + this._width, this._upperLeft.y);
-		}
-		return this._upperRight;
-	},
+    /**
+     * 우상단 좌표를 반환한다.
+     *
+     * @return {OG.geometry.Coordinate} 우상단 좌표
+     */
+    getUpperRight: function () {
+        if (!this._upperRight) {
+            this._upperRight = new OG.geometry.Coordinate(this._upperLeft.x + this._width, this._upperLeft.y);
+        }
+        return this._upperRight;
+    },
 
-	/**
-	 * 우하단 좌표를 반환한다.
-	 *
-	 * @return {OG.geometry.Coordinate} 우하단 좌표
-	 */
-	getLowerRight: function () {
-		if (!this._lowerRight) {
-			this._lowerRight = new OG.geometry.Coordinate(this._upperLeft.x + this._width, this._upperLeft.y + this._height);
-		}
-		return this._lowerRight;
-	},
+    /**
+     * 우하단 좌표를 반환한다.
+     *
+     * @return {OG.geometry.Coordinate} 우하단 좌표
+     */
+    getLowerRight: function () {
+        if (!this._lowerRight) {
+            this._lowerRight = new OG.geometry.Coordinate(this._upperLeft.x + this._width, this._upperLeft.y + this._height);
+        }
+        return this._lowerRight;
+    },
 
-	/**
-	 * 좌하단 좌표를 반환한다.
-	 *
-	 * @return {OG.geometry.Coordinate} 좌하단 좌표
-	 */
-	getLowerLeft: function () {
-		if (!this._lowerLeft) {
-			this._lowerLeft = new OG.geometry.Coordinate(this._upperLeft.x, this._upperLeft.y + this._height);
-		}
-		return this._lowerLeft;
-	},
+    /**
+     * 좌하단 좌표를 반환한다.
+     *
+     * @return {OG.geometry.Coordinate} 좌하단 좌표
+     */
+    getLowerLeft: function () {
+        if (!this._lowerLeft) {
+            this._lowerLeft = new OG.geometry.Coordinate(this._upperLeft.x, this._upperLeft.y + this._height);
+        }
+        return this._lowerLeft;
+    },
 
-	/**
-	 * 좌중간 좌표를 반환한다.
-	 *
-	 * @return {OG.geometry.Coordinate} 좌중간 좌표
-	 */
-	getLeftCenter: function () {
-		if (!this._leftCenter) {
-			this._leftCenter = new OG.geometry.Coordinate(this._upperLeft.x, OG.Util.round(this._upperLeft.y + this._height / 2));
-		}
-		return this._leftCenter;
-	},
+    /**
+     * 좌중간 좌표를 반환한다.
+     *
+     * @return {OG.geometry.Coordinate} 좌중간 좌표
+     */
+    getLeftCenter: function () {
+        if (!this._leftCenter) {
+            this._leftCenter = new OG.geometry.Coordinate(this._upperLeft.x, OG.Util.round(this._upperLeft.y + this._height / 2));
+        }
+        return this._leftCenter;
+    },
 
-	/**
-	 * 상단중간 좌표를 반환한다.
-	 *
-	 * @return {OG.geometry.Coordinate} 상단중간 좌표
-	 */
-	getUpperCenter: function () {
-		if (!this._upperCenter) {
-			this._upperCenter = new OG.geometry.Coordinate(OG.Util.round(this._upperLeft.x + this._width / 2), this._upperLeft.y);
-		}
-		return this._upperCenter;
-	},
+    /**
+     * 상단중간 좌표를 반환한다.
+     *
+     * @return {OG.geometry.Coordinate} 상단중간 좌표
+     */
+    getUpperCenter: function () {
+        if (!this._upperCenter) {
+            this._upperCenter = new OG.geometry.Coordinate(OG.Util.round(this._upperLeft.x + this._width / 2), this._upperLeft.y);
+        }
+        return this._upperCenter;
+    },
 
-	/**
-	 * 우중간 좌표를 반환한다.
-	 *
-	 * @return {OG.geometry.Coordinate} 우중간 좌표
-	 */
-	getRightCenter: function () {
-		if (!this._rightCenter) {
-			this._rightCenter = new OG.geometry.Coordinate(this._upperLeft.x + this._width, OG.Util.round(this._upperLeft.y + this._height / 2));
-		}
-		return this._rightCenter;
-	},
+    /**
+     * 우중간 좌표를 반환한다.
+     *
+     * @return {OG.geometry.Coordinate} 우중간 좌표
+     */
+    getRightCenter: function () {
+        if (!this._rightCenter) {
+            this._rightCenter = new OG.geometry.Coordinate(this._upperLeft.x + this._width, OG.Util.round(this._upperLeft.y + this._height / 2));
+        }
+        return this._rightCenter;
+    },
 
-	/**
-	 * 하단중간 좌표를 반환한다.
-	 *
-	 * @return {OG.geometry.Coordinate} 하단중간 좌표
-	 */
-	getLowerCenter: function () {
-		if (!this._lowerCenter) {
-			this._lowerCenter = new OG.geometry.Coordinate(OG.Util.round(this._upperLeft.x + this._width / 2), this._upperLeft.y + this._height);
-		}
-		return this._lowerCenter;
-	},
+    /**
+     * 하단중간 좌표를 반환한다.
+     *
+     * @return {OG.geometry.Coordinate} 하단중간 좌표
+     */
+    getLowerCenter: function () {
+        if (!this._lowerCenter) {
+            this._lowerCenter = new OG.geometry.Coordinate(OG.Util.round(this._upperLeft.x + this._width / 2), this._upperLeft.y + this._height);
+        }
+        return this._lowerCenter;
+    },
 
-	/**
-	 * Envelope 의 중심좌표를 반환한다.
-	 *
-	 * @return {OG.geometry.Coordinate} 중심좌표
-	 */
-	getCentroid: function () {
-		if (!this._centroid) {
-			this._centroid = new OG.geometry.Coordinate(OG.Util.round(this._upperLeft.x + this._width / 2),
-				OG.Util.round(this._upperLeft.y + this._height / 2));
-		}
+    /**
+     * Envelope 의 중심좌표를 반환한다.
+     *
+     * @return {OG.geometry.Coordinate} 중심좌표
+     */
+    getCentroid: function () {
+        if (!this._centroid) {
+            this._centroid = new OG.geometry.Coordinate(OG.Util.round(this._upperLeft.x + this._width / 2),
+                OG.Util.round(this._upperLeft.y + this._height / 2));
+        }
 
-		return this._centroid;
-	},
+        return this._centroid;
+    },
 
-	/**
-	 * 주어진 좌표로 중심 좌표를 설정한다. 새로 설정된 값으로 이동된다.
-	 *
-	 * @param {OG.geometry.Coordinate|Number[]} centroid 중심좌표
-	 */
-	setCentroid: function (centroid) {
-		if (centroid.constructor === Array) {
-			centroid = new OG.geometry.Coordinate(centroid[0], centroid[1]);
-		}
+    /**
+     * 주어진 좌표로 중심 좌표를 설정한다. 새로 설정된 값으로 이동된다.
+     *
+     * @param {OG.geometry.Coordinate|Number[]} centroid 중심좌표
+     */
+    setCentroid: function (centroid) {
+        if (centroid.constructor === Array) {
+            centroid = new OG.geometry.Coordinate(centroid[0], centroid[1]);
+        }
 
-		this.move(centroid.x - this.getCentroid().x, centroid.y - this.getCentroid().y);
-	},
+        this.move(centroid.x - this.getCentroid().x, centroid.y - this.getCentroid().y);
+    },
 
-	/**
-	 * Envelope 의 가로 사이즈를 반환한다.
-	 *
-	 * @return {Number} 너비
-	 */
-	getWidth: function () {
-		return this._width;
-	},
+    /**
+     * Envelope 의 가로 사이즈를 반환한다.
+     *
+     * @return {Number} 너비
+     */
+    getWidth: function () {
+        return this._width;
+    },
 
-	/**
-	 * 주어진 값으로 Envelope 의 가로 사이즈를 설정한다.
-	 *
-	 * @param {Number} width 너비
-	 */
-	setWidth: function (width) {
-		this._width = width;
-		this._reset();
-	},
+    /**
+     * 주어진 값으로 Envelope 의 가로 사이즈를 설정한다.
+     *
+     * @param {Number} width 너비
+     */
+    setWidth: function (width) {
+        this._width = width;
+        this._reset();
+    },
 
-	/**
-	 * Envelope 의 세로 사이즈를 반환한다.
-	 *
-	 * @return {Number} 높이
-	 */
-	getHeight: function () {
-		return this._height;
-	},
+    /**
+     * Envelope 의 세로 사이즈를 반환한다.
+     *
+     * @return {Number} 높이
+     */
+    getHeight: function () {
+        return this._height;
+    },
 
-	/**
-	 * 주어진 값으로 Envelope 의 세로 사이즈를 설정한다.
-	 *
-	 * @param {Number} height 높이
-	 */
-	setHeight: function (height) {
-		this._height = height;
-		this._reset();
-	},
+    /**
+     * 주어진 값으로 Envelope 의 세로 사이즈를 설정한다.
+     *
+     * @param {Number} height 높이
+     */
+    setHeight: function (height) {
+        this._height = height;
+        this._reset();
+    },
 
-	/**
-	 * Envelope 모든 꼭지점을 반환한다.
-	 * 좌상단좌표부터 시계방향으로 꼭지점 Array 를 반환한다.
-	 *
-	 * @return {OG.geometry.Coordinate[]} 꼭지점 좌표 Array : [좌상단, 상단중간, 우상단, 우중간, 우하단, 하단중간, 좌하단, 좌중간, 좌상단]
-	 */
-	getVertices: function () {
-		var vertices = [];
+    /**
+     * Envelope 모든 꼭지점을 반환한다.
+     * 좌상단좌표부터 시계방향으로 꼭지점 Array 를 반환한다.
+     *
+     * @return {OG.geometry.Coordinate[]} 꼭지점 좌표 Array : [좌상단, 상단중간, 우상단, 우중간, 우하단, 하단중간, 좌하단, 좌중간, 좌상단]
+     */
+    getVertices: function () {
+        var vertices = [];
 
-		vertices.push(this.getUpperLeft());
-		vertices.push(this.getUpperCenter());
-		vertices.push(this.getUpperRight());
-		vertices.push(this.getRightCenter());
-		vertices.push(this.getLowerRight());
-		vertices.push(this.getLowerCenter());
-		vertices.push(this.getLowerLeft());
-		vertices.push(this.getLeftCenter());
-		vertices.push(this.getUpperLeft());
+        vertices.push(this.getUpperLeft());
+        vertices.push(this.getUpperCenter());
+        vertices.push(this.getUpperRight());
+        vertices.push(this.getRightCenter());
+        vertices.push(this.getLowerRight());
+        vertices.push(this.getLowerCenter());
+        vertices.push(this.getLowerLeft());
+        vertices.push(this.getLeftCenter());
+        vertices.push(this.getUpperLeft());
 
-		return vertices;
-	},
+        return vertices;
+    },
 
-	/**
-	 * 주어진 좌표값이 Envelope 영역에 포함되는지 비교한다.
-	 *
-	 * @param {OG.geometry.Coordinate|Number[]} coordinate 좌표값
-	 * @return {Boolean} true:포함, false:비포함
-	 */
-	isContains: function (coordinate) {
-		if (coordinate.constructor === Array) {
-			return coordinate[0] >= this._upperLeft.x && coordinate[0] <= this.getLowerRight().x &&
-				coordinate[1] >= this._upperLeft.y && coordinate[1] <= this.getLowerRight().y;
-		} else {
-			return coordinate.x >= this._upperLeft.x && coordinate.x <= this.getLowerRight().x &&
-				coordinate.y >= this._upperLeft.y && coordinate.y <= this.getLowerRight().y;
-		}
-	},
+    /**
+     * 주어진 좌표값이 Envelope 영역에 포함되는지 비교한다.
+     *
+     * @param {OG.geometry.Coordinate|Number[]} coordinate 좌표값
+     * @return {Boolean} true:포함, false:비포함
+     */
+    isContains: function (coordinate) {
+        if (coordinate.constructor === Array) {
+            return coordinate[0] >= this._upperLeft.x && coordinate[0] <= this.getLowerRight().x &&
+                coordinate[1] >= this._upperLeft.y && coordinate[1] <= this.getLowerRight().y;
+        } else {
+            return coordinate.x >= this._upperLeft.x && coordinate.x <= this.getLowerRight().x &&
+                coordinate.y >= this._upperLeft.y && coordinate.y <= this.getLowerRight().y;
+        }
+    },
 
-	/**
-	 * 주어진 모든 좌표값이 Envelope 영역에 포함되는지 비교한다.
-	 *
-	 * @param {OG.geometry.Coordinate[]} coordinateArray 좌표값 Array
-	 * @return {Boolean} true:포함, false:비포함
-	 */
-	isContainsAll: function (coordinateArray) {
-		for (var i = 0,leni = coordinateArray.length; i < leni; i++) {
-			if (!this.isContains(coordinateArray[i])) {
-				return false;
-			}
-		}
+    /**
+     * 주어진 모든 좌표값이 Envelope 영역에 포함되는지 비교한다.
+     *
+     * @param {OG.geometry.Coordinate[]} coordinateArray 좌표값 Array
+     * @return {Boolean} true:포함, false:비포함
+     */
+    isContainsAll: function (coordinateArray) {
+        for (var i = 0, leni = coordinateArray.length; i < leni; i++) {
+            if (!this.isContains(coordinateArray[i])) {
+                return false;
+            }
+        }
 
-		return true;
-	},
+        return true;
+    },
 
-	/**
-	 * 몇개의 좌표값이 Envelope 영역에 포함되는지 비교한다.
-	 *
-	 * @param {OG.geometry.Coordinate[]} coordinateArray 좌표값 Array
-	 * @return {Boolean} true:포함, false:비포함
-	 */
-	getHowManyContains: function (coordinateArray) {
-		var i, time = 0;
-		for (var i = 0,leni = coordinateArray.length; i < leni; i++) {
-			if (this.isContains(coordinateArray[i])) {
-				time += 1;
-			}
-		}
+    /**
+     * 몇개의 좌표값이 Envelope 영역에 포함되는지 비교한다.
+     *
+     * @param {OG.geometry.Coordinate[]} coordinateArray 좌표값 Array
+     * @return {Boolean} true:포함, false:비포함
+     */
+    getHowManyContains: function (coordinateArray) {
+        var i, time = 0;
+        for (var i = 0, leni = coordinateArray.length; i < leni; i++) {
+            if (this.isContains(coordinateArray[i])) {
+                time += 1;
+            }
+        }
 
-		return time;
-	},
+        return time;
+    },
 
-	/**
-	 * 주어진 좌표값들이 하나라도 Envelope 영역에 포함되는지 비교한다.
-	 *
-	 * @param {OG.geometry.Coordinate[]} coordinateArray 좌표값 Array
-	 * @return {Boolean} true:포함, false:비포함
-	 */
-	isContainsOnce: function (coordinateArray) {
-		var i;
-		for (var i = 0,leni = coordinateArray.length; i < leni; i++) {
-			if (this.isContains(coordinateArray[i])) {
-				return true;
-			}
-		}
+    /**
+     * 주어진 좌표값들이 하나라도 Envelope 영역에 포함되는지 비교한다.
+     *
+     * @param {OG.geometry.Coordinate[]} coordinateArray 좌표값 Array
+     * @return {Boolean} true:포함, false:비포함
+     */
+    isContainsOnce: function (coordinateArray) {
+        var i;
+        for (var i = 0, leni = coordinateArray.length; i < leni; i++) {
+            if (this.isContains(coordinateArray[i])) {
+                return true;
+            }
+        }
 
-		return false;
-	},
+        return false;
+    },
 
-	/**
-	 * 크기는 고정한 채 가로, 세로 Offset 만큼 Envelope 을 이동한다.
-	 *
-	 * @param {Number} offsetX 가로 Offset
-	 * @param {Number} offsetY 세로 Offset
-	 * @return {OG.geometry.Envelope} 이동된 Envelope
-	 */
-	move: function (offsetX, offsetY) {
-		this._upperLeft.move(offsetX, offsetY);
-		this._reset();
+    /**
+     * 크기는 고정한 채 가로, 세로 Offset 만큼 Envelope 을 이동한다.
+     *
+     * @param {Number} offsetX 가로 Offset
+     * @param {Number} offsetY 세로 Offset
+     * @return {OG.geometry.Envelope} 이동된 Envelope
+     */
+    move: function (offsetX, offsetY) {
+        this._upperLeft.move(offsetX, offsetY);
+        this._reset();
 
-		return this;
-	},
+        return this;
+    },
 
-	/**
-	 * 상, 하, 좌, 우 외곽선을 이동하여 Envelope 을 리사이즈 한다.
-	 *
-	 * @param {Number} upper 상단 라인 이동 Offset(위 방향으로 +)
-	 * @param {Number} lower 하단 라인 이동 Offset(아래 방향으로 +)
-	 * @param {Number} left 좌측 라인 이동 Offset(좌측 방향으로 +)
-	 * @param {Number} right 우측 라인 이동 Offset(우측 방향으로 +)
-	 * @return {OG.geometry.Envelope} 리사이즈된 Envelope
-	 */
-	resize: function (upper, lower, left, right) {
-		upper = upper || 0;
-		lower = lower || 0;
-		left = left || 0;
-		right = right || 0;
+    /**
+     * 상, 하, 좌, 우 외곽선을 이동하여 Envelope 을 리사이즈 한다.
+     *
+     * @param {Number} upper 상단 라인 이동 Offset(위 방향으로 +)
+     * @param {Number} lower 하단 라인 이동 Offset(아래 방향으로 +)
+     * @param {Number} left 좌측 라인 이동 Offset(좌측 방향으로 +)
+     * @param {Number} right 우측 라인 이동 Offset(우측 방향으로 +)
+     * @return {OG.geometry.Envelope} 리사이즈된 Envelope
+     */
+    resize: function (upper, lower, left, right) {
+        upper = upper || 0;
+        lower = lower || 0;
+        left = left || 0;
+        right = right || 0;
 
-		if (this._width + (left + right) < 0 || this._height + (upper + lower) < 0) {
-			throw new OG.ParamError();
-		}
+        if (this._width + (left + right) < 0 || this._height + (upper + lower) < 0) {
+            throw new OG.ParamError();
+        }
 
-		this._upperLeft.move(-1 * left, -1 * upper);
-		this._width += (left + right);
-		this._height += (upper + lower);
-		this._reset();
+        this._upperLeft.move(-1 * left, -1 * upper);
+        this._width += (left + right);
+        this._height += (upper + lower);
+        this._reset();
 
-		return this;
-	},
+        return this;
+    },
 
-	/**
-	 * 주어진 Envelope 영역과 같은지 비교한다.
-	 *
-	 * @param {OG.geometry.Envelope} Envelope 영역
-	 * @return {Boolean} true:같음, false:다름
-	 */
-	isEquals: function (envelope) {
-		if (envelope && envelope instanceof OG.geometry.Envelope) {
-			if (this.getUpperLeft().isEquals(envelope.getUpperLeft()) &&
-				this.getWidth() === envelope.getWidth() &&
-				this.getHeight() === envelope.getHeight()) {
-				return true;
-			}
-		}
+    /**
+     * 주어진 Envelope 영역과 같은지 비교한다.
+     *
+     * @param {OG.geometry.Envelope} Envelope 영역
+     * @return {Boolean} true:같음, false:다름
+     */
+    isEquals: function (envelope) {
+        if (envelope && envelope instanceof OG.geometry.Envelope) {
+            if (this.getUpperLeft().isEquals(envelope.getUpperLeft()) &&
+                this.getWidth() === envelope.getWidth() &&
+                this.getHeight() === envelope.getHeight()) {
+                return true;
+            }
+        }
 
-		return false;
-	},
+        return false;
+    },
 
-	/**
-	 * 객체 프라퍼티 정보를 JSON 스트링으로 반환한다.
-	 *
-	 * @return {String} 프라퍼티 정보
-	 * @override
-	 */
-	toString: function () {
-		var s = [];
-		s.push("upperLeft:" + this.getUpperLeft());
-		s.push("width:" + this.getWidth());
-		s.push("height:" + this.getHeight());
-		s.push("upperRight:" + this.getUpperRight());
-		s.push("lowerLeft:" + this.getLowerLeft());
-		s.push("lowerRight:" + this.getLowerRight());
-		s.push("leftCenter:" + this.getLeftCenter());
-		s.push("upperCenter:" + this.getUpperCenter());
-		s.push("rightCenter:" + this.getRightCenter());
-		s.push("lowerCenter:" + this.getLowerCenter());
-		s.push("centroid:" + this.getCentroid());
+    /**
+     * 객체 프라퍼티 정보를 JSON 스트링으로 반환한다.
+     *
+     * @return {String} 프라퍼티 정보
+     * @override
+     */
+    toString: function () {
+        var s = [];
+        s.push("upperLeft:" + this.getUpperLeft());
+        s.push("width:" + this.getWidth());
+        s.push("height:" + this.getHeight());
+        s.push("upperRight:" + this.getUpperRight());
+        s.push("lowerLeft:" + this.getLowerLeft());
+        s.push("lowerRight:" + this.getLowerRight());
+        s.push("leftCenter:" + this.getLeftCenter());
+        s.push("upperCenter:" + this.getUpperCenter());
+        s.push("rightCenter:" + this.getRightCenter());
+        s.push("lowerCenter:" + this.getLowerCenter());
+        s.push("centroid:" + this.getCentroid());
 
-		return "{" + s.join() + "}";
-	},
+        return "{" + s.join() + "}";
+    },
 
-	/**
-	 * _upperLeft, _width, _height 를 제외한 private 멤버 변수의 값을 리셋한다.
-	 *
-	 * @private
-	 */
-	_reset: function () {
-		this._upperRight = null;
-		this._lowerLeft = null;
-		this._lowerRight = null;
-		this._leftCenter = null;
-		this._upperCenter = null;
-		this._rightCenter = null;
-		this._lowerCenter = null;
-		this._centroid = null;
-	}
+    /**
+     * _upperLeft, _width, _height 를 제외한 private 멤버 변수의 값을 리셋한다.
+     *
+     * @private
+     */
+    _reset: function () {
+        this._upperRight = null;
+        this._lowerLeft = null;
+        this._lowerRight = null;
+        this._leftCenter = null;
+        this._upperCenter = null;
+        this._rightCenter = null;
+        this._lowerCenter = null;
+        this._centroid = null;
+    }
 };
 OG.geometry.Envelope.prototype.constructor = OG.geometry.Envelope;
 OG.Envelope = OG.geometry.Envelope;
@@ -8525,7 +8538,7 @@ OG.geometry.Geometry.prototype = {
             return _coordinate.distance(vertices[0]);
         }
 
-        for (var i = 0,leni = vertices.length - 1; i < leni; i++) {
+        for (var i = 0, leni = vertices.length - 1; i < leni; i++) {
             distance = this.distanceToLine(_coordinate, [vertices[i], vertices[i + 1]]);
             if (distance < minDistance) {
                 minDistance = distance;
@@ -8554,7 +8567,7 @@ OG.geometry.Geometry.prototype = {
         var length = 0,
             vertices = this.getVertices(),
             i;
-        for (var i = 0,leni = vertices.length - 1; i < leni; i++) {
+        for (var i = 0, leni = vertices.length - 1; i < leni; i++) {
             length += vertices[i].distance(vertices[i + 1]);
         }
 
@@ -8762,7 +8775,7 @@ OG.geometry.Geometry.prototype = {
     intersectToLine: function (line) {
         var vertices = this.getVertices(), result = [], point, i,
             contains = function (coordinateArray, coordinate) {
-                for (var k = 0,lenk = coordinateArray.length; k < lenk; k++) {
+                for (var k = 0, lenk = coordinateArray.length; k < lenk; k++) {
                     if (coordinateArray[k].isEquals(coordinate)) {
                         return true;
                     }
@@ -8770,7 +8783,7 @@ OG.geometry.Geometry.prototype = {
                 return false;
             };
 
-        for (var i = 0,leni = vertices.length - 1; i < leni; i++) {
+        for (var i = 0, leni = vertices.length - 1; i < leni; i++) {
             point = this.intersectLineToLine(line, [vertices[i], vertices[i + 1]]);
             if (point && !contains(result, point)) {
                 result.push(point);
@@ -8873,8 +8886,8 @@ OG.geometry.Geometry.prototype = {
         var result = [],
             a = (to.x - from.x) * (to.x - from.x) +
                 (to.y - from.y) * (to.y - from.y),
-            b = 2 * ( (to.x - from.x) * (from.x - center.x) +
-                (to.y - from.y) * (from.y - center.y)   ),
+            b = 2 * ((to.x - from.x) * (from.x - center.x) +
+                (to.y - from.y) * (from.y - center.y)),
             cc = center.x * center.x + center.y * center.y + from.x * from.x + from.y * from.y -
                 2 * (center.x * from.x + center.y * from.y) - radius * radius,
             deter = b * b - 4 * a * cc,
@@ -8943,13 +8956,13 @@ OG.geometry.Geometry.prototype = {
         }
 
         m1 = (B.y - A.y) / (B.x - A.x);
-        b1 = A.y - ( m1 * A.x );
+        b1 = A.y - (m1 * A.x);
 
-        m2 = ( 1 / m1 ) * -1;
-        b2 = p.y - ( m2 * p.x );
+        m2 = (1 / m1) * -1;
+        b2 = p.y - (m2 * p.x);
 
         x = (b2 - b1) / (m1 - m2);
-        y = ( x * m1 ) + b1;
+        y = (x * m1) + b1;
 
         return this.convertCoordinate([x, y]);
     },
@@ -9027,8 +9040,8 @@ OG.geometry.Geometry.prototype = {
             width = boundary._width;
             height = boundary._height;
 
-            x = upperLeft.x + ( width * (px / 100) );
-            y = upperLeft.y + ( height * (py / 100) );
+            x = upperLeft.x + (width * (px / 100));
+            y = upperLeft.y + (height * (py / 100));
             _coordinate = this.convertCoordinate([Math.round(x), Math.round(y)]);
         }
 
@@ -9042,6 +9055,7 @@ OG.geometry.Geometry.prototype = {
      * @param distance
      * @return {OG.geometry.Coordinate[]} 평행선 시작좌표, 끝좌표 Array
      */
+
     getParallelLine: function (from, to, distance) {
         var me = this;
         var direction = 'plus';
@@ -9241,7 +9255,7 @@ OG.geometry.PolyLine = function (vertices) {
 
     // Array 좌표를 OG.geometry.Coordinate 로 변환
     if (vertices && vertices.length > 0) {
-        for (var i = 0,leni = vertices.length; i < leni; i++) {
+        for (var i = 0, leni = vertices.length; i < leni; i++) {
             this.vertices.push(this.convertCoordinate(vertices[i]));
         }
     }
@@ -9275,7 +9289,7 @@ OG.geometry.PolyLine.prototype.setVertices = function (vertices) {
  */
 OG.geometry.PolyLine.prototype.move = function (offsetX, offsetY) {
     this.getBoundary().move(offsetX, offsetY);
-    for (var i = 0,leni = this.vertices.length; i < leni; i++) {
+    for (var i = 0, leni = this.vertices.length; i < leni; i++) {
         this.vertices[i].move(offsetX, offsetY);
     }
 
@@ -9307,7 +9321,7 @@ OG.geometry.PolyLine.prototype.resize = function (upper, lower, left, right) {
         throw new OG.ParamError();
     }
 
-    for (var i = 0,leni = this.vertices.length; i < leni; i++) {
+    for (var i = 0, leni = this.vertices.length; i < leni; i++) {
         this.vertices[i].x = OG.Util.round((upperLeft.x - left) + (this.vertices[i].x - upperLeft.x) * rateWidth);
         this.vertices[i].y = OG.Util.round((upperLeft.y - upper) + (this.vertices[i].y - upperLeft.y) * rateHeight);
     }
@@ -9326,7 +9340,7 @@ OG.geometry.PolyLine.prototype.resize = function (upper, lower, left, right) {
  */
 OG.geometry.PolyLine.prototype.rotate = function (angle, origin) {
     origin = origin || this.getCentroid();
-    for (var i = 0,leni = this.vertices.length; i < leni; i++) {
+    for (var i = 0, leni = this.vertices.length; i < leni; i++) {
         this.vertices[i].rotate(angle, origin);
     }
     this.reset();
@@ -9533,23 +9547,23 @@ OG.geometry.Curve.prototype.toString = function () {
  */
 OG.geometry.Ellipse = function (center, radiusX, radiusY, angle) {
 
-	var _angle = angle || 0, _center = this.convertCoordinate(center), controlPoints = [], theta, i;
+    var _angle = angle || 0, _center = this.convertCoordinate(center), controlPoints = [], theta, i;
 
-	if (_center) {
-		for (i = -45; i <= 405; i += 45) {
-			theta = Math.PI / 180 * i;
-			controlPoints.push((new OG.geometry.Coordinate(
-				OG.Util.round(_center.x + radiusX * Math.cos(theta)),
-				OG.Util.round(_center.y + radiusY * Math.sin(theta))
-			)).rotate(_angle, _center));
-		}
-	}
+    if (_center) {
+        for (i = -45; i <= 405; i += 45) {
+            theta = Math.PI / 180 * i;
+            controlPoints.push((new OG.geometry.Coordinate(
+                OG.Util.round(_center.x + radiusX * Math.cos(theta)),
+                OG.Util.round(_center.y + radiusY * Math.sin(theta))
+            )).rotate(_angle, _center));
+        }
+    }
 
-	OG.geometry.Ellipse.superclass.call(this, controlPoints);
+    OG.geometry.Ellipse.superclass.call(this, controlPoints);
 
-	this.TYPE = OG.Constants.GEOM_TYPE.ELLIPSE;
-	this.IS_CLOSED = true;
-	this.style = new OG.geometry.Style();
+    this.TYPE = OG.Constants.GEOM_TYPE.ELLIPSE;
+    this.IS_CLOSED = true;
+    this.style = new OG.geometry.Style();
 };
 OG.geometry.Ellipse.prototype = new OG.geometry.Curve();
 OG.geometry.Ellipse.superclass = OG.geometry.Curve;
@@ -9563,12 +9577,12 @@ OG.Ellipse = OG.geometry.Ellipse;
  * @override
  */
 OG.geometry.Ellipse.prototype.getVertices = function () {
-	var vertices = [], i;
-	for (var i = 20,leni = this.vertices.length - 20; i < leni; i++) {
-		vertices.push(this.vertices[i]);
-	}
+    var vertices = [], i;
+    for (var i = 20, leni = this.vertices.length - 20; i < leni; i++) {
+        vertices.push(this.vertices[i]);
+    }
 
-	return vertices;
+    return vertices;
 };
 
 /**
@@ -9578,12 +9592,12 @@ OG.geometry.Ellipse.prototype.getVertices = function () {
  * @override
  */
 OG.geometry.Ellipse.prototype.getControlPoints = function () {
-	var controlPoints = [], i;
-	for (var i = 10,leni = this.vertices.length - 10; i <= leni; i += 10) {
-		controlPoints.push(this.vertices[i]);
-	}
+    var controlPoints = [], i;
+    for (var i = 10, leni = this.vertices.length - 10; i <= leni; i += 10) {
+        controlPoints.push(this.vertices[i]);
+    }
 
-	return controlPoints;
+    return controlPoints;
 };
 
 /**
@@ -9593,12 +9607,12 @@ OG.geometry.Ellipse.prototype.getControlPoints = function () {
  * @override
  */
 OG.geometry.Ellipse.prototype.getLength = function () {
-	// π{5(a+b)/4 - ab/(a+b)}
-	var controlPoints = this.getControlPoints(),
-		center = this.getCentroid(),
-		radiusX = center.distance(controlPoints[1]),
-		radiusY = center.distance(controlPoints[3]);
-	return Math.PI * (5 * (radiusX + radiusY) / 4 - radiusX * radiusY / (radiusX + radiusY));
+    // π{5(a+b)/4 - ab/(a+b)}
+    var controlPoints = this.getControlPoints(),
+        center = this.getCentroid(),
+        radiusX = center.distance(controlPoints[1]),
+        radiusY = center.distance(controlPoints[3]);
+    return Math.PI * (5 * (radiusX + radiusY) / 4 - radiusX * radiusY / (radiusX + radiusY));
 };
 
 /**
@@ -9608,20 +9622,20 @@ OG.geometry.Ellipse.prototype.getLength = function () {
  * @override
  */
 OG.geometry.Ellipse.prototype.toString = function () {
-	var s = [],
-		controlPoints = this.getControlPoints(),
-		center = this.getCentroid(),
-		radiusX = center.distance(controlPoints[1]),
-		radiusY = center.distance(controlPoints[3]),
-		angle = OG.Util.round(Math.atan2(controlPoints[1].y - center.y, controlPoints[1].x - center.x) * 180 / Math.PI);
+    var s = [],
+        controlPoints = this.getControlPoints(),
+        center = this.getCentroid(),
+        radiusX = center.distance(controlPoints[1]),
+        radiusY = center.distance(controlPoints[3]),
+        angle = OG.Util.round(Math.atan2(controlPoints[1].y - center.y, controlPoints[1].x - center.x) * 180 / Math.PI);
 
-	s.push("type:'" + OG.Constants.GEOM_NAME[this.TYPE] + "'");
-	s.push("center:" + center);
-	s.push("radiusX:" + radiusX);
-	s.push("radiusY:" + radiusY);
-	s.push("angle:" + angle);
+    s.push("type:'" + OG.Constants.GEOM_NAME[this.TYPE] + "'");
+    s.push("center:" + center);
+    s.push("radiusX:" + radiusX);
+    s.push("radiusY:" + radiusY);
+    s.push("angle:" + angle);
 
-	return "{" + s.join() + "}";
+    return "{" + s.join() + "}";
 };
 /**
  * Cubic Bezier Curve 공간 기하 객체(Spatial Geometry Object)
@@ -9655,7 +9669,7 @@ OG.geometry.BezierCurve = function (controlPoints) {
 
     // Array 좌표를 OG.geometry.Coordinate 로 변환
     if (controlPoints && controlPoints.length > 0) {
-        for (var i = 0,leni = controlPoints.length; i < leni; i++) {
+        for (var i = 0, leni = controlPoints.length; i < leni; i++) {
             this.controlPoints.push(this.convertCoordinate(controlPoints[i]));
         }
     }
@@ -9665,7 +9679,7 @@ OG.geometry.BezierCurve = function (controlPoints) {
 
     // t 는 0 ~ maxT 의 값으로, t 값의 증분값이 작을수록 세밀한 BezierCurve 를 그린다.
     this.vertices = [];
-    for (var t = 0,lent = bezier.maxT; t <= lent; t += 0.02) {
+    for (var t = 0, lent = bezier.maxT; t <= lent; t += 0.02) {
         this.vertices.push(new OG.geometry.Coordinate(
             OG.Util.round(bezier.getX(t)),
             OG.Util.round(bezier.getY(t))
@@ -9703,7 +9717,7 @@ OG.geometry.BezierCurve.prototype.getVertices = function () {
 
         // t 는 0 ~ maxT 의 값으로, t 값의 증분값이 작을수록 세밀한 BezierCurve 를 그린다.
         this.vertices = [];
-        for (var t = 0,lent = bezier.maxT; t <= lent; t += 0.02) {
+        for (var t = 0, lent = bezier.maxT; t <= lent; t += 0.02) {
             this.vertices.push(new OG.geometry.Coordinate(
                 OG.Util.round(bezier.getX(t)),
                 OG.Util.round(bezier.getY(t))
@@ -9724,7 +9738,7 @@ OG.geometry.BezierCurve.prototype.getVertices = function () {
  * @override
  */
 OG.geometry.BezierCurve.prototype.move = function (offsetX, offsetY) {
-    for (var i = 0,leni = this.controlPoints.length; i < leni; i++) {
+    for (var i = 0, leni = this.controlPoints.length; i < leni; i++) {
         this.controlPoints[i].move(offsetX, offsetY);
     }
     this.reset();
@@ -9756,7 +9770,7 @@ OG.geometry.BezierCurve.prototype.resize = function (upper, lower, left, right) 
  */
 OG.geometry.BezierCurve.prototype.rotate = function (angle, origin) {
     origin = origin || this.getCentroid();
-    for (var i = 0,leni = this.controlPoints.length; i < leni; i++) {
+    for (var i = 0, leni = this.controlPoints.length; i < leni; i++) {
         this.controlPoints[i].rotate(angle, origin);
     }
     this.reset();
@@ -9805,10 +9819,10 @@ OG.geometry.BezierCurve.prototype.reset = function () {
  */
 OG.geometry.Circle = function (center, radius) {
 
-	OG.geometry.Circle.superclass.call(this, center, radius, radius, 0);
+    OG.geometry.Circle.superclass.call(this, center, radius, radius, 0);
 
-	this.TYPE = OG.Constants.GEOM_TYPE.CIRCLE;
-	this.style = new OG.geometry.Style();
+    this.TYPE = OG.Constants.GEOM_TYPE.CIRCLE;
+    this.style = new OG.geometry.Style();
 };
 OG.geometry.Circle.prototype = new OG.geometry.Ellipse();
 OG.geometry.Circle.superclass = OG.geometry.Ellipse;
@@ -9822,10 +9836,10 @@ OG.Circle = OG.geometry.Circle;
  * @override
  */
 OG.geometry.Circle.prototype.getLength = function () {
-	var controlPoints = this.getControlPoints(),
-		center = this.getCentroid(),
-		radiusX = center.distance(controlPoints[1]);
-	return 2 * Math.PI * radiusX;
+    var controlPoints = this.getControlPoints(),
+        center = this.getCentroid(),
+        radiusX = center.distance(controlPoints[1]);
+    return 2 * Math.PI * radiusX;
 };
 
 /**
@@ -9835,26 +9849,26 @@ OG.geometry.Circle.prototype.getLength = function () {
  * @override
  */
 OG.geometry.Circle.prototype.toString = function () {
-	var s = [],
-		controlPoints = this.getControlPoints(),
-		center = this.getCentroid(),
-		radiusX = center.distance(controlPoints[1]),
-		radiusY = center.distance(controlPoints[3]),
-		angle = OG.Util.round(Math.atan2(controlPoints[1].y - center.y, controlPoints[1].x - center.x) * 180 / Math.PI);
+    var s = [],
+        controlPoints = this.getControlPoints(),
+        center = this.getCentroid(),
+        radiusX = center.distance(controlPoints[1]),
+        radiusY = center.distance(controlPoints[3]),
+        angle = OG.Util.round(Math.atan2(controlPoints[1].y - center.y, controlPoints[1].x - center.x) * 180 / Math.PI);
 
-	if (radiusX === radiusY) {
-		s.push("type:'" + OG.Constants.GEOM_NAME[this.TYPE] + "'");
-		s.push("center:" + center);
-		s.push("radius:" + radiusX);
-	} else {
-		s.push("type:'" + OG.Constants.GEOM_NAME[OG.Constants.GEOM_TYPE.ELLIPSE] + "'");
-		s.push("center:" + center);
-		s.push("radiusX:" + radiusX);
-		s.push("radiusY:" + radiusY);
-		s.push("angle:" + angle);
-	}
+    if (radiusX === radiusY) {
+        s.push("type:'" + OG.Constants.GEOM_NAME[this.TYPE] + "'");
+        s.push("center:" + center);
+        s.push("radius:" + radiusX);
+    } else {
+        s.push("type:'" + OG.Constants.GEOM_NAME[OG.Constants.GEOM_TYPE.ELLIPSE] + "'");
+        s.push("center:" + center);
+        s.push("radiusX:" + radiusX);
+        s.push("radiusY:" + radiusY);
+        s.push("angle:" + angle);
+    }
 
-	return "{" + s.join() + "}";
+    return "{" + s.join() + "}";
 };
 /**
  * 공간 기하 객체(Spatial Geometry Object) Collection
@@ -9877,14 +9891,14 @@ OG.geometry.Circle.prototype.toString = function () {
  */
 OG.geometry.GeometryCollection = function (geometries) {
 
-	this.TYPE = OG.Constants.GEOM_TYPE.COLLECTION;
-	this.style = new OG.geometry.Style();
+    this.TYPE = OG.Constants.GEOM_TYPE.COLLECTION;
+    this.style = new OG.geometry.Style();
 
-	/**
-	 * 공간 기하 객체 Array
-	 * @type OG.geometry.Geometry[]
-	 */
-	this.geometries = geometries;
+    /**
+     * 공간 기하 객체 Array
+     * @type OG.geometry.Geometry[]
+     */
+    this.geometries = geometries;
 };
 OG.geometry.GeometryCollection.prototype = new OG.geometry.Geometry();
 OG.geometry.GeometryCollection.superclass = OG.geometry.Geometry;
@@ -9898,17 +9912,17 @@ OG.GeometryCollection = OG.geometry.GeometryCollection;
  * @override
  */
 OG.geometry.GeometryCollection.prototype.getVertices = function () {
-	var vertices = [], _vertices, i, j;
-	for (var i = 0,leni = this.geometries.length; i < leni; i++) {
-		_vertices = this.geometries[i].getVertices();
-		for (var j = 0,lenj = _vertices.length; j < lenj; j++) {
-			vertices.push(_vertices[j]);
-		}
-	}
+    var vertices = [], _vertices, i, j;
+    for (var i = 0, leni = this.geometries.length; i < leni; i++) {
+        _vertices = this.geometries[i].getVertices();
+        for (var j = 0, lenj = _vertices.length; j < lenj; j++) {
+            vertices.push(_vertices[j]);
+        }
+    }
 
-	return vertices;
+    return vertices;
 };
-OG.geometry.GeometryCollection.prototype.getVerticess = function(){
+OG.geometry.GeometryCollection.prototype.getVerticess = function () {
 
 };
 
@@ -9921,13 +9935,13 @@ OG.geometry.GeometryCollection.prototype.getVerticess = function(){
  * @override
  */
 OG.geometry.GeometryCollection.prototype.move = function (offsetX, offsetY) {
-	this.getBoundary().move(offsetX, offsetY);
-	for (var i = 0,leni = this.geometries.length; i < leni; i++) {
-		this.geometries[i].move(offsetX, offsetY);
-		this.geometries[i].reset();
-	}
+    this.getBoundary().move(offsetX, offsetY);
+    for (var i = 0, leni = this.geometries.length; i < leni; i++) {
+        this.geometries[i].move(offsetX, offsetY);
+        this.geometries[i].reset();
+    }
 
-	return this;
+    return this;
 };
 
 /**
@@ -9941,31 +9955,31 @@ OG.geometry.GeometryCollection.prototype.move = function (offsetX, offsetY) {
  * @override
  */
 OG.geometry.GeometryCollection.prototype.resize = function (upper, lower, left, right) {
-	var boundary = this.getBoundary(),
-		offsetX = left + right,
-		offsetY = upper + lower,
-		width = boundary.getWidth() + offsetX,
-		height = boundary.getHeight() + offsetY,
-		rateWidth = boundary.getWidth() === 0 ? 1 : width / boundary.getWidth(),
-		rateHeight = boundary.getHeight() === 0 ? 1 : height / boundary.getHeight(),
-		upperLeft = boundary.getUpperLeft(),
-		vertices, i, j;
+    var boundary = this.getBoundary(),
+        offsetX = left + right,
+        offsetY = upper + lower,
+        width = boundary.getWidth() + offsetX,
+        height = boundary.getHeight() + offsetY,
+        rateWidth = boundary.getWidth() === 0 ? 1 : width / boundary.getWidth(),
+        rateHeight = boundary.getHeight() === 0 ? 1 : height / boundary.getHeight(),
+        upperLeft = boundary.getUpperLeft(),
+        vertices, i, j;
 
-	if (width < 0 || height < 0) {
-		throw new OG.ParamError();
-	}
+    if (width < 0 || height < 0) {
+        throw new OG.ParamError();
+    }
 
-	for (var i = 0,leni = this.geometries.length; i < leni; i++) {
-		vertices = this.geometries[i].vertices;
-		for (var j = 0,lenj = vertices.length; j < lenj; j++) {
-			vertices[j].x = OG.Util.round((upperLeft.x - left) + (vertices[j].x - upperLeft.x) * rateWidth);
-			vertices[j].y = OG.Util.round((upperLeft.y - upper) + (vertices[j].y - upperLeft.y) * rateHeight);
-		}
-		this.geometries[i].reset();
-	}
-	boundary.resize(upper, lower, left, right);
+    for (var i = 0, leni = this.geometries.length; i < leni; i++) {
+        vertices = this.geometries[i].vertices;
+        for (var j = 0, lenj = vertices.length; j < lenj; j++) {
+            vertices[j].x = OG.Util.round((upperLeft.x - left) + (vertices[j].x - upperLeft.x) * rateWidth);
+            vertices[j].y = OG.Util.round((upperLeft.y - upper) + (vertices[j].y - upperLeft.y) * rateHeight);
+        }
+        this.geometries[i].reset();
+    }
+    boundary.resize(upper, lower, left, right);
 
-	return this;
+    return this;
 };
 
 /**
@@ -9977,13 +9991,13 @@ OG.geometry.GeometryCollection.prototype.resize = function (upper, lower, left, 
  * @override
  */
 OG.geometry.GeometryCollection.prototype.resizeBox = function (width, height) {
-	var boundary = this.getBoundary(),
-		offsetWidth = OG.Util.round((width - boundary.getWidth()) / 2),
-		offsetHeight = OG.Util.round((height - boundary.getHeight()) / 2);
+    var boundary = this.getBoundary(),
+        offsetWidth = OG.Util.round((width - boundary.getWidth()) / 2),
+        offsetHeight = OG.Util.round((height - boundary.getHeight()) / 2);
 
-	this.resize(offsetHeight, offsetHeight, offsetWidth, offsetWidth);
+    this.resize(offsetHeight, offsetHeight, offsetWidth, offsetWidth);
 
-	return this;
+    return this;
 };
 
 /**
@@ -9995,14 +10009,14 @@ OG.geometry.GeometryCollection.prototype.resizeBox = function (width, height) {
  * @override
  */
 OG.geometry.GeometryCollection.prototype.rotate = function (angle, origin) {
-	origin = origin || this.getCentroid();
-	for (var i = 0,leni = this.geometries.length; i < leni; i++) {
-		this.geometries[i].rotate(angle, origin);
-		this.geometries[i].reset();
-	}
-	this.reset();
+    origin = origin || this.getCentroid();
+    for (var i = 0, leni = this.geometries.length; i < leni; i++) {
+        this.geometries[i].rotate(angle, origin);
+        this.geometries[i].reset();
+    }
+    this.reset();
 
-	return this;
+    return this;
 };
 
 /**
@@ -10013,15 +10027,15 @@ OG.geometry.GeometryCollection.prototype.rotate = function (angle, origin) {
  * @override
  */
 OG.geometry.GeometryCollection.prototype.fitToBoundary = function (envelope) {
-	var boundary = this.getBoundary(),
-		upper = boundary.getUpperCenter().y - envelope.getUpperCenter().y,
-		lower = envelope.getLowerCenter().y - boundary.getLowerCenter().y,
-		left = boundary.getLeftCenter().x - envelope.getLeftCenter().x,
-		right = envelope.getRightCenter().x - boundary.getRightCenter().x;
+    var boundary = this.getBoundary(),
+        upper = boundary.getUpperCenter().y - envelope.getUpperCenter().y,
+        lower = envelope.getLowerCenter().y - boundary.getLowerCenter().y,
+        left = boundary.getLeftCenter().x - envelope.getLeftCenter().x,
+        right = envelope.getRightCenter().x - boundary.getRightCenter().x;
 
-	this.resize(upper, lower, left, right);
+    this.resize(upper, lower, left, right);
 
-	return this;
+    return this;
 };
 
 /**
@@ -10031,13 +10045,13 @@ OG.geometry.GeometryCollection.prototype.fitToBoundary = function (envelope) {
  * @override
  */
 OG.geometry.GeometryCollection.prototype.toString = function () {
-	var s = [], i;
+    var s = [], i;
 
-	for (var i = 0,leni = this.geometries.length; i < leni; i++) {
-		s.push(this.geometries[i].toString());
-	}
+    for (var i = 0, leni = this.geometries.length; i < leni; i++) {
+        s.push(this.geometries[i].toString());
+    }
 
-	return "{type:'" + OG.Constants.GEOM_NAME[this.TYPE] + "',geometries:[" + s.join() + "]}";
+    return "{type:'" + OG.Constants.GEOM_NAME[this.TYPE] + "',geometries:[" + s.join() + "]}";
 };
 /**
  * Line 공간 기하 객체(Spatial Geometry Object)
@@ -10057,16 +10071,16 @@ OG.geometry.GeometryCollection.prototype.toString = function () {
  */
 OG.geometry.Line = function (from, to, poi) {
 
-	var _from = this.convertCoordinate(from),
-		_to = this.convertCoordinate(to);
+    var _from = this.convertCoordinate(from),
+        _to = this.convertCoordinate(to);
 
-	OG.geometry.Line.superclass.call(this, [
-		[_from.x, _from.y],
-		[_to.x, _to.y]
-	], poi);
+    OG.geometry.Line.superclass.call(this, [
+        [_from.x, _from.y],
+        [_to.x, _to.y]
+    ], poi);
 
-	this.TYPE = OG.Constants.GEOM_TYPE.LINE;
-	this.style = new OG.geometry.Style();
+    this.TYPE = OG.Constants.GEOM_TYPE.LINE;
+    this.style = new OG.geometry.Style();
 };
 OG.geometry.Line.prototype = new OG.geometry.PolyLine();
 OG.geometry.Line.superclass = OG.geometry.PolyLine;
@@ -10081,12 +10095,12 @@ OG.Line = OG.geometry.Line;
  * @override
  */
 OG.geometry.Line.prototype.toString = function () {
-	var s = [];
-	s.push("type:'" + OG.Constants.GEOM_NAME[this.TYPE] + "'");
-	s.push("from:" + this.vertices[0]);
-	s.push("to:" + this.vertices[1]);
+    var s = [];
+    s.push("type:'" + OG.Constants.GEOM_NAME[this.TYPE] + "'");
+    s.push("from:" + this.vertices[0]);
+    s.push("to:" + this.vertices[1]);
 
-	return "{" + s.join() + "}";
+    return "{" + s.join() + "}";
 };
 /**
  * Point 공간 기하 객체(Spatial Geometry Object)
@@ -10105,20 +10119,20 @@ OG.geometry.Line.prototype.toString = function () {
  */
 OG.geometry.Point = function (coordinate) {
 
-	this.TYPE = OG.Constants.GEOM_TYPE.POINT;
-	this.style = new OG.geometry.Style();
+    this.TYPE = OG.Constants.GEOM_TYPE.POINT;
+    this.style = new OG.geometry.Style();
 
-	/**
-	 * 좌표값
-	 * @type OG.geometry.Coordinate
-	 */
-	this.coordinate = this.convertCoordinate(coordinate);
+    /**
+     * 좌표값
+     * @type OG.geometry.Coordinate
+     */
+    this.coordinate = this.convertCoordinate(coordinate);
 
-	/**
-	 * Line Vertex 좌표 Array
-	 * @type OG.geometry.Coordinate[]
-	 */
-	this.vertices = [this.coordinate];
+    /**
+     * Line Vertex 좌표 Array
+     * @type OG.geometry.Coordinate[]
+     */
+    this.vertices = [this.coordinate];
 };
 OG.geometry.Point.prototype = new OG.geometry.Geometry();
 OG.geometry.Point.superclass = OG.geometry.Geometry;
@@ -10132,7 +10146,7 @@ OG.Point = OG.geometry.Point;
  * @override
  */
 OG.geometry.Point.prototype.getVertices = function () {
-	return this.vertices;
+    return this.vertices;
 };
 
 /**
@@ -10144,11 +10158,11 @@ OG.geometry.Point.prototype.getVertices = function () {
  * @override
  */
 OG.geometry.Point.prototype.move = function (offsetX, offsetY) {
-	this.getBoundary().move(offsetX, offsetY);
-	this.coordinate.move(offsetX, offsetY);
-	this.vertices = [this.coordinate];
+    this.getBoundary().move(offsetX, offsetY);
+    this.coordinate.move(offsetX, offsetY);
+    this.vertices = [this.coordinate];
 
-	return this;
+    return this;
 };
 
 /**
@@ -10158,9 +10172,9 @@ OG.geometry.Point.prototype.move = function (offsetX, offsetY) {
  * @override
  */
 OG.geometry.Point.prototype.moveCentroid = function (target) {
-	this.getBoundary().setUpperLeft(target);
-	this.coordinate = new OG.geometry.Coordinate(target);
-	this.vertices = [this.coordinate];
+    this.getBoundary().setUpperLeft(target);
+    this.coordinate = new OG.geometry.Coordinate(target);
+    this.vertices = [this.coordinate];
 };
 
 /**
@@ -10174,14 +10188,14 @@ OG.geometry.Point.prototype.moveCentroid = function (target) {
  * @override
  */
 OG.geometry.Point.prototype.resize = function (upper, lower, left, right) {
-	var boundary = this.getBoundary();
-	boundary.resize(upper, lower, left, right);
+    var boundary = this.getBoundary();
+    boundary.resize(upper, lower, left, right);
 
-	this.coordinate = boundary.getCentroid();
-	this.vertices = [this.coordinate];
-	this.boundary = new OG.Envelope(this.coordinate, 0, 0);
+    this.coordinate = boundary.getCentroid();
+    this.vertices = [this.coordinate];
+    this.boundary = new OG.Envelope(this.coordinate, 0, 0);
 
-	return this;
+    return this;
 };
 
 /**
@@ -10193,7 +10207,7 @@ OG.geometry.Point.prototype.resize = function (upper, lower, left, right) {
  * @override
  */
 OG.geometry.Point.prototype.resizeBox = function (width, height) {
-	return this;
+    return this;
 };
 
 /**
@@ -10205,13 +10219,13 @@ OG.geometry.Point.prototype.resizeBox = function (width, height) {
  * @override
  */
 OG.geometry.Point.prototype.rotate = function (angle, origin) {
-	origin = origin || this.getCentroid();
+    origin = origin || this.getCentroid();
 
-	this.coordinate.rotate(angle, origin);
-	this.vertices = [this.coordinate];
-	this.reset();
+    this.coordinate.rotate(angle, origin);
+    this.vertices = [this.coordinate];
+    this.reset();
 
-	return this;
+    return this;
 };
 
 /**
@@ -10222,11 +10236,11 @@ OG.geometry.Point.prototype.rotate = function (angle, origin) {
  * @override
  */
 OG.geometry.Point.prototype.fitToBoundary = function (envelope) {
-	this.coordinate = envelope.getCentroid();
-	this.vertices = [this.coordinate];
-	this.boundary = new OG.Envelope(this.coordinate, 0, 0);
+    this.coordinate = envelope.getCentroid();
+    this.vertices = [this.coordinate];
+    this.boundary = new OG.Envelope(this.coordinate, 0, 0);
 
-	return this;
+    return this;
 };
 
 /**
@@ -10236,11 +10250,11 @@ OG.geometry.Point.prototype.fitToBoundary = function (envelope) {
  * @override
  */
 OG.geometry.Point.prototype.toString = function () {
-	var s = [];
-	s.push("type:'" + OG.Constants.GEOM_NAME[this.TYPE] + "'");
-	s.push("coordinate:" + this.coordinate);
+    var s = [];
+    s.push("type:'" + OG.Constants.GEOM_NAME[this.TYPE] + "'");
+    s.push("coordinate:" + this.coordinate);
 
-	return "{" + s.join() + "}";
+    return "{" + s.join() + "}";
 };
 /**
  * Polygon 공간 기하 객체(Spatial Geometry Object)
@@ -10259,16 +10273,16 @@ OG.geometry.Point.prototype.toString = function () {
  */
 OG.geometry.Polygon = function (vertices) {
 
-	OG.geometry.Polygon.superclass.call(this, vertices);
+    OG.geometry.Polygon.superclass.call(this, vertices);
 
-	// Polygon 은 첫번째 좌표와 마지막 좌표가 같음
-	if (this.vertices.length > 0 && !this.vertices[0].isEquals(this.vertices[this.vertices.length - 1])) {
-		this.vertices.push(new OG.geometry.Coordinate(this.vertices[0].x, this.vertices[0].y));
-	}
+    // Polygon 은 첫번째 좌표와 마지막 좌표가 같음
+    if (this.vertices.length > 0 && !this.vertices[0].isEquals(this.vertices[this.vertices.length - 1])) {
+        this.vertices.push(new OG.geometry.Coordinate(this.vertices[0].x, this.vertices[0].y));
+    }
 
-	this.TYPE = OG.Constants.GEOM_TYPE.POLYGON;
-	this.IS_CLOSED = true;
-	this.style = new OG.geometry.Style();
+    this.TYPE = OG.Constants.GEOM_TYPE.POLYGON;
+    this.IS_CLOSED = true;
+    this.style = new OG.geometry.Style();
 };
 OG.geometry.Polygon.prototype = new OG.geometry.PolyLine();
 OG.geometry.Polygon.superclass = OG.geometry.PolyLine;
@@ -10293,24 +10307,24 @@ OG.Polygon = OG.geometry.Polygon;
  */
 OG.geometry.Rectangle = function (upperLeft, width, height) {
 
-	var _upperLeft = this.convertCoordinate(upperLeft),
-		_lowerRight = this.convertCoordinate([_upperLeft.x + width, _upperLeft.y + height]);
+    var _upperLeft = this.convertCoordinate(upperLeft),
+        _lowerRight = this.convertCoordinate([_upperLeft.x + width, _upperLeft.y + height]);
 
-	// 파라미터 유효성 체크
-	if (_upperLeft.x > _lowerRight.x || _upperLeft.y > _lowerRight.y) {
-		throw new OG.ParamError();
-	}
+    // 파라미터 유효성 체크
+    if (_upperLeft.x > _lowerRight.x || _upperLeft.y > _lowerRight.y) {
+        throw new OG.ParamError();
+    }
 
-	OG.geometry.Rectangle.superclass.call(this, [
-		[_upperLeft.x, _upperLeft.y],
-		[_upperLeft.x + (_lowerRight.x - _upperLeft.x), _upperLeft.y],
-		[_lowerRight.x, _lowerRight.y],
-		[_upperLeft.x, _upperLeft.y + (_lowerRight.y - _upperLeft.y)],
-		[_upperLeft.x, _upperLeft.y]
-	]);
+    OG.geometry.Rectangle.superclass.call(this, [
+        [_upperLeft.x, _upperLeft.y],
+        [_upperLeft.x + (_lowerRight.x - _upperLeft.x), _upperLeft.y],
+        [_lowerRight.x, _lowerRight.y],
+        [_upperLeft.x, _upperLeft.y + (_lowerRight.y - _upperLeft.y)],
+        [_upperLeft.x, _upperLeft.y]
+    ]);
 
-	this.TYPE = OG.Constants.GEOM_TYPE.RECTANGLE;
-	this.style = new OG.geometry.Style();
+    this.TYPE = OG.Constants.GEOM_TYPE.RECTANGLE;
+    this.style = new OG.geometry.Style();
 };
 OG.geometry.Rectangle.prototype = new OG.geometry.Polygon();
 OG.geometry.Rectangle.superclass = OG.geometry.Polygon;
@@ -10324,17 +10338,17 @@ OG.Rectangle = OG.geometry.Rectangle;
  * @override
  */
 OG.geometry.Rectangle.prototype.toString = function () {
-	var s = [],
-		angle = OG.Util.round(Math.atan2(this.vertices[1].y - this.vertices[0].y,
-			this.vertices[1].x - this.vertices[0].x) * 180 / Math.PI);
+    var s = [],
+        angle = OG.Util.round(Math.atan2(this.vertices[1].y - this.vertices[0].y,
+            this.vertices[1].x - this.vertices[0].x) * 180 / Math.PI);
 
-	s.push("type:'" + OG.Constants.GEOM_NAME[this.TYPE] + "'");
-	s.push("upperLeft:" + this.vertices[0]);
-	s.push("width:" + (this.vertices[0].distance(this.vertices[1])));
-	s.push("height:" + (this.vertices[0].distance(this.vertices[3])));
-	s.push("angle:" + angle);
+    s.push("type:'" + OG.Constants.GEOM_NAME[this.TYPE] + "'");
+    s.push("upperLeft:" + this.vertices[0]);
+    s.push("width:" + (this.vertices[0].distance(this.vertices[1])));
+    s.push("height:" + (this.vertices[0].distance(this.vertices[3])));
+    s.push("angle:" + angle);
 
-	return "{" + s.join() + "}";
+    return "{" + s.join() + "}";
 };
 /**
  * 도형 Path 의 Marker 정보 최상위 인터페이스
@@ -10347,29 +10361,29 @@ OG.geometry.Rectangle.prototype.toString = function () {
  */
 OG.marker.IMarker = function () {
 
-	/**
-	 * marker 을 구분하는 marker ID(marker 클래스명과 일치)
-	 * @type String
-	 */
-	this.MARKER_ID = null;
+    /**
+     * marker 을 구분하는 marker ID(marker 클래스명과 일치)
+     * @type String
+     */
+    this.MARKER_ID = null;
 
-	/**
-	 * marker 모양을 나타내는 공간기하객체(Geometry)
-	 * @type OG.geometry.Geometry
-	 */
-	this.geom = null;
+    /**
+     * marker 모양을 나타내는 공간기하객체(Geometry)
+     * @type OG.geometry.Geometry
+     */
+    this.geom = null;
 };
 OG.marker.IMarker.prototype = {
 
 
-	/**
-	 * 드로잉할 marker 를 생성하여 반환한다.
-	 * @return {*} Marker 정보
-	 * @abstract
-	 */
-	createMarker: function () {
-		throw new OG.NotImplementedException("OG.shape.IMarker.createMarker");
-	}
+    /**
+     * 드로잉할 marker 를 생성하여 반환한다.
+     * @return {*} Marker 정보
+     * @abstract
+     */
+    createMarker: function () {
+        throw new OG.NotImplementedException("OG.shape.IMarker.createMarker");
+    }
 };
 OG.marker.IMarker.prototype.constructor = OG.marker.IMarker;
 OG.IMarker = OG.marker.IMarker;
@@ -10384,9 +10398,9 @@ OG.IMarker = OG.marker.IMarker;
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.marker.ArrowMarker = function () {
-	OG.marker.ArrowMarker.superclass.call(this);
+    OG.marker.ArrowMarker.superclass.call(this);
 
-	this.MARKER_ID = 'OG.marker.ArrowMarker';
+    this.MARKER_ID = 'OG.marker.ArrowMarker';
 };
 OG.marker.ArrowMarker.prototype = new OG.marker.IMarker();
 OG.marker.ArrowMarker.superclass = OG.marker.IMarker;
@@ -10400,17 +10414,17 @@ OG.ArrowMarker = OG.marker.ArrowMarker;
  * @override
  */
 OG.marker.ArrowMarker.prototype.createMarker = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	//this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
-	this.geom = new OG.geometry.Polygon([[0, 0], [30, 20], [0, 40], [0, 0]]);
-	this.geom.style = new OG.geometry.Style({
-		'fill-opacity': 1,
-		'fill': 'black'
-	});
-	return this.geom;
+    //this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
+    this.geom = new OG.geometry.Polygon([[0, 0], [30, 20], [0, 40], [0, 0]]);
+    this.geom.style = new OG.geometry.Style({
+        'fill-opacity': 1,
+        'fill': 'black'
+    });
+    return this.geom;
 };
 /**
  * Circle Marker
@@ -10423,9 +10437,9 @@ OG.marker.ArrowMarker.prototype.createMarker = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.marker.CircleMarker = function () {
-	OG.marker.CircleMarker.superclass.call(this);
+    OG.marker.CircleMarker.superclass.call(this);
 
-	this.MARKER_ID = 'OG.marker.CircleMarker';
+    this.MARKER_ID = 'OG.marker.CircleMarker';
 };
 OG.marker.CircleMarker.prototype = new OG.marker.IMarker();
 OG.marker.CircleMarker.superclass = OG.marker.IMarker;
@@ -10439,12 +10453,12 @@ OG.CircleMarker = OG.marker.CircleMarker;
  * @override
  */
 OG.marker.CircleMarker.prototype.createMarker = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Circle([50, 50], 50);
-	return this.geom;
+    this.geom = new OG.geometry.Circle([50, 50], 50);
+    return this.geom;
 };
 /**
  * Rectangle Maker
@@ -10457,9 +10471,9 @@ OG.marker.CircleMarker.prototype.createMarker = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.marker.RectangleMarker = function () {
-	OG.marker.RectangleMarker.superclass.call(this);
+    OG.marker.RectangleMarker.superclass.call(this);
 
-	this.MARKER_ID = 'OG.marker.RectangleMarker';
+    this.MARKER_ID = 'OG.marker.RectangleMarker';
 };
 OG.marker.RectangleMarker.prototype = new OG.marker.IMarker();
 OG.marker.RectangleMarker.superclass = OG.marker.IMarker;
@@ -10473,36 +10487,36 @@ OG.RectangleMarker = OG.marker.RectangleMarker;
  * @override
  */
 OG.marker.RectangleMarker.prototype.createMarker = function () {
-	var geom1, geom2, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Circle([50, 50], 50);
-	geom1.style = new OG.geometry.Style({
-		"stroke-width": 4
-	});
+    geom1 = new OG.geometry.Circle([50, 50], 50);
+    geom1.style = new OG.geometry.Style({
+        "stroke-width": 4
+    });
 
-	geom2 = new OG.geometry.Polygon([
-		[20, 75],
-		[40, 30],
-		[60, 60],
-		[80, 20],
-		[60, 75],
-		[40, 50]
+    geom2 = new OG.geometry.Polygon([
+        [20, 75],
+        [40, 30],
+        [60, 60],
+        [80, 20],
+        [60, 75],
+        [40, 50]
 
-	]);
-	geom2.style = new OG.geometry.Style({
-		"fill": "black",
-		"fill-opacity": 1
-	});
+    ]);
+    geom2.style = new OG.geometry.Style({
+        "fill": "black",
+        "fill-opacity": 1
+    });
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * Rectangle Maker
@@ -10515,9 +10529,9 @@ OG.marker.RectangleMarker.prototype.createMarker = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.marker.SwitchLMarker = function () {
-	OG.marker.SwitchLMarker.superclass.call(this);
+    OG.marker.SwitchLMarker.superclass.call(this);
 
-	this.MARKER_ID = 'OG.marker.SwitchLMarker';
+    this.MARKER_ID = 'OG.marker.SwitchLMarker';
 };
 OG.marker.SwitchLMarker.prototype = new OG.marker.IMarker();
 OG.marker.SwitchLMarker.superclass = OG.marker.IMarker;
@@ -10531,15 +10545,15 @@ OG.SwitchLMarker = OG.marker.SwitchLMarker;
  * @override
  */
 OG.marker.SwitchLMarker.prototype.createMarker = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.PolyLine([[0, 0], [20, 5]]);
-	this.geom.style = new OG.geometry.Style({
-		'fill-opacity': 1
-	});
-	return this.geom;
+    this.geom = new OG.geometry.PolyLine([[0, 0], [20, 5]]);
+    this.geom.style = new OG.geometry.Style({
+        'fill-opacity': 1
+    });
+    return this.geom;
 };
 /**
  * Rectangle Maker
@@ -10552,9 +10566,9 @@ OG.marker.SwitchLMarker.prototype.createMarker = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.marker.SwitchRMarker = function () {
-	OG.marker.SwitchRMarker.superclass.call(this);
+    OG.marker.SwitchRMarker.superclass.call(this);
 
-	this.MARKER_ID = 'OG.marker.SwitchRMarker';
+    this.MARKER_ID = 'OG.marker.SwitchRMarker';
 };
 OG.marker.SwitchRMarker.prototype = new OG.marker.IMarker();
 OG.marker.SwitchRMarker.superclass = OG.marker.IMarker;
@@ -10568,15 +10582,15 @@ OG.SwitchRMarker = OG.marker.SwitchRMarker;
  * @override
  */
 OG.marker.SwitchRMarker.prototype.createMarker = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.PolyLine([[0, 5], [20, 0]]);
-	this.geom.style = new OG.geometry.Style({
-		'fill-opacity': 1
-	});
-	return this.geom;
+    this.geom = new OG.geometry.PolyLine([[0, 5], [20, 0]]);
+    this.geom.style = new OG.geometry.Style({
+        'fill-opacity': 1
+    });
+    return this.geom;
 };
 /**
  * Rectangle Maker
@@ -10589,9 +10603,9 @@ OG.marker.SwitchRMarker.prototype.createMarker = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.marker.SwitchXMarker = function () {
-	OG.marker.SwitchXMarker.superclass.call(this);
+    OG.marker.SwitchXMarker.superclass.call(this);
 
-	this.MARKER_ID = 'OG.marker.SwitchXMarker';
+    this.MARKER_ID = 'OG.marker.SwitchXMarker';
 };
 OG.marker.SwitchXMarker.prototype = new OG.marker.IMarker();
 OG.marker.SwitchXMarker.superclass = OG.marker.IMarker;
@@ -10605,20 +10619,20 @@ OG.SwitchXMarker = OG.marker.SwitchXMarker;
  * @override
  */
 OG.marker.SwitchXMarker.prototype.createMarker = function () {
-	var geom1, geom2,geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Line([-10, 10],[10,-10]);
-	geom2 = new OG.geometry.Line([-10, -10],[10,10]);
+    geom1 = new OG.geometry.Line([-10, 10], [10, -10]);
+    geom2 = new OG.geometry.Line([-10, -10], [10, 10]);
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * 도형 Pattern 정보 최상위 인터페이스
@@ -10631,29 +10645,29 @@ OG.marker.SwitchXMarker.prototype.createMarker = function () {
  */
 OG.pattern.IPattern = function () {
 
-	/**
-	 * pattern 을 구분하는 pattern ID(pattern 클래스명과 일치)
-	 * @type String
-	 */
-	this.PATTERN_ID = null;
+    /**
+     * pattern 을 구분하는 pattern ID(pattern 클래스명과 일치)
+     * @type String
+     */
+    this.PATTERN_ID = null;
 
-	/**
-	 * pattern 모양을 나타내는 공간기하객체(Geometry)
-	 * @type OG.geometry.Geometry
-	 */
-	this.geom = null;
+    /**
+     * pattern 모양을 나타내는 공간기하객체(Geometry)
+     * @type OG.geometry.Geometry
+     */
+    this.geom = null;
 };
 OG.pattern.IPattern.prototype = {
 
 
-	/**
-	 * 드로잉할 pattern 를 생성하여 반환한다.
-	 * @return {*} pattern 정보
-	 * @abstract
-	 */
-	createPattern: function () {
-		throw new OG.NotImplementedException("OG.shape.IPattern.createPattern");
-	}
+    /**
+     * 드로잉할 pattern 를 생성하여 반환한다.
+     * @return {*} pattern 정보
+     * @abstract
+     */
+    createPattern: function () {
+        throw new OG.NotImplementedException("OG.shape.IPattern.createPattern");
+    }
 };
 OG.pattern.IPattern.prototype.constructor = OG.pattern.IPattern;
 OG.IPattern = OG.pattern.IPattern;
@@ -11024,7 +11038,7 @@ OG.shape.IShape.prototype = {
      * @param groupElement
      * @param element
      */
-    onAddedToGroup: function(groupElement, element, eventOffset){
+    onAddedToGroup: function (groupElement, element, eventOffset) {
 
     },
     onSelectShape: function () {
@@ -11047,9 +11061,9 @@ OG.IShape = OG.shape.IShape;
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.GeomShape = function () {
-	OG.shape.GeomShape.superclass.call(this);
+    OG.shape.GeomShape.superclass.call(this);
 
-	this.TYPE = OG.Constants.SHAPE_TYPE.GEOM;
+    this.TYPE = OG.Constants.SHAPE_TYPE.GEOM;
 };
 OG.shape.GeomShape.prototype = new OG.shape.IShape();
 OG.shape.GeomShape.superclass = OG.shape.IShape;
@@ -11063,11 +11077,11 @@ OG.GeomShape = OG.shape.GeomShape;
  * @override
  */
 OG.shape.GeomShape.prototype.clone = function () {
-	var shape = eval('new ' + this.SHAPE_ID + '()');
-	shape.label = this.label;
-	shape.setData(JSON.parse(JSON.stringify(this.getData())));
+    var shape = eval('new ' + this.SHAPE_ID + '()');
+    shape.label = this.label;
+    shape.setData(JSON.parse(JSON.stringify(this.getData())));
 
-	return shape;
+    return shape;
 };
 /**
  * Text Shape
@@ -11081,22 +11095,22 @@ OG.shape.GeomShape.prototype.clone = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.TextShape = function (text) {
-	OG.shape.TextShape.superclass.call(this);
+    OG.shape.TextShape.superclass.call(this);
 
-	this.TYPE = OG.Constants.SHAPE_TYPE.TEXT;
-	this.SHAPE_ID = 'OG.shape.TextShape';
+    this.TYPE = OG.Constants.SHAPE_TYPE.TEXT;
+    this.SHAPE_ID = 'OG.shape.TextShape';
 
-	/**
-	 * 드로잉할 텍스트
-	 * @type String
-	 */
-	this.text = text || "Text Here";
+    /**
+     * 드로잉할 텍스트
+     * @type String
+     */
+    this.text = text || "Text Here";
 
-	/**
-	 * 회전각도
-	 * @type Number
-	 */
-	this.angle = 0;
+    /**
+     * 회전각도
+     * @type Number
+     */
+    this.angle = 0;
 };
 OG.shape.TextShape.prototype = new OG.shape.IShape();
 OG.shape.TextShape.superclass = OG.shape.IShape;
@@ -11110,7 +11124,7 @@ OG.TextShape = OG.shape.TextShape;
  * @override
  */
 OG.shape.TextShape.prototype.createShape = function () {
-	return this.text;
+    return this.text;
 };
 
 /**
@@ -11120,11 +11134,11 @@ OG.shape.TextShape.prototype.createShape = function () {
  * @override
  */
 OG.shape.TextShape.prototype.clone = function () {
-	var shape = eval('new ' + this.SHAPE_ID + '()');
-	shape.text = this.text;
-	shape.angle = this.angle;
-	shape.setData(JSON.parse(JSON.stringify(this.getData())));
-	return shape;
+    var shape = eval('new ' + this.SHAPE_ID + '()');
+    shape.text = this.text;
+    shape.angle = this.angle;
+    shape.setData(JSON.parse(JSON.stringify(this.getData())));
+    return shape;
 };
 /**
  * Image Shape
@@ -11139,23 +11153,23 @@ OG.shape.TextShape.prototype.clone = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.ImageShape = function (image, label) {
-	OG.shape.ImageShape.superclass.call(this);
+    OG.shape.ImageShape.superclass.call(this);
 
-	this.TYPE = OG.Constants.SHAPE_TYPE.IMAGE;
-	this.SHAPE_ID = 'OG.shape.ImageShape';
-	this.label = label;
+    this.TYPE = OG.Constants.SHAPE_TYPE.IMAGE;
+    this.SHAPE_ID = 'OG.shape.ImageShape';
+    this.label = label;
 
-	/**
-	 * 드로잉할 이미지 URL
-	 * @type String
-	 */
-	this.image = image;
+    /**
+     * 드로잉할 이미지 URL
+     * @type String
+     */
+    this.image = image;
 
-	/**
-	 * 회전각도
-	 * @type Number
-	 */
-	this.angle = 0;
+    /**
+     * 회전각도
+     * @type Number
+     */
+    this.angle = 0;
 };
 OG.shape.ImageShape.prototype = new OG.shape.IShape();
 OG.shape.ImageShape.superclass = OG.shape.IShape;
@@ -11169,7 +11183,7 @@ OG.ImageShape = OG.shape.ImageShape;
  * @override
  */
 OG.shape.ImageShape.prototype.createShape = function () {
-	return this.image;
+    return this.image;
 };
 
 /**
@@ -11179,12 +11193,12 @@ OG.shape.ImageShape.prototype.createShape = function () {
  * @override
  */
 OG.shape.ImageShape.prototype.clone = function () {
-	var shape = eval('new ' + this.SHAPE_ID + '()');
-	shape.image = this.image;
-	shape.label = this.label;
-	shape.angle = this.angle;
-	shape.setData(JSON.parse(JSON.stringify(this.getData())));
-	return shape;
+    var shape = eval('new ' + this.SHAPE_ID + '()');
+    shape.image = this.image;
+    shape.label = this.label;
+    shape.angle = this.angle;
+    shape.setData(JSON.parse(JSON.stringify(this.getData())));
+    return shape;
 };
 /**
  * Edge Shape
@@ -11202,36 +11216,36 @@ OG.shape.ImageShape.prototype.clone = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.EdgeShape = function (from, to, label, fromLabel, toLabel) {
-	OG.shape.EdgeShape.superclass.call(this);
+    OG.shape.EdgeShape.superclass.call(this);
 
-	this.TYPE = OG.Constants.SHAPE_TYPE.EDGE;
-	this.SHAPE_ID = 'OG.shape.EdgeShape';
+    this.TYPE = OG.Constants.SHAPE_TYPE.EDGE;
+    this.SHAPE_ID = 'OG.shape.EdgeShape';
 
-	/**
-	 * Edge 시작 좌표
-	 * @type Number[]
-	 */
-	this.from = from;
+    /**
+     * Edge 시작 좌표
+     * @type Number[]
+     */
+    this.from = from;
 
-	/**
-	 * Edge 끝 좌표
-	 * @type Number[]
-	 */
-	this.to = to;
+    /**
+     * Edge 끝 좌표
+     * @type Number[]
+     */
+    this.to = to;
 
-	this.label = label;
+    this.label = label;
 
-	/**
-	 * Edge 시작점 라벨
-	 * @type String
-	 */
-	this.fromLabel = fromLabel;
+    /**
+     * Edge 시작점 라벨
+     * @type String
+     */
+    this.fromLabel = fromLabel;
 
-	/**
-	 * Edge 끝점 라벨
-	 * @type String
-	 */
-	this.toLabel = toLabel;
+    /**
+     * Edge 끝점 라벨
+     * @type String
+     */
+    this.toLabel = toLabel;
 };
 OG.shape.EdgeShape.prototype = new OG.shape.IShape();
 OG.shape.EdgeShape.superclass = OG.shape.IShape;
@@ -11245,12 +11259,12 @@ OG.EdgeShape = OG.shape.EdgeShape;
  * @override
  */
 OG.shape.EdgeShape.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.PolyLine([this.from || [0, 0], this.to || [70, 0]]);
-	return this.geom;
+    this.geom = new OG.PolyLine([this.from || [0, 0], this.to || [70, 0]]);
+    return this.geom;
 };
 
 /**
@@ -11260,15 +11274,15 @@ OG.shape.EdgeShape.prototype.createShape = function () {
  * @override
  */
 OG.shape.EdgeShape.prototype.clone = function () {
-	var shape = eval('new ' + this.SHAPE_ID + '()');
-	shape.from = this.from;
-	shape.to = this.to;
-	shape.label = this.label;
-	shape.fromLabel = this.fromLabel;
-	shape.toLabel = this.toLabel;
-	shape.setData(JSON.parse(JSON.stringify(this.getData())));
+    var shape = eval('new ' + this.SHAPE_ID + '()');
+    shape.from = this.from;
+    shape.to = this.to;
+    shape.label = this.label;
+    shape.fromLabel = this.fromLabel;
+    shape.toLabel = this.toLabel;
+    shape.setData(JSON.parse(JSON.stringify(this.getData())));
 
-	return shape;
+    return shape;
 };
 /**
  * Svg Shape
@@ -11283,23 +11297,23 @@ OG.shape.EdgeShape.prototype.clone = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.SvgShape = function (xml, label) {
-	OG.shape.SvgShape.superclass.call(this);
+    OG.shape.SvgShape.superclass.call(this);
 
-	this.TYPE = OG.Constants.SHAPE_TYPE.IMAGE;
-	this.SHAPE_ID = 'OG.shape.SvgShape';
-	this.label = label;
+    this.TYPE = OG.Constants.SHAPE_TYPE.IMAGE;
+    this.SHAPE_ID = 'OG.shape.SvgShape';
+    this.label = label;
 
-	/**
-	 * 드로잉할 xml
-	 * @type String
-	 */
-	this.xml = xml;
+    /**
+     * 드로잉할 xml
+     * @type String
+     */
+    this.xml = xml;
 
-	/**
-	 * 회전각도
-	 * @type Number
-	 */
-	this.angle = 0;
+    /**
+     * 회전각도
+     * @type Number
+     */
+    this.angle = 0;
 };
 OG.shape.SvgShape.prototype = new OG.shape.IShape();
 OG.shape.SvgShape.superclass = OG.shape.IShape;
@@ -11313,7 +11327,7 @@ OG.SvgShape = OG.shape.SvgShape;
  * @override
  */
 OG.shape.SvgShape.prototype.createShape = function () {
-	return this.xml;
+    return this.xml;
 };
 
 /**
@@ -11323,12 +11337,12 @@ OG.shape.SvgShape.prototype.createShape = function () {
  * @override
  */
 OG.shape.SvgShape.prototype.clone = function () {
-	var shape = eval('new ' + this.SHAPE_ID + '()');
-	shape.xml = this.xml;
-	shape.label = this.label;
-	shape.angle = this.angle;
-	shape.setData(JSON.parse(JSON.stringify(this.getData())));
-	return shape;
+    var shape = eval('new ' + this.SHAPE_ID + '()');
+    shape.xml = this.xml;
+    shape.label = this.label;
+    shape.angle = this.angle;
+    shape.setData(JSON.parse(JSON.stringify(this.getData())));
+    return shape;
 };
 /**
  * Circle Shape
@@ -11342,10 +11356,10 @@ OG.shape.SvgShape.prototype.clone = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.CircleShape = function (label) {
-	OG.shape.CircleShape.superclass.call(this);
+    OG.shape.CircleShape.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.CircleShape';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.CircleShape';
+    this.label = label;
 };
 OG.shape.CircleShape.prototype = new OG.shape.GeomShape();
 OG.shape.CircleShape.superclass = OG.shape.GeomShape;
@@ -11359,12 +11373,12 @@ OG.CircleShape = OG.shape.CircleShape;
  * @override
  */
 OG.shape.CircleShape.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Circle([50, 50], 50);
-	return this.geom;
+    this.geom = new OG.geometry.Circle([50, 50], 50);
+    return this.geom;
 };
 /**
  * Ellipse Shape
@@ -11378,10 +11392,10 @@ OG.shape.CircleShape.prototype.createShape = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.EllipseShape = function (label) {
-	OG.shape.EllipseShape.superclass.call(this);
+    OG.shape.EllipseShape.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.EllipseShape';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.EllipseShape';
+    this.label = label;
 };
 OG.shape.EllipseShape.prototype = new OG.shape.GeomShape();
 OG.shape.EllipseShape.superclass = OG.shape.GeomShape;
@@ -11395,12 +11409,12 @@ OG.EllipseShape = OG.shape.EllipseShape;
  * @override
  */
 OG.shape.EllipseShape.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Ellipse([50, 50], 50, 30);
-	return this.geom;
+    this.geom = new OG.geometry.Ellipse([50, 50], 50, 30);
+    return this.geom;
 };
 /**
  * SpotShape Shape
@@ -11415,18 +11429,18 @@ OG.shape.EllipseShape.prototype.createShape = function () {
  * @private
  */
 OG.shape.From = function (label) {
-	OG.shape.From.superclass.call(this);
+    OG.shape.From.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.From';
-	this.label = label;
-	this.MOVABLE = false;
-	this.RESIZABLE = false;
-	this.SELF_CONNECTABLE = false;
-	this.CONNECT_CLONEABLE = false;
-	this.LABEL_EDITABLE = false;
-	this.DELETABLE = false;
-	this.CONNECT_STYLE_CHANGE = false;
-	this.ENABLE_TO = false;
+    this.SHAPE_ID = 'OG.shape.From';
+    this.label = label;
+    this.MOVABLE = false;
+    this.RESIZABLE = false;
+    this.SELF_CONNECTABLE = false;
+    this.CONNECT_CLONEABLE = false;
+    this.LABEL_EDITABLE = false;
+    this.DELETABLE = false;
+    this.CONNECT_STYLE_CHANGE = false;
+    this.ENABLE_TO = false;
 };
 OG.shape.From.prototype = new OG.shape.GeomShape();
 OG.shape.From.superclass = OG.shape.GeomShape;
@@ -11440,12 +11454,12 @@ OG.From = OG.shape.From;
  * @override
  */
 OG.shape.From.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Circle([10, 10], 10);
-	return this.geom;
+    this.geom = new OG.geometry.Circle([10, 10], 10);
+    return this.geom;
 };
 /**
  * Group Shape
@@ -11459,26 +11473,26 @@ OG.shape.From.prototype.createShape = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.GroupShape = function (label) {
-	OG.shape.GroupShape.superclass.call(this);
+    OG.shape.GroupShape.superclass.call(this);
 
-	this.TYPE = OG.Constants.SHAPE_TYPE.GROUP;
-	this.SHAPE_ID = 'OG.shape.GroupShape';
-	this.label = label;
+    this.TYPE = OG.Constants.SHAPE_TYPE.GROUP;
+    this.SHAPE_ID = 'OG.shape.GroupShape';
+    this.label = label;
 
-	this.CONNECTABLE = false;
-	this.SELF_CONNECTABLE = false;
+    this.CONNECTABLE = false;
+    this.SELF_CONNECTABLE = false;
 
-	/**
-	 * 그룹핑 가능여부
-	 * @type Boolean
-	 */
-	this.GROUP_DROPABLE = true;
+    /**
+     * 그룹핑 가능여부
+     * @type Boolean
+     */
+    this.GROUP_DROPABLE = true;
 
-	/**
-	 * 최소화 가능여부
-	 * @type Boolean
-	 */
-	this.GROUP_COLLAPSIBLE = false;
+    /**
+     * 최소화 가능여부
+     * @type Boolean
+     */
+    this.GROUP_COLLAPSIBLE = false;
 };
 OG.shape.GroupShape.prototype = new OG.shape.IShape();
 OG.shape.GroupShape.superclass = OG.shape.IShape;
@@ -11486,7 +11500,7 @@ OG.shape.GroupShape.prototype.constructor = OG.shape.GroupShape;
 OG.GroupShape = OG.shape.GroupShape;
 
 OG.shape.GroupShape.prototype.layoutChild = function () {
-	//NONE
+    //NONE
 
 }
 
@@ -11497,18 +11511,18 @@ OG.shape.GroupShape.prototype.layoutChild = function () {
  * @override
  */
 OG.shape.GroupShape.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
-	this.geom.style = new OG.geometry.Style({
-		'fill' : '#ffffff',
-		'fill-opacity': 0,
-		"stroke": 'none'
-	});
+    this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
+    this.geom.style = new OG.geometry.Style({
+        'fill': '#ffffff',
+        'fill-opacity': 0,
+        "stroke": 'none'
+    });
 
-	return this.geom;
+    return this.geom;
 };
 
 /**
@@ -11518,11 +11532,11 @@ OG.shape.GroupShape.prototype.createShape = function () {
  * @override
  */
 OG.shape.GroupShape.prototype.clone = function () {
-	var shape = eval('new ' + this.SHAPE_ID + '()');
-	shape.label = this.label;
-	shape.setData(JSON.parse(JSON.stringify(this.getData())));
+    var shape = eval('new ' + this.SHAPE_ID + '()');
+    shape.label = this.label;
+    shape.setData(JSON.parse(JSON.stringify(this.getData())));
 
-	return shape;
+    return shape;
 };
 /**
  * Horizontal Swimlane Shape
@@ -11536,9 +11550,9 @@ OG.shape.GroupShape.prototype.clone = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.HorizontalLaneShape = function (label) {
-	OG.shape.HorizontalLaneShape.superclass.call(this, label);
+    OG.shape.HorizontalLaneShape.superclass.call(this, label);
 
-	this.SHAPE_ID = 'OG.shape.HorizontalLaneShape';
+    this.SHAPE_ID = 'OG.shape.HorizontalLaneShape';
 
 };
 OG.shape.HorizontalLaneShape.prototype = new OG.shape.GroupShape();
@@ -11553,19 +11567,19 @@ OG.HorizontalLaneShape = OG.shape.HorizontalLaneShape;
  * @override
  */
 OG.shape.HorizontalLaneShape.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
-	this.geom.style = new OG.geometry.Style({
-		'label-direction': 'vertical',
-		'vertical-align' : 'top',
-		'fill' : '#ffffff',
-		'fill-opacity': 0
-	});
+    this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
+    this.geom.style = new OG.geometry.Style({
+        'label-direction': 'vertical',
+        'vertical-align': 'top',
+        'fill': '#ffffff',
+        'fill-opacity': 0
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * Horizontal Pool Shape
@@ -11607,10 +11621,10 @@ OG.shape.HorizontalPoolShape.prototype.createShape = function () {
     this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
     this.geom.style = new OG.geometry.Style({
         'label-direction': 'vertical',
-        'vertical-align' : 'top',
-        'fill' : '#ffffff',
+        'vertical-align': 'top',
+        'fill': '#ffffff',
         'fill-opacity': 0,
-        'title-size' : 32
+        'title-size': 32
     });
 
     return this.geom;
@@ -11657,23 +11671,23 @@ OG.shape.HorizontalPoolShape.prototype.createSubShape = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.HtmlShape = function (html, label) {
-	OG.shape.HtmlShape.superclass.call(this);
+    OG.shape.HtmlShape.superclass.call(this);
 
-	this.TYPE = OG.Constants.SHAPE_TYPE.HTML;
-	this.SHAPE_ID = 'OG.shape.HtmlShape';
-	this.label = label;
+    this.TYPE = OG.Constants.SHAPE_TYPE.HTML;
+    this.SHAPE_ID = 'OG.shape.HtmlShape';
+    this.label = label;
 
-	/**
-	 * 드로잉할 임베드 HTML String
-	 * @type String
-	 */
-	this.html = html || "";
+    /**
+     * 드로잉할 임베드 HTML String
+     * @type String
+     */
+    this.html = html || "";
 
-	/**
-	 * 회전각도
-	 * @type Number
-	 */
-	this.angle = 0;
+    /**
+     * 회전각도
+     * @type Number
+     */
+    this.angle = 0;
 };
 OG.shape.HtmlShape.prototype = new OG.shape.IShape();
 OG.shape.HtmlShape.superclass = OG.shape.IShape;
@@ -11687,7 +11701,7 @@ OG.HtmlShape = OG.shape.HtmlShape;
  * @override
  */
 OG.shape.HtmlShape.prototype.createShape = function () {
-	return this.html;
+    return this.html;
 };
 
 /**
@@ -11697,13 +11711,13 @@ OG.shape.HtmlShape.prototype.createShape = function () {
  * @override
  */
 OG.shape.HtmlShape.prototype.clone = function () {
-	var shape = eval('new ' + this.SHAPE_ID + '()');
-	shape.html = this.html;
-	shape.label = this.label;
-	shape.angle = this.angle;
-	shape.setData(JSON.parse(JSON.stringify(this.getData())));
+    var shape = eval('new ' + this.SHAPE_ID + '()');
+    shape.html = this.html;
+    shape.label = this.label;
+    shape.angle = this.angle;
+    shape.setData(JSON.parse(JSON.stringify(this.getData())));
 
-	return shape;
+    return shape;
 };
 /**
  * Rectangle Shape
@@ -11717,15 +11731,15 @@ OG.shape.HtmlShape.prototype.clone = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.RectangleShape = function (label) {
-	OG.shape.RectangleShape.superclass.call(this);
+    OG.shape.RectangleShape.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.RectangleShape';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.RectangleShape';
+    this.label = label;
 };
 OG.shape.RectangleShape.prototype = new OG.shape.GeomShape();
 OG.shape.RectangleShape.superclass = OG.shape.GeomShape;
 OG.shape.RectangleShape.prototype.constructor = OG.shape.RectangleShape;
-OG.RectangleShape = OG.shape.RectangleShape;
+OG.RectangleShape = OG.shape.getElementByIdRectangleShape;
 
 /**
  * 드로잉할 Shape 을 생성하여 반환한다.
@@ -11734,12 +11748,12 @@ OG.RectangleShape = OG.shape.RectangleShape;
  * @override
  */
 OG.shape.RectangleShape.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
-	return this.geom;
+    this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
+    return this.geom;
 };
 /**
  * SpotShape Shape
@@ -11753,10 +11767,10 @@ OG.shape.RectangleShape.prototype.createShape = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.SpotShape = function (label) {
-	OG.shape.SpotShape.superclass.call(this);
+    OG.shape.SpotShape.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.SpotShape';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.SpotShape';
+    this.label = label;
 };
 OG.shape.SpotShape.prototype = new OG.shape.GeomShape();
 OG.shape.SpotShape.superclass = OG.shape.GeomShape;
@@ -11770,12 +11784,12 @@ OG.SpotShape = OG.shape.SpotShape;
  * @override
  */
 OG.shape.SpotShape.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Circle([10, 10], 10);
-	return this.geom;
+    this.geom = new OG.geometry.Circle([10, 10], 10);
+    return this.geom;
 };
 /**
  * SpotShape Shape
@@ -11790,18 +11804,18 @@ OG.shape.SpotShape.prototype.createShape = function () {
  * @private
  */
 OG.shape.To = function (label) {
-	OG.shape.To.superclass.call(this);
+    OG.shape.To.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.To';
-	this.label = label;
-	this.MOVABLE = false;
-	this.RESIZABLE = false;
-	this.SELF_CONNECTABLE = false;
-	this.CONNECT_CLONEABLE = false;
-	this.LABEL_EDITABLE = false;
-	this.DELETABLE = false;
-	this.CONNECT_STYLE_CHANGE = false;
-	this.ENABLE_FROM = false;
+    this.SHAPE_ID = 'OG.shape.To';
+    this.label = label;
+    this.MOVABLE = false;
+    this.RESIZABLE = false;
+    this.SELF_CONNECTABLE = false;
+    this.CONNECT_CLONEABLE = false;
+    this.LABEL_EDITABLE = false;
+    this.DELETABLE = false;
+    this.CONNECT_STYLE_CHANGE = false;
+    this.ENABLE_FROM = false;
 };
 OG.shape.To.prototype = new OG.shape.GeomShape();
 OG.shape.To.superclass = OG.shape.GeomShape;
@@ -11815,12 +11829,12 @@ OG.To = OG.shape.To;
  * @override
  */
 OG.shape.To.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Circle([10, 10], 10);
-	return this.geom;
+    this.geom = new OG.geometry.Circle([10, 10], 10);
+    return this.geom;
 };
 /**
  * BPMN : Transformer Shape
@@ -11860,7 +11874,7 @@ OG.shape.Transformer.prototype.createShape = function () {
     this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
     this.geom.style = new OG.geometry.Style({
         'label-direction': 'horizontal',
-        'vertical-align' : 'top',
+        'vertical-align': 'top',
         fill: '#ffffff',
         'fill-opacity': 0
     });
@@ -11879,9 +11893,9 @@ OG.shape.Transformer.prototype.createShape = function () {
  * @author <a href="mailto:sppark@uengine.org">Seungpil Park</a>
  */
 OG.shape.VerticalLaneShape = function (label) {
-	OG.shape.VerticalLaneShape.superclass.call(this, label);
+    OG.shape.VerticalLaneShape.superclass.call(this, label);
 
-	this.SHAPE_ID = 'OG.shape.VerticalLaneShape';
+    this.SHAPE_ID = 'OG.shape.VerticalLaneShape';
 };
 OG.shape.VerticalLaneShape.prototype = new OG.shape.GroupShape();
 OG.shape.VerticalLaneShape.superclass = OG.shape.GroupShape;
@@ -11895,20 +11909,20 @@ OG.VerticalLaneShape = OG.shape.VerticalLaneShape;
  * @override
  */
 OG.shape.VerticalLaneShape.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
-	this.geom.style = new OG.geometry.Style({
-		'label-direction': 'horizontal',
-		'vertical-align' : 'top',
-		'title-size' : 24,
-		fill: '#ffffff',
-		'fill-opacity': 0
-	});
+    this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
+    this.geom.style = new OG.geometry.Style({
+        'label-direction': 'horizontal',
+        'vertical-align': 'top',
+        'title-size': 24,
+        fill: '#ffffff',
+        'fill-opacity': 0
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * Vertical Pool Shape
@@ -11946,7 +11960,7 @@ OG.shape.VerticalPoolShape.prototype.createShape = function () {
     this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
     this.geom.style = new OG.geometry.Style({
         'label-direction': 'horizontal',
-        'vertical-align' : 'top',
+        'vertical-align': 'top',
         'fill': '#ffffff',
         'fill-opacity': 0
     });
@@ -12504,10 +12518,10 @@ OG.shape.bpmn.E_End.prototype.createSubShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Intermediate = function (label) {
-	OG.shape.bpmn.E_Intermediate.superclass.call(this);
+    OG.shape.bpmn.E_Intermediate.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate';
+    this.label = label;
 };
 OG.shape.bpmn.E_Intermediate.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Intermediate.superclass = OG.shape.bpmn.Event;
@@ -12521,20 +12535,20 @@ OG.E_Intermediate = OG.shape.bpmn.E_Intermediate;
  * @override
  */
 OG.shape.bpmn.E_Intermediate.prototype.createShape = function () {
-	var geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geomCollection.push(new OG.geometry.Circle([50, 50], 50));
-	geomCollection.push(new OG.geometry.Circle([50, 50], 42));
+    geomCollection.push(new OG.geometry.Circle([50, 50], 50));
+    geomCollection.push(new OG.geometry.Circle([50, 50], 42));
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom'
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom'
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Start Event Shape
@@ -12549,11 +12563,11 @@ OG.shape.bpmn.E_Intermediate.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Start = function (label) {
-	OG.shape.bpmn.E_Start.superclass.call(this);
+    OG.shape.bpmn.E_Start.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Start';
-	this.label = label;
-	this.inclusion = false;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Start';
+    this.label = label;
+    this.inclusion = false;
 };
 OG.shape.bpmn.E_Start.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Start.superclass = OG.shape.bpmn.Event;
@@ -12567,34 +12581,34 @@ OG.E_Start = OG.shape.bpmn.E_Start;
  * @override
  */
 OG.shape.bpmn.E_Start.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Circle([50, 50], 50);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom',
-		"stroke-width" : 1.5
-	});
+    this.geom = new OG.geometry.Circle([50, 50], 50);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom',
+        "stroke-width": 1.5
+    });
 
-	return this.geom;
+    return this.geom;
 };
 
 OG.shape.bpmn.E_Start.prototype.createSubShape = function () {
-	this.sub = [];
+    this.sub = [];
 
-	if (this.inclusion) {
-		this.sub.push({
-			shape: new OG.ImageShape(this.currentCanvas._CONFIG.IMAGE_BASE + 'complete.png'),
-			width: '20px',
-			height: '20px',
-			right: '0px',
-			bottom: '20px',
-			style: {}
-		})
-	}
+    if (this.inclusion) {
+        this.sub.push({
+            shape: new OG.ImageShape(this.currentCanvas._CONFIG.IMAGE_BASE + 'complete.png'),
+            width: '20px',
+            height: '20px',
+            right: '0px',
+            bottom: '20px',
+            style: {}
+        })
+    }
 
-	return this.sub;
+    return this.sub;
 };
 /**
  * BPMN : Gateway Shape
@@ -12609,10 +12623,10 @@ OG.shape.bpmn.E_Start.prototype.createSubShape = function () {
  * @private
  */
 OG.shape.bpmn.G_Gateway = function (label) {
-	OG.shape.bpmn.G_Gateway.superclass.call(this);
+    OG.shape.bpmn.G_Gateway.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.G_Gateway';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.G_Gateway';
+    this.label = label;
 };
 OG.shape.bpmn.G_Gateway.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.G_Gateway.superclass = OG.shape.bpmn.Event;
@@ -12626,69 +12640,69 @@ OG.G_Gateway = OG.shape.bpmn.G_Gateway;
  * @override
  */
 OG.shape.bpmn.G_Gateway.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Polygon([
-		[0, 50],
-		[50, 100],
-		[100, 50],
-		[50, 0]
-	]);
+    this.geom = new OG.geometry.Polygon([
+        [0, 50],
+        [50, 100],
+        [100, 50],
+        [50, 0]
+    ]);
 
-	return this.geom;
+    return this.geom;
 };
 
-OG.shape.bpmn.G_Gateway.prototype.createContextMenu = function(){
-	var me = this;
-	this.contextMenu = {
-		'delete': true,
-		'copy': true,
-		'format': true,
-		'text': true,
-		'bringToFront': true,
-		'sendToBack': true,
-		'changegateway': {
-			name: '변경',
-			items: {
-				'G_Gateway': {
-					name: '베타적',
-					type: 'radio',
-					radio: 'changegateway',
-					value: 'OG.shape.bpmn.G_Gateway',
-					events: {
-						change: function (e) {
-							me.currentCanvas.getEventHandler().changeShape(e.target.value);
-						}
-					}
-				},
-				'G_Parallel': {
-					name: '병렬',
-					type: 'radio',
-					radio: 'changegateway',
-					value: 'OG.shape.bpmn.G_Parallel',
-					events: {
-						change: function (e) {
-							me.currentCanvas.getEventHandler().changeShape(e.target.value);
-						}
-					}
-				},
-				'G_Inclusive': {
-					name: '포괄적',
-					type: 'radio',
-					radio: 'changegateway',
-					value: 'OG.shape.bpmn.G_Inclusive',
-					events: {
-						change: function (e) {
-							me.currentCanvas.getEventHandler().changeShape(e.target.value);
-						}
-					}
-				}
-			}
-		}
-	};
-	return this.contextMenu;
+OG.shape.bpmn.G_Gateway.prototype.createContextMenu = function () {
+    var me = this;
+    this.contextMenu = {
+        'delete': true,
+        'copy': true,
+        'format': true,
+        'text': true,
+        'bringToFront': true,
+        'sendToBack': true,
+        'changegateway': {
+            name: '변경',
+            items: {
+                'G_Gateway': {
+                    name: '베타적',
+                    type: 'radio',
+                    radio: 'changegateway',
+                    value: 'OG.shape.bpmn.G_Gateway',
+                    events: {
+                        change: function (e) {
+                            me.currentCanvas.getEventHandler().changeShape(e.target.value);
+                        }
+                    }
+                },
+                'G_Parallel': {
+                    name: '병렬',
+                    type: 'radio',
+                    radio: 'changegateway',
+                    value: 'OG.shape.bpmn.G_Parallel',
+                    events: {
+                        change: function (e) {
+                            me.currentCanvas.getEventHandler().changeShape(e.target.value);
+                        }
+                    }
+                },
+                'G_Inclusive': {
+                    name: '포괄적',
+                    type: 'radio',
+                    radio: 'changegateway',
+                    value: 'OG.shape.bpmn.G_Inclusive',
+                    events: {
+                        change: function (e) {
+                            me.currentCanvas.getEventHandler().changeShape(e.target.value);
+                        }
+                    }
+                }
+            }
+        }
+    };
+    return this.contextMenu;
 };
 /**
  * BPMN : Human Task Shape
@@ -13679,10 +13693,10 @@ OG.shape.bpmn.E_End_Link.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_End_Message = function (label) {
-	OG.shape.bpmn.E_End_Message.superclass.call(this);
+    OG.shape.bpmn.E_End_Message.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_End_Message';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_End_Message';
+    this.label = label;
 };
 OG.shape.bpmn.E_End_Message.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_End_Message.superclass = OG.shape.bpmn.Event;
@@ -13696,50 +13710,50 @@ OG.E_End_Message = OG.shape.bpmn.E_End_Message;
  * @override
  */
 OG.shape.bpmn.E_End_Message.prototype.createShape = function () {
-	var geom1, geom2, geom3, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geom3, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Circle([50, 50], 50);
-	geom1.style = new OG.geometry.Style({
-		"stroke-width": 3
-	});
+    geom1 = new OG.geometry.Circle([50, 50], 50);
+    geom1.style = new OG.geometry.Style({
+        "stroke-width": 3
+    });
 
-	geom2 = new OG.geometry.PolyLine([
-		[20, 25],
-		[50, 45],
-		[80, 25],
-		[20, 25]
-	]);
-	geom2.style = new OG.geometry.Style({
-		"fill"        : "black",
-		"fill-opacity": 1
-	});
+    geom2 = new OG.geometry.PolyLine([
+        [20, 25],
+        [50, 45],
+        [80, 25],
+        [20, 25]
+    ]);
+    geom2.style = new OG.geometry.Style({
+        "fill": "black",
+        "fill-opacity": 1
+    });
 
-	geom3 = new OG.geometry.PolyLine([
-		[20, 35],
-		[20, 70],
-		[80, 70],
-		[80, 35],
-		[50, 55],
-		[20, 35]
-	]);
-	geom3.style = new OG.geometry.Style({
-		"fill"        : "black",
-		"fill-opacity": 1
-	});
+    geom3 = new OG.geometry.PolyLine([
+        [20, 35],
+        [20, 70],
+        [80, 70],
+        [80, 35],
+        [50, 55],
+        [20, 35]
+    ]);
+    geom3.style = new OG.geometry.Style({
+        "fill": "black",
+        "fill-opacity": 1
+    });
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
-	geomCollection.push(geom3);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
+    geomCollection.push(geom3);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom'
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom'
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Multiple End Event Shape
@@ -13754,10 +13768,10 @@ OG.shape.bpmn.E_End_Message.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_End_Multiple = function (label) {
-	OG.shape.bpmn.E_End_Multiple.superclass.call(this);
+    OG.shape.bpmn.E_End_Multiple.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_End_Multiple';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_End_Multiple';
+    this.label = label;
 };
 OG.shape.bpmn.E_End_Multiple.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_End_Multiple.superclass = OG.shape.bpmn.Event;
@@ -13771,44 +13785,44 @@ OG.E_End_Multiple = OG.shape.bpmn.E_End_Multiple;
  * @override
  */
 OG.shape.bpmn.E_End_Multiple.prototype.createShape = function () {
-	var geom1, geom2, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Circle([50, 50], 50);
-	geom1.style = new OG.geometry.Style({
-		"stroke-width": 3
-	});
+    geom1 = new OG.geometry.Circle([50, 50], 50);
+    geom1.style = new OG.geometry.Style({
+        "stroke-width": 3
+    });
 
-	geom2 = new OG.geometry.Polygon([
-		[50, 15],
-		[39, 33],
-		[20, 33],
-		[29, 50],
-		[19, 67],
-		[40, 67],
-		[50, 85],
-		[60, 68],
-		[80, 68],
-		[70, 50],
-		[79, 33],
-		[60, 33]
-	]);
-	geom2.style = new OG.geometry.Style({
-		"fill"        : "black",
-		"fill-opacity": 1
-	});
+    geom2 = new OG.geometry.Polygon([
+        [50, 15],
+        [39, 33],
+        [20, 33],
+        [29, 50],
+        [19, 67],
+        [40, 67],
+        [50, 85],
+        [60, 68],
+        [80, 68],
+        [70, 50],
+        [79, 33],
+        [60, 33]
+    ]);
+    geom2.style = new OG.geometry.Style({
+        "fill": "black",
+        "fill-opacity": 1
+    });
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom'
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom'
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Compensation Intermediate Event Shape
@@ -13823,12 +13837,12 @@ OG.shape.bpmn.E_End_Multiple.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Intermediate_Compensation = function (label) {
-	OG.shape.bpmn.E_Intermediate_Compensation.superclass.call(this);
+    OG.shape.bpmn.E_Intermediate_Compensation.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Compensation';
-	this.label = label;
-	this.selectable = true;
-	this.movable = true;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Compensation';
+    this.label = label;
+    this.selectable = true;
+    this.movable = true;
 };
 OG.shape.bpmn.E_Intermediate_Compensation.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Intermediate_Compensation.superclass = OG.shape.bpmn.Event;
@@ -13842,38 +13856,38 @@ OG.E_Intermediate_Compensation = OG.shape.bpmn.E_Intermediate_Compensation;
  * @override
  */
 OG.shape.bpmn.E_Intermediate_Compensation.prototype.createShape = function () {
-	var geom1, geom2, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Polygon([
-		[15, 50],
-		[45, 70],
-		[45, 30]
-	]);
+    geom1 = new OG.geometry.Polygon([
+        [15, 50],
+        [45, 70],
+        [45, 30]
+    ]);
 
-	geom2 = new OG.geometry.Polygon([
-		[45, 50],
-		[75, 70],
-		[75, 30]
-	]);
+    geom2 = new OG.geometry.Polygon([
+        [45, 50],
+        [75, 70],
+        [75, 30]
+    ]);
 
-	geomCollection.push(new OG.geometry.Circle([50, 50], 50));
-	geomCollection.push(new OG.geometry.Circle([50, 50], 40));
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
+    geomCollection.push(new OG.geometry.Circle([50, 50], 50));
+    geomCollection.push(new OG.geometry.Circle([50, 50], 40));
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom',
-		"stroke" : "#969149",
-		"stroke-width" : 1.5,
-		fill : "white",
-		"fill-opacity" : 1
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom',
+        "stroke": "#969149",
+        "stroke-width": 1.5,
+        fill: "white",
+        "fill-opacity": 1
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Error Intermediate Event Shape
@@ -13888,10 +13902,10 @@ OG.shape.bpmn.E_Intermediate_Compensation.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Intermediate_Error = function (label) {
-	OG.shape.bpmn.E_Intermediate_Error.superclass.call(this);
+    OG.shape.bpmn.E_Intermediate_Error.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Error';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Error';
+    this.label = label;
 };
 OG.shape.bpmn.E_Intermediate_Error.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Intermediate_Error.superclass = OG.shape.bpmn.Event;
@@ -13905,37 +13919,37 @@ OG.E_Intermediate_Error = OG.shape.bpmn.E_Intermediate_Error;
  * @override
  */
 OG.shape.bpmn.E_Intermediate_Error.prototype.createShape = function () {
-	var geom1, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Polygon([
-		[20, 75],
-		[40, 30],
-		[60, 60],
-		[80, 20],
-		[60, 75],
-		[40, 50]
-	]);
-	geom1.style = new OG.geometry.Style({
-		fill : "#ffffff"
-	});
+    geom1 = new OG.geometry.Polygon([
+        [20, 75],
+        [40, 30],
+        [60, 60],
+        [80, 20],
+        [60, 75],
+        [40, 50]
+    ]);
+    geom1.style = new OG.geometry.Style({
+        fill: "#ffffff"
+    });
 
-	geomCollection.push(new OG.geometry.Circle([50, 50], 50));
-	geomCollection.push(new OG.geometry.Circle([50, 50], 42));
-	geomCollection.push(geom1);
+    geomCollection.push(new OG.geometry.Circle([50, 50], 50));
+    geomCollection.push(new OG.geometry.Circle([50, 50], 42));
+    geomCollection.push(geom1);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom',
-		//"stroke" : "#969149",
-		"stroke-width" : 1.5,
-		fill : "white",
-		"fill-opacity" : 1
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom',
+        //"stroke" : "#969149",
+        "stroke-width": 1.5,
+        fill: "white",
+        "fill-opacity": 1
+    });
 
-	return this.geom;
+    return this.geom;
 };
 OG.shape.bpmn.E_Intermediate_Escalation = function (label) {
     OG.shape.bpmn.E_Intermediate_Escalation.superclass.call(this);
@@ -13975,9 +13989,9 @@ OG.shape.bpmn.E_Intermediate_Escalation.prototype.createShape = function () {
     this.geom.style = new OG.geometry.Style({
         'label-position': 'bottom',
         // "stroke" : "#969149",
-        "stroke-width" : 1.5,
-        fill : "white",
-        "fill-opacity" : 1
+        "stroke-width": 1.5,
+        fill: "white",
+        "fill-opacity": 1
     });
 
     return this.geom;
@@ -13995,10 +14009,10 @@ OG.shape.bpmn.E_Intermediate_Escalation.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Intermediate_Link = function (label) {
-	OG.shape.bpmn.E_Intermediate_Link.superclass.call(this);
+    OG.shape.bpmn.E_Intermediate_Link.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Link';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Link';
+    this.label = label;
 };
 OG.shape.bpmn.E_Intermediate_Link.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Intermediate_Link.superclass = OG.shape.bpmn.Event;
@@ -14013,19 +14027,19 @@ OG.E_Intermediate_Link = OG.shape.bpmn.E_Intermediate_Link;
  */
 OG.shape.bpmn.E_Intermediate_Link.prototype.createShape = function () {
 
-	if (this.geom) {
-		return this.geom;
-	}
-	this.geom = new OG.geometry.Polygon([
-		[0, 0],
-		[80, 0],
-		[100, 50],
-		[80, 100],
-		[0, 100],
-		[20, 50]
-	]);
+    if (this.geom) {
+        return this.geom;
+    }
+    this.geom = new OG.geometry.Polygon([
+        [0, 0],
+        [80, 0],
+        [100, 50],
+        [80, 100],
+        [0, 100],
+        [20, 50]
+    ]);
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Message Intermediate Event Shape
@@ -14040,10 +14054,10 @@ OG.shape.bpmn.E_Intermediate_Link.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Intermediate_Message = function (label) {
-	OG.shape.bpmn.E_Intermediate_Message.superclass.call(this);
+    OG.shape.bpmn.E_Intermediate_Message.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Message';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Message';
+    this.label = label;
 };
 OG.shape.bpmn.E_Intermediate_Message.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Intermediate_Message.superclass = OG.shape.bpmn.Event;
@@ -14057,43 +14071,43 @@ OG.E_Intermediate_Message = OG.shape.bpmn.E_Intermediate_Message;
  * @override
  */
 OG.shape.bpmn.E_Intermediate_Message.prototype.createShape = function () {
-	var geom1, geom2, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.PolyLine([
-		[20, 25],
-		[50, 45],
-		[80, 25],
-		[20, 25]
-	]);
+    geom1 = new OG.geometry.PolyLine([
+        [20, 25],
+        [50, 45],
+        [80, 25],
+        [20, 25]
+    ]);
 
-	geom2 = new OG.geometry.PolyLine([
-		[20, 35],
-		[20, 70],
-		[80, 70],
-		[80, 35],
-		[50, 55],
-		[20, 35]
-	]);
+    geom2 = new OG.geometry.PolyLine([
+        [20, 35],
+        [20, 70],
+        [80, 70],
+        [80, 35],
+        [50, 55],
+        [20, 35]
+    ]);
 
 
-	geomCollection.push(new OG.geometry.Circle([50, 50], 50));
-	geomCollection.push(new OG.geometry.Circle([50, 50], 45));
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
+    geomCollection.push(new OG.geometry.Circle([50, 50], 50));
+    geomCollection.push(new OG.geometry.Circle([50, 50], 45));
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom',
-		"stroke" : "black",
-		"stroke-width" : 1,
-		fill : "white",
-		"fill-opacity" : 1
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom',
+        "stroke": "black",
+        "stroke-width": 1,
+        fill: "white",
+        "fill-opacity": 1
+    });
 
-	return this.geom;
+    return this.geom;
 };
 OG.shape.bpmn.E_Intermediate_MessageFill = function (label) {
     OG.shape.bpmn.E_Intermediate_MessageFill.superclass.call(this);
@@ -14125,7 +14139,7 @@ OG.shape.bpmn.E_Intermediate_MessageFill.prototype.createShape = function () {
         [20, 25]
     ]);
     geom1.style = new OG.geometry.Style({
-        "fill"        : "black",
+        "fill": "black",
         "fill-opacity": 1
     });
 
@@ -14138,7 +14152,7 @@ OG.shape.bpmn.E_Intermediate_MessageFill.prototype.createShape = function () {
         [20, 35]
     ]);
     geom2.style = new OG.geometry.Style({
-        "fill"        : "black",
+        "fill": "black",
         "fill-opacity": 1
     });
 
@@ -14151,10 +14165,10 @@ OG.shape.bpmn.E_Intermediate_MessageFill.prototype.createShape = function () {
     this.geom = new OG.geometry.GeometryCollection(geomCollection);
     this.geom.style = new OG.geometry.Style({
         'label-position': 'bottom',
-        "stroke" : "black",
-        "stroke-width" : 1,
-        fill : "white",
-        "fill-opacity" : 1
+        "stroke": "black",
+        "stroke-width": 1,
+        fill: "white",
+        "fill-opacity": 1
     });
 
     return this.geom;
@@ -14172,10 +14186,10 @@ OG.shape.bpmn.E_Intermediate_MessageFill.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Intermediate_Multiple = function (label) {
-	OG.shape.bpmn.E_Intermediate_Multiple.superclass.call(this);
+    OG.shape.bpmn.E_Intermediate_Multiple.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Multiple';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Multiple';
+    this.label = label;
 };
 OG.shape.bpmn.E_Intermediate_Multiple.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Intermediate_Multiple.superclass = OG.shape.bpmn.Event;
@@ -14189,33 +14203,33 @@ OG.E_Intermediate_Multiple = OG.shape.bpmn.E_Intermediate_Multiple;
  * @override
  */
 OG.shape.bpmn.E_Intermediate_Multiple.prototype.createShape = function () {
-	var geom1, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Polygon([
-		[20, 50],
-		[50, 20],
-		[80, 50],
-		[65, 75],
-		[35, 75]
-	]);
+    geom1 = new OG.geometry.Polygon([
+        [20, 50],
+        [50, 20],
+        [80, 50],
+        [65, 75],
+        [35, 75]
+    ]);
 
-	geomCollection.push(new OG.geometry.Circle([50, 50], 50));
-	geomCollection.push(new OG.geometry.Circle([50, 50], 40));
-	geomCollection.push(geom1);
+    geomCollection.push(new OG.geometry.Circle([50, 50], 50));
+    geomCollection.push(new OG.geometry.Circle([50, 50], 40));
+    geomCollection.push(geom1);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom',
-		"stroke" : "#969149",
-		"stroke-width" : 1.5,
-		fill : "white",
-		"fill-opacity" : 1
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom',
+        "stroke": "#969149",
+        "stroke-width": 1.5,
+        fill: "white",
+        "fill-opacity": 1
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Rule Intermediate Event Shape
@@ -14230,10 +14244,10 @@ OG.shape.bpmn.E_Intermediate_Multiple.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Intermediate_Rule = function (label) {
-	OG.shape.bpmn.E_Intermediate_Rule.superclass.call(this);
+    OG.shape.bpmn.E_Intermediate_Rule.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Rule';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Rule';
+    this.label = label;
 };
 OG.shape.bpmn.E_Intermediate_Rule.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Intermediate_Rule.superclass = OG.shape.bpmn.Event;
@@ -14247,31 +14261,31 @@ OG.E_Intermediate_Rule = OG.shape.bpmn.E_Intermediate_Rule;
  * @override
  */
 OG.shape.bpmn.E_Intermediate_Rule.prototype.createShape = function () {
-	var geom1, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Rectangle([25, 20], 50, 60);
+    geom1 = new OG.geometry.Rectangle([25, 20], 50, 60);
 
-	geomCollection.push(new OG.geometry.Circle([50, 50], 50));
-	geomCollection.push(new OG.geometry.Circle([50, 50], 42));
-	geomCollection.push(geom1);
-	geomCollection.push(new OG.geometry.Line([30, 30], [70, 30]));
-	geomCollection.push(new OG.geometry.Line([30, 45], [70, 45]));
-	geomCollection.push(new OG.geometry.Line([30, 60], [70, 60]));
-	geomCollection.push(new OG.geometry.Line([30, 70], [70, 70]));
+    geomCollection.push(new OG.geometry.Circle([50, 50], 50));
+    geomCollection.push(new OG.geometry.Circle([50, 50], 42));
+    geomCollection.push(geom1);
+    geomCollection.push(new OG.geometry.Line([30, 30], [70, 30]));
+    geomCollection.push(new OG.geometry.Line([30, 45], [70, 45]));
+    geomCollection.push(new OG.geometry.Line([30, 60], [70, 60]));
+    geomCollection.push(new OG.geometry.Line([30, 70], [70, 70]));
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom',
-		"stroke" : "black",
-		"stroke-width" : 1.5,
-		fill : "white",
-		"fill-opacity" : 1
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom',
+        "stroke": "black",
+        "stroke-width": 1.5,
+        fill: "white",
+        "fill-opacity": 1
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Timer Intermediate Event Shape
@@ -14286,10 +14300,10 @@ OG.shape.bpmn.E_Intermediate_Rule.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Intermediate_Timer = function (label) {
-	OG.shape.bpmn.E_Intermediate_Timer.superclass.call(this);
+    OG.shape.bpmn.E_Intermediate_Timer.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Timer';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Intermediate_Timer';
+    this.label = label;
 };
 OG.shape.bpmn.E_Intermediate_Timer.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Intermediate_Timer.superclass = OG.shape.bpmn.Event;
@@ -14303,39 +14317,39 @@ OG.E_Intermediate_Timer = OG.shape.bpmn.E_Intermediate_Timer;
  * @override
  */
 OG.shape.bpmn.E_Intermediate_Timer.prototype.createShape = function () {
-	var geom1, geom2, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Circle([50, 50], 32);
+    geom1 = new OG.geometry.Circle([50, 50], 32);
 
-	geom2 = new OG.geometry.PolyLine([
-		[50, 30],
-		[50, 50],
-		[70, 50]
-	]);
+    geom2 = new OG.geometry.PolyLine([
+        [50, 30],
+        [50, 50],
+        [70, 50]
+    ]);
 
-	geomCollection.push(new OG.geometry.Circle([50, 50], 50));
-	geomCollection.push(new OG.geometry.Circle([50, 50], 42));
-	geomCollection.push(geom1);
-	geomCollection.push(new OG.geometry.Line([50, 18], [50, 25]));
-	geomCollection.push(new OG.geometry.Line([50, 82], [50, 75]));
-	geomCollection.push(new OG.geometry.Line([18, 50], [25, 50]));
-	geomCollection.push(new OG.geometry.Line([82, 50], [75, 50]));
-	geomCollection.push(geom2);
+    geomCollection.push(new OG.geometry.Circle([50, 50], 50));
+    geomCollection.push(new OG.geometry.Circle([50, 50], 42));
+    geomCollection.push(geom1);
+    geomCollection.push(new OG.geometry.Line([50, 18], [50, 25]));
+    geomCollection.push(new OG.geometry.Line([50, 82], [50, 75]));
+    geomCollection.push(new OG.geometry.Line([18, 50], [25, 50]));
+    geomCollection.push(new OG.geometry.Line([82, 50], [75, 50]));
+    geomCollection.push(geom2);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom',
-		//"stroke" : "#969149",
-		"stroke" : "black",
-		"stroke-width" : 1.5,
-		fill : "white",
-		"fill-opacity" : 1
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom',
+        //"stroke" : "#969149",
+        "stroke": "black",
+        "stroke-width": 1.5,
+        fill: "white",
+        "fill-opacity": 1
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Link Start Event Shape
@@ -14446,7 +14460,7 @@ OG.shape.bpmn.E_Start_Error.prototype.createShape = function () {
     this.geom = new OG.geometry.GeometryCollection(geomCollection);
     this.geom.style = new OG.geometry.Style({
         'label-position': 'bottom',
-        "stroke-width" : 1.5
+        "stroke-width": 1.5
     });
 
     return this.geom;
@@ -14464,10 +14478,10 @@ OG.shape.bpmn.E_Start_Error.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Start_Link = function (label) {
-	OG.shape.bpmn.E_Start_Link.superclass.call(this);
+    OG.shape.bpmn.E_Start_Link.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Start_Link';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Start_Link';
+    this.label = label;
 };
 OG.shape.bpmn.E_Start_Link.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Start_Link.superclass = OG.shape.bpmn.Event;
@@ -14481,31 +14495,31 @@ OG.E_Start_Link = OG.shape.bpmn.E_Start_Link;
  * @override
  */
 OG.shape.bpmn.E_Start_Link.prototype.createShape = function () {
-	var geom1, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Polygon([
-		[20, 35],
-		[20, 65],
-		[60, 65],
-		[60, 80],
-		[85, 50],
-		[60, 20],
-		[60, 35]
-	]);
+    geom1 = new OG.geometry.Polygon([
+        [20, 35],
+        [20, 65],
+        [60, 65],
+        [60, 80],
+        [85, 50],
+        [60, 20],
+        [60, 35]
+    ]);
 
-	geomCollection.push(new OG.geometry.Circle([50, 50], 50));
-	geomCollection.push(new OG.geometry.Circle([50, 50], 42));
-	geomCollection.push(geom1);
+    geomCollection.push(new OG.geometry.Circle([50, 50], 50));
+    geomCollection.push(new OG.geometry.Circle([50, 50], 42));
+    geomCollection.push(geom1);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom'
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom'
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Message Start Event Shape
@@ -14520,10 +14534,10 @@ OG.shape.bpmn.E_Start_Link.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Start_Message = function (label) {
-	OG.shape.bpmn.E_Start_Message.superclass.call(this);
+    OG.shape.bpmn.E_Start_Message.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Start_Message';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Start_Message';
+    this.label = label;
 };
 OG.shape.bpmn.E_Start_Message.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Start_Message.superclass = OG.shape.bpmn.Event;
@@ -14537,42 +14551,42 @@ OG.E_Start_Message = OG.shape.bpmn.E_Start_Message;
  * @override
  */
 OG.shape.bpmn.E_Start_Message.prototype.createShape = function () {
-	var geom1, geom2, geom3, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geom3, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Circle([50, 50], 50);
-	geom1.style = new OG.geometry.Style({
-		"stroke-width": 1.5
-	});
+    geom1 = new OG.geometry.Circle([50, 50], 50);
+    geom1.style = new OG.geometry.Style({
+        "stroke-width": 1.5
+    });
 
-	geom2 = new OG.geometry.PolyLine([
-		[20, 25],
-		[50, 45],
-		[80, 25],
-		[20, 25]
-	]);
+    geom2 = new OG.geometry.PolyLine([
+        [20, 25],
+        [50, 45],
+        [80, 25],
+        [20, 25]
+    ]);
 
-	geom3 = new OG.geometry.PolyLine([
-		[20, 35],
-		[20, 70],
-		[80, 70],
-		[80, 35],
-		[50, 55],
-		[20, 35]
-	]);
+    geom3 = new OG.geometry.PolyLine([
+        [20, 35],
+        [20, 70],
+        [80, 70],
+        [80, 35],
+        [50, 55],
+        [20, 35]
+    ]);
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
-	geomCollection.push(geom3);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
+    geomCollection.push(geom3);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom'
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom'
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Multiple Start Event Shape
@@ -14587,10 +14601,10 @@ OG.shape.bpmn.E_Start_Message.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Start_Multiple = function (label) {
-	OG.shape.bpmn.E_Start_Multiple.superclass.call(this);
+    OG.shape.bpmn.E_Start_Multiple.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Start_Multiple';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Start_Multiple';
+    this.label = label;
 };
 OG.shape.bpmn.E_Start_Multiple.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Start_Multiple.superclass = OG.shape.bpmn.Event;
@@ -14604,37 +14618,37 @@ OG.E_Start_Multiple = OG.shape.bpmn.E_Start_Multiple;
  * @override
  */
 OG.shape.bpmn.E_Start_Multiple.prototype.createShape = function () {
-	var geom1, geom2, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Circle([50, 50], 50);
+    geom1 = new OG.geometry.Circle([50, 50], 50);
 
-	geom2 = new OG.geometry.Polygon([
-		[50, 15],
-		[39, 33],
-		[20, 33],
-		[29, 50],
-		[19, 67],
-		[40, 67],
-		[50, 85],
-		[60, 68],
-		[80, 68],
-		[70, 50],
-		[79, 33],
-		[60, 33]
-	]);
+    geom2 = new OG.geometry.Polygon([
+        [50, 15],
+        [39, 33],
+        [20, 33],
+        [29, 50],
+        [19, 67],
+        [40, 67],
+        [50, 85],
+        [60, 68],
+        [80, 68],
+        [70, 50],
+        [79, 33],
+        [60, 33]
+    ]);
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom'
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom'
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Rule Start Event Shape
@@ -14649,10 +14663,10 @@ OG.shape.bpmn.E_Start_Multiple.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Start_Rule = function (label) {
-	OG.shape.bpmn.E_Start_Rule.superclass.call(this);
+    OG.shape.bpmn.E_Start_Rule.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Start_Rule';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Start_Rule';
+    this.label = label;
 };
 OG.shape.bpmn.E_Start_Rule.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Start_Rule.superclass = OG.shape.bpmn.Event;
@@ -14666,31 +14680,31 @@ OG.E_Start_Rule = OG.shape.bpmn.E_Start_Rule;
  * @override
  */
 OG.shape.bpmn.E_Start_Rule.prototype.createShape = function () {
-	var geom1, geom2, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Circle([50, 50], 50);
-	geom1.style = new OG.geometry.Style({
-		"stroke-width": 1.5
-	});
+    geom1 = new OG.geometry.Circle([50, 50], 50);
+    geom1.style = new OG.geometry.Style({
+        "stroke-width": 1.5
+    });
 
-	geom2 = new OG.geometry.Rectangle([25, 20], 50, 60);
+    geom2 = new OG.geometry.Rectangle([25, 20], 50, 60);
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
-	geomCollection.push(new OG.geometry.Line([30, 30], [70, 30]));
-	geomCollection.push(new OG.geometry.Line([30, 45], [70, 45]));
-	geomCollection.push(new OG.geometry.Line([30, 60], [70, 60]));
-	geomCollection.push(new OG.geometry.Line([30, 70], [70, 70]));
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
+    geomCollection.push(new OG.geometry.Line([30, 30], [70, 30]));
+    geomCollection.push(new OG.geometry.Line([30, 45], [70, 45]));
+    geomCollection.push(new OG.geometry.Line([30, 60], [70, 60]));
+    geomCollection.push(new OG.geometry.Line([30, 70], [70, 70]));
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom'
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom'
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Timer Start Event Shape
@@ -14705,10 +14719,10 @@ OG.shape.bpmn.E_Start_Rule.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Start_Timer = function (label) {
-	OG.shape.bpmn.E_Start_Timer.superclass.call(this);
+    OG.shape.bpmn.E_Start_Timer.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Start_Timer';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Start_Timer';
+    this.label = label;
 };
 OG.shape.bpmn.E_Start_Timer.prototype = new OG.shape.bpmn.Event();
 OG.shape.bpmn.E_Start_Timer.superclass = OG.shape.bpmn.Event;
@@ -14722,38 +14736,38 @@ OG.E_Start_Timer = OG.shape.bpmn.E_Start_Timer;
  * @override
  */
 OG.shape.bpmn.E_Start_Timer.prototype.createShape = function () {
-	var geom1, geom2, geom3, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geom3, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Circle([50, 50], 50);
-	geom1.style = new OG.geometry.Style({
-		"stroke-width": 1.5
-	});
+    geom1 = new OG.geometry.Circle([50, 50], 50);
+    geom1.style = new OG.geometry.Style({
+        "stroke-width": 1.5
+    });
 
-	geom2 = new OG.geometry.Circle([50, 50], 32);
+    geom2 = new OG.geometry.Circle([50, 50], 32);
 
-	geom3 = new OG.geometry.PolyLine([
-		[50, 30],
-		[50, 50],
-		[70, 50]
-	]);
+    geom3 = new OG.geometry.PolyLine([
+        [50, 30],
+        [50, 50],
+        [70, 50]
+    ]);
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
-	geomCollection.push(new OG.geometry.Line([50, 18], [50, 25]));
-	geomCollection.push(new OG.geometry.Line([50, 82], [50, 75]));
-	geomCollection.push(new OG.geometry.Line([18, 50], [25, 50]));
-	geomCollection.push(new OG.geometry.Line([82, 50], [75, 50]));
-	geomCollection.push(geom3);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
+    geomCollection.push(new OG.geometry.Line([50, 18], [50, 25]));
+    geomCollection.push(new OG.geometry.Line([50, 82], [50, 75]));
+    geomCollection.push(new OG.geometry.Line([18, 50], [25, 50]));
+    geomCollection.push(new OG.geometry.Line([82, 50], [75, 50]));
+    geomCollection.push(geom3);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom'
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom'
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Terminate Event Shape
@@ -14768,9 +14782,9 @@ OG.shape.bpmn.E_Start_Timer.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.E_Terminate = function (label) {
-	OG.shape.bpmn.E_Terminate.superclass.call(this, label);
+    OG.shape.bpmn.E_Terminate.superclass.call(this, label);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.E_Terminate';
+    this.SHAPE_ID = 'OG.shape.bpmn.E_Terminate';
 };
 OG.shape.bpmn.E_Terminate.prototype = new OG.shape.bpmn.E_End();
 OG.shape.bpmn.E_Terminate.superclass = OG.shape.bpmn.E_End;
@@ -14784,31 +14798,31 @@ OG.E_Terminate = OG.shape.bpmn.E_Terminate;
  * @override
  */
 OG.shape.bpmn.E_Terminate.prototype.createShape = function () {
-	var geom1, geom2, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Circle([50, 50], 50);
-	geom1.style = new OG.geometry.Style({
-		"stroke-width": 3
-	});
+    geom1 = new OG.geometry.Circle([50, 50], 50);
+    geom1.style = new OG.geometry.Style({
+        "stroke-width": 3
+    });
 
-	geom2 = new OG.geometry.Circle([50, 50], 30);
-	geom2.style = new OG.geometry.Style({
-		"fill"        : "black",
-		"fill-opacity": 1
-	});
+    geom2 = new OG.geometry.Circle([50, 50], 30);
+    geom2.style = new OG.geometry.Style({
+        "fill": "black",
+        "fill-opacity": 1
+    });
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-		'label-position': 'bottom'
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({
+        'label-position': 'bottom'
+    });
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Complex Gateway Shape
@@ -14823,10 +14837,10 @@ OG.shape.bpmn.E_Terminate.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.G_Complex = function (label) {
-	OG.shape.bpmn.G_Complex.superclass.call(this);
+    OG.shape.bpmn.G_Complex.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.G_Complex';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.G_Complex';
+    this.label = label;
 };
 OG.shape.bpmn.G_Complex.prototype = new OG.shape.bpmn.G_Gateway();
 OG.shape.bpmn.G_Complex.superclass = OG.shape.bpmn.G_Gateway;
@@ -14840,47 +14854,47 @@ OG.G_Complex = OG.shape.bpmn.G_Complex;
  * @override
  */
 OG.shape.bpmn.G_Complex.prototype.createShape = function () {
-	var geom1, geom2, geom3, geom4, geom5, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geom3, geom4, geom5, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Polygon([
-		[0, 50],
-		[50, 100],
-		[100, 50],
-		[50, 0]
-	]);
+    geom1 = new OG.geometry.Polygon([
+        [0, 50],
+        [50, 100],
+        [100, 50],
+        [50, 0]
+    ]);
 
-	geom2 = new OG.geometry.Line([30, 30], [70, 70]);
-	geom2.style = new OG.geometry.Style({
-		"stroke-width": 3
-	});
+    geom2 = new OG.geometry.Line([30, 30], [70, 70]);
+    geom2.style = new OG.geometry.Style({
+        "stroke-width": 3
+    });
 
-	geom3 = new OG.geometry.Line([30, 70], [70, 30]);
-	geom3.style = new OG.geometry.Style({
-		"stroke-width": 3
-	});
+    geom3 = new OG.geometry.Line([30, 70], [70, 30]);
+    geom3.style = new OG.geometry.Style({
+        "stroke-width": 3
+    });
 
-	geom4 = new OG.geometry.Line([20, 50], [80, 50]);
-	geom4.style = new OG.geometry.Style({
-		"stroke-width": 3
-	});
+    geom4 = new OG.geometry.Line([20, 50], [80, 50]);
+    geom4.style = new OG.geometry.Style({
+        "stroke-width": 3
+    });
 
-	geom5 = new OG.geometry.Line([50, 20], [50, 80]);
-	geom5.style = new OG.geometry.Style({
-		"stroke-width": 3
-	});
+    geom5 = new OG.geometry.Line([50, 20], [50, 80]);
+    geom5.style = new OG.geometry.Style({
+        "stroke-width": 3
+    });
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
-	geomCollection.push(geom3);
-	geomCollection.push(geom4);
-	geomCollection.push(geom5);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
+    geomCollection.push(geom3);
+    geomCollection.push(geom4);
+    geomCollection.push(geom5);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Exclusive Gateway Shape
@@ -14895,10 +14909,10 @@ OG.shape.bpmn.G_Complex.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.G_Exclusive = function (label) {
-	OG.shape.bpmn.G_Exclusive.superclass.call(this);
+    OG.shape.bpmn.G_Exclusive.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.G_Exclusive';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.G_Exclusive';
+    this.label = label;
 };
 OG.shape.bpmn.G_Exclusive.prototype = new OG.shape.bpmn.G_Gateway();
 OG.shape.bpmn.G_Exclusive.superclass = OG.shape.bpmn.G_Gateway;
@@ -14912,35 +14926,35 @@ OG.G_Exclusive = OG.shape.bpmn.G_Exclusive;
  * @override
  */
 OG.shape.bpmn.G_Exclusive.prototype.createShape = function () {
-	var geom1, geom2, geom3, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geom3, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Polygon([
-		[0, 50],
-		[50, 100],
-		[100, 50],
-		[50, 0]
-	]);
+    geom1 = new OG.geometry.Polygon([
+        [0, 50],
+        [50, 100],
+        [100, 50],
+        [50, 0]
+    ]);
 
-	geom2 = new OG.geometry.Line([30, 30], [70, 70]);
-	geom2.style = new OG.geometry.Style({
-		"stroke-width": 5
-	});
+    geom2 = new OG.geometry.Line([30, 30], [70, 70]);
+    geom2.style = new OG.geometry.Style({
+        "stroke-width": 5
+    });
 
-	geom3 = new OG.geometry.Line([30, 70], [70, 30]);
-	geom3.style = new OG.geometry.Style({
-		"stroke-width": 5
-	});
+    geom3 = new OG.geometry.Line([30, 70], [70, 30]);
+    geom3.style = new OG.geometry.Style({
+        "stroke-width": 5
+    });
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
-	geomCollection.push(geom3);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
+    geomCollection.push(geom3);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Inclusive Gateway Shape
@@ -14955,10 +14969,10 @@ OG.shape.bpmn.G_Exclusive.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.G_Inclusive = function (label) {
-	OG.shape.bpmn.G_Inclusive.superclass.call(this);
+    OG.shape.bpmn.G_Inclusive.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.G_Inclusive';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.G_Inclusive';
+    this.label = label;
 };
 OG.shape.bpmn.G_Inclusive.prototype = new OG.shape.bpmn.G_Gateway();
 OG.shape.bpmn.G_Inclusive.superclass = OG.shape.bpmn.G_Gateway;
@@ -14972,29 +14986,29 @@ OG.G_Inclusive = OG.shape.bpmn.G_Inclusive;
  * @override
  */
 OG.shape.bpmn.G_Inclusive.prototype.createShape = function () {
-	var geom1, geom2, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Polygon([
-		[0, 50],
-		[50, 100],
-		[100, 50],
-		[50, 0]
-	]);
+    geom1 = new OG.geometry.Polygon([
+        [0, 50],
+        [50, 100],
+        [100, 50],
+        [50, 0]
+    ]);
 
-	geom2 = new OG.geometry.Circle([50, 50], 25);
-	geom2.style = new OG.geometry.Style({
-		"stroke-width": 3
-	});
+    geom2 = new OG.geometry.Circle([50, 50], 25);
+    geom2.style = new OG.geometry.Style({
+        "stroke-width": 3
+    });
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Parallel Gateway Shape
@@ -15009,10 +15023,10 @@ OG.shape.bpmn.G_Inclusive.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.G_Parallel = function (label) {
-	OG.shape.bpmn.G_Parallel.superclass.call(this);
+    OG.shape.bpmn.G_Parallel.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.G_Parallel';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.G_Parallel';
+    this.label = label;
 };
 OG.shape.bpmn.G_Parallel.prototype = new OG.shape.bpmn.G_Gateway();
 OG.shape.bpmn.G_Parallel.superclass = OG.shape.bpmn.G_Gateway;
@@ -15026,35 +15040,35 @@ OG.G_Parallel = OG.shape.bpmn.G_Parallel;
  * @override
  */
 OG.shape.bpmn.G_Parallel.prototype.createShape = function () {
-	var geom1, geom2, geom3, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geom3, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Polygon([
-		[0, 50],
-		[50, 100],
-		[100, 50],
-		[50, 0]
-	]);
+    geom1 = new OG.geometry.Polygon([
+        [0, 50],
+        [50, 100],
+        [100, 50],
+        [50, 0]
+    ]);
 
-	geom2 = new OG.geometry.Line([20, 50], [80, 50]);
-	geom2.style = new OG.geometry.Style({
-		"stroke-width": 5
-	});
+    geom2 = new OG.geometry.Line([20, 50], [80, 50]);
+    geom2.style = new OG.geometry.Style({
+        "stroke-width": 5
+    });
 
-	geom3 = new OG.geometry.Line([50, 20], [50, 80]);
-	geom3.style = new OG.geometry.Style({
-		"stroke-width": 5
-	});
+    geom3 = new OG.geometry.Line([50, 20], [50, 80]);
+    geom3.style = new OG.geometry.Style({
+        "stroke-width": 5
+    });
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
-	geomCollection.push(geom3);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
+    geomCollection.push(geom3);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
 
-	return this.geom;
+    return this.geom;
 };
 OG.shape.bpmn.MIParallel = function (label) {
     OG.shape.bpmn.MIParallel.superclass.call(this);
@@ -15125,10 +15139,10 @@ OG.shape.bpmn.MISequential.prototype.createShape = function () {
     return this.geom;
 };
 OG.shape.bpmn.M_Annotation = function (label) {
-	OG.shape.bpmn.M_Annotation.superclass.call(this);
+    OG.shape.bpmn.M_Annotation.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.M_Annotation';
-	this.label = label;
+    this.SHAPE_ID = 'OG.shape.bpmn.M_Annotation';
+    this.label = label;
 };
 OG.shape.bpmn.M_Annotation.prototype = new OG.shape.GeomShape();
 OG.shape.bpmn.M_Annotation.superclass = OG.shape.GeomShape;
@@ -15142,38 +15156,37 @@ OG.M_Annotation = OG.shape.bpmn.M_Annotation;
  * @override
  */
 OG.shape.bpmn.M_Annotation.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	var geom1, geom2, geomCollection = [];
-	if (this.geom) {
-		return this.geom;
-	}
+    var geom1, geom2, geomCollection = [];
+    if (this.geom) {
+        return this.geom;
+    }
 
-	geom1 = new OG.geometry.Rectangle([0, 0], 100, 100);
-	geom1.style = new OG.geometry.Style({
-		"stroke": 'none'
-	});
+    geom1 = new OG.geometry.Rectangle([0, 0], 100, 100);
+    geom1.style = new OG.geometry.Style({
+        "stroke": 'none'
+    });
 
-	geom2 = new OG.geometry.PolyLine([
-		[10, 0],
-		[0, 0],
-		[0, 100],
-		[10, 100]
-	]);
-	geom2.style = new OG.geometry.Style({
-		"stroke": 'black'
-	});
+    geom2 = new OG.geometry.PolyLine([
+        [10, 0],
+        [0, 0],
+        [0, 100],
+        [10, 100]
+    ]);
+    geom2.style = new OG.geometry.Style({
+        "stroke": 'black'
+    });
 
-	geomCollection.push(geom1);
-	geomCollection.push(geom2);
+    geomCollection.push(geom1);
+    geomCollection.push(geom2);
 
-	this.geom = new OG.geometry.GeometryCollection(geomCollection);
-	this.geom.style = new OG.geometry.Style({
-	});
+    this.geom = new OG.geometry.GeometryCollection(geomCollection);
+    this.geom.style = new OG.geometry.Style({});
 
-	return this.geom;
+    return this.geom;
 };
 /**
  * BPMN : Group Shape
@@ -15241,13 +15254,13 @@ OG.shape.bpmn.M_Group.prototype.createShape = function () {
  * @private
  */
 OG.shape.bpmn.M_Text = function (label) {
-	OG.shape.bpmn.M_Text.superclass.call(this);
+    OG.shape.bpmn.M_Text.superclass.call(this);
 
-	this.SHAPE_ID = 'OG.shape.bpmn.M_Text';
-	this.label = label || 'Text';
-	//this.SELECTABLE = false;
-	//this.CONNECTABLE = false;
-	//this.MOVABLE = false;
+    this.SHAPE_ID = 'OG.shape.bpmn.M_Text';
+    this.label = label || 'Text';
+    //this.SELECTABLE = false;
+    //this.CONNECTABLE = false;
+    //this.MOVABLE = false;
 };
 OG.shape.bpmn.M_Text.prototype = new OG.shape.GeomShape();
 OG.shape.bpmn.M_Text.superclass = OG.shape.GeomShape;
@@ -15261,16 +15274,16 @@ OG.M_Text = OG.shape.bpmn.M_Text;
  * @override
  */
 OG.shape.bpmn.M_Text.prototype.createShape = function () {
-	if (this.geom) {
-		return this.geom;
-	}
+    if (this.geom) {
+        return this.geom;
+    }
 
-	this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
-	this.geom.style = new OG.geometry.Style({
-		stroke: "none"
-	});
+    this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
+    this.geom.style = new OG.geometry.Style({
+        stroke: "none"
+    });
 
-	return this.geom;
+    return this.geom;
 };
 OG.shape.bpmn.ParallelMultiple = function (label) {
     OG.shape.bpmn.ParallelMultiple.superclass.call(this);
@@ -15320,7 +15333,7 @@ OG.shape.bpmn.ParallelMultiple.prototype.createShape = function () {
     this.geom.style = new OG.geometry.Style({
         'label-position': 'bottom',
         "stroke-width": 1.5,
-        "stroke" : "#969149",
+        "stroke": "#969149",
         fill: "white",
         "fill-opacity": 1
     });
@@ -15345,7 +15358,7 @@ OG.ScopeActivity = OG.shape.bpmn.ScopeActivity;
 
 
 OG.shape.bpmn.ScopeActivity.prototype.layoutChild = function () {
-    for(var event in this.Events){
+    for (var event in this.Events) {
         //TODO:
         //var shapeOfEvent = event.shape;
         //shapeOfEvent.x = .... ;
@@ -15403,7 +15416,7 @@ OG.shape.bpmn.Signal.prototype.createShape = function () {
     this.geom.style = new OG.geometry.Style({
         'label-position': 'bottom',
         "stroke-width": 1.5,
-        "stroke" : "#969149",
+        "stroke": "#969149",
         fill: "white",
         "fill-opacity": 1
     });
@@ -15728,14 +15741,14 @@ OG.shape.elec.BLDG.prototype.createShape = function () {
     this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
     this.geom.style = new OG.geometry.Style({
         'label-direction': 'horizontal',
-        'vertical-align' : 'top',
+        'vertical-align': 'top',
         'fill': '#ffffff',
         'fill-opacity': 0,
-        'title-size' : 26,
+        'title-size': 26,
         'label-fill': '#428bca',
         'label-fill-opacity': 1,
         'font-weight': 700,
-        'font-color' : 'white'
+        'font-color': 'white'
     });
 
     return this.geom;
@@ -15931,7 +15944,7 @@ OG.shape.elec.EHLoad.prototype.constructor = OG.shape.elec.EHLoad;
 OG.EHLoad = OG.shape.elec.EHLoad;
 
 OG.shape.elec.EHLoad.prototype.createShape = function () {
-    var geom1, geom2,geom3,geom4, geomCollection = [];
+    var geom1, geom2, geom3, geom4, geomCollection = [];
     if (this.geom) {
         return this.geom;
     }
@@ -16006,7 +16019,7 @@ OG.shape.elec.EHSLoad.prototype.constructor = OG.shape.elec.EHSLoad;
 OG.EHSLoad = OG.shape.elec.EHSLoad;
 
 OG.shape.elec.EHSLoad.prototype.createShape = function () {
-    var geom1, geom2,geom3,geom4, geomCollection = [];
+    var geom1, geom2, geom3, geom4, geomCollection = [];
     if (this.geom) {
         return this.geom;
     }
@@ -16088,14 +16101,14 @@ OG.shape.elec.HierarchyBldg.prototype.createShape = function () {
     this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
     this.geom.style = new OG.geometry.Style({
         'label-direction': 'vertical',
-        'vertical-align' : 'top',
-        'fill' : '#ffffff',
+        'vertical-align': 'top',
+        'fill': '#ffffff',
         'fill-opacity': 0,
-        'title-size' : 26,
+        'title-size': 26,
         'label-fill': '#428bca',
         'label-fill-opacity': 1,
         'font-weight': 700,
-        'font-color' : 'white'
+        'font-color': 'white'
     });
 
     return this.geom;
@@ -16247,14 +16260,14 @@ OG.shape.elec.HierarchyFloor.prototype.createShape = function () {
     this.geom = new OG.geometry.Rectangle([0, 0], 100, 100);
     this.geom.style = new OG.geometry.Style({
         'label-direction': 'vertical',
-        'vertical-align' : 'top',
-        'fill' : '#ffffff',
+        'vertical-align': 'top',
+        'fill': '#ffffff',
         'fill-opacity': 0,
-        'title-size' : 26,
+        'title-size': 26,
         'label-fill': '#428bca',
         'label-fill-opacity': 1,
         'font-weight': 700,
-        'font-color' : 'white'
+        'font-color': 'white'
     });
 
     return this.geom;
@@ -16339,9 +16352,7 @@ OG.shape.elec.Location.prototype.createSubShape = function () {
         return;
     }
 
-    this.sub = [
-
-    ];
+    this.sub = [];
     return this.sub;
 };
 
@@ -16458,16 +16469,16 @@ OG.shape.elec.MKLoad.prototype.constructor = OG.shape.elec.MKLoad;
 OG.MKLoad = OG.shape.elec.MKLoad;
 
 OG.shape.elec.MKLoad.prototype.createShape = function () {
-    var geom1, geom2,geom3,geom4,geom5, geomCollection = [];
+    var geom1, geom2, geom3, geom4, geom5, geomCollection = [];
     if (this.geom) {
         return this.geom;
     }
 
-    geom1 = new OG.geometry.Polygon([[10, 0],[27,10],[10,20]]);
-    geom2 = new OG.geometry.Polygon([[44, 0],[27,10],[44,20]]);
-    geom3 = new OG.geometry.Line([27,10],[27,20]);
-    geom4 = new OG.geometry.Circle([27,27],7);
-    geom5 = new OG.geometry.PolyLine([[24,30],[24,24],[27,28],[30,24],[30,30]]);
+    geom1 = new OG.geometry.Polygon([[10, 0], [27, 10], [10, 20]]);
+    geom2 = new OG.geometry.Polygon([[44, 0], [27, 10], [44, 20]]);
+    geom3 = new OG.geometry.Line([27, 10], [27, 20]);
+    geom4 = new OG.geometry.Circle([27, 27], 7);
+    geom5 = new OG.geometry.PolyLine([[24, 30], [24, 24], [27, 28], [30, 24], [30, 30]]);
 
     geomCollection.push(geom1);
     geomCollection.push(geom2);
@@ -16601,9 +16612,7 @@ OG.shape.elec.Manhole.prototype.createSubShape = function () {
         return;
     }
 
-    this.sub = [
-
-    ];
+    this.sub = [];
     return this.sub;
 };
 
@@ -16826,7 +16835,7 @@ OG.shape.elec.RacewayShape.prototype.createShape = function () {
                 top: 0,
                 from: 'start',
                 to: 'end',
-                style:{
+                style: {
                     //'stroke': 'none',
                     'fill-opacity': 1,
                     animation: [
@@ -16869,7 +16878,7 @@ OG.shape.elec.RacewayShape.prototype.createShape = function () {
 
 OG.shape.elec.RacewayShape.prototype.createContextMenu = function () {
     var me = this;
-    var options = {'':''};
+    var options = {'': ''};
     if (this.data && this.data.pathList) {
         for (var i = 0; i < this.data.pathList.length; i++) {
             options[this.data.pathList[i]['value']] = this.data.pathList[i]['name'];
@@ -19221,9 +19230,9 @@ OG.shape.component.DataTable.prototype.cutAndPaste = function (beforeColumn, aft
         afterCell = row.cells[afterColumn];
         if (beforeCell && afterCell) {
             cellInformation = me.getCellInformation(beforeCell);
-            if(cellInformation.contentElements && cellInformation.contentElements.length){
+            if (cellInformation.contentElements && cellInformation.contentElements.length) {
                 var elementsWithValues = [];
-                $.each(cellInformation.contentElements, function(c, contentElement){
+                $.each(cellInformation.contentElements, function (c, contentElement) {
                     elementsWithValues.push({
                         element: contentElement,
                         value: null
@@ -19434,7 +19443,6 @@ OG.shape.component.Cell.prototype.createContextMenu = function () {
         return {};
     }
 };
-
 
 
 /**
@@ -20314,7 +20322,7 @@ OG.renderer.IRenderer.prototype = {
                 y2: 0
             };
 
-        for (var i = 0,leni = shapeElements.length; i < leni; i++) {
+        for (var i = 0, leni = shapeElements.length; i < leni; i++) {
             shape = shapeElements[i].shape;
             if (shape && shape.geom) {
                 envelope = shape.geom.getBoundary();
@@ -20383,7 +20391,7 @@ OG.renderer.IRenderer.prototype = {
         var prevShapeId, nextShapeId;
         var prevEdges = this.getPrevEdges(fromElement);
         var nextEdges = this.getNextEdges(fromElement);
-        for (var i = 0,leni = prevEdges.length; i < leni; i++) {
+        for (var i = 0, leni = prevEdges.length; i < leni; i++) {
             prevShapeId = $(prevEdges[i]).attr('_from');
             if (prevShapeId) {
                 prevShapeId = prevShapeId.substring(0, prevShapeId.indexOf(OG.Constants.TERMINAL));
@@ -20392,7 +20400,7 @@ OG.renderer.IRenderer.prototype = {
                 }
             }
         }
-        for (var i = 0,leni = nextEdges.length; i < leni; i++) {
+        for (var i = 0, leni = nextEdges.length; i < leni; i++) {
             nextShapeId = $(nextEdges[i]).attr('_to');
             if (nextShapeId) {
                 nextShapeId = nextShapeId.substring(0, nextShapeId.indexOf(OG.Constants.TERMINAL));
@@ -20416,7 +20424,7 @@ OG.renderer.IRenderer.prototype = {
 
         if (prevEdgeIds) {
             edgeIds = prevEdgeIds.split(',');
-            for (var i = 0,leni = edgeIds.length; i < leni; i++) {
+            for (var i = 0, leni = edgeIds.length; i < leni; i++) {
                 edge = this.getElementById(edgeIds[i]);
                 if (edge) {
                     edgeArray.push(edge);
@@ -20440,7 +20448,7 @@ OG.renderer.IRenderer.prototype = {
 
         if (nextEdgeIds) {
             edgeIds = nextEdgeIds.split(',');
-            for (var i = 0,leni = edgeIds.length; i < leni; i++) {
+            for (var i = 0, leni = edgeIds.length; i < leni; i++) {
                 edge = this.getElementById(edgeIds[i]);
                 if (edge) {
                     edgeArray.push(edge);
@@ -20462,7 +20470,7 @@ OG.renderer.IRenderer.prototype = {
             shapeArray = [],
             prevShapeId, shape, i;
 
-        for (var i = 0,leni = prevEdges.length; i < leni; i++) {
+        for (var i = 0, leni = prevEdges.length; i < leni; i++) {
             prevShapeId = $(prevEdges[i]).attr('_from');
             if (prevShapeId) {
                 prevShapeId = prevShapeId.substring(0, prevShapeId.indexOf(OG.Constants.TERMINAL));
@@ -20487,7 +20495,7 @@ OG.renderer.IRenderer.prototype = {
             shapeArray = [],
             prevShapeId, i;
 
-        for (var i = 0,leni = prevEdges.length; i < leni; i++) {
+        for (var i = 0, leni = prevEdges.length; i < leni; i++) {
             prevShapeId = $(prevEdges[i]).attr('_from');
             if (prevShapeId) {
                 prevShapeId = prevShapeId.substring(0, prevShapeId.indexOf(OG.Constants.TERMINAL));
@@ -20508,7 +20516,7 @@ OG.renderer.IRenderer.prototype = {
             shapeArray = [],
             nextShapeId, shape, i;
 
-        for (var i = 0,leni = nextEdges.length; i < leni; i++) {
+        for (var i = 0, leni = nextEdges.length; i < leni; i++) {
             nextShapeId = $(nextEdges[i]).attr('_to');
             if (nextShapeId) {
                 nextShapeId = nextShapeId.substring(0, nextShapeId.indexOf(OG.Constants.TERMINAL));
@@ -20533,7 +20541,7 @@ OG.renderer.IRenderer.prototype = {
             shapeArray = [],
             nextShapeId, i;
 
-        for (var i = 0,leni = nextEdges.length; i < leni; i++) {
+        for (var i = 0, leni = nextEdges.length; i < leni; i++) {
             nextShapeId = $(nextEdges[i]).attr('_to');
             if (nextShapeId) {
                 nextShapeId = nextShapeId.substring(0, nextShapeId.indexOf(OG.Constants.TERMINAL));
@@ -22012,6 +22020,7 @@ OG.renderer.RaphaelRenderer.prototype.drawShape = function (position, shape, siz
 
         // 좌상단으로 이동 및 크기 조정
         geometry.moveCentroid(position);
+        // console.log(width, height)
         geometry.resizeBox(width, height);
         if (size && size[2]) {
             geometry.rotate(size[2]);
@@ -22788,7 +22797,8 @@ OG.renderer.RaphaelRenderer.prototype.drawEdge = function (line, style, id, isSe
 };
 
 OG.renderer.RaphaelRenderer.prototype.drawGroup = function (geometry, style, id) {
-    var me = this, group, geomElement, _style = {}, childNodes, i, boundary, titleLine, group_hidden, _tempStyle = {}, geom_shadow;
+    var me = this, group, geomElement, _style = {}, childNodes, i, boundary, titleLine, group_hidden, _tempStyle = {},
+        geom_shadow;
 
     OG.Util.apply(_style, (style instanceof OG.geometry.Style) ? style.map : style || {});
 
@@ -23010,11 +23020,12 @@ OG.renderer.RaphaelRenderer.prototype.drawLabel = function (shapeElement, text, 
             if (text !== undefined && beforeText !== undefined && text !== beforeText) {
                 // labelChanged event fire
                 element.shape.onLabelChanged(text, beforeText);
+                // console.log("onLabelChanged",text,beforeText);
                 $(this._PAPER.canvas).trigger('labelChanged', [element, text, beforeText]);
             }
         }
     }
-
+    // console.log("labelElement",labelElement);
     return labelElement;
 };
 
@@ -23388,7 +23399,6 @@ OG.renderer.RaphaelRenderer.prototype.connect = function (fromTerminal, toTermin
 
     //if label null, convert undefined
     label = label ? label : undefined;
-
     var me = this, _style = {}, fromShape, toShape, fromXY, toXY,
         isSelf, beforeEvent,
         addAttrValues = function (element, name, value) {
@@ -23799,7 +23809,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         _size = me._CONFIG.GUIDE_RECT_SIZE, _hSize = OG.Util.round(_size / 2),
         _ctrlSize = me._CONFIG.GUIDE_LINE_SIZE,
         _ctrlMargin = me._CONFIG.GUIDE_LINE_MARGIN,
-        _trash, isEdge, isEssensia, controllers = [], isLane,
+        _trash, _rotate, isEdge, isEssensia, controllers = [], isLane,
         _qUpper, _qLow, _qBisector, _qThirds;
 
     var bboxStyle = element.shape.GUIDE_BBOX ? element.shape.GUIDE_BBOX : me._CONFIG.DEFAULT_STYLE.GUIDE_BBOX;
@@ -24027,6 +24037,45 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         }
         _trash = me._getREleById(rElement.id + OG.Constants.GUIDE_SUFFIX.TRASH);
         controllers.push(_trash);
+    }
+
+    function _drawRotate(angle) {
+        if (!_isDeletable) {
+            return;
+        }
+        _rotate = me._PAPER.image(me._CONFIG.IMAGE_BASE + 'rotate.png', 0, 0, _ctrlSize, _ctrlSize);
+        _rotate.attr(me._CONFIG.DEFAULT_STYLE.GUIDE_LINE_AREA);
+        group.appendChild(_rotate);
+        me._add(_rotate, rElement.id + OG.Constants.GUIDE_SUFFIX.ROTATE);
+        guide.trash = _rotate.node;
+
+
+        $(_rotate.node).click(function () {
+            if (me.isLane(element)) {
+                me.removeLaneShape(element);
+                me.addHistory();
+            } else {
+                //Rotate 클릭 구분
+                if (rElement.attrs.cursor == 'move') {
+                    me.rotate(element, 330)
+                    rElement.attrs.cursor = 'default'
+                } else if (rElement.attrs.cursor == 'default') {
+                    me.rotate(element, 0)
+                    rElement.attrs.cursor = 'move'
+
+                }
+                me.addHistory();
+            }
+        })
+        controllers.push(_rotate);
+    }
+
+    function _redrawRotate() {
+        if (!_isDeletable) {
+            return;
+        }
+        _rotate = me._getREleById(rElement.id + OG.Constants.GUIDE_SUFFIX.ROTATE);
+        controllers.push(_rotate);
     }
 
     function _drawLine() {
@@ -24292,7 +24341,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
             x = _upperRight.x + ((divide + 1) * (_ctrlMargin + _ctrlSize) - _ctrlSize);
             y = _upperRight.y + (rest * (_ctrlMargin + _ctrlSize));
 
-            if(!controller) return;
+            if (!controller) return;
 
             controller.attr({x: x, y: y});
 
@@ -24355,11 +24404,12 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                     _redrawLine();
                 }
             }
-            _redrawTrash();
+            // _redrawTrash();
+            _redrawRotate();
         }
         if (isEdge) {
             _redrawBbox();
-            _redrawTrash();
+            // _redrawTrash();
         }
 
         _setControllerPosition();
@@ -24370,7 +24420,8 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
         if (isEdge) {
             _drawGroup();
             _drawBbox();
-            _drawTrash();
+            // _drawTrash();
+            // _drawRotate();
         }
         if (!isEdge) {
             _drawGroup();
@@ -24400,7 +24451,7 @@ OG.renderer.RaphaelRenderer.prototype.drawGuide = function (element) {
                     _drawLine();
                 }
             }
-            _drawTrash();
+            _drawRotate();
         }
         _setControllerPosition();
 
@@ -25500,9 +25551,9 @@ OG.renderer.RaphaelRenderer.prototype.rotate = function (element, angle) {
             center = envelope.getCentroid();
             width = envelope.getWidth();
             height = envelope.getHeight();
-
             this.drawShape([center.x, center.y], shape, [width, height, angle], rElement.node.shapeStyle, rElement.node.id);
-        } else {
+        }
+        else {
             if (rElement.node.shape.angle) {
                 geometry.rotate(-1 * rElement.node.shape.angle);
             }
@@ -25511,19 +25562,18 @@ OG.renderer.RaphaelRenderer.prototype.rotate = function (element, angle) {
 
             this.redrawShape(rElement.node);
         }
-
         // rotateShape event fire
         rElement.node.shape.onRotateShape(angle);
         $(this._PAPER.canvas).trigger('rotateShape', [rElement.node, angle]);
-
+        // console.log(rElement.node)
         return rElement.node;
-    } else if (rElement) {
-        rElement.rotate(angle);
 
+    } else if (rElement) {
+
+        rElement.rotate(angle);
         // rotateShape event fire
         rElement.node.shape.onRotateShape(angle);
         $(this._PAPER.canvas).trigger('rotateShape', [rElement.node, angle]);
-
         return rElement.node;
     }
 
@@ -30435,11 +30485,10 @@ OG.handler.EventHandler.prototype = {
                         var connectShape = $(root).data(OG.Constants.GUIDE_SUFFIX.LINE_CONNECT_SHAPE);
                         var isRectMode = $(root).data(OG.Constants.GUIDE_SUFFIX.RECT_CONNECT_MODE);
                         var isEdge = $(element).attr("_shape") === OG.Constants.SHAPE_TYPE.EDGE;
-
                         if (isConnectMode) {
+
                             if (isConnectable && !isEdge) {
                                 var target = me._RENDERER.getTargetfromVirtualEdge();
-
                                 if (target.id === element.id) {
                                     return;
                                 }
@@ -30645,7 +30694,7 @@ OG.handler.EventHandler.prototype = {
                 //터치패드 이벤트와 마우스 휠 스피드의 차이는 매우 크다.
                 //터치패드 0~10, 마우스 휠 400 이상.
 
-                if(!event.shiftKey) return;
+                if (!event.shiftKey) return;
 
                 var deltaX = 0;
                 var deltaY = 0;
@@ -30750,7 +30799,8 @@ OG.handler.EventHandler.prototype = {
                 }
                 if (isConnectable) {
                     var rectShape = renderer._CANVAS.drawShape([eventOffset.x, eventOffset.y], newShape, [width, height], style);
-                    var edge = renderer._CANVAS.connect(target, rectShape, null, null, null, null, true);
+                    var edge = rende
+                    rer._CANVAS.connect(target, rectShape, null, null, null, null, true);
                     if (target.shape.onDuplicated) {
                         target.shape.onDuplicated(edge, target, rectShape);
                     }
@@ -33815,13 +33865,13 @@ OG.handler.EventHandler.prototype = {
                                 //vertical boundary range
                                 correctionConditions.push({
                                     condition: {
-                                        minX: upperLeft.x + ( width / 2) - delay,
-                                        maxX: upperLeft.x + ( width / 2) + delay,
+                                        minX: upperLeft.x + (width / 2) - delay,
+                                        maxX: upperLeft.x + (width / 2) + delay,
                                         minY: upperLeft.y,
                                         maxY: upperLeft.y + height,
                                     },
                                     fixedPosition: {
-                                        x: upperLeft.x + ( width / 2)
+                                        x: upperLeft.x + (width / 2)
                                     },
                                     id: idx
                                 });
@@ -33831,11 +33881,11 @@ OG.handler.EventHandler.prototype = {
                                     condition: {
                                         minX: upperLeft.x,
                                         maxX: upperLeft.x + width,
-                                        minY: upperLeft.y + ( height / 2) - delay,
-                                        maxY: upperLeft.y + ( height / 2) + delay,
+                                        minY: upperLeft.y + (height / 2) - delay,
+                                        maxY: upperLeft.y + (height / 2) + delay,
                                     },
                                     fixedPosition: {
-                                        y: upperLeft.y + ( height / 2)
+                                        y: upperLeft.y + (height / 2)
                                     },
                                     id: idx
                                 });
@@ -35355,7 +35405,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
         /**
          * 이미지 베이스 패스
          */
-        IMAGE_BASE: 'resources/images/symbol/',
+        IMAGE_BASE: 'https://raw.githubusercontent.com/kimsanghoon1/k8s-UI/master/public/static/images/symbol/',
 
         /**
          * 이미지 url 정보
@@ -36078,6 +36128,7 @@ OG.graph.Canvas.prototype = {
         //     'overflow-y': 'auto',
         //     'background': 'black'
         // });
+
         sliderImage = $('<canvas class="sliderImage"></canvas>');
         sliderImage.css({
             position: 'absolute',
@@ -36085,11 +36136,9 @@ OG.graph.Canvas.prototype = {
             left: '0px'
         });
         sliderImage.attr("width", "100%");
-        // console.log(container.id)
+        console.log(container.id)
         sliderImage.attr('id', container.id + 'sliderImage');
 
-
-        console.log(sliderImage)
 
         sliderNavigator = $('<div class="sliderNavigator">' +
             '<div style="position: absolute;top: 2px;left: 2px;bottom: 2px;right: 2px;border: 2px solid #3e77ff;"></div>' +
@@ -36264,7 +36313,7 @@ OG.graph.Canvas.prototype = {
             var sliderBar = slider.find('.scaleSlider');
             var sliderImage = slider.find('.sliderImage');
             var sliderNavigator = slider.find('.sliderNavigator');
-            var sliderImageWrapper = slider.find('.sliderImageWrapper');
+            // var sliderImageWrapper = slider.find('.sliderImageWrapper');
 
 
             //여기서부터는 캔버스의 내용을 슬라이더에 투영시킨다.
@@ -36290,8 +36339,8 @@ OG.graph.Canvas.prototype = {
                 image.src = 'data:image/svg+xml;base64,' + encoded;
                 image.onload = function () {
                     var canvas = document.getElementById(sliderImage.attr('id'));
-                    canvas.width = sliderImageWrapper.width();
-                    canvas.height = sliderImageWrapper.width() * image.height / image.width;
+                    // canvas.width = sliderImageWrapper.width();
+                    // canvas.height = sliderImageWrapper.width() * image.height / image.width;
                     var context = canvas.getContext('2d');
                     try {
                         context.drawImage(image, 0, 0, sliderImageWrapper.width(), sliderImageWrapper.width() * image.height / image.width);
@@ -36306,11 +36355,11 @@ OG.graph.Canvas.prototype = {
                 image.src = 'data:image/svg+xml;utf-8,' + svgData;
                 image.onload = function () {
                     var canvas = document.getElementById(sliderImage.attr('id'));
-                    canvas.width = sliderImageWrapper.width();
-                    canvas.height = sliderImageWrapper.width() * image.height / image.width;
+                    // canvas.width = sliderImageWrapper.width();
+                    // canvas.height = sliderImageWrapper.width() * image.height / image.width;
                     var context = canvas.getContext('2d');
                     try {
-                        context.drawImage(image, 0, 0, sliderImageWrapper.width(), sliderImageWrapper.width() * image.height / image.width);
+                        // context.drawImage(image, 0, 0, sliderImageWrapper.width(), sliderImageWrapper.width() * image.height / image.width);
                         $(image).remove();
                         me.updateNavigatior();
                     } catch (e) {
@@ -36326,10 +36375,10 @@ OG.graph.Canvas.prototype = {
                 var width = me._CONFIG.BACKDOOR.width;
                 var height = me._CONFIG.BACKDOOR.height;
                 var canvasScale = me.getScale();
-                var contextWidth = sliderImageWrapper.width();
+                // var contextWidth = sliderImageWrapper.width();
                 var fixedWidth = (width * (scale / 100) / canvasSize[0] * canvasScale) * contextWidth;
                 var fixedHeight = fixedWidth * height / width;
-                var sliderBackDoorWrapper = sliderImageWrapper.find('.sliderBackDoorWrapper');
+                // var sliderBackDoorWrapper = sliderImageWrapper.find('.sliderBackDoorWrapper');
 
                 if (!sliderBackDoorWrapper || sliderBackDoorWrapper.length < 1) {
                     sliderBackDoorWrapper = $('<div class="sliderBackDoorWrapper"></div>');
@@ -36341,7 +36390,7 @@ OG.graph.Canvas.prototype = {
                         height: '100%'
                     });
 
-                    sliderImageWrapper.data('backdoor', true);
+                    // sliderImageWrapper.data('backdoor', true);
                     sliderBackDoorWrapper.css({
                         'background-image': 'url(' + me._CONFIG.BACKDOOR.url + ')',
                         'background-repeat': 'no-repeat',
@@ -36375,7 +36424,7 @@ OG.graph.Canvas.prototype = {
      */
     removeSlider: function () {
         if (this._CONFIG.SLIDER) {
-            this._CONFIG.SLIDER.dialog("destroy");
+            // this._CONFIG.SLIDER.dialog("destroy");
             this._CONFIG.SLIDER.remove();
         }
     }
@@ -36448,7 +36497,8 @@ OG.graph.Canvas.prototype = {
      * @return {Element} Group DOM Element with geometry
      */
     drawTransformer: function (position, label, inputs, outputs, drawData, id) {
-        var me = this, shape, element, style, envelope, i, toShape, fromShape, toElement, fromElement, textShape, textElement;
+        var me = this, shape, element, style, envelope, i, toShape, fromShape, toElement, fromElement, textShape,
+            textElement;
         shape = new OG.shape.Transformer(label);
 
         if (!Array.isArray(inputs) || !Array.isArray(outputs)) {
@@ -37601,7 +37651,8 @@ OG.graph.Canvas.prototype = {
         var canvasWidth, canvasHeight, rootGroup, canvasScale,
             minX = Number.MAX_VALUE, minY = Number.MAX_VALUE, maxX = Number.MIN_VALUE, maxY = Number.MIN_VALUE,
             i, cell, shape, id, parent, shapeType, shapeId, x, y, width, height, style, geom, from, to,
-            fromEdge, toEdge, label, fromLabel, toLabel, angle, value, data, dataExt, element, loopType, taskType, swimlane, textList;
+            fromEdge, toEdge, label, fromLabel, toLabel, angle, value, data, dataExt, element, loopType, taskType,
+            swimlane, textList;
 
         this._RENDERER.clear();
         var renderer = this._RENDERER;

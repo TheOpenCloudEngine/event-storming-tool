@@ -1,6 +1,6 @@
 forEach: View
 fileName: {{namePascalCase}}Listener.java
-path: {{boundedContext.name}}/{{{options.packagePath}}}
+path: {{boundedContext}}/{{{options.packagePath}}}
 ---
 package {{options.package}};
 
