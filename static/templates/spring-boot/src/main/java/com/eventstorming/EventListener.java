@@ -1,6 +1,4 @@
-forEach: Aggregate
-fileName: {{namePascalCase}}EventListener.java
-path: {{boundedContext.name}}/{{{options.packagePath}}}
+path: {{name}}/{{{options.packagePath}}}
 ---
 package {{options.package}};
 
@@ -13,8 +11,8 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 @Service
-public class {{namePascalCase}}EventListener{
-
+public class EventListener{
+    {{ policies.toString() }}
     {{#policies}}
         {{#relationEventInfo}}
     @StreamListener(KafkaProcessor.INPUT)
