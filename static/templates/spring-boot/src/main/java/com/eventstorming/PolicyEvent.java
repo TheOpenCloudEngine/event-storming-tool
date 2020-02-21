@@ -1,18 +1,18 @@
-forEach: Policy
-fileName: {{relationEventInfo.namePascalCase}}.java
-path: {{boundedContext}}/{{{options.packagePath}}}
+forEach: relationEventInfo
+fileName: {{eventValue.namePascalCase}}.java
+path: {{boundedContext.name}}/{{{options.packagePath}}}
 ---
-{{#relationEventInfo}}
+{{#eventValue}}
 package {{options.package}};
 
 
-public class {{relationEventInfo.namePascalCase}} extends AbstractEvent {
+public class {{eventValue.namePascalCase}} extends AbstractEvent {
 
-{{#relationEventInfo.fieldDescriptors}}
+{{#eventValue.fieldDescriptors}}
     private {{className}} {{name}};
-{{/relationEventInfo.fieldDescriptors}}
+{{/eventValue.fieldDescriptors}}
 
-{{#relationEventInfo.fieldDescriptors}}
+{{#eventValue.fieldDescriptors}}
     public {{className}} get{{namePascalCase}}() {
         return {{name}};
     }
@@ -20,6 +20,6 @@ public class {{relationEventInfo.namePascalCase}} extends AbstractEvent {
     public void set{{namePascalCase}}({{className}} {{name}}) {
         this.{{name}} = {{name}};
     }
-{{/relationEventInfo.fieldDescriptors}}
+{{/eventValue.fieldDescriptors}}
 }
-{{/relationEventInfo}}
+{{/eventValue}}

@@ -1,6 +1,6 @@
 forEach: Aggregate
 fileName: {{namePascalCase}}Repository.java
-path: {{boundedContext}}/{{{options.packagePath}}}
+path: {{boundedContext.name}}/{{{options.packagePath}}}
 ---
 package {{options.package}};
 
