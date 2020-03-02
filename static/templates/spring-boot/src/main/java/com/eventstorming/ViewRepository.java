@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface {{aggregate.namePascalCase}}Repository extends CrudRepository<{{aggregate.namePascalCase}}, Long> {
+public interface {{namePascalCase}}Repository extends CrudRepository<{{namePascalCase}}, Long> {
 
-    List<{{aggregate.namePascalCase}}> findByName(@Param("name") String name);
+    List<{{namePascalCase}}> findByName(@Param("name") String name);
 }

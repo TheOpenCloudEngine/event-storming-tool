@@ -37,7 +37,10 @@ public class AbstractEvent {
         return json;
     }
 
-    public void sendMessage(String json){
+    public void publish(){
+        this.publish(this.toJson());
+    }
+    public void publish(String json){
         if( json != null ){
 
             /**

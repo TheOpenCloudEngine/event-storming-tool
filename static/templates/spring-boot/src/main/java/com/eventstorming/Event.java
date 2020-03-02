@@ -14,9 +14,7 @@ public class {{namePascalCase}} extends AbstractEvent {
     {{/fieldDescriptors}}
 
     public {{namePascalCase}}(){
-        this.setEventType(this.getClass().getSimpleName());
-        SimpleDateFormat defaultSimpleDateFormat = new SimpleDateFormat("YYYYMMddHHmmss");
-        this.timestamp = defaultSimpleDateFormat.format(new Date());
+        super();
     }
 
     {{#fieldDescriptors}}

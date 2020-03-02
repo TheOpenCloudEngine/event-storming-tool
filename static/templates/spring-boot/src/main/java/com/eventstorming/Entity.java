@@ -5,6 +5,7 @@ path: {{boundedContext.name}}/{{{options.packagePath}}}
 package {{options.package}};
 
 import javax.persistence.*;
+import org.springframework.beans.BeanUtils;
 import java.util.List;
 
 @Entity
@@ -24,8 +25,9 @@ public class {{namePascalCase}} {
     {{trigger}}
     public void publish{{namePascalCase}}(){
 
-        {{namePascalCase}} {{name}} = new {{namePascalCase}}();
-        {{name}}.sendMessage({{name}}.toJson());
+        {{namePascalCase}} {{nameCamelCase}} = new {{namePascalCase}}();
+        BeanUtils.copyProperties(this, {{nameCamelCase}});
+        {{nameCamelCase}}.publish();
 
     }
 {{/events}}
