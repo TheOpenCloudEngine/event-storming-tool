@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "61d176e142e56c328ef8",
+    "revision": "5dc5d90b577dbd5a87d0",
     "url": "/css/app.4a7df0a5.css"
   },
   {
-    "revision": "61d176e142e56c328ef8",
-    "url": "/js/app.9b488427.js"
+    "revision": "5dc5d90b577dbd5a87d0",
+    "url": "/js/app.e704f304.js"
   },
   {
     "revision": "de77abeadd7ab5649cbe",
@@ -20,8 +20,16 @@ self.__precacheManifest = [
     "url": "/img/logo_change.8c110234.png"
   },
   {
-    "revision": "eb6a27fa3374e298bc60e9a50450a109",
+    "revision": "eed928c3981bdee3b31871316bb2d8e4",
     "url": "/index.html"
+  },
+  {
+    "revision": "8c1102345ea5a36fc9a0055ba166ef50",
+    "url": "/static/image/logo_change.png"
+  },
+  {
+    "revision": "cae06f48ca7916475eea0c11b455b687",
+    "url": "/static/image/symbol/hands.png"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
@@ -40,12 +48,12 @@ self.__precacheManifest = [
     "url": "/static/bpmn/css/bpmn-codes.css"
   },
   {
-    "revision": "d2e963c690c5a85072cfdde1a4af7cea",
-    "url": "/static/bpmn/css/bpmn-embedded.css"
-  },
-  {
     "revision": "da7db8b007b5131e87b80bf82978a394",
     "url": "/static/bpmn/css/bpmn-ie7-codes.css"
+  },
+  {
+    "revision": "d2e963c690c5a85072cfdde1a4af7cea",
+    "url": "/static/bpmn/css/bpmn-embedded.css"
   },
   {
     "revision": "00621ef967204605d9c71976473bc745",
@@ -56,12 +64,12 @@ self.__precacheManifest = [
     "url": "/static/bpmn/css/bpmn.css"
   },
   {
-    "revision": "0a847dd3eb75ef60b6dfa6a6d34b07ba",
-    "url": "/static/bpmn/css/custom.css"
-  },
-  {
     "revision": "609860a7b5830bab8c7843e1637290ba",
     "url": "/static/bpmn/font/bpmn.eot"
+  },
+  {
+    "revision": "0a847dd3eb75ef60b6dfa6a6d34b07ba",
+    "url": "/static/bpmn/css/custom.css"
   },
   {
     "revision": "c35e00bf530edb924b3a46795b480512",
@@ -80,12 +88,12 @@ self.__precacheManifest = [
     "url": "/static/env.txt"
   },
   {
-    "revision": "417f045d85882a504a3d39ed3183052e",
-    "url": "/static/external/2fcrYFNaTjcS6g4U3t-Y5ewrjPiaoEww8AihgqWRJAo.woff"
-  },
-  {
     "revision": "bafb105baeb22d965c70fe52ba6b49d9",
     "url": "/static/external/2UX7WLTfW3W8TclTUvlFyQ.woff"
+  },
+  {
+    "revision": "417f045d85882a504a3d39ed3183052e",
+    "url": "/static/external/2fcrYFNaTjcS6g4U3t-Y5ewrjPiaoEww8AihgqWRJAo.woff"
   },
   {
     "revision": "cf6613d1adf490972c557a8e318e0868",
@@ -108,32 +116,36 @@ self.__precacheManifest = [
     "url": "/static/external/fontawesome-webfont.eot"
   },
   {
-    "revision": "b06871f281fee6b241d60582ae9369b9",
-    "url": "/static/external/fontawesome-webfont.ttf"
-  },
-  {
     "revision": "fee66e712a8a08eef5805a46892932ad",
     "url": "/static/external/fontawesome-webfont.woff"
-  },
-  {
-    "revision": "af7ae505a9eed503f8b8e6982036873e",
-    "url": "/static/external/fontawesome-webfont.woff2"
   },
   {
     "revision": "3b1d220067ad433eca319f8c06b38224",
     "url": "/static/external/fonts.css"
   },
   {
-    "revision": "a1471d1d6431c893582a5f6a250db3f9",
-    "url": "/static/external/Hgo13k-tfSpn0qi1SFdUfT8E0i7KZn-EPnyo3HZu7kw.woff"
+    "revision": "af7ae505a9eed503f8b8e6982036873e",
+    "url": "/static/external/fontawesome-webfont.woff2"
   },
   {
     "revision": "cedb417e2288e732627318ebecb5bc33",
     "url": "/static/external/hybind_latest.js"
   },
   {
+    "revision": "a1471d1d6431c893582a5f6a250db3f9",
+    "url": "/static/external/Hgo13k-tfSpn0qi1SFdUfT8E0i7KZn-EPnyo3HZu7kw.woff"
+  },
+  {
     "revision": "de8b7431b74642e830af4d4f4b513ec9",
     "url": "/static/external/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff"
+  },
+  {
+    "revision": "b06871f281fee6b241d60582ae9369b9",
+    "url": "/static/external/fontawesome-webfont.ttf"
+  },
+  {
+    "revision": "37518e401620e1c3288156e0ae282f50",
+    "url": "/static/favicon-32x32.png"
   },
   {
     "revision": "65a6b4b5f98241a910dc233110f5c9f6",
@@ -144,32 +156,32 @@ self.__precacheManifest = [
     "url": "/static/image/1.jpg"
   },
   {
-    "revision": "37518e401620e1c3288156e0ae282f50",
-    "url": "/static/favicon-32x32.png"
-  },
-  {
     "revision": "534d83233216e56e59b503fe3f3e7edb",
     "url": "/static/image/es2cdIcon.png"
-  },
-  {
-    "revision": "2fbb9e59cbab2174760da29c08d37354",
-    "url": "/static/image/event/actor.png"
-  },
-  {
-    "revision": "a5d0a486cbb6d7cdb3073e7e33cadc3b",
-    "url": "/static/image/event/aggregate.png"
-  },
-  {
-    "revision": "7a1a918283bbf6c499e50677ed9d0aaa",
-    "url": "/static/image/event/bounded2.png"
   },
   {
     "revision": "a55e4fec9f51678f26e00e40ca3e8513",
     "url": "/static/image/event/bounded1.png"
   },
   {
+    "revision": "7a1a918283bbf6c499e50677ed9d0aaa",
+    "url": "/static/image/event/bounded2.png"
+  },
+  {
+    "revision": "a5d0a486cbb6d7cdb3073e7e33cadc3b",
+    "url": "/static/image/event/aggregate.png"
+  },
+  {
+    "revision": "2fbb9e59cbab2174760da29c08d37354",
+    "url": "/static/image/event/actor.png"
+  },
+  {
     "revision": "2661bc44c693179f6ea759a7d653b29d",
     "url": "/static/image/event/command.png"
+  },
+  {
+    "revision": "7af8593aa4e67a8cf770c3141d94db25",
+    "url": "/static/image/event/right-arrow-icon.png"
   },
   {
     "revision": "dde6423adbb1fcbd044f93a6d5364864",
@@ -180,44 +192,36 @@ self.__precacheManifest = [
     "url": "/static/image/event/external.png"
   },
   {
-    "revision": "29ec20ce386ad428e337cbebd1a9e357",
-    "url": "/static/image/event/policy.png"
-  },
-  {
-    "revision": "7af8593aa4e67a8cf770c3141d94db25",
-    "url": "/static/image/event/right-arrow-icon.png"
-  },
-  {
     "revision": "72584fe4be6365dbae7d6ad1c455527a",
     "url": "/static/image/event/right-arrow.png"
   },
   {
-    "revision": "64d70a176bb252ed0e41db51b0229268",
-    "url": "/static/image/event/rotate.png"
-  },
-  {
-    "revision": "e270d019ff6336c4da12f88c014218ec",
-    "url": "/static/image/event/view.png"
+    "revision": "29ec20ce386ad428e337cbebd1a9e357",
+    "url": "/static/image/event/policy.png"
   },
   {
     "revision": "44509b41a3c9bc141c775c032633f2bb",
     "url": "/static/image/grid.gif"
   },
   {
-    "revision": "11d17532aef439c9d81ac2dedc535eea",
-    "url": "/static/image/Logo_black_stroke7.png"
+    "revision": "e270d019ff6336c4da12f88c014218ec",
+    "url": "/static/image/event/view.png"
   },
   {
-    "revision": "8c1102345ea5a36fc9a0055ba166ef50",
-    "url": "/static/image/logo_change.png"
-  },
-  {
-    "revision": "6b4cd57c7d9e693a13228d3966f8bf1b",
-    "url": "/static/image/logo_change2.png"
+    "revision": "64d70a176bb252ed0e41db51b0229268",
+    "url": "/static/image/event/rotate.png"
   },
   {
     "revision": "50601b64e45a90965b2da232d2a5ddd5",
     "url": "/static/image/sample.png"
+  },
+  {
+    "revision": "11d17532aef439c9d81ac2dedc535eea",
+    "url": "/static/image/Logo_black_stroke7.png"
+  },
+  {
+    "revision": "6b4cd57c7d9e693a13228d3966f8bf1b",
+    "url": "/static/image/logo_change2.png"
   },
   {
     "revision": "0bbef444bd1c110195bd7fe31abee55b",
@@ -232,12 +236,12 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/BusinessRule.png"
   },
   {
-    "revision": "c73105efdd5a363053daef010fbdb452",
-    "url": "/static/image/symbol/cancel_end.png"
-  },
-  {
     "revision": "73c8e7007f5787ad2ba5a6ded55710d1",
     "url": "/static/image/symbol/cancel_intermediate.png"
+  },
+  {
+    "revision": "c73105efdd5a363053daef010fbdb452",
+    "url": "/static/image/symbol/cancel_end.png"
   },
   {
     "revision": "2ebdec778c5fffabfa38d5211f72e473",
@@ -248,20 +252,20 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/compensation_end.png"
   },
   {
-    "revision": "c5bb944a864b8d32e965bee835af381a",
-    "url": "/static/image/symbol/compensation_intermediate.png"
-  },
-  {
     "revision": "36b02eb514729fe8d77c8e9d55c2ed67",
     "url": "/static/image/symbol/complete.png"
   },
   {
-    "revision": "d4df2ba6da44ab1fda57ec1399f40950",
-    "url": "/static/image/symbol/connector_association.png"
+    "revision": "c5bb944a864b8d32e965bee835af381a",
+    "url": "/static/image/symbol/compensation_intermediate.png"
   },
   {
     "revision": "4d722952692941ac8746ea058138a47f",
     "url": "/static/image/symbol/connector_conditional.png"
+  },
+  {
+    "revision": "d4df2ba6da44ab1fda57ec1399f40950",
+    "url": "/static/image/symbol/connector_association.png"
   },
   {
     "revision": "1fb189455db843f783e13887d7818471",
@@ -284,12 +288,12 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/connector_start.png"
   },
   {
-    "revision": "fc1957dec8a9e14c47290a52eda8195c",
-    "url": "/static/image/symbol/data_store.png"
-  },
-  {
     "revision": "8b9fd52845fff0f9c97e6ec85765c1d0",
     "url": "/static/image/symbol/data_object.png"
+  },
+  {
+    "revision": "fc1957dec8a9e14c47290a52eda8195c",
+    "url": "/static/image/symbol/data_store.png"
   },
   {
     "revision": "76def91e8ab240ddb037670f1ee04766",
@@ -300,20 +304,20 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/error_intermediate.png"
   },
   {
-    "revision": "1afb25b5fe3a360c9dbc000bdd2f4494",
-    "url": "/static/image/symbol/error_start.png"
-  },
-  {
     "revision": "266b642e4153adaa83c2d3471df5b705",
     "url": "/static/image/symbol/error.png"
   },
   {
-    "revision": "d10a3b2ad8dbdf0e307e62afbf3ce9aa",
-    "url": "/static/image/symbol/event_end.png"
+    "revision": "1afb25b5fe3a360c9dbc000bdd2f4494",
+    "url": "/static/image/symbol/error_start.png"
   },
   {
     "revision": "c4abed46436f5914e7726df53cb53237",
     "url": "/static/image/symbol/event_intermediate.png"
+  },
+  {
+    "revision": "d10a3b2ad8dbdf0e307e62afbf3ce9aa",
+    "url": "/static/image/symbol/event_end.png"
   },
   {
     "revision": "f253dbef8f72f5e270c3de2595c9aca1",
@@ -328,20 +332,20 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/event.png"
   },
   {
-    "revision": "73eea773f3d6e739ba800a3317929694",
-    "url": "/static/image/symbol/failed.png"
-  },
-  {
     "revision": "a576d493b1909594d94278ad73a82b1b",
     "url": "/static/image/symbol/fork.png"
   },
   {
-    "revision": "9b33c8e53e7b87820e090d0c0d84795d",
-    "url": "/static/image/symbol/gateway_complex.png"
+    "revision": "73eea773f3d6e739ba800a3317929694",
+    "url": "/static/image/symbol/failed.png"
   },
   {
     "revision": "79a2f6f1cd77e8c18789346e410ee340",
     "url": "/static/image/symbol/gateway_exclusive.png"
+  },
+  {
+    "revision": "9b33c8e53e7b87820e090d0c0d84795d",
+    "url": "/static/image/symbol/gateway_complex.png"
   },
   {
     "revision": "b898ded5c6e560b666060c3efd424bd9",
@@ -372,10 +376,6 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/guide_task.png"
   },
   {
-    "revision": "cae06f48ca7916475eea0c11b455b687",
-    "url": "/static/image/symbol/hands.png"
-  },
-  {
     "revision": "a9f4c5807f6f6fb35619d1d3afe722f1",
     "url": "/static/image/symbol/horizontal_lane.png"
   },
@@ -384,48 +384,48 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/inclusive.png"
   },
   {
-    "revision": "a719cafcc896b5072f1b1a9f724b9a64",
-    "url": "/static/image/symbol/link_end.png"
-  },
-  {
     "revision": "89fe6775a66206b36f0d399b0b368c61",
     "url": "/static/image/symbol/link_intermediate.png"
+  },
+  {
+    "revision": "a719cafcc896b5072f1b1a9f724b9a64",
+    "url": "/static/image/symbol/link_end.png"
   },
   {
     "revision": "fba3bba556cb948877437c070d0abf55",
     "url": "/static/image/symbol/link_start.png"
   },
   {
-    "revision": "eabfb78da68344d562040102968f5939",
-    "url": "/static/image/symbol/link.png"
-  },
-  {
     "revision": "ff90ca5f7eb3325ed9ecd3ca5b03658a",
     "url": "/static/image/symbol/loop_standard.png"
+  },
+  {
+    "revision": "eabfb78da68344d562040102968f5939",
+    "url": "/static/image/symbol/link.png"
   },
   {
     "revision": "3690d8a9f49f87022bbdee7baad0abce",
     "url": "/static/image/symbol/Manual.png"
   },
   {
-    "revision": "e8f54111f08503e1f39b0ef5916ad9fd",
-    "url": "/static/external/fontawesome-webfont.svg.htm"
-  },
-  {
     "revision": "9b33c8e53e7b87820e090d0c0d84795d",
     "url": "/static/image/symbol/merge.png"
+  },
+  {
+    "revision": "1ce7ae8cc09bcd27304590d8184ce9ac",
+    "url": "/static/image/symbol/message_blank.png"
   },
   {
     "revision": "2b55547172c6b8c8c461014fc6683c6b",
     "url": "/static/image/symbol/message_end.png"
   },
   {
-    "revision": "79ac142c6d53333832e406acc48316d4",
-    "url": "/static/image/symbol/message_intermediate.png"
+    "revision": "e8f54111f08503e1f39b0ef5916ad9fd",
+    "url": "/static/external/fontawesome-webfont.svg.htm"
   },
   {
-    "revision": "1ce7ae8cc09bcd27304590d8184ce9ac",
-    "url": "/static/image/symbol/message_blank.png"
+    "revision": "79ac142c6d53333832e406acc48316d4",
+    "url": "/static/image/symbol/message_intermediate.png"
   },
   {
     "revision": "1c7425c6f412562042f6bb10c69df4be",
@@ -460,16 +460,16 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/OG.shape.bpmn.A_LoopTask.png"
   },
   {
-    "revision": "484c31ed1d1d3ffd5e0b085e95ec8959",
-    "url": "/static/image/symbol/OG.shape.bpmn.A_MapperTask.png"
-  },
-  {
     "revision": "11eb610a3286e17bcf181ace388cfaac",
     "url": "/static/image/symbol/OG.shape.bpmn.A_ManualTask.png"
   },
   {
     "revision": "f24a74f5395820a53fb641d9ed4ffd92",
     "url": "/static/image/symbol/OG.shape.bpmn.A_ServiceTask2.png"
+  },
+  {
+    "revision": "484c31ed1d1d3ffd5e0b085e95ec8959",
+    "url": "/static/image/symbol/OG.shape.bpmn.A_MapperTask.png"
   },
   {
     "revision": "95b727235491025687ee1493cecb6e24",
@@ -488,12 +488,12 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/OG.shape.bpmn.C_Association.png"
   },
   {
-    "revision": "beec36782667f2edf7ef73091a332288",
-    "url": "/static/image/symbol/OG.shape.bpmn.C_DataAssociation.png"
-  },
-  {
     "revision": "0f4ba823b24003e96426bbb9799a33eb",
     "url": "/static/image/symbol/OG.shape.bpmn.C_Message.png"
+  },
+  {
+    "revision": "beec36782667f2edf7ef73091a332288",
+    "url": "/static/image/symbol/OG.shape.bpmn.C_DataAssociation.png"
   },
   {
     "revision": "989791ec321be0cf441a1637ea707d06",
@@ -540,24 +540,24 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/OG.shape.bpmn.E_Intermediate.png"
   },
   {
-    "revision": "1c7425c6f412562042f6bb10c69df4be",
-    "url": "/static/image/symbol/OG.shape.bpmn.E_Start_Message.png"
-  },
-  {
     "revision": "5ebf47b662788296608e10536320d84c",
     "url": "/static/image/symbol/OG.shape.bpmn.E_Start_Rule.png"
+  },
+  {
+    "revision": "1c7425c6f412562042f6bb10c69df4be",
+    "url": "/static/image/symbol/OG.shape.bpmn.E_Start_Message.png"
   },
   {
     "revision": "f674e79000dcf4aec6ef5cbb7d0b163c",
     "url": "/static/image/symbol/OG.shape.bpmn.E_Start_Timer.png"
   },
   {
-    "revision": "f253dbef8f72f5e270c3de2595c9aca1",
-    "url": "/static/image/symbol/OG.shape.bpmn.E_Start.png"
-  },
-  {
     "revision": "ea882eba43241d319f16e9d9ae0152f7",
     "url": "/static/image/symbol/OG.shape.bpmn.E_Terminate.png"
+  },
+  {
+    "revision": "f253dbef8f72f5e270c3de2595c9aca1",
+    "url": "/static/image/symbol/OG.shape.bpmn.E_Start.png"
   },
   {
     "revision": "0283d4e9746537d5c4d753ef907bc490",
@@ -616,6 +616,14 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/OG.shape.essencia.LevelOfDetail.png"
   },
   {
+    "revision": "2504c7a25e74615a905094d2195467f0",
+    "url": "/static/templates/helloWorld/Application.java"
+  },
+  {
+    "revision": "fe35a91d7960b38e494db28ae099c8f8",
+    "url": "/static/templates/helloWorld/Test.java"
+  },
+  {
     "revision": "d03f8e175d1a2835a6e68b92a8011968",
     "url": "/static/image/symbol/OG.shape.essencia.Practice.png"
   },
@@ -624,8 +632,96 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/OG.shape.essencia.State_Successor.png"
   },
   {
+    "revision": "5aac5d49c94c6910e3e1f33f046d5ed9",
+    "url": "/static/templates/spring-boot/cloudbuild.yaml"
+  },
+  {
+    "revision": "d108755c493517434438e9f48aa06f24",
+    "url": "/static/templates/spring-boot/Dockerfile"
+  },
+  {
     "revision": "399e8ffc411d2e42bab8003d6c263e4a",
     "url": "/static/image/symbol/OG.shape.essencia.State.png"
+  },
+  {
+    "revision": "11edc203234fc428dbfde26fcf242aa1",
+    "url": "/static/templates/spring-boot/for-model/gateway/cloudbuild.yaml"
+  },
+  {
+    "revision": "d108755c493517434438e9f48aa06f24",
+    "url": "/static/templates/spring-boot/for-model/gateway/Dockerfile"
+  },
+  {
+    "revision": "d5aa067344681bd978d2e6c7fe3c1eec",
+    "url": "/static/templates/spring-boot/for-model/gateway/pom.xml"
+  },
+  {
+    "revision": "d41d8cd98f00b204e9800998ecf8427e",
+    "url": "/static/templates/spring-boot/for-model/gateway/README.md"
+  },
+  {
+    "revision": "16e0b3ae00d518954c70aa69601d01d8",
+    "url": "/static/templates/spring-boot/for-model/gateway/src/main/java/com/example/template/Application.java"
+  },
+  {
+    "revision": "c7c7e6448d9a571f85e9d9ad0ba1a9f1",
+    "url": "/static/templates/spring-boot/for-model/gateway/src/main/resources/application.yml"
+  },
+  {
+    "revision": "5fa753c4d65de9876c1468e8570c8359",
+    "url": "/static/templates/spring-boot/pom.xml"
+  },
+  {
+    "revision": "d23f82a98b9c9462539ee670dbe04afd",
+    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/AbstractEvent.java"
+  },
+  {
+    "revision": "c2b977a0ed76e3a281992c3c4d0b5456",
+    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/Application.java"
+  },
+  {
+    "revision": "c82b2115aa1cc8f8b177afa81cd531f7",
+    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/config/kafka/KafkaProcessor.java"
+  },
+  {
+    "revision": "856b1fff585c66319a27e704347a290d",
+    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/Controller.java"
+  },
+  {
+    "revision": "94ea84925291311ef8e97c0057174235",
+    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/Entity.java"
+  },
+  {
+    "revision": "ee6515e8a5a964939c5c8ba3e574dfcc",
+    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/Event.java"
+  },
+  {
+    "revision": "8d8e547f6f00abcd1af5b7271bfa0924",
+    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/PolicyEvent.java"
+  },
+  {
+    "revision": "24d64aaa8edd5f2fc89df8fb0773af7a",
+    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/PolicyHandler.java"
+  },
+  {
+    "revision": "236085a69805935d0ee1ffe6684b5ca5",
+    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/Repository.java"
+  },
+  {
+    "revision": "6b20ef8e40e615d8e1bfee8dbabe9057",
+    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/View.java"
+  },
+  {
+    "revision": "6a002e7fd6ee9786f35513c9b37fe099",
+    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/ViewHandler.java"
+  },
+  {
+    "revision": "d84a00a9ad2adfd469a39f6b3a8c1982",
+    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/ViewRepository.java"
+  },
+  {
+    "revision": "b186b2328c11ef2d551d776db187cac4",
+    "url": "/static/templates/spring-boot/src/main/resources/application.yml"
   },
   {
     "revision": "3fe301ff4d8d5d23007f0bb3cf664c13",
@@ -648,32 +744,32 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/popup.png"
   },
   {
-    "revision": "ad351cf082add06d97752f2803321028",
-    "url": "/static/image/symbol/quarter-bisector.png"
-  },
-  {
     "revision": "1190cfc22a21548635bc1d05f6e57f32",
     "url": "/static/image/symbol/quarter-low.png"
+  },
+  {
+    "revision": "ad351cf082add06d97752f2803321028",
+    "url": "/static/image/symbol/quarter-bisector.png"
   },
   {
     "revision": "7978cf55360dff0082c8aa1dbf362f9a",
     "url": "/static/image/symbol/quarter-thirds.png"
   },
   {
-    "revision": "529d01c41c98899c3beebfd5856ae4a4",
-    "url": "/static/image/symbol/quarter-upper.png"
-  },
-  {
     "revision": "a1732b804a2f5a2b0d4f23d28ffcf404",
     "url": "/static/image/symbol/rule_intermediate.png"
   },
   {
-    "revision": "a610b0339c41755b425896ec735b21da",
-    "url": "/static/image/symbol/rotate.png"
-  },
-  {
     "revision": "9d0b0e62240ff18a628d48c7d2abc86b",
     "url": "/static/image/symbol/rule_start.png"
+  },
+  {
+    "revision": "529d01c41c98899c3beebfd5856ae4a4",
+    "url": "/static/image/symbol/quarter-upper.png"
+  },
+  {
+    "revision": "a610b0339c41755b425896ec735b21da",
+    "url": "/static/image/symbol/rotate.png"
   },
   {
     "revision": "9d0b0e62240ff18a628d48c7d2abc86b",
@@ -696,12 +792,12 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/Service.png"
   },
   {
-    "revision": "03dfa5416a7411b624cb51591bcf478b",
-    "url": "/static/image/symbol/signal.png"
-  },
-  {
     "revision": "1e9de78bfba9c14f92420ec194e42070",
     "url": "/static/image/symbol/small_cancel_end.gif"
+  },
+  {
+    "revision": "03dfa5416a7411b624cb51591bcf478b",
+    "url": "/static/image/symbol/signal.png"
   },
   {
     "revision": "4b6ca6d6e9fe3cfdeb5684f2edb2b3e9",
@@ -816,16 +912,12 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/w_services.png"
   },
   {
-    "revision": "903a441d4c67ad6de19b62f5d2e04be4",
-    "url": "/static/image/symbol/wrench.png"
-  },
-  {
     "revision": "01511f4f64b32037648fe81e482527b6",
     "url": "/static/image/symbol/WebService.png"
   },
   {
-    "revision": "63f7279113cee951e06603433cb9f3ad",
-    "url": "/static/lib/jquery-contextMenu/images/cut.png"
+    "revision": "903a441d4c67ad6de19b62f5d2e04be4",
+    "url": "/static/image/symbol/wrench.png"
   },
   {
     "revision": "632e5492ec3dfa720804f01ae0bd4d71",
@@ -836,16 +928,20 @@ self.__precacheManifest = [
     "url": "/static/lib/jquery-contextMenu/images/page_white_add.png"
   },
   {
+    "revision": "baab23c41cdc34dcd6b068b23f963762",
+    "url": "/static/lib/jquery-contextMenu/images/page_white_delete.png"
+  },
+  {
+    "revision": "63f7279113cee951e06603433cb9f3ad",
+    "url": "/static/lib/jquery-contextMenu/images/cut.png"
+  },
+  {
     "revision": "38de59d96ecaa147d8b5f440b4c4b0e6",
     "url": "/static/lib/jquery-contextMenu/images/page_white_copy.png"
   },
   {
     "revision": "97176626eef35c7beb4f05a850325042",
     "url": "/static/lib/jquery-contextMenu/images/page_white_edit.png"
-  },
-  {
-    "revision": "baab23c41cdc34dcd6b068b23f963762",
-    "url": "/static/lib/jquery-contextMenu/images/page_white_delete.png"
   },
   {
     "revision": "37f35a84b3c1e324341715a9cabfb8c8",
@@ -856,24 +952,24 @@ self.__precacheManifest = [
     "url": "/static/lib/jquery-contextMenu/jquery.contextMenu.css"
   },
   {
-    "revision": "3cf3ba4270c73e5cb0f944b3fca64244",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_55_fbf9ee_1x400.png"
-  },
-  {
     "revision": "726e1b236a569185faa2b38314eeb283",
     "url": "/static/lib/jquery-1.11.1/jquery-1.11.1.min.js"
+  },
+  {
+    "revision": "3cf3ba4270c73e5cb0f944b3fca64244",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_55_fbf9ee_1x400.png"
   },
   {
     "revision": "d62284bd1214ec4e2a4f82ecc742d4c0",
     "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_65_ffffff_1x400.png"
   },
   {
-    "revision": "a95c74d60a5d1863c6e8a16aa2967e1c",
-    "url": "/static/lib/jquery-contextMenu/jquery.contextMenu.js"
-  },
-  {
     "revision": "e040dc2297c0248851894799bd1ce745",
     "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_75_dadada_1x400.png"
+  },
+  {
+    "revision": "a95c74d60a5d1863c6e8a16aa2967e1c",
+    "url": "/static/lib/jquery-contextMenu/jquery.contextMenu.js"
   },
   {
     "revision": "0104e5836b59a4e11e769615976ee247",
@@ -888,16 +984,16 @@ self.__precacheManifest = [
     "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_highlight-soft_75_cccccc_1x100.png"
   },
   {
-    "revision": "d92acecad29da2ccee5c9d491267f4a2",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_2e83ff_256x240.png"
-  },
-  {
     "revision": "3a3c5468f484f07ac4a320d9e22acb8c",
     "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_222222_256x240.png"
   },
   {
     "revision": "3b001ae33bd74fff64bc609ce6a55628",
     "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_454545_256x240.png"
+  },
+  {
+    "revision": "d92acecad29da2ccee5c9d491267f4a2",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_2e83ff_256x240.png"
   },
   {
     "revision": "6cc57703e2f287de68f76244a618f15c",
@@ -916,12 +1012,12 @@ self.__precacheManifest = [
     "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.css"
   },
   {
-    "revision": "91515770ce8c55de23b306444d8ea998",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/external/jquery/jquery.js"
-  },
-  {
     "revision": "f01ceaf221837778658105ca4a7f1c02",
     "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.min.css"
+  },
+  {
+    "revision": "91515770ce8c55de23b306444d8ea998",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/external/jquery/jquery.js"
   },
   {
     "revision": "8b1b37ea467bc3a15747c7c21b937677",
@@ -932,24 +1028,16 @@ self.__precacheManifest = [
     "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css"
   },
   {
-    "revision": "0d7a39de68f2c3800e35abb3580d6c5e",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.js"
+    "revision": "52ef50dd16535520f1f8e9e20c1ac563",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css"
   },
   {
     "revision": "1a269f0a8cdb97b1dd5b6150e2e08425",
     "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.theme.css"
   },
   {
-    "revision": "52ef50dd16535520f1f8e9e20c1ac563",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css"
-  },
-  {
     "revision": "396a695751d02153f66f830d60a7f5cc",
     "url": "/static/lib/jqueryXML2JSON/jquery.xml2json.js"
-  },
-  {
-    "revision": "1c102295674bbd1cb78744bd83d04d15",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js"
   },
   {
     "revision": "eebaf260766f5e0e773f53d3ea4f3e4d",
@@ -958,6 +1046,10 @@ self.__precacheManifest = [
   {
     "revision": "51286e68b083696edaf4f9fc577e2a2d",
     "url": "/static/lib/jstree/themes/default-dark/40px.png"
+  },
+  {
+    "revision": "1c102295674bbd1cb78744bd83d04d15",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js"
   },
   {
     "revision": "e7708316c7389cf5d25223d250367a08",
@@ -984,16 +1076,20 @@ self.__precacheManifest = [
     "url": "/static/lib/jstree/themes/default/style.css"
   },
   {
-    "revision": "7e62fd0bb4ba401d02905976637787a4",
-    "url": "/static/lib/jstree/jstree.js"
-  },
-  {
     "revision": "f279435ca7dd3a22357c063f1f7b01a4",
     "url": "/static/lib/jstree/themes/default/style.min.css"
   },
   {
     "revision": "9ed4669f524bec38319be63a2ee4ba26",
     "url": "/static/lib/jstree/themes/default/throbber.gif"
+  },
+  {
+    "revision": "7e62fd0bb4ba401d02905976637787a4",
+    "url": "/static/lib/jstree/jstree.js"
+  },
+  {
+    "revision": "0d7a39de68f2c3800e35abb3580d6c5e",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.js"
   },
   {
     "revision": "ad6e6499b37fe8992bf381dc7156e38c",
@@ -1004,14 +1100,6 @@ self.__precacheManifest = [
     "url": "/static/slimscroll/jquery.slimscroll.min.js"
   },
   {
-    "revision": "2504c7a25e74615a905094d2195467f0",
-    "url": "/static/templates/helloWorld/Application.java"
-  },
-  {
-    "revision": "fe35a91d7960b38e494db28ae099c8f8",
-    "url": "/static/templates/helloWorld/Test.java"
-  },
-  {
     "revision": "de52395a420916c1c598d505d30e3ed2",
     "url": "/static/templates/spring-boot/.gitignore"
   },
@@ -1020,100 +1108,12 @@ self.__precacheManifest = [
     "url": "/static/templates/spring-boot/.mvn/wrapper/mavenwrapper.properties"
   },
   {
-    "revision": "5aac5d49c94c6910e3e1f33f046d5ed9",
-    "url": "/static/templates/spring-boot/cloudbuild.yaml"
-  },
-  {
-    "revision": "d108755c493517434438e9f48aa06f24",
-    "url": "/static/templates/spring-boot/Dockerfile"
+    "revision": "5e055714d2c647827907bbf144cf409f",
+    "url": "/static/v.png"
   },
   {
     "revision": "de52395a420916c1c598d505d30e3ed2",
     "url": "/static/templates/spring-boot/for-model/gateway/.gitignore"
-  },
-  {
-    "revision": "11edc203234fc428dbfde26fcf242aa1",
-    "url": "/static/templates/spring-boot/for-model/gateway/cloudbuild.yaml"
-  },
-  {
-    "revision": "d5aa067344681bd978d2e6c7fe3c1eec",
-    "url": "/static/templates/spring-boot/for-model/gateway/pom.xml"
-  },
-  {
-    "revision": "d108755c493517434438e9f48aa06f24",
-    "url": "/static/templates/spring-boot/for-model/gateway/Dockerfile"
-  },
-  {
-    "revision": "d41d8cd98f00b204e9800998ecf8427e",
-    "url": "/static/templates/spring-boot/for-model/gateway/README.md"
-  },
-  {
-    "revision": "16e0b3ae00d518954c70aa69601d01d8",
-    "url": "/static/templates/spring-boot/for-model/gateway/src/main/java/com/example/template/Application.java"
-  },
-  {
-    "revision": "c7c7e6448d9a571f85e9d9ad0ba1a9f1",
-    "url": "/static/templates/spring-boot/for-model/gateway/src/main/resources/application.yml"
-  },
-  {
-    "revision": "5fa753c4d65de9876c1468e8570c8359",
-    "url": "/static/templates/spring-boot/pom.xml"
-  },
-  {
-    "revision": "d23f82a98b9c9462539ee670dbe04afd",
-    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/AbstractEvent.java"
-  },
-  {
-    "revision": "c2b977a0ed76e3a281992c3c4d0b5456",
-    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/Application.java"
-  },
-  {
-    "revision": "c82b2115aa1cc8f8b177afa81cd531f7",
-    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/config/kafka/KafkaProcessor.java"
-  },
-  {
-    "revision": "856b1fff585c66319a27e704347a290d",
-    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/Controller.java"
-  },
-  {
-    "revision": "94ea84925291311ef8e97c0057174235",
-    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/Entity.java"
-  },
-  {
-    "revision": "ee6515e8a5a964939c5c8ba3e574dfcc",
-    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/Event.java"
-  },
-  {
-    "revision": "8d8e547f6f00abcd1af5b7271bfa0924",
-    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/PolicyEvent.java"
-  },
-  {
-    "revision": "24d64aaa8edd5f2fc89df8fb0773af7a",
-    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/PolicyHandler.java"
-  },
-  {
-    "revision": "236085a69805935d0ee1ffe6684b5ca5",
-    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/Repository.java"
-  },
-  {
-    "revision": "6b20ef8e40e615d8e1bfee8dbabe9057",
-    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/View.java"
-  },
-  {
-    "revision": "d84a00a9ad2adfd469a39f6b3a8c1982",
-    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/ViewRepository.java"
-  },
-  {
-    "revision": "6a002e7fd6ee9786f35513c9b37fe099",
-    "url": "/static/templates/spring-boot/src/main/java/com/eventstorming/ViewHandler.java"
-  },
-  {
-    "revision": "b186b2328c11ef2d551d776db187cac4",
-    "url": "/static/templates/spring-boot/src/main/resources/application.yml"
-  },
-  {
-    "revision": "5e055714d2c647827907bbf144cf409f",
-    "url": "/static/v.png"
   },
   {
     "revision": "0834340f96d379a3bbad1f2ca2d6f913",
