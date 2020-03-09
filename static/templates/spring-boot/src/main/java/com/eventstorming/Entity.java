@@ -20,17 +20,28 @@ public class {{namePascalCase}} {
     private {{className}} {{nameCamelCase}};
     {{/aggregateRoot.fieldDescriptors}}
 
-
-{{#events}}
-    {{trigger}}
-    public void publish{{namePascalCase}}(){
-
+{{#lifeCycles}}
+    {{annotation}}
+    public void when_{{trigger}}_publishEvent(){
+    {{#events}}
         {{namePascalCase}} {{nameCamelCase}} = new {{namePascalCase}}();
         BeanUtils.copyProperties(this, {{nameCamelCase}});
         {{nameCamelCase}}.publish();
 
+    {{/events}}
     }
-{{/events}}
+
+{{/lifeCycles}}
+//{{#events}}
+//    {{trigger}}
+//    public void publish{{namePascalCase}}(){
+//
+//        {{namePascalCase}} {{nameCamelCase}} = new {{namePascalCase}}();
+//        BeanUtils.copyProperties(this, {{nameCamelCase}});
+//        {{nameCamelCase}}.publish();
+//
+//    }
+//{{/events}}
 
 {{#aggregateRoot.fieldDescriptors}}
     public {{className}} get{{namePascalCase}}() {

@@ -4,9 +4,6 @@ path: {{boundedContext.name}}/{{{options.packagePath}}}
 ---
 package {{options.package}};
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class {{namePascalCase}} extends AbstractEvent {
 
     {{#fieldDescriptors}}

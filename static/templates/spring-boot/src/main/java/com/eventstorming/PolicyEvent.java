@@ -1,4 +1,4 @@
-forEach: relationEventInfo
+forEach: RelationEventInfo
 fileName: {{eventValue.namePascalCase}}.java
 path: {{boundedContext.name}}/{{{options.packagePath}}}
 ---

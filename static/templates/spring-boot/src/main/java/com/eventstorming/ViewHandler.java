@@ -4,74 +4,100 @@ path: {{boundedContext.name}}/{{{options.packagePath}}}
 ---
 package {{options.package}};
 
+import {{options.package}}.config.kafka.KafkaProcessor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.stereotype.Service;
 
-import com.example.template.config.kafka.KafkaProcessor;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.util.MimeTypeUtils;
-
-import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class {{namePascalCase}}ViewHandler {
-{{#isCqrs}}
+
+
     @Autowired
     private {{namePascalCase}}Repository {{nameCamelCase}}Repository;
 
-
-
-//{{#sourceEvent}}
-//@StreamListener(KafkaProcessor.INPUT)
-//public void on{{sourceEvent.namePascalCase}}(@Payload {{sourceEvent.namePascalCase}} {{sourceEvent.nameCamelCase}}) {
-//        try {
-//            if ({{sourceEvent.nameCamelCase}}.isMe()) {
-//                // view 객체 생성
-//                {{namePascalCase}} {{nameCamelCase}} = new {{namePascalCase}}();
-//                // view 객체에 이벤트의 eventDirectValue 를 set 함
-//                {{#viewFieldDescriptors}}
-//                    {{nameCamelCase}}.set{{namePascalCase}}({{viewFieldDescriptors.eventDirectValue}});
-//                {{/viewFieldDescriptors}}
-//
-//                // view 레파지 토리에 save
-//                {{nameCamelCase}}Repository.save({{nameCamelCase}});
-//
-//                // 만약 View 컬럼명의 value 와 소스이벤트 컬럼명의 value 가 같으면
-//            }
-//        }catch (Exception e){
-//        e.printStackTrace();
-//        }
-//}
-//{{/sourceEvent}}
-
-{{#viewFieldDescriptors}}
-        @StreamListener(KafkaProcessor.INPUT)
-        public void on{{sourceEvent.namePascalCase}}(@Payload {{sourceEvent.namePascalCase}} {{sourceEvent.nameCamelCase}}) {
-                try {
-                    if ({{sourceEvent.nameCamelCase}}.isMe()) {
-                        System.out.println("##### listener : " + {{sourceEvent.nameCamelCase}}.toJson());
-                        {{namePascalCase}} {{nameCamelCase}} = new {{namePascalCase}}();
-                        {{#fieldDescriptors}}
-                        {{nameCamelCase}}.set{{namePascalCase}}({{viewFieldDescriptors.eventDirectValue}});
-                        {{/fieldDescriptors}}
-                        {{nameCamelCase}}Repository.save({{nameCamelCase}});
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+    {{#createRules}}
+    @StreamListener(KafkaProcessor.INPUT)
+    public void when{{when.namePascalCase}}_then_{{operation}}_{{_index}} (@Payload {{when.namePascalCase}} {{when.nameCamelCase}}) {
+        try {
+            if ({{when.nameCamelCase}}.isMe()) {
+                // view 객체 생성
+                {{namePascalCase}} {{nameCamelCase}} = new {{namePascalCase}}();
+                // view 객체에 이벤트의 Value 를 set 함
+            {{#fieldMapping}}
+                {{nameCamelCase}}.set{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+            {{/fieldMapping}}
+                // view 레파지 토리에 save
+                {{nameCamelCase}}Repository.save({{nameCamelCase}});
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
- {{/viewFieldDescriptors}}
+    }
+    {{/createRules}}
 
-{{/isCqrs}}
-{{#isMash}}
-        Mash
-{{/isMash}}
-{{#isgraph}}
-        isgraph
-{{/isgraph}}
+
+    {{#updateRules}}
+    @StreamListener(KafkaProcessor.INPUT)
+    public void when{{when.namePascalCase}}_then_{{operation}}_{{_index}}(@Payload {{when.namePascalCase}} {{when.nameCamelCase}}) {
+        try {
+            if ({{when.nameCamelCase}}.isMe()) {
+                // view 객체 조회
+        {{#where}}
+            {{#viewField.isKey}}
+                Optional<{{namePascalCase}}> {{nameCamelCase}}Optional = {{nameCamelCase}}Repository.findBy{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+                if( {{nameCamelCase}}Optional.isPresent()) {
+                    {{namePascalCase}} {{nameCamelCase}} = {{nameCamelCase}}Optional.get();
+                    // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    {{#fieldMapping}}
+                    {{nameCamelCase}}.set{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+                    {{/fieldMapping}}
+                    // view 레파지 토리에 save
+                    {{nameCamelCase}}Repository.save({{nameCamelCase}});
+                }
+            {{/viewField.isKey}}
+            {{^viewField.isKey}}
+                List<{{namePascalCase}}> {{nameCamelCase}}List = {{nameCamelCase}}Repository.findBy{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+                for({{namePascalCase}} {{nameCamelCase}} : {{nameCamelCase}}List){
+                    // view 객체에 이벤트의 eventDirectValue 를 set 함
+                {{#fieldMapping}}
+                    {{nameCamelCase}}.set{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+                {{/fieldMapping}}
+                    // view 레파지 토리에 save
+                    {{nameCamelCase}}Repository.save({{nameCamelCase}});
+                }
+            {{/viewField.isKey}}
+        {{/where}}
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    {{/updateRules}}
+
+    {{#deleteRules}}
+    @StreamListener(KafkaProcessor.INPUT)
+    public void when{{when.namePascalCase}}_then_{{operation}}_{{_index}}(@Payload {{when.namePascalCase}} {{when.nameCamelCase}}) {
+        try {
+            if ({{when.nameCamelCase}}.isMe()) {
+        {{#where}}
+                // view 레파지 토리에 삭제 쿼리
+            {{#viewField.isKey}}
+                {{nameCamelCase}}Repository.deleteById({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+            {{/viewField.isKey}}
+            {{^viewField.isKey}}
+                {{nameCamelCase}}Repository.deleteBy{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+            {{/viewField.isKey}}
+        {{/where}}
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    {{/deleteRules}}
 }

@@ -15,11 +15,16 @@ import java.util.List;
 
  @RestController
  public class {{ namePascalCase }}Controller {
-
         {{#commands}}
-        @RequestMapping(value = "/{{aggregate.nameCamelCase}}/{{nameCamelCase}}", method = RequestMethod.{{restfulType}}, produces = "application/json;charset=UTF-8")
-        public void {{nameCamelCase}}(HttpServletRequest request, HttpServletResponse response) throws Exception {
-            System.out.println("##### /{{aggregate.nameCamelCase}}/{{nameCamelCase}}  called #####");
+        {{#isRestRepository}}
+    @RequestMapping(value = "/{{aggregate.nameCamelCase}}/{{nameCamelCase}}", method = RequestMethod.{{restRepositoryInfo.method}}, produces = "application/json;charset=UTF-8")
+    public void {{nameCamelCase}}(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("##### /{{aggregate.nameCamelCase}}/{{nameCamelCase}}  called #####");
         }
+        {{/isRestRepository}}
+
+
+        {{^isRestRepository}}
+        {{/isRestRepository}}
         {{/commands}}
  }

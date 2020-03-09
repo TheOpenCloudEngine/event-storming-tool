@@ -11,5 +11,19 @@ import java.util.List;
 
 public interface {{namePascalCase}}Repository extends CrudRepository<{{namePascalCase}}, Long> {
 
-    List<{{namePascalCase}}> findByName(@Param("name") String name);
+{{#updateRules}}
+    {{#where}}
+    {{^viewField.isKey}}
+    List<{{namePascalCase}}> findBy{{viewField.namePascalCase}}({{viewField.className}} {{viewField.nameCamelCase}});
+    {{/viewField.isKey}}
+    {{/where}}
+{{/updateRules}}
+
+{{#deleteRules}}
+    {{#where}}
+    {{^viewField.isKey}}
+        void deleteBy{{viewField.namePascalCase}}({{viewField.className}} {{viewField.nameCamelCase}});
+    {{/viewField.isKey}}
+    {{/where}}
+{{/deleteRules}}
 }

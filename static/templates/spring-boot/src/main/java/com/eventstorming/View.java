@@ -11,23 +11,23 @@ import java.util.List;
 @Table(name="{{namePascalCase}}_table")
 public class {{namePascalCase}} {
 
-{{#viewFieldDescriptors}}
+{{#fieldDescriptors}}
     {{#isKey}}
         @Id
         @GeneratedValue(strategy=GenerationType.AUTO)
     {{/isKey}}
-        private {{className}} {{name}};
-{{/viewFieldDescriptors}}
+        private {{className}} {{nameCamelCase}};
+{{/fieldDescriptors}}
 
 
-        {{#viewFieldDescriptors}}
-        public {{className}} get{{name}}() {
-            return {{name}};
+{{#fieldDescriptors}}
+        public {{className}} get{{namePascalCase}}() {
+            return {{nameCamelCase}};
         }
 
-        public void set{{name}}({{className}} {{name}}) {
-            this.{{name}} = {{name}};
+        public void set{{namePascalCase}}({{className}} {{nameCamelCase}}) {
+            this.{{nameCamelCase}} = {{nameCamelCase}};
         }
-        {{/viewFieldDescriptors}}
+{{/fieldDescriptors}}
 
 }

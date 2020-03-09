@@ -11,7 +11,7 @@ spring:
         - id: {{name}}
           uri: http://localhost:{{portGenerated}}
           predicates:
-            - Path={{#aggregates}}/{{namePlural}}/**{{/aggregates}}
+            - Path={{#aggregates}}/{{namePlural}}/**{{/aggregates}} {{#viewes}}/{{namePlural}}/**{{/viewes}}
         {{/boundedContexts}}
       globalcors:
         corsConfigurations:
@@ -35,7 +35,7 @@ spring:
         - id: {{name}}
           uri: http://{{name}}:8080
           predicates:
-            - Path={{#aggregates}}/{{namePlural}}/**{{/aggregates}}
+            - Path={{#aggregates}}/{{namePlural}}/**{{/aggregates}} {{#viewes}}/{{namePlural}}/**{{/viewes}}
         {{/boundedContexts}}
       globalcors:
         corsConfigurations:
