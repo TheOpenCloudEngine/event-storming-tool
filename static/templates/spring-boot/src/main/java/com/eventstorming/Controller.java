@@ -17,14 +17,17 @@ import java.util.List;
  public class {{ namePascalCase }}Controller {
         {{#commands}}
         {{#isRestRepository}}
-    @RequestMapping(value = "/{{aggregate.nameCamelCase}}/{{nameCamelCase}}", method = RequestMethod.{{restRepositoryInfo.method}}, produces = "application/json;charset=UTF-8")
-    public void {{nameCamelCase}}(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("##### /{{aggregate.nameCamelCase}}/{{nameCamelCase}}  called #####");
-        }
         {{/isRestRepository}}
 
-
         {{^isRestRepository}}
+@RequestMapping(value = "/{{controllerInfo.apiPath}}",
+        method = RequestMethod.{{controllerInfo.method}},
+        produces = "application/json;charset=UTF-8")
+
+public void {{nameCamelCase}}(HttpServletRequest request, HttpServletResponse response)
+        throws Exception {
+        System.out.println("##### /{{aggregate.nameCamelCase}}/{{nameCamelCase}}  called #####");
+        }
         {{/isRestRepository}}
         {{/commands}}
  }

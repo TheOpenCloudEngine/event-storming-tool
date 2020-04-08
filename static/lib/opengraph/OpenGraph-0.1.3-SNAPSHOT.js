@@ -35098,8 +35098,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
             IMAGE: true,
             EDGE: true,
             GROUP: true
-        }
-        ,
+        },
 
         /**
          * 리사이즈 가능여부
@@ -35113,8 +35112,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
             IMAGE: true,
             EDGE: true,
             GROUP: true
-        }
-        ,
+        },
 
         /**
          * 연결 가능여부
@@ -35142,8 +35140,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
             IMAGE: true,
             EDGE: true,
             GROUP: true
-        }
-        ,
+        },
 
         /**
          * 가이드에 삭제 컨트롤러 여부
@@ -35156,8 +35153,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
             IMAGE: true,
             EDGE: true,
             GROUP: true
-        }
-        ,
+        },
 
         /**
          * 라벨 수정여부
@@ -35170,8 +35166,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
             IMAGE: true,
             EDGE: true,
             GROUP: true
-        }
-        ,
+        },
 
         /**
          * 그룹핑 가능여부
@@ -35415,8 +35410,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
         DEFAULT_STYLE: {
             SHAPE: {
                 cursor: "default"
-            }
-            ,
+            },
             GEOM: {
                 stroke: "black",
                 "fill-r": ".5",
@@ -35425,23 +35419,19 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 fill: "white",
                 "fill-opacity": 0,
                 "label-position": "center"
-            }
-            ,
+            },
             TEXT: {
                 stroke: "none", "text-anchor": "middle"
-            }
-            ,
+            },
             HTML: {
                 "label-position": "bottom", "text-anchor": "middle", "vertical-align": "top"
-            }
-            ,
+            },
             IMAGE: {
                 "label-position": "bottom", "text-anchor": "middle", "vertical-align": "top"
             },
             SVG: {
                 "label-position": "bottom", "text-anchor": "middle", "vertical-align": "top"
-            }
-            ,
+            },
             EDGE: {
                 stroke: "black",
                 fill: "none",
@@ -35455,8 +35445,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "label-position": "center",
                 "stroke-linejoin": "round",
                 cursor: "pointer"
-            }
-            ,
+            },
             EDGE_SHADOW: {
                 stroke: "#00FF00",
                 fill: "none",
@@ -35468,8 +35457,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "stroke-dasharray": "- ",
                 "edge-type": "plain",
                 cursor: "pointer"
-            }
-            ,
+            },
             EDGE_HIDDEN: {
                 stroke: "white",
                 fill: "none",
@@ -35477,8 +35465,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "stroke-width": 10,
                 "stroke-opacity": 0,
                 cursor: "pointer"
-            }
-            ,
+            },
             GROUP: {
                 stroke: "black",
                 fill: "none",
@@ -35486,12 +35473,10 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "label-position": "bottom",
                 "text-anchor": "middle",
                 "vertical-align": "top"
-            }
-            ,
+            },
             GROUP_HIDDEN: {
                 stroke: "black", fill: "white", "fill-opacity": 0, "stroke-opacity": 0, cursor: "move"
-            }
-            ,
+            },
             GROUP_SHADOW: {
                 stroke: "white",
                 fill: "none",
@@ -35499,8 +35484,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "stroke-width": 15,
                 "stroke-opacity": 0,
                 cursor: "pointer"
-            }
-            ,
+            },
             GROUP_SHADOW_MAPPER: {
                 stroke: "white",
                 fill: "none",
@@ -35508,8 +35492,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "stroke-width": 1,
                 "stroke-opacity": 0,
                 cursor: "pointer"
-            }
-            ,
+            },
             GUIDE_BBOX: {
                 stroke: "#00FF00",
                 fill: "white",
@@ -35517,92 +35500,78 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "stroke-dasharray": "- ",
                 "shape-rendering": "crispEdges",
                 cursor: "move"
-            }
-            ,
+            },
             GUIDE_UL: {
                 stroke: "#03689a",
                 fill: "#03689a",
                 "fill-opacity": 0.5,
                 cursor: "nwse-resize",
                 "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_UR: {
                 stroke: "#03689a",
                 fill: "#03689a",
                 "fill-opacity": 0.5,
                 cursor: "nesw-resize",
                 "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_LL: {
                 stroke: "#03689a",
                 fill: "#03689a",
                 "fill-opacity": 0.5,
                 cursor: "nesw-resize",
                 "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_LR: {
                 stroke: "#03689a",
                 fill: "#03689a",
                 "fill-opacity": 0.5,
                 cursor: "nwse-resize",
                 "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_LC: {
                 stroke: "#03689a",
                 fill: "#03689a",
                 "fill-opacity": 0.5,
                 cursor: "ew-resize",
                 "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_UC: {
                 stroke: "black",
                 fill: "#03689a",
                 "fill-opacity": 0.5,
                 cursor: "ns-resize",
                 "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_RC: {
                 stroke: "black",
                 fill: "#03689a",
                 "fill-opacity": 0.5,
                 cursor: "ew-resize",
                 "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_LWC: {
                 stroke: "black",
                 fill: "#03689a",
                 "fill-opacity": 0.5,
                 cursor: "ns-resize",
                 "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_FROM: {
                 stroke: "black", fill: "#00FF00", cursor: "move", "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_TO: {
                 stroke: "black", fill: "#00FF00", cursor: "move", "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_CTL_H: {
                 stroke: "black", fill: "#00FF00", cursor: "ew-resize", "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_CTL_V: {
                 stroke: "black", fill: "#00FF00", cursor: "ns-resize", "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_SHADOW: {
                 stroke: "black", fill: "none", "stroke-dasharray": "- ", "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             GUIDE_LINE: {
                 stroke: "black",
                 fill: "none",
@@ -35613,8 +35582,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "arrow-end": "block",
                 "stroke-linejoin": "round",
                 cursor: "pointer"
-            }
-            ,
+            },
             GUIDE_LINE_ESSENSIA: {
                 stroke: "black",
                 fill: "none",
@@ -35626,8 +35594,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "arrow-end": "none",
                 "stroke-linejoin": "round",
                 cursor: "pointer"
-            }
-            ,
+            },
             GUIDE_VIRTUAL_EDGE: {
                 stroke: "black",
                 fill: "none",
@@ -35638,8 +35605,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "stroke-linejoin": "round",
                 "arrow-start": "none",
                 "arrow-end": "none"
-            }
-            ,
+            },
             GUIDE_LINE_AREA: {
                 stroke: "#ffffff",
                 fill: "#ffffff",
@@ -35647,8 +35613,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "stroke-width": 1,
                 "stroke-opacity": 0.2,
                 cursor: "pointer"
-            }
-            ,
+            },
             GUIDE_RECT_AREA: {
                 stroke: "black",
                 fill: "#ffffff",
@@ -35656,20 +35621,16 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "stroke-width": 1,
                 "stroke-opacity": 1,
                 cursor: "pointer"
-            }
-            ,
+            },
             RUBBER_BAND: {
                 stroke: "#0000FF", opacity: 0.2, fill: "#0077FF"
-            }
-            ,
+            },
             DROP_OVER_BBOX: {
                 stroke: "#0077FF", fill: "none", opacity: 0.3, "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             LABEL: {
                 "font-size": 12, "font-color": "black", "fill": "none"
-            }
-            ,
+            },
             LABEL_EDITOR: {
                 position: "absolute",
                 overflow: "visible",
@@ -35677,43 +35638,37 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 "text-align": "center",
                 display: "block",
                 padding: 0
-            }
-            ,
+            },
             COLLAPSE: {
                 stroke: "black",
                 fill: "none",
                 "fill-opacity": 0,
                 cursor: "pointer",
                 "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             COLLAPSE_BBOX: {
                 stroke: "none", fill: "none", "fill-opacity": 0
-            }
-            ,
+            },
             BUTTON: {
                 stroke: "#9FD7FF",
                 fill: "white",
                 "fill-opacity": 0,
                 cursor: "pointer",
                 "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             CONNECT_GUIDE_EVENT_AREA: {
                 stroke: "#ffffff",
                 fill: "none",
                 "fill-opacity": 0,
                 "stroke-width": 20,
                 "stroke-opacity": 0
-            }
-            ,
+            },
             CONNECT_GUIDE_BBOX: {
                 stroke: "#00FF00",
                 fill: "none",
                 "stroke-dasharray": "- ",
                 "shape-rendering": "crispEdges"
-            }
-            ,
+            },
             CONNECT_GUIDE_BBOX_EXPEND: 10,
             CONNECT_GUIDE_SPOT_CIRCLE: {
                 r: 7,
@@ -35722,8 +35677,7 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 fill: "#FFE400",
                 "fill-opacity": 0.5,
                 cursor: "pointer"
-            }
-            ,
+            },
             CONNECT_GUIDE_SPOT_RECT: {
                 stroke: "#A6A6A6",
                 "stroke-width": 1,
@@ -35732,12 +35686,10 @@ OG.graph.Canvas = function (container, containerSize, backgroundColor, backgroun
                 cursor: "ns-resize",
                 w: 20,
                 h: 10
-            }
-            ,
+            },
             CONNECTABLE_HIGHLIGHT: {
                 "stroke-width": 2
-            }
-            ,
+            },
             NOT_CONNECTABLE_HIGHLIGHT: {
                 fill: "#FAAFBE",
                 "fill-opacity": 0.5
@@ -36247,8 +36199,7 @@ OG.graph.Canvas.prototype = {
         var sliderBar = slider.find('.scaleSlider');
         sliderText.html(Math.round(this._CONFIG.SCALE * 100));
         sliderBar.val(Math.round(this._CONFIG.SCALE * 100));
-    }
-    ,
+    },
     updateSlider: function (val) {
         if (this._CONFIG.AUTO_SLIDER_UPDATE && !this._CONFIG.FAST_LOADING) {
             var me = this;
@@ -36368,8 +36319,7 @@ OG.graph.Canvas.prototype = {
                 }
             }
         }
-    }
-    ,
+    },
     /**
      * 확대 축소 슬라이더를 삭제한다.
      */
@@ -36378,8 +36328,7 @@ OG.graph.Canvas.prototype = {
             this._CONFIG.SLIDER.dialog("destroy");
             this._CONFIG.SLIDER.remove();
         }
-    }
-    ,
+    },
 
     /**
      * Shape 을 캔버스에 위치 및 사이즈 지정하여 드로잉한다.
@@ -36431,8 +36380,7 @@ OG.graph.Canvas.prototype = {
         }
         this.updateSlider();
         return element;
-    }
-    ,
+    },
 
     /**
      * Transfomer Shape 을 캔버스에 위치 및 사이즈 지정하여 드로잉한다.
@@ -36498,18 +36446,15 @@ OG.graph.Canvas.prototype = {
         if (!id) {
             this._RENDERER.addHistory();
         }
-    }
-    ,
+    },
 
     setExceptionType: function (element, exceptionType) {
         this._HANDLER.setExceptionType(element, exceptionType);
-    }
-    ,
+    },
 
     setInclusion: function (element, inclusion) {
         this._HANDLER.setInclusion(element, inclusion);
-    }
-    ,
+    },
 
     /**
      * Shape 의 스타일을 변경한다.
@@ -36519,8 +36464,7 @@ OG.graph.Canvas.prototype = {
      */
     setShapeStyle: function (shapeElement, style) {
         this._RENDERER.setShapeStyle(shapeElement, style);
-    }
-    ,
+    },
 
     /**
      * Shape 의 선 연결 커스텀 컨트롤러를 설정한다.
@@ -36530,8 +36474,7 @@ OG.graph.Canvas.prototype = {
      */
     setTextListInController: function (shapeElement, textList) {
         this._RENDERER.setTextListInController(shapeElement, textList);
-    }
-    ,
+    },
 
     /**
      * Shape 의 선 연결 커스텀 컨트롤러를 가져온다.
@@ -36540,8 +36483,7 @@ OG.graph.Canvas.prototype = {
      */
     getTextListInController: function (shapeElement) {
         this._RENDERER.getTextListInController(shapeElement);
-    }
-    ,
+    },
 
     /**
      * Shape 의 Label 을 캔버스에 위치 및 사이즈 지정하여 드로잉한다.
@@ -36554,8 +36496,7 @@ OG.graph.Canvas.prototype = {
      */
     drawLabel: function (shapeElement, text, style) {
         return this._RENDERER.drawLabel(shapeElement, text, style);
-    }
-    ,
+    },
 
     /**
      * Shape 의 연결된 Edge 를 redraw 한다.(이동 또는 리사이즈시)
@@ -36564,8 +36505,7 @@ OG.graph.Canvas.prototype = {
      */
     redrawConnectedEdge: function (element) {
         this._RENDERER.redrawConnectedEdge(element);
-    }
-    ,
+    },
 
     /**
      * 연결된 터미널의 vertices 를 초기화한다.
@@ -36576,8 +36516,7 @@ OG.graph.Canvas.prototype = {
      */
     reconnect: function (edge) {
         return this._RENDERER.reconnect(edge);
-    }
-    ,
+    },
 
     /**
      * 두개의 Shape 을 Edge 로 연결한다.
@@ -36640,8 +36579,7 @@ OG.graph.Canvas.prototype = {
         }
         this.updateSlider();
         return edge;
-    }
-    ,
+    },
 
     /**
      * 두개의 터미널 아이디로 부터 얻어진 도형들을 Edge 로 연결한다.
@@ -36706,8 +36644,7 @@ OG.graph.Canvas.prototype = {
         }
         this.updateSlider();
         return edge;
-    }
-    ,
+    },
 
     /**
      * 연결속성정보를 삭제한다. Edge 인 경우는 라인만 삭제하고, 일반 Shape 인 경우는 연결된 모든 Edge 를 삭제한다.
@@ -36716,8 +36653,7 @@ OG.graph.Canvas.prototype = {
      */
     disconnect: function (element) {
         this._RENDERER.disconnect(element);
-    }
-    ,
+    },
     /**
      * 주어진 도형을 신규 아이디로 변경한다.
      * @param element
@@ -36744,8 +36680,7 @@ OG.graph.Canvas.prototype = {
         }
 
         return group;
-    }
-    ,
+    },
 
     /**
      * 주어진 그룹들을 그룹해제한다.
@@ -36755,8 +36690,7 @@ OG.graph.Canvas.prototype = {
      */
     ungroup: function (groupElements) {
         return this._RENDERER.ungroup(groupElements);
-    }
-    ,
+    },
 
     /**
      * 주어진 Shape 들을 그룹에 추가한다.
@@ -36766,8 +36700,7 @@ OG.graph.Canvas.prototype = {
      */
     addToGroup: function (groupElement, elements) {
         this._RENDERER.addToGroup(groupElement, elements);
-    }
-    ,
+    },
 
     /**
      * 주어진 Shape 이 그룹인 경우 collapse 한다.
@@ -36776,8 +36709,7 @@ OG.graph.Canvas.prototype = {
      */
     collapse: function (element) {
         this._RENDERER.collapse(element);
-    }
-    ,
+    },
 
     /**
      * 주어진 Shape 이 그룹인 경우 expand 한다.
@@ -36786,16 +36718,14 @@ OG.graph.Canvas.prototype = {
      */
     expand: function (element) {
         this._RENDERER.expand(element);
-    }
-    ,
+    },
 
     /**
      * 드로잉된 모든 오브젝트를 클리어한다.
      */
     clear: function () {
         this._RENDERER.clear();
-    }
-    ,
+    },
 
     /**
      * Shape 을 캔버스에서 관련된 모두를 삭제한다.
@@ -36804,8 +36734,7 @@ OG.graph.Canvas.prototype = {
      */
     removeShape: function (element, preventEvent) {
         this._RENDERER.removeShape(element, preventEvent);
-    }
-    ,
+    },
 
     /**
      * 하위 엘리먼트만 제거한다.
@@ -36814,8 +36743,7 @@ OG.graph.Canvas.prototype = {
      */
     removeChild: function (element) {
         this._RENDERER.removeChild(element);
-    }
-    ,
+    },
 
     /**
      * ID에 해당하는 Element 의 Move & Resize 용 가이드를 제거한다.
@@ -36824,16 +36752,14 @@ OG.graph.Canvas.prototype = {
      */
     removeGuide: function (element) {
         this._RENDERER.removeGuide(element);
-    }
-    ,
+    },
 
     /**
      * 모든 Move & Resize 용 가이드를 제거한다.
      */
     removeAllGuide: function () {
         this._RENDERER.removeAllGuide();
-    }
-    ,
+    },
 
     /**
      * 랜더러 캔버스 Root Element 를 반환한다.
@@ -36842,8 +36768,7 @@ OG.graph.Canvas.prototype = {
      */
     getRootElement: function () {
         return this._RENDERER.getRootElement();
-    }
-    ,
+    },
 
     /**
      * 랜더러 캔버스 Root Group Element 를 반환한다.
@@ -36852,8 +36777,7 @@ OG.graph.Canvas.prototype = {
      */
     getRootGroup: function () {
         return this._RENDERER.getRootGroup();
-    }
-    ,
+    },
 
     /**
      * 주어진 지점을 포함하는 Top Element 를 반환한다.
@@ -36863,8 +36787,7 @@ OG.graph.Canvas.prototype = {
      */
     getElementByPoint: function (position) {
         return this._RENDERER.getElementByPoint(position);
-    }
-    ,
+    },
 
     /**
      * 주어진 Boundary Box 영역에 포함되는 Shape(GEOM, TEXT, IMAGE) Element 를 반환한다.
@@ -36875,8 +36798,7 @@ OG.graph.Canvas.prototype = {
      */
     getElementsByBBox: function (envelope) {
         return this._RENDERER.getElementsByBBox(envelope);
-    }
-    ,
+    },
 
     /**
      * 엘리먼트에 속성값을 설정한다.
@@ -36886,8 +36808,7 @@ OG.graph.Canvas.prototype = {
      */
     setAttr: function (element, attribute) {
         this._RENDERER.setAttr(element, attribute);
-    }
-    ,
+    },
 
     /**
      * 엘리먼트 속성값을 반환한다.
@@ -36898,8 +36819,7 @@ OG.graph.Canvas.prototype = {
      */
     getAttr: function (element, attrName) {
         return this._RENDERER.getAttr(element, attrName);
-    }
-    ,
+    },
 
     /**
      * ID에 해당하는 Element 를 최상단 레이어로 이동한다.
@@ -36908,8 +36828,7 @@ OG.graph.Canvas.prototype = {
      */
     toFront: function (element) {
         this._RENDERER.toFront(element);
-    }
-    ,
+    },
 
     /**
      * ID에 해당하는 Element 를 최하단 레이어로 이동한다.
@@ -36918,8 +36837,7 @@ OG.graph.Canvas.prototype = {
      */
     toBack: function (element) {
         this._RENDERER.toBack(element);
-    }
-    ,
+    },
 
     /**
      * ID에 해당하는 Element 를 앞으로 한단계 이동한다.
@@ -36946,8 +36864,7 @@ OG.graph.Canvas.prototype = {
      */
     getCanvasSize: function () {
         return this._RENDERER.getCanvasSize();
-    }
-    ,
+    },
 
     /**
      * 랜더러 캔버스의 사이즈(Width, Height)를 변경한다.
@@ -36956,8 +36873,7 @@ OG.graph.Canvas.prototype = {
      */
     setCanvasSize: function (size) {
         this._RENDERER.setCanvasSize(size);
-    }
-    ,
+    },
 
     /**
      * 랜더러 캔버스의 사이즈(Width, Height)를 실제 존재하는 Shape 의 영역에 맞게 변경한다.
@@ -36967,8 +36883,7 @@ OG.graph.Canvas.prototype = {
      */
     fitCanvasSize: function (minSize, fitScale) {
         this._RENDERER.fitCanvasSize(minSize, fitScale);
-    }
-    ,
+    },
 
     /**
      * 새로운 View Box 영역을 설정한다. (ZoomIn & ZoomOut 가능)
@@ -36979,8 +36894,7 @@ OG.graph.Canvas.prototype = {
      */
     setViewBox: function (position, size, isFit) {
         this._RENDERER.setViewBox(position, size, isFit);
-    }
-    ,
+    },
 
     /**
      * Scale 을 반환한다. (리얼 사이즈 : Scale = 1)
@@ -36989,8 +36903,7 @@ OG.graph.Canvas.prototype = {
      */
     getScale: function () {
         return this._RENDERER.getScale();
-    }
-    ,
+    },
 
     /**
      * Scale 을 설정한다. (리얼 사이즈 : Scale = 1)
@@ -36999,8 +36912,7 @@ OG.graph.Canvas.prototype = {
      */
     setScale: function (scale) {
         this._RENDERER.setScale(scale);
-    }
-    ,
+    },
 
     /**
      * ID에 해당하는 Element 를 캔버스에서 show 한다.
@@ -37009,8 +36921,7 @@ OG.graph.Canvas.prototype = {
      */
     show: function (element) {
         this._RENDERER.show(element);
-    }
-    ,
+    },
 
     /**
      * ID에 해당하는 Element 를 캔버스에서 hide 한다.
@@ -37019,8 +36930,7 @@ OG.graph.Canvas.prototype = {
      */
     hide: function (element) {
         this._RENDERER.hide(element);
-    }
-    ,
+    },
 
     /**
      * Source Element 를 Target Element 아래에 append 한다.
@@ -37031,8 +36941,7 @@ OG.graph.Canvas.prototype = {
      */
     appendChild: function (srcElement, targetElement) {
         return this._RENDERER.appendChild(srcElement, targetElement);
-    }
-    ,
+    },
 
     /**
      * Source Element 를 Target Element 이후에 insert 한다.
@@ -37043,8 +36952,7 @@ OG.graph.Canvas.prototype = {
      */
     insertAfter: function (srcElement, targetElement) {
         return this._RENDERER.insertAfter(srcElement, targetElement);
-    }
-    ,
+    },
 
     /**
      * Source Element 를 Target Element 이전에 insert 한다.
@@ -37055,8 +36963,7 @@ OG.graph.Canvas.prototype = {
      */
     insertBefore: function (srcElement, targetElement) {
         return this._RENDERER.insertBefore(srcElement, targetElement);
-    }
-    ,
+    },
 
     /**
      * 해당 Element 를 가로, 세로 Offset 만큼 이동한다.
@@ -37067,8 +36974,7 @@ OG.graph.Canvas.prototype = {
      */
     move: function (element, offset) {
         return this._RENDERER.move(element, offset);
-    }
-    ,
+    },
 
     /**
      * 주어진 중심좌표로 해당 Element 를 이동한다.
@@ -37079,8 +36985,7 @@ OG.graph.Canvas.prototype = {
      */
     moveCentroid: function (element, position) {
         return this._RENDERER.moveCentroid(element, position);
-    }
-    ,
+    },
 
     /**
      * 중심 좌표를 기준으로 주어진 각도 만큼 회전한다.
@@ -37091,8 +36996,7 @@ OG.graph.Canvas.prototype = {
      */
     rotate: function (element, angle) {
         return this._RENDERER.rotate(element, angle);
-    }
-    ,
+    },
 
     /**
      * 상, 하, 좌, 우 외곽선을 이동한 만큼 리사이즈 한다.
@@ -37103,8 +37007,7 @@ OG.graph.Canvas.prototype = {
      */
     resize: function (element, offset, preventEvent) {
         return this._RENDERER.resize(element, offset, preventEvent);
-    }
-    ,
+    },
 
     /**
      * 중심좌표는 고정한 채 Bounding Box 의 width, height 를 리사이즈 한다.
@@ -37115,8 +37018,7 @@ OG.graph.Canvas.prototype = {
      */
     resizeBox: function (element, size, preventEvent) {
         return this._RENDERER.resizeBox(element, size, preventEvent);
-    }
-    ,
+    },
 
     /**
      * 노드 Element 를 복사한다.
@@ -37126,8 +37028,7 @@ OG.graph.Canvas.prototype = {
      */
     clone: function (element) {
         return this._RENDERER.clone(element);
-    }
-    ,
+    },
 
     /**
      * ID에 해당하는 Element 의 바운더리 영역을 리턴한다.
@@ -37147,8 +37048,7 @@ OG.graph.Canvas.prototype = {
      */
     getElementById: function (id) {
         return this._RENDERER.getElementById(id);
-    }
-    ,
+    },
 
     /**
      * Shape 타입에 해당하는 Node Element 들을 반환한다.
@@ -37159,8 +37059,7 @@ OG.graph.Canvas.prototype = {
      */
     getElementsByType: function (shapeType, excludeType) {
         return this._RENDERER.getElementsByType(shapeType, excludeType);
-    }
-    ,
+    },
 
     /**
      * Shape ID에 해당하는 Node Element 들을 반환한다.
@@ -37171,8 +37070,7 @@ OG.graph.Canvas.prototype = {
     getElementsByShapeId: function (shapeId) {
         var root = this.getRootGroup();
         return $(root).find("[_type=SHAPE][_shape_id='" + shapeId + "']");
-    }
-    ,
+    },
 
     /**
      * 두 도형 사이의 연결된 Edge 를 반환한다.
@@ -37212,8 +37110,7 @@ OG.graph.Canvas.prototype = {
                 to: null
             };
         }
-    }
-    ,
+    },
     /**
      * 부모 엘리먼트를 반환한다. 부모가 루트일때는 반환하지 않는다.
      *
@@ -37260,8 +37157,7 @@ OG.graph.Canvas.prototype = {
      */
     getBBox: function (element) {
         return this._RENDERER.getBBox(element);
-    }
-    ,
+    },
 
     /**
      * 부모노드기준으로 캔버스 루트 엘리먼트의 BoundingBox 영역 정보를 반환한다.
@@ -37270,8 +37166,7 @@ OG.graph.Canvas.prototype = {
      */
     getRootBBox: function () {
         return this._RENDERER.getRootBBox();
-    }
-    ,
+    },
 
     /**
      * 부모노드기준으로 캔버스 루트 엘리먼트의 실제 Shape 이 차지하는 BoundingBox 영역 정보를 반환한다.
@@ -37280,8 +37175,7 @@ OG.graph.Canvas.prototype = {
      */
     getRealRootBBox: function () {
         return this._RENDERER.getRealRootBBox();
-    }
-    ,
+    },
 
     /**
      * SVG 인지 여부를 반환한다.
@@ -37290,8 +37184,7 @@ OG.graph.Canvas.prototype = {
      */
     isSVG: function () {
         return this._RENDERER.isSVG();
-    }
-    ,
+    },
 
     /**
      * VML 인지 여부를 반환한다.
@@ -37300,8 +37193,7 @@ OG.graph.Canvas.prototype = {
      */
     isVML: function () {
         return this._RENDERER.isVML();
-    }
-    ,
+    },
 
     /**
      * 주어진 Shape 엘리먼트에 커스텀 데이타를 저장한다.
@@ -37315,8 +37207,7 @@ OG.graph.Canvas.prototype = {
 
         //도형의 shape 에 데이터를 저장한다.
         element.shape.data = data;
-    }
-    ,
+    },
 
     /**
      * 주어진 Shape 엘리먼트에 저장된 커스텀 데이터를 반환한다.
@@ -37331,8 +37222,7 @@ OG.graph.Canvas.prototype = {
             element.data = element.shape.data;
         }
         return element.data;
-    }
-    ,
+    },
 
     /**
      * 주어진 Shape 엘리먼트에 확장 커스텀 데이타를 저장한다.
@@ -37343,8 +37233,7 @@ OG.graph.Canvas.prototype = {
     setExtCustomData: function (shapeElement, data) {
         var element = OG.Util.isElement(shapeElement) ? shapeElement : document.getElementById(shapeElement);
         element.dataExt = data;
-    }
-    ,
+    },
 
     /**
      * 주어진 Shape 엘리먼트에 저장된 확장 커스텀 데이터를 반환한다.
@@ -37355,8 +37244,7 @@ OG.graph.Canvas.prototype = {
     getExtCustomData: function (shapeElement) {
         var element = OG.Util.isElement(shapeElement) ? shapeElement : document.getElementById(shapeElement);
         return element.dataExt;
-    }
-    ,
+    },
 
     /**
      * 주어진 Shape 엘리먼트에 커스텀 컨텍스트 메뉴를 지정한다.
@@ -37379,8 +37267,7 @@ OG.graph.Canvas.prototype = {
     getCustomContextMenu: function (shapeElement) {
         var element = OG.Util.isElement(shapeElement) ? shapeElement : document.getElementById(shapeElement);
         return element.shape.customContextMenu;
-    }
-    ,
+    },
 
     /**
      *    Canvas 에 그려진 Shape 들을 OpenGraph XML 문자열로 export 한다.
@@ -37389,8 +37276,7 @@ OG.graph.Canvas.prototype = {
      */
     toXML: function () {
         return OG.Util.jsonToXml(this.toJSON());
-    }
-    ,
+    },
 
     /**
      * Canvas 에 그려진 Shape 들을 OpenGraph JSON 객체로 export 한다.
@@ -37553,8 +37439,7 @@ OG.graph.Canvas.prototype = {
         //root check
         childShape(rootGroup, true);
         return jsonObj;
-    }
-    ,
+    },
 
     /**
      * OpenGraph XML 문자열로 부터 Shape 을 드로잉한다.
@@ -37567,28 +37452,23 @@ OG.graph.Canvas.prototype = {
             xml = OG.Util.parseXML(xml);
         }
         return this.loadJSON(OG.Util.xmlToJson(xml));
-    }
-    ,
+    },
 
     alignLeft: function () {
         this._RENDERER.alignLeft();
-    }
-    ,
+    },
 
     alignRight: function () {
         this._RENDERER.alignRight();
-    }
-    ,
+    },
 
     alignTop: function () {
         this._RENDERER.alignTop();
-    }
-    ,
+    },
 
     alignBottom: function () {
         this._RENDERER.alignBottom();
-    }
-    ,
+    },
 
     /**
      * JSON 객체로 부터 Shape 을 드로잉한다.
@@ -37818,24 +37698,21 @@ OG.graph.Canvas.prototype = {
             x2: 0,
             y2: 0
         };
-    }
-    ,
+    },
 
     /**
      * 캔버스 undo.
      */
     undo: function () {
         this._RENDERER.undo();
-    }
-    ,
+    },
 
     /**
      * 캔버스 redo.
      */
     redo: function () {
         this._RENDERER.redo();
-    }
-    ,
+    },
 
     /**
      * 연결된 이전 Edge Element 들을 반환한다.
@@ -37845,8 +37722,7 @@ OG.graph.Canvas.prototype = {
      */
     getPrevEdges: function (element) {
         return this._RENDERER.getPrevEdges(element);
-    }
-    ,
+    },
 
     /**
      * 연결된 이후 Edge Element 들을 반환한다.
@@ -37856,8 +37732,7 @@ OG.graph.Canvas.prototype = {
      */
     getNextEdges: function (element) {
         return this._RENDERER.getNextEdges(element);
-    }
-    ,
+    },
 
     /**
      * 연결된 이전 노드 Element 들을 반환한다.
@@ -37867,8 +37742,7 @@ OG.graph.Canvas.prototype = {
      */
     getPrevShapes: function (element) {
         return this._RENDERER.getPrevShapes(element);
-    }
-    ,
+    },
 
     /**
      * 연결된 이전 노드 Element ID들을 반환한다.
@@ -37878,8 +37752,7 @@ OG.graph.Canvas.prototype = {
      */
     getPrevShapeIds: function (element) {
         return this._RENDERER.getPrevShapeIds(element);
-    }
-    ,
+    },
 
     /**
      * 연결된 이후 노드 Element 들을 반환한다.
@@ -37889,8 +37762,7 @@ OG.graph.Canvas.prototype = {
      */
     getNextShapes: function (element) {
         return this._RENDERER.getNextShapes(element);
-    }
-    ,
+    },
 
     /**
      * 연결된 이후 노드 Element ID들을 반환한다.
@@ -37900,8 +37772,7 @@ OG.graph.Canvas.prototype = {
      */
     getNextShapeIds: function (element) {
         return this._RENDERER.getNextShapeIds(element);
-    }
-    ,
+    },
 
     /**
      * Shape 이 처음 Draw 되었을 때의 이벤트 리스너
@@ -37912,8 +37783,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('drawShape', function (event, shapeElement) {
             callbackFunc(event, shapeElement);
         });
-    }
-    ,
+    },
 
     /**
      * History Update 되었을때의 이벤트 리스너
@@ -37935,8 +37805,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('undo', function (event) {
             callbackFunc(event);
         });
-    }
-    ,
+    },
 
     /**
      * Redo 되었을때의 이벤트 리스너
@@ -37947,8 +37816,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('redo', function (event) {
             callbackFunc(event);
         });
-    }
-    ,
+    },
 
     /**
      * Lane 이 divide 되었을 때의 이벤트 리스너
@@ -37959,8 +37827,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('divideLane', function (event, dividedLane) {
             callbackFunc(event, dividedLane);
         });
-    }
-    ,
+    },
 
     /**
      * 라벨이 Draw 되었을 때의 이벤트 리스너
@@ -37971,8 +37838,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('drawLabel', function (event, shapeElement, labelText) {
             callbackFunc(event, shapeElement, labelText);
         })
-    }
-    ,
+    },
 
     /**
      * 라벨이 Change 되었을 때의 이벤트 리스너
@@ -37983,8 +37849,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('labelChanged', function (event, shapeElement, afterText, beforeText) {
             callbackFunc(event, shapeElement, afterText, beforeText);
         });
-    }
-    ,
+    },
 
     /**
      * 라벨이 Change 되기전 이벤트 리스너
@@ -37997,8 +37862,7 @@ OG.graph.Canvas.prototype = {
                 event.stopPropagation();
             }
         });
-    }
-    ,
+    },
 
     /**
      * Shape 이 Redraw 되었을 때의 이벤트 리스너
@@ -38009,8 +37873,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('redrawShape', function (event, shapeElement) {
             callbackFunc(event, shapeElement);
         });
-    }
-    ,
+    },
 
     /**
      * Shape 이 Remove 될 때의 이벤트 리스너
@@ -38021,8 +37884,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('removeShape', function (event, shapeElement) {
             callbackFunc(event, shapeElement);
         });
-    }
-    ,
+    },
 
     /**
      * Shape 이 Rotate 될 때의 이벤트 리스너
@@ -38033,8 +37895,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('rotateShape', function (event, element, angle) {
             callbackFunc(event, element, angle);
         });
-    }
-    ,
+    },
 
     /**
      * Shape 이 Move 되었을 때의 이벤트 리스너
@@ -38045,8 +37906,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('moveShape', function (event, shapeElement, offset) {
             callbackFunc(event, shapeElement, offset);
         });
-    }
-    ,
+    },
 
     /**
      * Shape 이 Resize 되었을 때의 이벤트 리스너
@@ -38057,8 +37917,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('resizeShape', function (event, shapeElement, offset) {
             callbackFunc(event, shapeElement, offset);
         });
-    }
-    ,
+    },
 
     /**
      * Shape 이 Connect 되기전 이벤트 리스너
@@ -38071,8 +37930,7 @@ OG.graph.Canvas.prototype = {
                 event.stopPropagation();
             }
         });
-    }
-    ,
+    },
 
     /**
      * Shape 이 Remove 되기전 이벤트 리스너
@@ -38085,8 +37943,7 @@ OG.graph.Canvas.prototype = {
                 event.stopPropagation();
             }
         });
-    }
-    ,
+    },
 
     /**
      * Shape 이 Connect 되었을 때의 이벤트 리스너
@@ -38097,8 +37954,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('connectShape', function (event, edgeElement, fromElement, toElement) {
             callbackFunc(event, edgeElement, fromElement, toElement);
         });
-    }
-    ,
+    },
 
     /**
      * Shape 이 Disconnect 되었을 때의 이벤트 리스너
@@ -38109,8 +37965,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('disconnectShape', function (event, edgeElement, fromElement, toElement) {
             callbackFunc(event, edgeElement, fromElement, toElement);
         });
-    }
-    ,
+    },
 
     /**
      * Shape 이 Grouping 되었을 때의 이벤트 리스너
@@ -38121,8 +37976,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('group', function (event, groupElement) {
             callbackFunc(event, groupElement);
         });
-    }
-    ,
+    },
 
     /**
      * Shape 이 UnGrouping 되었을 때의 이벤트 리스너
@@ -38133,8 +37987,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('ungroup', function (event, ungroupedElements) {
             callbackFunc(event, ungroupedElements);
         });
-    }
-    ,
+    },
 
     /**
      * Group 이 Collapse 되었을 때의 이벤트 리스너
@@ -38145,8 +37998,7 @@ OG.graph.Canvas.prototype = {
         $(this.getRootElement()).bind('collapsed', function (event, element) {
             callbackFunc(event, element);
         });
-    }
-    ,
+    },
 
     /**
      * Group 이 Expand 되었을 때의 이벤트 리스너
