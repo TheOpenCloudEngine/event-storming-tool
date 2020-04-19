@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{name}}
+  labels:
+    app: {{name}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{name}}
+  template:
+    metadata:
+      labels:
+        app: {{name}}
+    spec:
+      containers:
+        - name: command-handler
+          image: username/{{name}}-command-handler:latest
+          ports:
+            - containerPort: {{portGenerated}}
+        - name: policy-handler
+          image: username/{{name}}-policy-handler:latest

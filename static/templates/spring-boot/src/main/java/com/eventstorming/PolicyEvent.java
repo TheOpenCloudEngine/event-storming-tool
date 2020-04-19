@@ -2,9 +2,8 @@ forEach: RelationEventInfo
 fileName: {{eventValue.namePascalCase}}.java
 path: {{boundedContext.name}}/{{{options.packagePath}}}
 ---
-{{#eventValue}}
-package {{options.package}};
 
+package {{options.package}};
 
 public class {{eventValue.namePascalCase}} extends AbstractEvent {
 
@@ -22,4 +21,3 @@ public class {{eventValue.namePascalCase}} extends AbstractEvent {
     }
 {{/eventValue.fieldDescriptors}}
 }
-{{/eventValue}}
