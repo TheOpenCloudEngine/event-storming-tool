@@ -26,7 +26,7 @@ public class {{namePascalCase}} {
     {{#events}}
         {{namePascalCase}} {{nameCamelCase}} = new {{namePascalCase}}();
         BeanUtils.copyProperties(this, {{nameCamelCase}});
-        {{nameCamelCase}}.publish();
+        {{nameCamelCase}}.publishAfterCommit();
 
         {{#relationCommandInfo}}
         {{#commandValue}}

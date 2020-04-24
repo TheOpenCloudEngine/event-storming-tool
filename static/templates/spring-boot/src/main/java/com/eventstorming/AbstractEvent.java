@@ -37,9 +37,6 @@ public class AbstractEvent {
         return json;
     }
 
-    public void publish(){
-        this.publish(this.toJson());
-    }
     public void publish(String json){
         if( json != null ){
 
@@ -55,6 +52,20 @@ public class AbstractEvent {
                     .build());
 
         }
+    }
+
+    public void publish(){
+        this.publish(this.toJson());
+    }
+
+    public void publishAfterCommit(){
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+
+            @Override
+            public void afterCompletion(int status) {
+                AbstractEvent.this.publish();
+            }
+        });
     }
 
 
