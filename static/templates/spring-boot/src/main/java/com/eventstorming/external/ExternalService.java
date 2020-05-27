@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Date;
 
-/**
- * Created by uengine on 2018. 11. 21..
- */
-
 @FeignClient(name="{{commandValue.aggregate.boundedContext.name}}", url="http://{{commandValue.aggregate.boundedContext.name}}:8080")
 public interface {{commandValue.aggregate.namePascalCase}}Service {
 

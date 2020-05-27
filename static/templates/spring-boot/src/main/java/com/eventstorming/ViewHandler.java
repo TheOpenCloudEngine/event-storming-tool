@@ -30,7 +30,7 @@ public class {{namePascalCase}}ViewHandler {
                 {{namePascalCase}} {{nameCamelCase}} = new {{namePascalCase}}();
                 // view 객체에 이벤트의 Value 를 set 함
             {{#fieldMapping}}
-                {{nameCamelCase}}.set{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+                {{nameCamelCase}}.set{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}}());
             {{/fieldMapping}}
                 // view 레파지 토리에 save
                 {{nameCamelCase}}Repository.save({{nameCamelCase}});
@@ -50,23 +50,23 @@ public class {{namePascalCase}}ViewHandler {
                 // view 객체 조회
         {{#where}}
             {{#viewField.isKey}}
-                Optional<{{namePascalCase}}> {{nameCamelCase}}Optional = {{nameCamelCase}}Repository.findBy{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+                Optional<{{namePascalCase}}> {{nameCamelCase}}Optional = {{nameCamelCase}}Repository.findBy{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}}());
                 if( {{nameCamelCase}}Optional.isPresent()) {
                     {{namePascalCase}} {{nameCamelCase}} = {{nameCamelCase}}Optional.get();
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
                     {{#fieldMapping}}
-                    {{nameCamelCase}}.set{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+                    {{nameCamelCase}}.set{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}}());
                     {{/fieldMapping}}
                     // view 레파지 토리에 save
                     {{nameCamelCase}}Repository.save({{nameCamelCase}});
                 }
             {{/viewField.isKey}}
             {{^viewField.isKey}}
-                List<{{namePascalCase}}> {{nameCamelCase}}List = {{nameCamelCase}}Repository.findBy{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+                List<{{namePascalCase}}> {{nameCamelCase}}List = {{nameCamelCase}}Repository.findBy{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}}());
                 for({{namePascalCase}} {{nameCamelCase}} : {{nameCamelCase}}List){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
                 {{#fieldMapping}}
-                    {{nameCamelCase}}.set{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+                    {{nameCamelCase}}.set{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}}());
                 {{/fieldMapping}}
                     // view 레파지 토리에 save
                     {{nameCamelCase}}Repository.save({{nameCamelCase}});
@@ -88,10 +88,10 @@ public class {{namePascalCase}}ViewHandler {
         {{#where}}
                 // view 레파지 토리에 삭제 쿼리
             {{#viewField.isKey}}
-                {{nameCamelCase}}Repository.deleteById({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+                {{nameCamelCase}}Repository.deleteById({{when.nameCamelCase}}.get{{eventField.namePascalCase}}());
             {{/viewField.isKey}}
             {{^viewField.isKey}}
-                {{nameCamelCase}}Repository.deleteBy{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}});
+                {{nameCamelCase}}Repository.deleteBy{{viewField.namePascalCase}}({{when.nameCamelCase}}.get{{eventField.namePascalCase}}());
             {{/viewField.isKey}}
         {{/where}}
             }
