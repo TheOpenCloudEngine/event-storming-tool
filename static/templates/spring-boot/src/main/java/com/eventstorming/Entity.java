@@ -35,7 +35,7 @@ public class {{namePascalCase}} {
 
         {{options.package}}.external.{{aggregate.namePascalCase}} {{aggregate.nameCamelCase}} = new {{options.package}}.external.{{aggregate.namePascalCase}}();
         // mappings goes here
-        Application.applicationContext.getBean({{options.package}}.external.{{aggregate.namePascalCase}}Service.class)
+        {{relationCommandInfo.boundedContext.namePascalCase}}Application.applicationContext.getBean({{options.package}}.external.{{aggregate.namePascalCase}}Service.class)
             .{{nameCamelCase}}({{aggregate.nameCamelCase}});
 
         {{/commandValue}}

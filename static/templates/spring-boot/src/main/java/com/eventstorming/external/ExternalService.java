@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Date;
 
-@FeignClient(name="{{commandValue.aggregate.boundedContext.name}}", url="http://{{commandValue.aggregate.boundedContext.name}}:8080")
+@FeignClient(name="{{commandValue.boundedContext.name}}", url="http://{{commandValue.boundedContext.name}}:8080")
 public interface {{commandValue.aggregate.namePascalCase}}Service {
 
     @RequestMapping(method= RequestMethod.{{commandValue.restRepositoryInfo.method}}, path="/{{commandValue.aggregate.namePlural}}")

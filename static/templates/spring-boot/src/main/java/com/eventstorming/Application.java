@@ -1,4 +1,5 @@
 path: {{name}}/{{{options.packagePath}}}
+fileName: {{namePascalCase}}Application.java
 ---
 package {{options.package}};
 import {{options.package}}.config.kafka.KafkaProcessor;
@@ -12,9 +13,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableBinding(KafkaProcessor.class)
 @EnableFeignClients
-public class Application {
+public class {{namePascalCase}}Application {
     protected static ApplicationContext applicationContext;
     public static void main(String[] args) {
-        applicationContext = SpringApplication.run(Application.class, args);
+        applicationContext = SpringApplication.run({{namePascalCase}}Application.class, args);
     }
 }

@@ -12,7 +12,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PolicyHandler{
-    {{ policies.toString() }}
+    @StreamListener(KafkaProcessor.INPUT)
+    public void onStringEventListener(@Payload String eventString){
+
+    }
+
     {{#policies}}
         {{#relationEventInfo}}
     @StreamListener(KafkaProcessor.INPUT)

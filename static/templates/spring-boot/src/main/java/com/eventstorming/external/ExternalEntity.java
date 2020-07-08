@@ -7,21 +7,18 @@ package {{options.package}}.external;
 {{#commandValue.aggregate}}
 public class {{namePascalCase}} {
 
-    {{#fieldDescriptors}}
+    {{#aggregateRoot.fieldDescriptors}}
     private {{className}} {{nameCamelCase}};
-    {{/fieldDescriptors}}
+    {{/aggregateRoot.fieldDescriptors}}
 
-
-{{#fieldDescriptors}}
+{{#aggregateRoot.fieldDescriptors}}
     public {{className}} get{{namePascalCase}}() {
         return {{nameCamelCase}};
     }
-
     public void set{{namePascalCase}}({{className}} {{nameCamelCase}}) {
         this.{{nameCamelCase}} = {{nameCamelCase}};
     }
-{{/fieldDescriptors}}
+{{/aggregateRoot.fieldDescriptors}}
 
 }
-
 {{/commandValue.aggregate}}
