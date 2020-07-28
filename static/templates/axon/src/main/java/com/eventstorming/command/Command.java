@@ -1,4 +1,4 @@
-forEach: Event
+forEach: Command
 fileName: {{namePascalCase}}Command.java
 path: {{boundedContext.name}}/{{{options.packagePath}}}/command
 ---
@@ -6,18 +6,16 @@ package {{options.package}}.command;
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
-import {{options.package}}.*;
-
 public class {{namePascalCase}}Command {
 
-    {{#fieldDescriptors}}
+    {{#aggregate.aggregateRoot.fieldDescriptors}}
     {{#isKey}}
     @TargetAggregateIdentifier
     {{/isKey}}
     private {{className}} {{nameCamelCase}};
-    {{/fieldDescriptors}}
+    {{/aggregate.aggregateRoot.fieldDescriptors}}
 
-    {{#fieldDescriptors}}
+    {{#aggregate.aggregateRoot.fieldDescriptors}}
     public {{className}} get{{namePascalCase}}() {
         return {{nameCamelCase}};
     }
@@ -25,5 +23,5 @@ public class {{namePascalCase}}Command {
     public void set{{namePascalCase}}({{className}} {{nameCamelCase}}) {
         this.{{nameCamelCase}} = {{nameCamelCase}};
     }
-    {{/fieldDescriptors}}
+    {{/aggregate.aggregateRoot.fieldDescriptors}}
 }

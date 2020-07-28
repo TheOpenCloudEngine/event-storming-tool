@@ -35988,7 +35988,7 @@ OG.graph.Canvas.prototype = {
         var sliderParent;
         var expandBtn;
         var container = me._CONTAINER;
-        console.log(container)
+        // console.log(container)
         if (!option.slider) {
             return;
         }
@@ -36045,7 +36045,9 @@ OG.graph.Canvas.prototype = {
         sliderText = $('<div class="scaleSliderText"></div>');
         sliderBar = $('<input type="range" min="25" max="175" class="scaleSlider"/>');
         sliderBar.bind('change', function () {
+
             me.updateSlider($(this).val());
+            // me.updateSlider(option.sliderLocation);
         });
         sliderBar.bind('input', function () {
             me.updateSlider($(this).val());
@@ -36193,6 +36195,9 @@ OG.graph.Canvas.prototype = {
         this._CONFIG.SLIDER = slider;
 
         //슬라이더 업데이트
+        if(option.sliderLocationScale){
+            this._CONFIG.SCALE = option.sliderLocationScale
+        }
         this.updateSlider(this._CONFIG.SCALE * 100);
     },
 
@@ -36244,6 +36249,7 @@ OG.graph.Canvas.prototype = {
             if (!this._CONFIG.SLIDER) {
                 return;
             }
+            // console.log('updateSlider:: ',val, this._CONFIG.SCALE)
             if (!val) {
                 val = this._CONFIG.SCALE * 100;
             }

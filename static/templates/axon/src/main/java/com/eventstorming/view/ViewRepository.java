@@ -9,12 +9,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface {{namePascalCase}}Repository extends CrudRepository<{{namePascalCase}}, Long> {
+public interface {{namePascalCase}}Repository extends CrudRepository<{{namePascalCase}}View, Long> {
 
 {{#updateRules}}
     {{#where}}
     {{^viewField.isKey}}
-    List<{{namePascalCase}}> findBy{{viewField.namePascalCase}}({{viewField.className}} {{viewField.nameCamelCase}});
+    List<{{namePascalCase}}View> findBy{{viewField.namePascalCase}}({{viewField.className}} {{viewField.nameCamelCase}});
     {{/viewField.isKey}}
     {{/where}}
 {{/updateRules}}

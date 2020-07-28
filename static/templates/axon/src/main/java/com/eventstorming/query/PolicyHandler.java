@@ -21,8 +21,6 @@ import {{options.package}}.aggregate.*;
 @ProcessingGroup("{{nameCamelCase}}_Policy")
 public class PolicyHandler{
 
-//    private final Map<Long, Order> {{namePascalCase}}Map = new HashMap<>();
-
     {{#policies}}
         {{#relationEventInfo}}
     @EventHandler

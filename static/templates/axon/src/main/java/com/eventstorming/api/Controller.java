@@ -41,12 +41,11 @@ public class {{ namePascalCase }}Controller {
   public void {{nameCamelCase}}(@RequestBody {{aggregate.namePascalCase}}Aggregate {{aggregate.nameCamelCase}})
         throws Exception {
           System.out.println("##### /{{aggregate.nameCamelCase}}/{{nameCamelCase}}  called #####");
-
           // make command
-
+          {{namePascalCase}}Command {{nameCamelCase}} = new {{namePascalCase}}Command();
+          // TODO set attribute
           // send command
-//          commandGateway.send();
-
+          commandGateway.send({{nameCamelCase}});
   }
         {{/isRestRepository}}
 

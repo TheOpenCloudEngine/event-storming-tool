@@ -1,5 +1,5 @@
 forEach: View
-fileName: {{namePascalCase}}.java
+fileName: {{namePascalCase}}View.java
 path: {{boundedContext.name}}/{{{options.packagePath}}}/view
 ---
 package {{options.package}}.view;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name="{{namePascalCase}}_table")
-public class {{namePascalCase}} {
+public class {{namePascalCase}}View {
 
 {{#fieldDescriptors}}
     {{#isKey}}

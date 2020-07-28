@@ -28,13 +28,12 @@ public class {{namePascalCase}}Aggregate {
 
     private {{namePascalCase}}Aggregate(){}
 
-{{#lifeCycles}}
-    {{#events}}
+    {{#commands}}
     @CommandHandler
-    public void on({{namePascalCase}}Command command){
-        {{namePascalCase}}Event {{nameCamelCase}} = new {{namePascalCase}}Event();
-        BeanUtils.copyProperties(command, {{nameCamelCase}});
-        AggregateLifecycle.apply({{nameCamelCase}});
+    public void handle({{namePascalCase}}Command command){
+        // TODO send Event
+        // AggregateLifecycle.apply( Event );
+
         {{#relationCommandInfo}}
         {{#commandValue}}
         //Following code causes dependency to external APIs
@@ -43,20 +42,23 @@ public class {{namePascalCase}}Aggregate {
         {{options.package}}.external.{{aggregate.namePascalCase}} {{aggregate.nameCamelCase}} = new {{options.package}}.external.{{aggregate.namePascalCase}}();
         // mappings goes here
         {{relationCommandInfo.boundedContext.namePascalCase}}Application.applicationContext.getBean({{options.package}}.external.{{aggregate.namePascalCase}}Service.class)
-            .{{nameCamelCase}}({{aggregate.nameCamelCase}});
+        .{{nameCamelCase}}({{aggregate.nameCamelCase}});
 
         {{/commandValue}}
         {{/relationCommandInfo}}
-    }
+        }
+    {{/commands}}
+
+    {{#lifeCycles}}
+        {{#events}}
 
     @EventSourcingHandler
     public void on({{namePascalCase}}Event event) {
         BeanUtils.copyProperties(event, this);
     }
 
-    {{/events}}
-
-{{/lifeCycles}}
+        {{/events}}
+    {{/lifeCycles}}
 
 {{#aggregateRoot.fieldDescriptors}}
     public {{className}} get{{namePascalCase}}() {
