@@ -34143,7 +34143,12 @@ OG.handler.EventHandler.prototype = {
                                 vertices[index].x = newX;
                                 vertices[index].y = newY;
 
-                                console.log('OG vertices:',vertices)
+                                var ele = renderer.getElementById(element.id);
+                                if (ele.customRelationMoveAction) {
+                                    console.log('#### OG vertices:',vertices)
+                                    ele.customRelationMoveAction(vertices);
+                                }
+
                                 renderer.drawEdge(new OG.PolyLine(vertices), element.shape.geom.style, element.id);
 
                                 renderer.removeConnectGuide(element);
