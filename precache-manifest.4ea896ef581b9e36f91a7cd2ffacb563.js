@@ -1,11 +1,15 @@
 self.__precacheManifest = [
   {
-    "revision": "ff90ca5f7eb3325ed9ecd3ca5b03658a",
-    "url": "/static/image/symbol/loop_standard.png"
+    "revision": "2b55547172c6b8c8c461014fc6683c6b",
+    "url": "/static/image/symbol/message_end.png"
   },
   {
     "revision": "1954707995492ed154670d112ae37e3d",
     "url": "/static/lib/opengraph/OpenGraph-0.1.3-SNAPSHOT.js"
+  },
+  {
+    "revision": "5dcde6493bf94dd8eae6493eddb292ee",
+    "url": "/static/slimscroll/jquery.slimscroll.min.js"
   },
   {
     "revision": "5e055714d2c647827907bbf144cf409f",
@@ -16,84 +20,80 @@ self.__precacheManifest = [
     "url": "/static/usericon/019.svg"
   },
   {
-    "revision": "170e420ab5eec30eaf047e23d8824e12",
-    "url": "/static/usericon/022.svg"
-  },
-  {
     "revision": "2f3bb707a82aa3e83be4a0871857791e",
     "url": "/static/usericon/021.svg"
+  },
+  {
+    "revision": "170e420ab5eec30eaf047e23d8824e12",
+    "url": "/static/usericon/022.svg"
   },
   {
     "revision": "bb45f8b350f605d38cc1d81bcd922d5a",
     "url": "/static/usericon/020.svg"
   },
   {
-    "revision": "995de2ba29bec98960a31c2de54e9fdb",
-    "url": "/static/usericon/018.svg"
-  },
-  {
-    "revision": "169046d1ba06b65ac9d6d78ac605cdc8",
-    "url": "/static/usericon/005.svg"
-  },
-  {
     "revision": "82bd4bce7e271b5728055b91378187df",
     "url": "/static/usericon/017.svg"
   },
   {
-    "revision": "81af01770b11d85c27bfca437be3de28",
-    "url": "/static/usericon/016.svg"
+    "revision": "995de2ba29bec98960a31c2de54e9fdb",
+    "url": "/static/usericon/018.svg"
   },
   {
     "revision": "352de8ef46b6fb429194d2a20ca1babd",
     "url": "/static/usericon/015.svg"
   },
   {
-    "revision": "a5067243ab002ce364e388eaec252c74",
-    "url": "/static/usericon/014.svg"
+    "revision": "81af01770b11d85c27bfca437be3de28",
+    "url": "/static/usericon/016.svg"
   },
   {
     "revision": "c5a87f5fb7ce0c6fd3f756aa1d7fb037",
     "url": "/static/usericon/013.svg"
   },
   {
-    "revision": "b4faa08bd007ccf1d28d80253694bf06",
-    "url": "/static/usericon/011.svg"
-  },
-  {
-    "revision": "2f5efde6e3342d794f1ccd63d1eaba10",
-    "url": "/static/usericon/008.svg"
-  },
-  {
-    "revision": "88159beb3ef0333696f737f3e791a232",
-    "url": "/static/usericon/010.svg"
+    "revision": "a5067243ab002ce364e388eaec252c74",
+    "url": "/static/usericon/014.svg"
   },
   {
     "revision": "975ac46f425d4300502995e8d384d28a",
     "url": "/static/usericon/012.svg"
   },
   {
-    "revision": "3d560f2aa1f0b4effa72010f18fb212e",
-    "url": "/static/usericon/009.svg"
-  },
-  {
-    "revision": "27c8b60137db6b7ea0dbc678fb995b22",
-    "url": "/static/usericon/007.svg"
+    "revision": "b4faa08bd007ccf1d28d80253694bf06",
+    "url": "/static/usericon/011.svg"
   },
   {
     "revision": "ce32b167fad8188c5ecc4a2cd76e0dc4",
     "url": "/static/usericon/002.svg"
   },
   {
-    "revision": "a2039d91a24f9cdcd2801cc644c35acf",
-    "url": "/static/usericon/006.svg"
+    "revision": "169046d1ba06b65ac9d6d78ac605cdc8",
+    "url": "/static/usericon/005.svg"
+  },
+  {
+    "revision": "88159beb3ef0333696f737f3e791a232",
+    "url": "/static/usericon/010.svg"
+  },
+  {
+    "revision": "3d560f2aa1f0b4effa72010f18fb212e",
+    "url": "/static/usericon/009.svg"
+  },
+  {
+    "revision": "2f5efde6e3342d794f1ccd63d1eaba10",
+    "url": "/static/usericon/008.svg"
+  },
+  {
+    "revision": "27c8b60137db6b7ea0dbc678fb995b22",
+    "url": "/static/usericon/007.svg"
   },
   {
     "revision": "77d9312a554f7e61aa44ff063aeaf633",
     "url": "/static/usericon/004.svg"
   },
   {
-    "revision": "5dcde6493bf94dd8eae6493eddb292ee",
-    "url": "/static/slimscroll/jquery.slimscroll.min.js"
+    "revision": "a2039d91a24f9cdcd2801cc644c35acf",
+    "url": "/static/usericon/006.svg"
   },
   {
     "revision": "4948508ccfd3552d72bc0783dfe5502f",
@@ -104,12 +104,12 @@ self.__precacheManifest = [
     "url": "/static/usericon/001.svg"
   },
   {
-    "revision": "96eb1c6c56da3962160c2b0172c9f5fa",
-    "url": "/static/templates/spring-boot/.mvn/wrapper/mavenwrapper.properties"
-  },
-  {
     "revision": "de52395a420916c1c598d505d30e3ed2",
     "url": "/static/templates/spring-boot/for-model/gateway/.gitignore"
+  },
+  {
+    "revision": "96eb1c6c56da3962160c2b0172c9f5fa",
+    "url": "/static/templates/spring-boot/.mvn/wrapper/mavenwrapper.properties"
   },
   {
     "revision": "de52395a420916c1c598d505d30e3ed2",
@@ -376,16 +376,12 @@ self.__precacheManifest = [
     "url": "/static/templates/axon/Dockerfile"
   },
   {
-    "revision": "d92cd6cd9852a711c3172ce5a00e429b",
-    "url": "/static/image/symbol/OG.shape.bpmn.Value_Chain_Module.png"
+    "revision": "d204e559914f2eb9b3a25a9bfec81628",
+    "url": "/static/image/symbol/OG.shape.bpmn.Value_Chain.png"
   },
   {
     "revision": "7d696fc763c5198ccf1831143f3edd38",
     "url": "/static/image/business/value-propositions/Concierge.png"
-  },
-  {
-    "revision": "120e209fe448199f57c7dd95dc7dd1ab",
-    "url": "/static/image/business/value-propositions/Guarantee.png"
   },
   {
     "revision": "0f9ae69749dc379c57aeeabf81898043",
@@ -408,6 +404,10 @@ self.__precacheManifest = [
     "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js"
   },
   {
+    "revision": "726e1b236a569185faa2b38314eeb283",
+    "url": "/static/lib/jquery-1.11.1/jquery-1.11.1.min.js"
+  },
+  {
     "revision": "1fc574d4721afa68ffd935a35469f4ae",
     "url": "/static/image/business/value-propositions/ProductBundling.png"
   },
@@ -416,16 +416,20 @@ self.__precacheManifest = [
     "url": "/static/image/event/bounded1.png"
   },
   {
-    "revision": "726e1b236a569185faa2b38314eeb283",
-    "url": "/static/lib/jquery-1.11.1/jquery-1.11.1.min.js"
+    "revision": "a95c74d60a5d1863c6e8a16aa2967e1c",
+    "url": "/static/lib/jquery-contextMenu/jquery.contextMenu.js"
   },
   {
     "revision": "7a1a918283bbf6c499e50677ed9d0aaa",
     "url": "/static/image/event/bounded2.png"
   },
   {
-    "revision": "a95c74d60a5d1863c6e8a16aa2967e1c",
-    "url": "/static/lib/jquery-contextMenu/jquery.contextMenu.js"
+    "revision": "e46f05685d3311db21924de9bca2736a",
+    "url": "/static/image/business/value-propositions/UserCommunitiesSupport Systems.png"
+  },
+  {
+    "revision": "e7708316c7389cf5d25223d250367a08",
+    "url": "/static/lib/jstree/themes/default-dark/style.css"
   },
   {
     "revision": "7af8593aa4e67a8cf770c3141d94db25",
@@ -436,36 +440,24 @@ self.__precacheManifest = [
     "url": "/static/image/event/right-arrow.png"
   },
   {
-    "revision": "e46f05685d3311db21924de9bca2736a",
-    "url": "/static/image/business/value-propositions/UserCommunitiesSupport Systems.png"
+    "revision": "e738d9ea5e954cc876a0fbca4c3b8e54",
+    "url": "/static/image/business/value-propositions/ProductServicePlatforms.png"
   },
   {
     "revision": "44509b41a3c9bc141c775c032633f2bb",
     "url": "/static/image/grid.gif"
   },
   {
-    "revision": "e738d9ea5e954cc876a0fbca4c3b8e54",
-    "url": "/static/image/business/value-propositions/ProductServicePlatforms.png"
-  },
-  {
-    "revision": "0c11ba9bb4de61f3c27374fdd61b07e8",
-    "url": "/static/lib/jstree/themes/default/style.css"
-  },
-  {
-    "revision": "e7708316c7389cf5d25223d250367a08",
-    "url": "/static/lib/jstree/themes/default-dark/style.css"
+    "revision": "f279435ca7dd3a22357c063f1f7b01a4",
+    "url": "/static/lib/jstree/themes/default/style.min.css"
   },
   {
     "revision": "0bbef444bd1c110195bd7fe31abee55b",
     "url": "/static/image/symbol/alert-icon.png"
   },
   {
-    "revision": "f279435ca7dd3a22357c063f1f7b01a4",
-    "url": "/static/lib/jstree/themes/default/style.min.css"
-  },
-  {
-    "revision": "f5a556c6f925608cd5eb59497e0d4a0a",
-    "url": "/static/image/symbol/BusinessRule.png"
+    "revision": "0c11ba9bb4de61f3c27374fdd61b07e8",
+    "url": "/static/lib/jstree/themes/default/style.css"
   },
   {
     "revision": "3c0320b541910be7ce8aa78be284917b",
@@ -476,52 +468,52 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/annotation.png"
   },
   {
-    "revision": "c73105efdd5a363053daef010fbdb452",
-    "url": "/static/image/symbol/cancel_end.png"
+    "revision": "f5a556c6f925608cd5eb59497e0d4a0a",
+    "url": "/static/image/symbol/BusinessRule.png"
   },
   {
-    "revision": "73c8e7007f5787ad2ba5a6ded55710d1",
-    "url": "/static/image/symbol/cancel_intermediate.png"
+    "revision": "c73105efdd5a363053daef010fbdb452",
+    "url": "/static/image/symbol/cancel_end.png"
   },
   {
     "revision": "d41af7a2efba4926116967345332ecc2",
     "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.css"
   },
   {
-    "revision": "2ebdec778c5fffabfa38d5211f72e473",
-    "url": "/static/image/symbol/class.png"
+    "revision": "73c8e7007f5787ad2ba5a6ded55710d1",
+    "url": "/static/image/symbol/cancel_intermediate.png"
   },
   {
-    "revision": "6d8bc774747b2537c3c9ceb79be6fde7",
-    "url": "/static/image/symbol/compensation_end.png"
+    "revision": "2ebdec778c5fffabfa38d5211f72e473",
+    "url": "/static/image/symbol/class.png"
   },
   {
     "revision": "534d83233216e56e59b503fe3f3e7edb",
     "url": "/static/image/es2cdIcon.png"
   },
   {
-    "revision": "c5bb944a864b8d32e965bee835af381a",
-    "url": "/static/image/symbol/compensation_intermediate.png"
-  },
-  {
-    "revision": "ffc1591e6946f5efc53b76d5fa2c2213",
-    "url": "/static/image/business/value-propositions/PersonalizedService.png"
-  },
-  {
-    "revision": "cae06f48ca7916475eea0c11b455b687",
-    "url": "/static/image/symbol/hands.png"
+    "revision": "f01ceaf221837778658105ca4a7f1c02",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.min.css"
   },
   {
     "revision": "36b02eb514729fe8d77c8e9d55c2ed67",
     "url": "/static/image/symbol/complete.png"
   },
   {
-    "revision": "f01ceaf221837778658105ca4a7f1c02",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.min.css"
+    "revision": "6d8bc774747b2537c3c9ceb79be6fde7",
+    "url": "/static/image/symbol/compensation_end.png"
   },
   {
-    "revision": "a6d8fc8e9f4e66e0ef16c8de9b9826b5",
-    "url": "/static/image/business/value-propositions/LoyaltyPrograms.png"
+    "revision": "c5bb944a864b8d32e965bee835af381a",
+    "url": "/static/image/symbol/compensation_intermediate.png"
+  },
+  {
+    "revision": "cae06f48ca7916475eea0c11b455b687",
+    "url": "/static/image/symbol/hands.png"
+  },
+  {
+    "revision": "ffc1591e6946f5efc53b76d5fa2c2213",
+    "url": "/static/image/business/value-propositions/PersonalizedService.png"
   },
   {
     "revision": "c6ada4373f52efeeb77483dbb62e840c",
@@ -532,6 +524,18 @@ self.__precacheManifest = [
     "url": "/static/lib/jquery-ui-1.11.4.custom/index.html"
   },
   {
+    "revision": "a6d8fc8e9f4e66e0ef16c8de9b9826b5",
+    "url": "/static/image/business/value-propositions/LoyaltyPrograms.png"
+  },
+  {
+    "revision": "1a269f0a8cdb97b1dd5b6150e2e08425",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.theme.css"
+  },
+  {
+    "revision": "50601b64e45a90965b2da232d2a5ddd5",
+    "url": "/static/image/sample.png"
+  },
+  {
     "revision": "d4df2ba6da44ab1fda57ec1399f40950",
     "url": "/static/image/symbol/connector_association.png"
   },
@@ -540,32 +544,24 @@ self.__precacheManifest = [
     "url": "/static/image/business/value-propositions/ExtensionsPlugins.png"
   },
   {
-    "revision": "50601b64e45a90965b2da232d2a5ddd5",
-    "url": "/static/image/sample.png"
+    "revision": "4d722952692941ac8746ea058138a47f",
+    "url": "/static/image/symbol/connector_conditional.png"
   },
   {
     "revision": "2fbb9e59cbab2174760da29c08d37354",
     "url": "/static/image/event/actor.png"
   },
   {
-    "revision": "1a269f0a8cdb97b1dd5b6150e2e08425",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.theme.css"
-  },
-  {
-    "revision": "4d722952692941ac8746ea058138a47f",
-    "url": "/static/image/symbol/connector_conditional.png"
-  },
-  {
     "revision": "8b1b37ea467bc3a15747c7c21b937677",
     "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.structure.css"
   },
   {
-    "revision": "1fb189455db843f783e13887d7818471",
-    "url": "/static/image/symbol/connector_dataassociation.png"
-  },
-  {
     "revision": "3b2006c239c533dc3dac97d0a48d4c1c",
     "url": "/static/image/symbol/connector_end.png"
+  },
+  {
+    "revision": "1fb189455db843f783e13887d7818471",
+    "url": "/static/image/symbol/connector_dataassociation.png"
   },
   {
     "revision": "198d1046e55d2b48b8eca1d37d49772d",
@@ -576,24 +572,24 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/connector_sequence.png"
   },
   {
-    "revision": "aec6d2e4885ae2ed4fda431343751f13",
-    "url": "/static/image/symbol/connector_start.png"
-  },
-  {
     "revision": "a610b0339c41755b425896ec735b21da",
     "url": "/static/image/symbol/rotate.png"
+  },
+  {
+    "revision": "aec6d2e4885ae2ed4fda431343751f13",
+    "url": "/static/image/symbol/connector_start.png"
   },
   {
     "revision": "582c29aeb22269a98b5a0a13ca948cc4",
     "url": "/static/image/business/value-propositions/TryBeforeYouBuy.png"
   },
   {
-    "revision": "52ef50dd16535520f1f8e9e20c1ac563",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css"
-  },
-  {
     "revision": "8b9fd52845fff0f9c97e6ec85765c1d0",
     "url": "/static/image/symbol/data_object.png"
+  },
+  {
+    "revision": "52ef50dd16535520f1f8e9e20c1ac563",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css"
   },
   {
     "revision": "fc1957dec8a9e14c47290a52eda8195c",
@@ -604,44 +600,28 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/error_end.png"
   },
   {
-    "revision": "f89ae5f9a1fb8ec0fc5112d9d3c51914",
-    "url": "/static/image/symbol/error_intermediate.png"
+    "revision": "a40956a3cb3a81dacbee12add3a29893",
+    "url": "/static/image/business/value-propositions/SupplementaryService.png"
   },
   {
     "revision": "9ed4669f524bec38319be63a2ee4ba26",
     "url": "/static/lib/jstree/themes/default/throbber.gif"
   },
   {
-    "revision": "657c7979baccb44f453483dbeb43c2c5",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css"
+    "revision": "f89ae5f9a1fb8ec0fc5112d9d3c51914",
+    "url": "/static/image/symbol/error_intermediate.png"
   },
   {
     "revision": "1afb25b5fe3a360c9dbc000bdd2f4494",
     "url": "/static/image/symbol/error_start.png"
   },
   {
+    "revision": "657c7979baccb44f453483dbeb43c2c5",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css"
+  },
+  {
     "revision": "266b642e4153adaa83c2d3471df5b705",
     "url": "/static/image/symbol/error.png"
-  },
-  {
-    "revision": "a40956a3cb3a81dacbee12add3a29893",
-    "url": "/static/image/business/value-propositions/SupplementaryService.png"
-  },
-  {
-    "revision": "db49c8de4f267eede40a9a8843efcdec",
-    "url": "/static/lib/jstree/themes/default/32px.png"
-  },
-  {
-    "revision": "1f075735090412ed7eb8077d819b19c6",
-    "url": "/static/lib/jstree/themes/default/40px.png"
-  },
-  {
-    "revision": "62be6ed2b189444b472b8000dc187240",
-    "url": "/static/lib/jstree/themes/default-dark/throbber.gif"
-  },
-  {
-    "revision": "51286e68b083696edaf4f9fc577e2a2d",
-    "url": "/static/lib/jstree/themes/default-dark/40px.png"
   },
   {
     "revision": "d10a3b2ad8dbdf0e307e62afbf3ce9aa",
@@ -652,32 +632,48 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/event_intermediate.png"
   },
   {
-    "revision": "230f91911c019b4723cdf396dd814ad7",
-    "url": "/static/image/business/value-propositions/ModularSystems.png"
-  },
-  {
-    "revision": "eebaf260766f5e0e773f53d3ea4f3e4d",
-    "url": "/static/lib/jstree/themes/default-dark/32px.png"
+    "revision": "1f075735090412ed7eb8077d819b19c6",
+    "url": "/static/lib/jstree/themes/default/40px.png"
   },
   {
     "revision": "f253dbef8f72f5e270c3de2595c9aca1",
     "url": "/static/image/symbol/event_start.png"
   },
   {
-    "revision": "46725f1ddc60e3523e22b49f08c404f5",
-    "url": "/static/image/symbol/event_terminate.png"
+    "revision": "db49c8de4f267eede40a9a8843efcdec",
+    "url": "/static/lib/jstree/themes/default/32px.png"
   },
   {
-    "revision": "73eea773f3d6e739ba800a3317929694",
-    "url": "/static/image/symbol/failed.png"
+    "revision": "62be6ed2b189444b472b8000dc187240",
+    "url": "/static/lib/jstree/themes/default-dark/throbber.gif"
+  },
+  {
+    "revision": "a4db3afc4e2fe17c82b7443a665f6124",
+    "url": "/static/image/symbol/OG.shape.HorizontalPoolShape.png"
+  },
+  {
+    "revision": "230f91911c019b4723cdf396dd814ad7",
+    "url": "/static/image/business/value-propositions/ModularSystems.png"
+  },
+  {
+    "revision": "46725f1ddc60e3523e22b49f08c404f5",
+    "url": "/static/image/symbol/event_terminate.png"
   },
   {
     "revision": "f253dbef8f72f5e270c3de2595c9aca1",
     "url": "/static/image/symbol/event.png"
   },
   {
-    "revision": "396a695751d02153f66f830d60a7f5cc",
-    "url": "/static/lib/jqueryXML2JSON/jquery.xml2json.js"
+    "revision": "73eea773f3d6e739ba800a3317929694",
+    "url": "/static/image/symbol/failed.png"
+  },
+  {
+    "revision": "51286e68b083696edaf4f9fc577e2a2d",
+    "url": "/static/lib/jstree/themes/default-dark/40px.png"
+  },
+  {
+    "revision": "eebaf260766f5e0e773f53d3ea4f3e4d",
+    "url": "/static/lib/jstree/themes/default-dark/32px.png"
   },
   {
     "revision": "a576d493b1909594d94278ad73a82b1b",
@@ -704,36 +700,28 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/grid.gif"
   },
   {
-    "revision": "3175fb44af4dd9f9466cc98b9baaf22a",
-    "url": "/static/image/symbol/gateway.png"
-  },
-  {
-    "revision": "3249bbf85bce24f4c98bd8fe3f3de548",
-    "url": "/static/image/symbol/group.png"
+    "revision": "2f0ad8e37bd08412f17b09608d63a830",
+    "url": "/static/image/symbol/guide_end.png"
   },
   {
     "revision": "090cf7eb75190022c3f9902e3716f22f",
     "url": "/static/image/symbol/guide_task.png"
   },
   {
-    "revision": "2f0ad8e37bd08412f17b09608d63a830",
-    "url": "/static/image/symbol/guide_end.png"
+    "revision": "a9f4c5807f6f6fb35619d1d3afe722f1",
+    "url": "/static/image/symbol/horizontal_lane.png"
   },
   {
     "revision": "b898ded5c6e560b666060c3efd424bd9",
     "url": "/static/image/symbol/inclusive.png"
   },
   {
-    "revision": "a9f4c5807f6f6fb35619d1d3afe722f1",
-    "url": "/static/image/symbol/horizontal_lane.png"
-  },
-  {
-    "revision": "6cc57703e2f287de68f76244a618f15c",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_888888_256x240.png"
-  },
-  {
     "revision": "2c76ea1686196c053c73bd772c3f372b",
     "url": "/static/image/symbol/kubernetes/argo/argo-icon-color.svg"
+  },
+  {
+    "revision": "396a695751d02153f66f830d60a7f5cc",
+    "url": "/static/lib/jqueryXML2JSON/jquery.xml2json.js"
   },
   {
     "revision": "a72b7617f94b7dd302037f232d179a39",
@@ -744,32 +732,32 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/kubernetes/c-role.svg"
   },
   {
-    "revision": "e4cb14fdb1cbff1bf8697c6a07febb63",
-    "url": "/static/image/symbol/kubernetes/crb.svg"
-  },
-  {
     "revision": "8434e609f320e455b03ffe99a749e58d",
     "url": "/static/image/symbol/kubernetes/cm-palette.svg"
-  },
-  {
-    "revision": "e4cb14fdb1cbff1bf8697c6a07febb63",
-    "url": "/static/image/symbol/kubernetes/crb-palette.svg"
-  },
-  {
-    "revision": "eda093cd6a23786a2e3c7ca888c8360e",
-    "url": "/static/image/symbol/kubernetes/crd-palette.svg"
   },
   {
     "revision": "fd0098c918ad0db260b3a6f562ad2c14",
     "url": "/static/image/symbol/kubernetes/cm.svg"
   },
   {
-    "revision": "3c110cc5ca5f0b92cff106782ec75873",
-    "url": "/static/image/business/value-propositions/IntegratedOffering.png"
+    "revision": "e4cb14fdb1cbff1bf8697c6a07febb63",
+    "url": "/static/image/symbol/kubernetes/crb-palette.svg"
+  },
+  {
+    "revision": "e4cb14fdb1cbff1bf8697c6a07febb63",
+    "url": "/static/image/symbol/kubernetes/crb.svg"
+  },
+  {
+    "revision": "eda093cd6a23786a2e3c7ca888c8360e",
+    "url": "/static/image/symbol/kubernetes/crd-palette.svg"
   },
   {
     "revision": "eda093cd6a23786a2e3c7ca888c8360e",
     "url": "/static/image/symbol/kubernetes/crd.svg"
+  },
+  {
+    "revision": "3c110cc5ca5f0b92cff106782ec75873",
+    "url": "/static/image/business/value-propositions/IntegratedOffering.png"
   },
   {
     "revision": "4173363f906e5e30e8efc65ce78837cb",
@@ -780,92 +768,88 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/kubernetes/cronjob.svg"
   },
   {
-    "revision": "fdc58c14e91fbb086f953818c525a7ee",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_cd0a0a_256x240.png"
+    "revision": "5aa98f5eae4a78e25a3b6c5ac337fdc4",
+    "url": "/static/image/symbol/kubernetes/deploy-palette.svg"
   },
   {
-    "revision": "d0f2aeb6964ae3fe9df0b628c08b0bf5",
-    "url": "/static/image/symbol/kubernetes/ds-palette.svg"
+    "revision": "6cc57703e2f287de68f76244a618f15c",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_888888_256x240.png"
   },
   {
     "revision": "4d8fba74fda6023ad40de98bbff6b682",
     "url": "/static/image/symbol/kubernetes/deploy.svg"
   },
   {
-    "revision": "5aa98f5eae4a78e25a3b6c5ac337fdc4",
-    "url": "/static/image/symbol/kubernetes/deploy-palette.svg"
+    "revision": "d0f2aeb6964ae3fe9df0b628c08b0bf5",
+    "url": "/static/image/symbol/kubernetes/ds-palette.svg"
   },
   {
     "revision": "913e9fed60f9df5abd033b69746ec4bb",
     "url": "/static/image/business/value-propositions/SuperiorService.png"
   },
   {
+    "revision": "fdc58c14e91fbb086f953818c525a7ee",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_cd0a0a_256x240.png"
+  },
+  {
     "revision": "d0f2aeb6964ae3fe9df0b628c08b0bf5",
     "url": "/static/image/symbol/kubernetes/ds.svg"
-  },
-  {
-    "revision": "3b001ae33bd74fff64bc609ce6a55628",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_454545_256x240.png"
-  },
-  {
-    "revision": "3a3c5468f484f07ac4a320d9e22acb8c",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_222222_256x240.png"
   },
   {
     "revision": "9b06b9ee3165481a041e243d6c81efbf",
     "url": "/static/image/symbol/kubernetes/group-palette.svg"
   },
   {
-    "revision": "e62e559dbeb09289274bc563b150078b",
-    "url": "/static/image/symbol/kubernetes/hpa-palette.svg"
+    "revision": "3b001ae33bd74fff64bc609ce6a55628",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_454545_256x240.png"
   },
   {
     "revision": "9b06b9ee3165481a041e243d6c81efbf",
     "url": "/static/image/symbol/kubernetes/group.svg"
   },
   {
-    "revision": "a477dc560ac295f213ae4cdfb249ae3e",
-    "url": "/static/image/business/value-propositions/SelfService.png"
+    "revision": "e62e559dbeb09289274bc563b150078b",
+    "url": "/static/image/symbol/kubernetes/hpa-palette.svg"
   },
   {
     "revision": "e62e559dbeb09289274bc563b150078b",
     "url": "/static/image/symbol/kubernetes/hpa.svg"
   },
   {
+    "revision": "a477dc560ac295f213ae4cdfb249ae3e",
+    "url": "/static/image/business/value-propositions/SelfService.png"
+  },
+  {
     "revision": "777d9a1b2939f869cb84ff31cb5d895d",
     "url": "/static/image/symbol/kubernetes/ing-palette.svg"
-  },
-  {
-    "revision": "d92acecad29da2ccee5c9d491267f4a2",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_2e83ff_256x240.png"
-  },
-  {
-    "revision": "6074412bcb2f73f83e7ff7cc9010afa2",
-    "url": "/static/image/symbol/kubernetes/istio/istio-drule.svg"
   },
   {
     "revision": "de2311290e258dc814f234fde8d442d8",
     "url": "/static/image/symbol/kubernetes/ing.svg"
   },
   {
-    "revision": "16eb28944b2a759538bf0ec05f790c9c",
-    "url": "/static/image/symbol/kubernetes/istio/istio-sidecar.svg"
+    "revision": "6074412bcb2f73f83e7ff7cc9010afa2",
+    "url": "/static/image/symbol/kubernetes/istio/istio-drule.svg"
   },
   {
     "revision": "7faee6037cdefb526f1a52efc220bd85",
     "url": "/static/image/symbol/kubernetes/istio/istio-gateway.svg"
   },
   {
+    "revision": "3a3c5468f484f07ac4a320d9e22acb8c",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_222222_256x240.png"
+  },
+  {
+    "revision": "16eb28944b2a759538bf0ec05f790c9c",
+    "url": "/static/image/symbol/kubernetes/istio/istio-sidecar.svg"
+  },
+  {
+    "revision": "d92acecad29da2ccee5c9d491267f4a2",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-icons_2e83ff_256x240.png"
+  },
+  {
     "revision": "f1abd4b9a0df278299832497f9a399aa",
     "url": "/static/image/symbol/kubernetes/istio/istio-svcentry.svg"
-  },
-  {
-    "revision": "5f53484351687a5f766e20e47dbf8c05",
-    "url": "/static/image/symbol/kubernetes/istio/istio-vsvc.svg"
-  },
-  {
-    "revision": "63631dbaa3a4f86eadd74ff5d470027b",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_highlight-soft_75_cccccc_1x100.png"
   },
   {
     "revision": "7f50cd1491cbf3587599c43492af9607",
@@ -876,6 +860,10 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/kubernetes/ep.svg"
   },
   {
+    "revision": "5f53484351687a5f766e20e47dbf8c05",
+    "url": "/static/image/symbol/kubernetes/istio/istio-vsvc.svg"
+  },
+  {
     "revision": "52b9357526e213dd095020f5fa4e80dc",
     "url": "/static/image/symbol/kubernetes/istio/istio.svg"
   },
@@ -884,20 +872,20 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/kubernetes/job-palette.svg"
   },
   {
-    "revision": "d3676572e468b93e616b7cece8905e00",
-    "url": "/static/image/symbol/kubernetes/limits-palette.svg"
-  },
-  {
     "revision": "65cd37b52d8d4f2a00f5a5d0c0186c7c",
     "url": "/static/image/symbol/kubernetes/job.svg"
   },
   {
-    "revision": "d75f6c7aab13e5faaef7bd455370ea69",
-    "url": "/static/image/symbol/kubernetes/netpol-palette.svg"
+    "revision": "d3676572e468b93e616b7cece8905e00",
+    "url": "/static/image/symbol/kubernetes/limits.svg"
   },
   {
     "revision": "d3676572e468b93e616b7cece8905e00",
-    "url": "/static/image/symbol/kubernetes/limits.svg"
+    "url": "/static/image/symbol/kubernetes/limits-palette.svg"
+  },
+  {
+    "revision": "d75f6c7aab13e5faaef7bd455370ea69",
+    "url": "/static/image/symbol/kubernetes/netpol-palette.svg"
   },
   {
     "revision": "d75f6c7aab13e5faaef7bd455370ea69",
@@ -912,12 +900,16 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/kubernetes/ns.svg"
   },
   {
-    "revision": "38ebfb0631df1f9faeeef225a3f72078",
-    "url": "/static/image/symbol/kubernetes/pod.svg"
+    "revision": "a5d0a486cbb6d7cdb3073e7e33cadc3b",
+    "url": "/static/image/event/aggregate.png"
   },
   {
     "revision": "1c4c3a4829345826d55d2867a23a8a34",
     "url": "/static/image/symbol/kubernetes/pod-palette.svg"
+  },
+  {
+    "revision": "38ebfb0631df1f9faeeef225a3f72078",
+    "url": "/static/image/symbol/kubernetes/pod.svg"
   },
   {
     "revision": "cfe7020cac5b6c2503e36f63bcd82cb9",
@@ -928,14 +920,6 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/kubernetes/psp.svg"
   },
   {
-    "revision": "a5d0a486cbb6d7cdb3073e7e33cadc3b",
-    "url": "/static/image/event/aggregate.png"
-  },
-  {
-    "revision": "72b79c825e7fdd43dbb4740b1424502f",
-    "url": "/static/image/symbol/kubernetes/pvc-palette.svg"
-  },
-  {
     "revision": "46ccaee89d4dfd68ec9e000cc44ed99f",
     "url": "/static/image/symbol/kubernetes/pv-palette.svg"
   },
@@ -944,32 +928,40 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/kubernetes/pv.svg"
   },
   {
-    "revision": "ddeb9526f3ba3b9c9859212e80bc9f29",
-    "url": "/static/image/symbol/kubernetes/pvc.svg"
+    "revision": "72b79c825e7fdd43dbb4740b1424502f",
+    "url": "/static/image/symbol/kubernetes/pvc-palette.svg"
   },
   {
     "revision": "2661bc44c693179f6ea759a7d653b29d",
     "url": "/static/image/event/command.png"
   },
   {
+    "revision": "dde6423adbb1fcbd044f93a6d5364864",
+    "url": "/static/image/event/event.png"
+  },
+  {
     "revision": "6f4cb21aaa5f42e2a287f272fb45285c",
     "url": "/static/image/event/external.png"
   },
   {
-    "revision": "dde6423adbb1fcbd044f93a6d5364864",
-    "url": "/static/image/event/event.png"
+    "revision": "ddeb9526f3ba3b9c9859212e80bc9f29",
+    "url": "/static/image/symbol/kubernetes/pvc.svg"
   },
   {
     "revision": "dcce04801beee24fd8ebd0eb99425aa4",
     "url": "/static/image/symbol/kubernetes/rb-palette.svg"
   },
   {
-    "revision": "4c3b1d2e09d4330db5559f3229fd39f9",
-    "url": "/static/image/symbol/kubernetes/role-palette.svg"
-  },
-  {
     "revision": "dcce04801beee24fd8ebd0eb99425aa4",
     "url": "/static/image/symbol/kubernetes/rb.svg"
+  },
+  {
+    "revision": "29ec20ce386ad428e337cbebd1a9e357",
+    "url": "/static/image/event/policy.png"
+  },
+  {
+    "revision": "4c3b1d2e09d4330db5559f3229fd39f9",
+    "url": "/static/image/symbol/kubernetes/role-palette.svg"
   },
   {
     "revision": "4c3b1d2e09d4330db5559f3229fd39f9",
@@ -980,12 +972,28 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/kubernetes/rs-palette.svg"
   },
   {
-    "revision": "29ec20ce386ad428e337cbebd1a9e357",
-    "url": "/static/image/event/policy.png"
+    "revision": "21cf333ffbb87996510eef6952ebab42",
+    "url": "/static/image/symbol/kubernetes/sa-palette.svg"
   },
   {
-    "revision": "a09fd2b81dad19f51424ec8f572eb926",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_95_fef1ec_1x400.png"
+    "revision": "202b14182b11f57ec83f221d2cc9d417",
+    "url": "/static/image/symbol/kubernetes/rs.svg"
+  },
+  {
+    "revision": "e270d019ff6336c4da12f88c014218ec",
+    "url": "/static/image/event/view.png"
+  },
+  {
+    "revision": "63631dbaa3a4f86eadd74ff5d470027b",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_highlight-soft_75_cccccc_1x100.png"
+  },
+  {
+    "revision": "21cf333ffbb87996510eef6952ebab42",
+    "url": "/static/image/symbol/kubernetes/sa.svg"
+  },
+  {
+    "revision": "605f6d8cba097f5a255a53d98a3380f4",
+    "url": "/static/image/symbol/kubernetes/knative/logo.svg"
   },
   {
     "revision": "cdf0c8d93c924c557030175cdb31d811",
@@ -994,22 +1002,6 @@ self.__precacheManifest = [
   {
     "revision": "cdf0c8d93c924c557030175cdb31d811",
     "url": "/static/image/symbol/kubernetes/quota.svg"
-  },
-  {
-    "revision": "202b14182b11f57ec83f221d2cc9d417",
-    "url": "/static/image/symbol/kubernetes/rs.svg"
-  },
-  {
-    "revision": "21cf333ffbb87996510eef6952ebab42",
-    "url": "/static/image/symbol/kubernetes/sa-palette.svg"
-  },
-  {
-    "revision": "e270d019ff6336c4da12f88c014218ec",
-    "url": "/static/image/event/view.png"
-  },
-  {
-    "revision": "21cf333ffbb87996510eef6952ebab42",
-    "url": "/static/image/symbol/kubernetes/sa.svg"
   },
   {
     "revision": "c54a747f6b404e34c925f92eb99e704a",
@@ -1024,8 +1016,12 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/kubernetes/sts-palette.svg"
   },
   {
-    "revision": "605f6d8cba097f5a255a53d98a3380f4",
-    "url": "/static/image/symbol/kubernetes/knative/logo.svg"
+    "revision": "3175fb44af4dd9f9466cc98b9baaf22a",
+    "url": "/static/image/symbol/gateway.png"
+  },
+  {
+    "revision": "0992accff4338eb958306b74429ce782",
+    "url": "/static/image/symbol/kubernetes/svc.svg"
   },
   {
     "revision": "e025583d21e1ca51fe0fefb4a0dc6967",
@@ -1037,23 +1033,35 @@ self.__precacheManifest = [
   },
   {
     "revision": "3368f1c75e94d3eb2f19d49b543103f0",
-    "url": "/static/image/symbol/kubernetes/user.svg"
-  },
-  {
-    "revision": "3368f1c75e94d3eb2f19d49b543103f0",
     "url": "/static/image/symbol/kubernetes/user-palette.svg"
   },
   {
-    "revision": "0992accff4338eb958306b74429ce782",
-    "url": "/static/image/symbol/kubernetes/svc.svg"
+    "revision": "3368f1c75e94d3eb2f19d49b543103f0",
+    "url": "/static/image/symbol/kubernetes/user.svg"
+  },
+  {
+    "revision": "ff5a5b1f4791b40b0c82bb7e22339b1b",
+    "url": "/static/image/symbol/kubernetes/sc-palette.svg"
   },
   {
     "revision": "429b012b43c01ea4fb7837a108269260",
     "url": "/static/image/symbol/kubernetes/vol-palette.svg"
   },
   {
+    "revision": "ff5a5b1f4791b40b0c82bb7e22339b1b",
+    "url": "/static/image/symbol/kubernetes/sc.svg"
+  },
+  {
     "revision": "429b012b43c01ea4fb7837a108269260",
     "url": "/static/image/symbol/kubernetes/vol.svg"
+  },
+  {
+    "revision": "a09fd2b81dad19f51424ec8f572eb926",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_95_fef1ec_1x400.png"
+  },
+  {
+    "revision": "0104e5836b59a4e11e769615976ee247",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_75_e6e6e6_1x400.png"
   },
   {
     "revision": "a719cafcc896b5072f1b1a9f724b9a64",
@@ -1064,40 +1072,24 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/link_intermediate.png"
   },
   {
-    "revision": "ff5a5b1f4791b40b0c82bb7e22339b1b",
-    "url": "/static/image/symbol/kubernetes/sc-palette.svg"
-  },
-  {
-    "revision": "0104e5836b59a4e11e769615976ee247",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_75_e6e6e6_1x400.png"
-  },
-  {
     "revision": "fba3bba556cb948877437c070d0abf55",
     "url": "/static/image/symbol/link_start.png"
-  },
-  {
-    "revision": "ff5a5b1f4791b40b0c82bb7e22339b1b",
-    "url": "/static/image/symbol/kubernetes/sc.svg"
-  },
-  {
-    "revision": "e040dc2297c0248851894799bd1ce745",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_75_dadada_1x400.png"
   },
   {
     "revision": "eabfb78da68344d562040102968f5939",
     "url": "/static/image/symbol/link.png"
   },
   {
-    "revision": "d62284bd1214ec4e2a4f82ecc742d4c0",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_65_ffffff_1x400.png"
+    "revision": "ff90ca5f7eb3325ed9ecd3ca5b03658a",
+    "url": "/static/image/symbol/loop_standard.png"
   },
   {
     "revision": "9b33c8e53e7b87820e090d0c0d84795d",
     "url": "/static/image/symbol/merge.png"
   },
   {
-    "revision": "2b55547172c6b8c8c461014fc6683c6b",
-    "url": "/static/image/symbol/message_end.png"
+    "revision": "e040dc2297c0248851894799bd1ce745",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_75_dadada_1x400.png"
   },
   {
     "revision": "79ac142c6d53333832e406acc48316d4",
@@ -1108,8 +1100,16 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/message_start.png"
   },
   {
+    "revision": "3249bbf85bce24f4c98bd8fe3f3de548",
+    "url": "/static/image/symbol/group.png"
+  },
+  {
     "revision": "1c7425c6f412562042f6bb10c69df4be",
     "url": "/static/image/symbol/message.png"
+  },
+  {
+    "revision": "2f8f6c6d667d701818a041f3db52c3ae",
+    "url": "/static/image/symbol/multiple_intermediate.png"
   },
   {
     "revision": "5edf606c66aaf2352af8e8ee6fb5868d",
@@ -1128,48 +1128,44 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/OG.shape.bpmn.A_LoopTask.png"
   },
   {
-    "revision": "11eb610a3286e17bcf181ace388cfaac",
-    "url": "/static/image/symbol/OG.shape.bpmn.A_ManualTask.png"
-  },
-  {
-    "revision": "2f8f6c6d667d701818a041f3db52c3ae",
-    "url": "/static/image/symbol/multiple_intermediate.png"
-  },
-  {
     "revision": "4371b5b9abcde3e6964c10cd6b8e423c",
     "url": "/static/image/symbol/multiple_start.png"
   },
   {
-    "revision": "484c31ed1d1d3ffd5e0b085e95ec8959",
-    "url": "/static/image/symbol/OG.shape.bpmn.A_MapperTask.png"
+    "revision": "11eb610a3286e17bcf181ace388cfaac",
+    "url": "/static/image/symbol/OG.shape.bpmn.A_ManualTask.png"
   },
   {
-    "revision": "3690d8a9f49f87022bbdee7baad0abce",
-    "url": "/static/image/symbol/Manual.png"
-  },
-  {
-    "revision": "95b727235491025687ee1493cecb6e24",
-    "url": "/static/image/symbol/OG.shape.bpmn.A_Subprocess.png"
-  },
-  {
-    "revision": "3cf3ba4270c73e5cb0f944b3fca64244",
-    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_55_fbf9ee_1x400.png"
+    "revision": "d62284bd1214ec4e2a4f82ecc742d4c0",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_65_ffffff_1x400.png"
   },
   {
     "revision": "8c1102345ea5a36fc9a0055ba166ef50",
     "url": "/static/image/logo_change.png"
   },
   {
+    "revision": "484c31ed1d1d3ffd5e0b085e95ec8959",
+    "url": "/static/image/symbol/OG.shape.bpmn.A_MapperTask.png"
+  },
+  {
+    "revision": "95b727235491025687ee1493cecb6e24",
+    "url": "/static/image/symbol/OG.shape.bpmn.A_Subprocess.png"
+  },
+  {
+    "revision": "3690d8a9f49f87022bbdee7baad0abce",
+    "url": "/static/image/symbol/Manual.png"
+  },
+  {
     "revision": "7c8ecd6549c3356a80d89025693d8798",
     "url": "/static/image/symbol/OG.shape.bpmn.A_WebServiceTask.png"
   },
   {
-    "revision": "aa1e0a6533cb6d79f37169ab3db7056a",
-    "url": "/static/image/symbol/OG.shape.bpmn.C_Association.png"
-  },
-  {
     "revision": "beec36782667f2edf7ef73091a332288",
     "url": "/static/image/symbol/OG.shape.bpmn.C_DataAssociation.png"
+  },
+  {
+    "revision": "0f4ba823b24003e96426bbb9799a33eb",
+    "url": "/static/image/symbol/OG.shape.bpmn.C_Message.png"
   },
   {
     "revision": "f1dbe1fbf9c3d33641b7076dc2d99b4e",
@@ -1178,10 +1174,6 @@ self.__precacheManifest = [
   {
     "revision": "989791ec321be0cf441a1637ea707d06",
     "url": "/static/image/symbol/OG.shape.bpmn.C_Sequence.png"
-  },
-  {
-    "revision": "0f4ba823b24003e96426bbb9799a33eb",
-    "url": "/static/image/symbol/OG.shape.bpmn.C_Message.png"
   },
   {
     "revision": "1e0de9777e80276f92cd2293aaf4ca0f",
@@ -1200,8 +1192,8 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/OG.shape.bpmn.E_End.png"
   },
   {
-    "revision": "109ca535ac649dce047b63e916cf42f4",
-    "url": "/static/image/symbol/OG.shape.bpmn.E_Intermediate_Rule.png"
+    "revision": "3cf3ba4270c73e5cb0f944b3fca64244",
+    "url": "/static/lib/jquery-ui-1.11.4.custom/images/ui-bg_glass_55_fbf9ee_1x400.png"
   },
   {
     "revision": "907c9fefb39bfa86548ace8e0fa6b901",
@@ -1212,48 +1204,48 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/OG.shape.bpmn.E_Intermediate_MessageFill.png"
   },
   {
-    "revision": "3dd8d117944125dc60e581471723529e",
-    "url": "/static/lib/jquery-contextMenu/jquery.contextMenu.css"
-  },
-  {
-    "revision": "56e7dd4bf48602d711ba3c7df0ecc428",
-    "url": "/static/image/symbol/OG.shape.bpmn.E_Intermediate.png"
-  },
-  {
-    "revision": "1c7425c6f412562042f6bb10c69df4be",
-    "url": "/static/image/symbol/OG.shape.bpmn.E_Start_Message.png"
-  },
-  {
-    "revision": "5ebf47b662788296608e10536320d84c",
-    "url": "/static/image/symbol/OG.shape.bpmn.E_Start_Rule.png"
-  },
-  {
-    "revision": "2bde9eabc6ed9903e6a595a5e2bb2b99",
-    "url": "/static/image/symbol/OG.shape.bpmn.E_Intermediate_Timer.png"
-  },
-  {
-    "revision": "37f35a84b3c1e324341715a9cabfb8c8",
-    "url": "/static/lib/jquery-contextMenu/images/page_white_paste.png"
-  },
-  {
-    "revision": "f674e79000dcf4aec6ef5cbb7d0b163c",
-    "url": "/static/image/symbol/OG.shape.bpmn.E_Start_Timer.png"
-  },
-  {
-    "revision": "f24a74f5395820a53fb641d9ed4ffd92",
-    "url": "/static/image/symbol/OG.shape.bpmn.A_ServiceTask2.png"
+    "revision": "109ca535ac649dce047b63e916cf42f4",
+    "url": "/static/image/symbol/OG.shape.bpmn.E_Intermediate_Rule.png"
   },
   {
     "revision": "97176626eef35c7beb4f05a850325042",
     "url": "/static/lib/jquery-contextMenu/images/page_white_edit.png"
   },
   {
-    "revision": "f253dbef8f72f5e270c3de2595c9aca1",
-    "url": "/static/image/symbol/OG.shape.bpmn.E_Start.png"
+    "revision": "2bde9eabc6ed9903e6a595a5e2bb2b99",
+    "url": "/static/image/symbol/OG.shape.bpmn.E_Intermediate_Timer.png"
   },
   {
-    "revision": "ea882eba43241d319f16e9d9ae0152f7",
-    "url": "/static/image/symbol/OG.shape.bpmn.E_Terminate.png"
+    "revision": "56e7dd4bf48602d711ba3c7df0ecc428",
+    "url": "/static/image/symbol/OG.shape.bpmn.E_Intermediate.png"
+  },
+  {
+    "revision": "f24a74f5395820a53fb641d9ed4ffd92",
+    "url": "/static/image/symbol/OG.shape.bpmn.A_ServiceTask2.png"
+  },
+  {
+    "revision": "1c7425c6f412562042f6bb10c69df4be",
+    "url": "/static/image/symbol/OG.shape.bpmn.E_Start_Message.png"
+  },
+  {
+    "revision": "3dd8d117944125dc60e581471723529e",
+    "url": "/static/lib/jquery-contextMenu/jquery.contextMenu.css"
+  },
+  {
+    "revision": "5ebf47b662788296608e10536320d84c",
+    "url": "/static/image/symbol/OG.shape.bpmn.E_Start_Rule.png"
+  },
+  {
+    "revision": "aa1e0a6533cb6d79f37169ab3db7056a",
+    "url": "/static/image/symbol/OG.shape.bpmn.C_Association.png"
+  },
+  {
+    "revision": "f674e79000dcf4aec6ef5cbb7d0b163c",
+    "url": "/static/image/symbol/OG.shape.bpmn.E_Start_Timer.png"
+  },
+  {
+    "revision": "f253dbef8f72f5e270c3de2595c9aca1",
+    "url": "/static/image/symbol/OG.shape.bpmn.E_Start.png"
   },
   {
     "revision": "0283d4e9746537d5c4d753ef907bc490",
@@ -1268,6 +1260,10 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/OG.shape.bpmn.G_Parallel.png"
   },
   {
+    "revision": "d92cd6cd9852a711c3172ce5a00e429b",
+    "url": "/static/image/symbol/OG.shape.bpmn.Value_Chain_Module.png"
+  },
+  {
     "revision": "49e48dabefa35c816068625bbc5310ba",
     "url": "/static/image/symbol/OG.shape.bpmn.M_Annotation.png"
   },
@@ -1276,20 +1272,24 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/OG.shape.bpmn.ScopeActivity.png"
   },
   {
-    "revision": "baab23c41cdc34dcd6b068b23f963762",
-    "url": "/static/lib/jquery-contextMenu/images/page_white_delete.png"
+    "revision": "ea882eba43241d319f16e9d9ae0152f7",
+    "url": "/static/image/symbol/OG.shape.bpmn.E_Terminate.png"
   },
   {
-    "revision": "d204e559914f2eb9b3a25a9bfec81628",
-    "url": "/static/image/symbol/OG.shape.bpmn.Value_Chain.png"
+    "revision": "120e209fe448199f57c7dd95dc7dd1ab",
+    "url": "/static/image/business/value-propositions/Guarantee.png"
   },
   {
-    "revision": "ee37b26a74d033b0e26c110516a74ab8",
-    "url": "/static/image/symbol/OG.shape.essencia.ActivitySpace.png"
+    "revision": "6b4cd57c7d9e693a13228d3966f8bf1b",
+    "url": "/static/image/logo_change2.png"
   },
   {
     "revision": "3e5687bce96defb799c91e21c0d7881c",
     "url": "/static/image/symbol/OG.shape.essencia.Activity.png"
+  },
+  {
+    "revision": "ee37b26a74d033b0e26c110516a74ab8",
+    "url": "/static/image/symbol/OG.shape.essencia.ActivitySpace.png"
   },
   {
     "revision": "c2201187161072642e3dd028b80a53b8",
@@ -1308,10 +1308,6 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/OG.shape.essencia.CompetencyLevel.png"
   },
   {
-    "revision": "6b4cd57c7d9e693a13228d3966f8bf1b",
-    "url": "/static/image/logo_change2.png"
-  },
-  {
     "revision": "9f08f90d532ec89efc5083ca606a7051",
     "url": "/static/image/symbol/OG.shape.essencia.LevelOfDetail.png"
   },
@@ -1328,36 +1324,40 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/OG.shape.essencia.State.png"
   },
   {
-    "revision": "e8dd2f93fe81457efa893faaed7b2c19",
-    "url": "/static/image/symbol/OG.shape.essencia.WorkProduct.png"
-  },
-  {
     "revision": "3fe301ff4d8d5d23007f0bb3cf664c13",
     "url": "/static/image/symbol/OG.shape.essencia.WorkProduct_Manifest.png"
   },
   {
-    "revision": "22a01ca3cb8863213601bd6f75d4da08",
-    "url": "/static/image/symbol/OG.shape.HorizontalLaneShape.png"
-  },
-  {
-    "revision": "a4db3afc4e2fe17c82b7443a665f6124",
-    "url": "/static/image/symbol/OG.shape.HorizontalPoolShape.png"
+    "revision": "37f35a84b3c1e324341715a9cabfb8c8",
+    "url": "/static/lib/jquery-contextMenu/images/page_white_paste.png"
   },
   {
     "revision": "c396a0c089e84ea59c7acc5e757f6848",
     "url": "/static/image/symbol/OG.shape.bpmn.E_Intermediate_Escalation.png"
   },
   {
+    "revision": "64d70a176bb252ed0e41db51b0229268",
+    "url": "/static/image/event/rotate.png"
+  },
+  {
     "revision": "ad351cf082add06d97752f2803321028",
     "url": "/static/image/symbol/quarter-bisector.png"
+  },
+  {
+    "revision": "e8dd2f93fe81457efa893faaed7b2c19",
+    "url": "/static/image/symbol/OG.shape.essencia.WorkProduct.png"
   },
   {
     "revision": "1190cfc22a21548635bc1d05f6e57f32",
     "url": "/static/image/symbol/quarter-low.png"
   },
   {
-    "revision": "64d70a176bb252ed0e41db51b0229268",
-    "url": "/static/image/event/rotate.png"
+    "revision": "22a01ca3cb8863213601bd6f75d4da08",
+    "url": "/static/image/symbol/OG.shape.HorizontalLaneShape.png"
+  },
+  {
+    "revision": "baab23c41cdc34dcd6b068b23f963762",
+    "url": "/static/lib/jquery-contextMenu/images/page_white_delete.png"
   },
   {
     "revision": "7978cf55360dff0082c8aa1dbf362f9a",
@@ -1372,16 +1372,12 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/rule_start.png"
   },
   {
-    "revision": "9d0b0e62240ff18a628d48c7d2abc86b",
-    "url": "/static/image/symbol/rule.png"
-  },
-  {
     "revision": "a1732b804a2f5a2b0d4f23d28ffcf404",
     "url": "/static/image/symbol/rule_intermediate.png"
   },
   {
-    "revision": "38de59d96ecaa147d8b5f440b4c4b0e6",
-    "url": "/static/lib/jquery-contextMenu/images/page_white_copy.png"
+    "revision": "9d0b0e62240ff18a628d48c7d2abc86b",
+    "url": "/static/image/symbol/rule.png"
   },
   {
     "revision": "ae66f85d0497db0d64cb77320369c4bf",
@@ -1392,12 +1388,12 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/Send.png"
   },
   {
-    "revision": "28be3720d2b2a944a1cc4811cd0375e3",
-    "url": "/static/image/symbol/Service.png"
-  },
-  {
     "revision": "1ce7ae8cc09bcd27304590d8184ce9ac",
     "url": "/static/image/symbol/message_blank.png"
+  },
+  {
+    "revision": "28be3720d2b2a944a1cc4811cd0375e3",
+    "url": "/static/image/symbol/Service.png"
   },
   {
     "revision": "03dfa5416a7411b624cb51591bcf478b",
@@ -1420,6 +1416,10 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/small_event_end.gif"
   },
   {
+    "revision": "bb78af3e1ac0e0979eccbe82ba05d700",
+    "url": "/static/image/symbol/small_event.gif"
+  },
+  {
     "revision": "6d96251cc604610168bf87981eb1f06d",
     "url": "/static/image/symbol/small_event_intermediate.gif"
   },
@@ -1432,8 +1432,8 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/small_fork.gif"
   },
   {
-    "revision": "632e5492ec3dfa720804f01ae0bd4d71",
-    "url": "/static/lib/jquery-contextMenu/images/door.png"
+    "revision": "38de59d96ecaa147d8b5f440b4c4b0e6",
+    "url": "/static/lib/jquery-contextMenu/images/page_white_copy.png"
   },
   {
     "revision": "63f7279113cee951e06603433cb9f3ad",
@@ -1448,20 +1448,20 @@ self.__precacheManifest = [
     "url": "/static/image/business/value-propositions/LeaseorLoan.png"
   },
   {
-    "revision": "01511f4f64b32037648fe81e482527b6",
-    "url": "/static/image/symbol/WebService.png"
+    "revision": "632e5492ec3dfa720804f01ae0bd4d71",
+    "url": "/static/lib/jquery-contextMenu/images/door.png"
   },
   {
     "revision": "08cb66cbf56fd944f5703a21bd5a097c",
     "url": "/static/image/logochange2.png"
   },
   {
-    "revision": "7c8ecd6549c3356a80d89025693d8798",
-    "url": "/static/image/symbol/w_services.png"
-  },
-  {
     "revision": "c417c330fce41020a04f2074b5215850",
     "url": "/static/image/symbol/popup.png"
+  },
+  {
+    "revision": "01511f4f64b32037648fe81e482527b6",
+    "url": "/static/image/symbol/WebService.png"
   },
   {
     "revision": "a4db3afc4e2fe17c82b7443a665f6124",
@@ -1472,16 +1472,16 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/vertical_lane.png"
   },
   {
+    "revision": "7c8ecd6549c3356a80d89025693d8798",
+    "url": "/static/image/symbol/w_services.png"
+  },
+  {
     "revision": "281e9a05cdf598527fc1f396f501f305",
     "url": "/static/image/symbol/User.png"
   },
   {
     "revision": "b7b478f99610e07c89ebbcd9c48a2613",
     "url": "/static/image/symbol/trash.svg"
-  },
-  {
-    "revision": "15feaa0b51c7840e9ba5702c8273cf42",
-    "url": "/static/image/symbol/timer_intermediate.png"
   },
   {
     "revision": "db2590d28df34a3354e1e39cda7d8cd0",
@@ -1494,6 +1494,10 @@ self.__precacheManifest = [
   {
     "revision": "f674e79000dcf4aec6ef5cbb7d0b163c",
     "url": "/static/image/symbol/timer_start.png"
+  },
+  {
+    "revision": "15feaa0b51c7840e9ba5702c8273cf42",
+    "url": "/static/image/symbol/timer_intermediate.png"
   },
   {
     "revision": "86f945295795f651763886e81b77088c",
@@ -1518,6 +1522,10 @@ self.__precacheManifest = [
   {
     "revision": "989f779114f0d89ebd3606dfbff9a3c2",
     "url": "/static/image/symbol/small_terminate.gif"
+  },
+  {
+    "revision": "9b0f5935d67017a142808a9f5052999f",
+    "url": "/static/image/symbol/Script.png"
   },
   {
     "revision": "6b76eeeab5ae99b295b30a56806760c5",
@@ -1548,20 +1556,12 @@ self.__precacheManifest = [
     "url": "/static/image/symbol/small_link.gif"
   },
   {
-    "revision": "9b0f5935d67017a142808a9f5052999f",
-    "url": "/static/image/symbol/Script.png"
-  },
-  {
     "revision": "8f46bccd11a7dd6ede0b8dbd8ac8ce84",
     "url": "/static/image/symbol/small_inclusive.gif"
   },
   {
-    "revision": "bb78af3e1ac0e0979eccbe82ba05d700",
-    "url": "/static/image/symbol/small_event.gif"
-  },
-  {
-    "revision": "e4692cbd05553b241983d4d37dc389b0",
-    "url": "/static/image/business/revenue-streams/ScaledTransactions.png"
+    "revision": "58114275b78203f4c9150a73474cc788",
+    "url": "/static/image/business/revenue-streams/InstalledBase.png"
   },
   {
     "revision": "1d6701dded50112e941e5a0b8830d3f9",
@@ -1576,20 +1576,20 @@ self.__precacheManifest = [
     "url": "/static/image/business/value-propositions/Complements.png"
   },
   {
-    "revision": "06297f486179225fb3b6d8793c9ca2bc",
-    "url": "/static/image/business/revenue-streams/CostLeadership.png"
-  },
-  {
     "revision": "60baecc423b87b54e26474da1d18c4fb",
     "url": "/static/image/business/value-proposition.png"
   },
   {
-    "revision": "37934d2dab1a1f7ddee1e1e12bd49f15",
-    "url": "/static/image/business/revenue-streams/Subscription.png"
+    "revision": "06297f486179225fb3b6d8793c9ca2bc",
+    "url": "/static/image/business/revenue-streams/CostLeadership.png"
   },
   {
     "revision": "0801374f7792be73c2b6d45d8ef8c456",
     "url": "/static/image/business/revenue-stream.png"
+  },
+  {
+    "revision": "37934d2dab1a1f7ddee1e1e12bd49f15",
+    "url": "/static/image/business/revenue-streams/Subscription.png"
   },
   {
     "revision": "15c91cadbcd054cddba8c558ca1efdea",
@@ -1624,8 +1624,8 @@ self.__precacheManifest = [
     "url": "/static/image/business/revenue-streams/Freemium.png"
   },
   {
-    "revision": "58114275b78203f4c9150a73474cc788",
-    "url": "/static/image/business/revenue-streams/InstalledBase.png"
+    "revision": "e4692cbd05553b241983d4d37dc389b0",
+    "url": "/static/image/business/revenue-streams/ScaledTransactions.png"
   },
   {
     "revision": "6b6805bdf8400e5247276895b7848fca",
@@ -1676,8 +1676,8 @@ self.__precacheManifest = [
     "url": "/static/external/Hgo13k-tfSpn0qi1SFdUfT8E0i7KZn-EPnyo3HZu7kw.woff"
   },
   {
-    "revision": "f3053fdb112f7cb25f0cd930a5d49224",
-    "url": "/static/image/business/key-partners/Collaboration.png"
+    "revision": "fee66e712a8a08eef5805a46892932ad",
+    "url": "/static/external/fontawesome-webfont.woff"
   },
   {
     "revision": "b23efe8a2ca966ca99ec8cb58638d6f8",
@@ -1692,28 +1692,28 @@ self.__precacheManifest = [
     "url": "/static/external/fontawesome-webfont.svg.htm"
   },
   {
-    "revision": "43b9fb00944f6918777a0c690bd4c573",
-    "url": "/static/image/business/channel/ContextSpecific.png"
-  },
-  {
-    "revision": "df8da45e601b5bcb62f28de2ba107171",
-    "url": "/static/image/business/customer-relationships/Transparency.png"
-  },
-  {
     "revision": "9c77316ab2dc853be2705a66c1d69b51",
     "url": "/static/image/business/key-resources/EnvironmentalSensitivity.png"
+  },
+  {
+    "revision": "76d9d37cffbf537e6aefdc1f80e1fd42",
+    "url": "/static/image/business/key-partners/Alliances.png"
+  },
+  {
+    "revision": "43b9fb00944f6918777a0c690bd4c573",
+    "url": "/static/image/business/channel/ContextSpecific.png"
   },
   {
     "revision": "660c1f5d82860783f95859fb0b97ee3b",
     "url": "/static/external/marked.min.js"
   },
   {
-    "revision": "7a6429aed852494b22890c3d22f9ac7c",
-    "url": "/static/image/business/key-activities/OnDemandProduction.png"
+    "revision": "df8da45e601b5bcb62f28de2ba107171",
+    "url": "/static/image/business/customer-relationships/Transparency.png"
   },
   {
-    "revision": "76d9d37cffbf537e6aefdc1f80e1fd42",
-    "url": "/static/image/business/key-partners/Alliances.png"
+    "revision": "7a6429aed852494b22890c3d22f9ac7c",
+    "url": "/static/image/business/key-activities/OnDemandProduction.png"
   },
   {
     "revision": "28eb229525d3548696a1cf5edfcd63c4",
@@ -1728,14 +1728,6 @@ self.__precacheManifest = [
     "url": "/static/image/business/channel/GoDirect.png"
   },
   {
-    "revision": "fbd55f4c8fd80d19b2b5ab589abc9a82",
-    "url": "/static/image/business/key-activities/OrganizationalDesign.png"
-  },
-  {
-    "revision": "6fd34819decd7f8d3e5673737a271b78",
-    "url": "/static/image/business/key-activities/StrategicDesign.png"
-  },
-  {
     "revision": "ae3f5c35d38dfc257b8e377c4788a0f3",
     "url": "/static/image/business/key-activities/KnowledgeManagement.png"
   },
@@ -1744,12 +1736,20 @@ self.__precacheManifest = [
     "url": "/static/image/business/key-activities/ProcessStandardization.png"
   },
   {
-    "revision": "2442a4a6df1085a8b48d030ade66caef",
-    "url": "/static/image/business/key-activities/ProcessEfficiency.png"
+    "revision": "fbd55f4c8fd80d19b2b5ab589abc9a82",
+    "url": "/static/image/business/key-activities/OrganizationalDesign.png"
+  },
+  {
+    "revision": "6fd34819decd7f8d3e5673737a271b78",
+    "url": "/static/image/business/key-activities/StrategicDesign.png"
   },
   {
     "revision": "af7ae505a9eed503f8b8e6982036873e",
     "url": "/static/external/fontawesome-webfont.woff2"
+  },
+  {
+    "revision": "2442a4a6df1085a8b48d030ade66caef",
+    "url": "/static/image/business/key-activities/ProcessEfficiency.png"
   },
   {
     "revision": "598f1175f5a8c7dc1b0b49e51e3e6e78",
@@ -1772,16 +1772,16 @@ self.__precacheManifest = [
     "url": "/static/image/business/key-activities/PredictiveAnalytics.png"
   },
   {
-    "revision": "09f22b1503de319cc5a222dd492097c9",
-    "url": "/static/image/business/key-resources/FeatureAggregation.png"
+    "revision": "c98d0a9394f81e970f52fd0b83686d55",
+    "url": "/static/image/business/key-partners/ComplementaryPartnering.png"
   },
   {
     "revision": "a05952f77af051ad7ad46f7cac59f025",
     "url": "/static/image/business/key-partners/Consolidation.png"
   },
   {
-    "revision": "c98d0a9394f81e970f52fd0b83686d55",
-    "url": "/static/image/business/key-partners/ComplementaryPartnering.png"
+    "revision": "00bab476bb37153bac23f6f14bc604cd",
+    "url": "/static/image/business/key-activities/UserGenerated.png"
   },
   {
     "revision": "51c3991daaac908b174a907b38ff8bed",
@@ -1796,28 +1796,28 @@ self.__precacheManifest = [
     "url": "/static/image/business/customer-relationships/StatusandRecognition.png"
   },
   {
-    "revision": "0e3f06fb6f48592e89393a6f9cbb0cd8",
-    "url": "/static/external/font-awesome.min.old"
-  },
-  {
     "revision": "4f49271e17710072df54d4efe9b6f401",
     "url": "/static/image/business/key-activities/CorporateUniversity.png"
+  },
+  {
+    "revision": "9c4b73117e7e9bb5c8a4c7001665295f",
+    "url": "/static/external/font-awesome.min.css"
   },
   {
     "revision": "18b63ea50050c429a13e82da0baeedfe",
     "url": "/static/image/business/channel/OnDemand.png"
   },
   {
-    "revision": "fee66e712a8a08eef5805a46892932ad",
-    "url": "/static/external/fontawesome-webfont.woff"
+    "revision": "07d057961722423a20c7f98675cc36a4",
+    "url": "/static/image/business/key-partners/SecondaryMarkets.png"
   },
   {
     "revision": "debf64bfd3ad3f5d0d3d001b11103067",
     "url": "/static/image/business/key-partners/SupplyChainIntegration.png"
   },
   {
-    "revision": "9c4b73117e7e9bb5c8a4c7001665295f",
-    "url": "/static/external/font-awesome.min.css"
+    "revision": "0e3f06fb6f48592e89393a6f9cbb0cd8",
+    "url": "/static/external/font-awesome.min.old"
   },
   {
     "revision": "5cd5929eba1ad6c57ea3dbaa11d61bb7",
@@ -1828,8 +1828,8 @@ self.__precacheManifest = [
     "url": "/static/image/Logo_black_stroke7.png"
   },
   {
-    "revision": "00bab476bb37153bac23f6f14bc604cd",
-    "url": "/static/image/business/key-activities/UserGenerated.png"
+    "revision": "09f22b1503de319cc5a222dd492097c9",
+    "url": "/static/image/business/key-resources/FeatureAggregation.png"
   },
   {
     "revision": "196e22953967aca475462ef82f4dfe1c",
@@ -1844,8 +1844,8 @@ self.__precacheManifest = [
     "url": "/static/image/business/key-partners/Franchising.png"
   },
   {
-    "revision": "2ed19ded8d348dd9fbae3e0c4c049597",
-    "url": "/static/image/business/channel/IndirectDistribution.png"
+    "revision": "e55dda0dc30dcd621e766b91f9cb69e1",
+    "url": "/static/image/business/channel/MultiLevelMarketing.png"
   },
   {
     "revision": "3527f90861b09cb944ebb57bccc4e798",
@@ -1856,16 +1856,16 @@ self.__precacheManifest = [
     "url": "/static/image/business/key-activities/ITIntegration.png"
   },
   {
-    "revision": "e55dda0dc30dcd621e766b91f9cb69e1",
-    "url": "/static/image/business/channel/MultiLevelMarketing.png"
+    "revision": "54768cdeeff51dbd4337a909936d7857",
+    "url": "/static/image/business/channel/PopupPresence.png"
   },
   {
     "revision": "fb32ce9612b32f8ed7ba7bf6590e0a62",
     "url": "/static/image/business/key-activities/Crowdsourcing.png"
   },
   {
-    "revision": "54768cdeeff51dbd4337a909936d7857",
-    "url": "/static/image/business/channel/PopupPresence.png"
+    "revision": "66a57ab089852e1dc5fc2e12cfc807b7",
+    "url": "/static/image/business/customer-relationships/Curation.png"
   },
   {
     "revision": "73d8a5af2267fc2a7864cb36d2ee6619",
@@ -1876,16 +1876,8 @@ self.__precacheManifest = [
     "url": "/static/image/business/customer-relationships/ComponentBranding.png"
   },
   {
-    "revision": "66a57ab089852e1dc5fc2e12cfc807b7",
-    "url": "/static/image/business/customer-relationships/Curation.png"
-  },
-  {
-    "revision": "9217ba8fbf83bd1ca181d3cc351f889d",
-    "url": "/static/image/business/key-partners/MergerAcquisition.png"
-  },
-  {
-    "revision": "674f50d287a8c48dc19ba404d20fe713",
-    "url": "/static/external/fontawesome-webfont_iefix.eot"
+    "revision": "04f537abe341e40cf3c31d6a91dff822",
+    "url": "/static/image/business/customer-relationships/WhimsyandPersonality.png"
   },
   {
     "revision": "b06871f281fee6b241d60582ae9369b9",
@@ -1893,43 +1885,51 @@ self.__precacheManifest = [
   },
   {
     "revision": "674f50d287a8c48dc19ba404d20fe713",
+    "url": "/static/external/fontawesome-webfont_iefix.eot"
+  },
+  {
+    "revision": "674f50d287a8c48dc19ba404d20fe713",
     "url": "/static/external/fontawesome-webfont.eot"
   },
   {
-    "revision": "04f537abe341e40cf3c31d6a91dff822",
-    "url": "/static/image/business/customer-relationships/WhimsyandPersonality.png"
+    "revision": "9217ba8fbf83bd1ca181d3cc351f889d",
+    "url": "/static/image/business/key-partners/MergerAcquisition.png"
   },
   {
     "revision": "93842dd9bb21e5a93cddbc4b3d423f8d",
     "url": "/static/image/business/customer-relationships/Personalization.png"
   },
   {
-    "revision": "e3306b72e13c4a15cacb32d242afc260",
-    "url": "/static/image/business/customer-relationships/ExperienceEnabling.png"
+    "revision": "2d88d530ae820fe545e8fc2148a59239",
+    "url": "/static/image/business/key-activities/DecentralizedManagement.png"
   },
   {
     "revision": "0763e6aeb5d924c1a97c37df291de477",
     "url": "/static/image/business/key-activities/ProcessAutomation.png"
   },
   {
-    "revision": "0763e6aeb5d924c1a97c37df291de477",
-    "url": "/static/image/business/customer-relationships/ProcessAutomation.png"
+    "revision": "e3306b72e13c4a15cacb32d242afc260",
+    "url": "/static/image/business/customer-relationships/ExperienceEnabling.png"
   },
   {
     "revision": "4212a0e98aa808ac68ecb2196af0e62c",
     "url": "/static/image/business/channel/ExperienceCenter.png"
   },
   {
-    "revision": "cf6613d1adf490972c557a8e318e0868",
-    "url": "/static/external/d-6IYplOFocCacKzxwXSOD8E0i7KZn-EPnyo3HZu7kw.woff"
-  },
-  {
     "revision": "e45b5750ba58186561bd1e35337bd736",
     "url": "/static/external/prism.min.js"
   },
   {
+    "revision": "cf6613d1adf490972c557a8e318e0868",
+    "url": "/static/external/d-6IYplOFocCacKzxwXSOD8E0i7KZn-EPnyo3HZu7kw.woff"
+  },
+  {
     "revision": "cb4fb6dd786b8e5dee5679a2583b26ea",
     "url": "/static/external/es5-shim.min.js"
+  },
+  {
+    "revision": "0763e6aeb5d924c1a97c37df291de477",
+    "url": "/static/image/business/customer-relationships/ProcessAutomation.png"
   },
   {
     "revision": "8afdae634b27f228a166ad979c6774f4",
@@ -1940,24 +1940,24 @@ self.__precacheManifest = [
     "url": "/static/image/business/key-resources/Conservation.png"
   },
   {
-    "revision": "93bcc8279e39988fc107779cbb696a8f",
-    "url": "/static/image/business/customer-relationships/PrivateLabel.png"
-  },
-  {
     "revision": "65a6b4b5f98241a910dc233110f5c9f6",
     "url": "/static/external/vue-material.css"
   },
   {
-    "revision": "07d057961722423a20c7f98675cc36a4",
-    "url": "/static/image/business/key-partners/SecondaryMarkets.png"
+    "revision": "a76cc69fb450185211904af41a7df061",
+    "url": "/static/image/business/key-activities/Outsourcing.png"
   },
   {
-    "revision": "54023410eaac27f3a72a1f3c385e1aa0",
-    "url": "/static/image/business/channel/FlagshipStore.png"
+    "revision": "74f6d287e147e2e59b715682df658908",
+    "url": "/static/image/business/key-activities/FlexibleManufacturing.png"
   },
   {
-    "revision": "36442314dce0bc350779c7324997632a",
-    "url": "/static/image/business/channel/Crossselling.png"
+    "revision": "f3053fdb112f7cb25f0cd930a5d49224",
+    "url": "/static/image/business/key-partners/Collaboration.png"
+  },
+  {
+    "revision": "93bcc8279e39988fc107779cbb696a8f",
+    "url": "/static/image/business/customer-relationships/PrivateLabel.png"
   },
   {
     "revision": "1b70fed56b1375eae3e40bded8b35eec",
@@ -1968,10 +1968,6 @@ self.__precacheManifest = [
     "url": "/static/image/business/customer-relationships/Certification.png"
   },
   {
-    "revision": "05d145779daeec76ec16a1a12e03e230",
-    "url": "/static/image/1.jpg"
-  },
-  {
     "revision": "22ff23b5c6fa68dbe35c889c8786ab38",
     "url": "/static/image/business/channel/NonTraditionalChannels.png"
   },
@@ -1980,8 +1976,12 @@ self.__precacheManifest = [
     "url": "/static/favicon-32x32.png"
   },
   {
-    "revision": "74f6d287e147e2e59b715682df658908",
-    "url": "/static/image/business/key-activities/FlexibleManufacturing.png"
+    "revision": "05d145779daeec76ec16a1a12e03e230",
+    "url": "/static/image/1.jpg"
+  },
+  {
+    "revision": "a97e71676fa563981de75df00ac62235",
+    "url": "/static/image/business/key-activities/IntellectualProperty.png"
   },
   {
     "revision": "2cf286e01ff51054a12af3f5ef178949",
@@ -2000,28 +2000,32 @@ self.__precacheManifest = [
     "url": "/static/external/ansi_up.min.js"
   },
   {
-    "revision": "28ff96a24f565c050f855d3c745b4d7b",
-    "url": "/static/image/business/key-partners/Coopetition.png"
-  },
-  {
-    "revision": "a97e71676fa563981de75df00ac62235",
-    "url": "/static/image/business/key-activities/IntellectualProperty.png"
-  },
-  {
     "revision": "6d9e7f89a62611f41ea25473e1c536c6",
     "url": "/static/image/business/key-resources/Safety.png"
+  },
+  {
+    "revision": "54023410eaac27f3a72a1f3c385e1aa0",
+    "url": "/static/image/business/channel/FlagshipStore.png"
+  },
+  {
+    "revision": "4eeb0ded9518eaa39e95bbb731416244",
+    "url": "/static/image/business/key-activities/Localization.png"
   },
   {
     "revision": "c50918059d5a7bdadd262f194d5c3e06",
     "url": "/static/image/business/key-activities/LogisticsSystems.png"
   },
   {
-    "revision": "f74b658fd63413dbf0a69ad7edaa73e3",
-    "url": "/static/image/business/key-resource.png"
+    "revision": "28ff96a24f565c050f855d3c745b4d7b",
+    "url": "/static/image/business/key-partners/Coopetition.png"
   },
   {
     "revision": "605ef2f03fd80560b0f5f194128bda6e",
     "url": "/static/image/business/key-resources/Customization.png"
+  },
+  {
+    "revision": "f74b658fd63413dbf0a69ad7edaa73e3",
+    "url": "/static/image/business/key-resource.png"
   },
   {
     "revision": "4ffaae07526682159231f8ecd4b7fe34",
@@ -2032,10 +2036,6 @@ self.__precacheManifest = [
     "url": "/static/image/business/key-partner.png"
   },
   {
-    "revision": "2d88d530ae820fe545e8fc2148a59239",
-    "url": "/static/image/business/key-activities/DecentralizedManagement.png"
-  },
-  {
     "revision": "1dcc2a4cf4092434cbaa3d61263b8f94",
     "url": "/static/image/business/key-activity.png"
   },
@@ -2044,40 +2044,40 @@ self.__precacheManifest = [
     "url": "/static/image/business/customer-segment.png"
   },
   {
-    "revision": "5f9a681f10e0a24cee5505deba234697",
-    "url": "/static/image/business/cost-structure.png"
-  },
-  {
     "revision": "b8d6907d239b649db9cf29a793e599e1",
     "url": "/static/image/business/customer-relationship.png"
   },
   {
-    "revision": "1909e19607698dae1748ad6a83e83a54",
-    "url": "/static/image/business/channel.png"
-  },
-  {
-    "revision": "5a27caf82d1bc2c0179dc6324b7fbc35",
-    "url": "/static/image/business/key-resources/PerformanceSimplification.png"
+    "revision": "5f9a681f10e0a24cee5505deba234697",
+    "url": "/static/image/business/cost-structure.png"
   },
   {
     "revision": "5815c1b97e474e95932ea8c91c27c08a",
     "url": "/static/image/business/key-resources/EaseofUse.png"
   },
   {
-    "revision": "4eeb0ded9518eaa39e95bbb731416244",
-    "url": "/static/image/business/key-activities/Localization.png"
-  },
-  {
     "revision": "7716f0ed2a5c03d32736af59b61cf0a9",
     "url": "/static/image/business/key-resources/AddedFunctionality.png"
   },
   {
-    "revision": "a76cc69fb450185211904af41a7df061",
-    "url": "/static/image/business/key-activities/Outsourcing.png"
+    "revision": "2ed19ded8d348dd9fbae3e0c4c049597",
+    "url": "/static/image/business/channel/IndirectDistribution.png"
   },
   {
-    "revision": "5efb6f925470166045ba28c25131f79a",
-    "url": "/static/bpmn/css/animation.css"
+    "revision": "1909e19607698dae1748ad6a83e83a54",
+    "url": "/static/image/business/channel.png"
+  },
+  {
+    "revision": "36442314dce0bc350779c7324997632a",
+    "url": "/static/image/business/channel/Crossselling.png"
+  },
+  {
+    "revision": "5a27caf82d1bc2c0179dc6324b7fbc35",
+    "url": "/static/image/business/key-resources/PerformanceSimplification.png"
+  },
+  {
+    "revision": "bbe82cb684302cdebb9a3fca9c8161c5",
+    "url": "/static/bpmn/css/bpmn-codes.css"
   },
   {
     "revision": "c35e00bf530edb924b3a46795b480512",
@@ -2092,24 +2092,24 @@ self.__precacheManifest = [
     "url": "/static/external/2fcrYFNaTjcS6g4U3t-Y5ewrjPiaoEww8AihgqWRJAo.woff"
   },
   {
-    "revision": "4881de659ca6c029fc2bda001413f17c",
-    "url": "/static/env.txt"
-  },
-  {
     "revision": "113f6d4c71fd7c6e535ec151b206aaba",
     "url": "/static/bpmn/font/bpmn.woff"
   },
   {
-    "revision": "da7db8b007b5131e87b80bf82978a394",
-    "url": "/static/bpmn/css/bpmn-ie7-codes.css"
+    "revision": "4881de659ca6c029fc2bda001413f17c",
+    "url": "/static/env.txt"
   },
   {
-    "revision": "732389ded34cb9c52dd88271f1345af9",
-    "url": "/fonts/element-icons.732389de.ttf"
+    "revision": "00621ef967204605d9c71976473bc745",
+    "url": "/static/bpmn/css/bpmn-ie7.css"
   },
   {
-    "revision": "22a12e9216de8b22637db1e7a30b215d",
-    "url": "/index.html"
+    "revision": "08cb66cbf56fd944f5703a21bd5a097c",
+    "url": "/img/logochange2.08cb66cb.png"
+  },
+  {
+    "revision": "27b5b1904737f806dcb193a12156af9a",
+    "url": "/static/bpmn/font/bpmn.svg"
   },
   {
     "revision": "d41d8cd98f00b204e9800998ecf8427e",
@@ -2120,28 +2120,24 @@ self.__precacheManifest = [
     "url": "/robots.txt"
   },
   {
+    "revision": "5efb6f925470166045ba28c25131f79a",
+    "url": "/static/bpmn/css/animation.css"
+  },
+  {
     "revision": "609860a7b5830bab8c7843e1637290ba",
     "url": "/static/bpmn/font/bpmn.eot"
-  },
-  {
-    "revision": "27b5b1904737f806dcb193a12156af9a",
-    "url": "/static/bpmn/font/bpmn.svg"
-  },
-  {
-    "revision": "bbe82cb684302cdebb9a3fca9c8161c5",
-    "url": "/static/bpmn/css/bpmn-codes.css"
   },
   {
     "revision": "0a847dd3eb75ef60b6dfa6a6d34b07ba",
     "url": "/static/bpmn/css/custom.css"
   },
   {
-    "revision": "08cb66cbf56fd944f5703a21bd5a097c",
-    "url": "/img/logochange2.08cb66cb.png"
+    "revision": "da7db8b007b5131e87b80bf82978a394",
+    "url": "/static/bpmn/css/bpmn-ie7-codes.css"
   },
   {
-    "revision": "00621ef967204605d9c71976473bc745",
-    "url": "/static/bpmn/css/bpmn-ie7.css"
+    "revision": "22a12e9216de8b22637db1e7a30b215d",
+    "url": "/index.html"
   },
   {
     "revision": "c1a498bb179c7d10deb5072e87333fc7",
@@ -2152,16 +2148,20 @@ self.__precacheManifest = [
     "url": "/js/chunk-vendors.6a654fed.js"
   },
   {
-    "revision": "256e3abce3a61ba656dbb8f4967e3933",
-    "url": "/img/jsoneditor-icons.256e3abc.svg"
+    "revision": "d2e963c690c5a85072cfdde1a4af7cea",
+    "url": "/static/bpmn/css/bpmn-embedded.css"
   },
   {
     "revision": "b30da345a795ffb0f1b1",
     "url": "/js/app.40f1c68d.js"
   },
   {
-    "revision": "d2e963c690c5a85072cfdde1a4af7cea",
-    "url": "/static/bpmn/css/bpmn-embedded.css"
+    "revision": "256e3abce3a61ba656dbb8f4967e3933",
+    "url": "/img/jsoneditor-icons.256e3abc.svg"
+  },
+  {
+    "revision": "732389ded34cb9c52dd88271f1345af9",
+    "url": "/fonts/element-icons.732389de.ttf"
   },
   {
     "revision": "535877f50039c0cb49a6196a5b7517cd",
